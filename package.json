@@ -1,47 +1,40 @@
 {
   "homepage": "https://patelsahil2k03.github.io",
   "name": "portfolio",
-  "version": "0.1.0",
+  "version": "2.0.0",
   "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "export": "next build",
+    "deploy": "next build && (if not exist out\\.nojekyll echo. > out\\.nojekyll) && gh-pages -d out -b gh-pages",
+    "lint": "next lint"
+  },
   "dependencies": {
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
-    "framer-motion": "^11.18.2",
-    "gh": "^2.8.9",
+    "@react-three/drei": "^9.93.0",
+    "@react-three/fiber": "^8.15.12",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.0",
+    "framer-motion": "^10.16.16",
+    "lucide-react": "^0.303.0",
+    "next": "^14.0.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-lazy-load-image-component": "^1.6.0",
-    "react-scripts": "^5.0.1",
-    "react-scroll": "^1.8.9",
-    "web-vitals": "^2.1.4"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "deploy": "npm run build && git add -f build && git commit -m \"Deploy\" && git subtree push --prefix build origin main",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+    "tailwind-merge": "^2.2.0",
+    "three": "^0.160.0"
   },
   "devDependencies": {
-    "gh-pages": "^6.3.0"
+    "@types/node": "20.19.23",
+    "@types/react": "^18.2.46",
+    "@types/react-dom": "^18.2.18",
+    "@types/three": "^0.160.0",
+    "autoprefixer": "^10.4.16",
+    "eslint": "^8.56.0",
+    "eslint-config-next": "^14.0.4",
+    "gh-pages": "^6.1.1",
+    "postcss": "^8.4.32",
+    "tailwindcss": "^3.4.0",
+    "typescript": "5.9.3"
   }
 }
