@@ -1,12 +1,17 @@
 'use client';
 
 import React from 'react';
+import { motion } from 'framer-motion';
 import { personalInfo, education, stats } from '@/data';
 import { Badge } from '@/components/ui/Badge';
 import { Card, CardContent } from '@/components/ui/Card';
 import { Trophy, BookOpen, Briefcase, Award, Code, Target } from 'lucide-react';
+import { fadeInUp, staggerContainer, staggerItem, scaleIn } from '@/lib/animations';
+import { useScrollAnimation } from '@/lib/hooks';
 
 export function About() {
+  const { ref, inView } = useScrollAnimation({ threshold: 0.1 });
+  
   const highlights = [
     {
       icon: <Trophy className="w-6 h-6" />,
@@ -36,9 +41,15 @@ export function About() {
 
   return (
     <section id="about" className="py-20 lg:py-32 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <motion.div 
+        ref={ref}
+        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
+        initial="hidden"
+        animate={inView ? "visible" : "hidden"}
+        variants={staggerContainer}
+      >
         {/* Section Header */}
-        <div className="text-center mb-16">
+        <motion.div className="text-center mb-16" variants={fadeInUp}>
           <Badge variant="default" size="lg" className="mb-4">
             About Me
           </Badge>
@@ -49,11 +60,11 @@ export function About() {
           <p className="text-xl text-slate-600 max-w-3xl mx-auto">
             A unique blend of athletic discipline and technical expertise
           </p>
-        </div>
+        </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-12 items-start">
+        <motion.div className="grid lg:grid-cols-2 gap-12 items-start" variants={staggerContainer}>
           {/* Left Column - Story */}
-          <div className="space-y-6">
+          <motion.div className="space-y-6" variants={staggerItem}>
             <Card className="border-2 border-blue-100 hover:border-blue-300 transition-colors">
               <CardContent className="p-8">
                 <div className="space-y-4 text-slate-700 leading-relaxed">
@@ -140,35 +151,38 @@ export function About() {
                 </CardContent>
               </Card>
             </div>
-          </div>
+          </motion.div>
 
           {/* Right Column - Highlights & Education */}
-          <div className="space-y-8">
+          <motion.div className="space-y-8" variants={staggerItem}>
             {/* Key Highlights */}
             <div className="space-y-4">
               <h3 className="text-2xl font-bold text-slate-900 mb-6">
                 Key Highlights
               </h3>
-              <div className="grid sm:grid-cols-2 gap-4">
+              <motion.div className="grid sm:grid-cols-2 gap-4" variants={staggerContainer}>
                 {highlights.map((highlight, index) => (
-                  <Card
+                  <motion.div
                     key={index}
-                    className="hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+                    variants={scaleIn}
+                    whileHover={{ scale: 1.05, y: -5 }}
                   >
-                    <CardContent className="p-6">
-                      <div className={`inline-flex p-3 rounded-lg ${highlight.color} mb-4`}>
-                        {highlight.icon}
-                      </div>
-                      <h4 className="font-bold text-slate-900 mb-1">
-                        {highlight.title}
-                      </h4>
-                      <p className="text-sm text-slate-600">
-                        {highlight.description}
-                      </p>
-                    </CardContent>
-                  </Card>
+                    <Card className="hover:shadow-lg transition-all duration-300 h-full">
+                      <CardContent className="p-6">
+                        <div className={`inline-flex p-3 rounded-lg ${highlight.color} mb-4`}>
+                          {highlight.icon}
+                        </div>
+                        <h4 className="font-bold text-slate-900 mb-1">
+                          {highlight.title}
+                        </h4>
+                        <p className="text-sm text-slate-600">
+                          {highlight.description}
+                        </p>
+                      </CardContent>
+                    </Card>
+                  </motion.div>
                 ))}
-              </div>
+              </motion.div>
             </div>
 
             {/* Education */}
@@ -228,9 +242,9 @@ export function About() {
                 </div>
               </CardContent>
             </Card>
-          </div>
-        </div>
-      </div>
+          </motion.div>
+        </motion.div>
+      </motion.div>
     </section>
   );
 }

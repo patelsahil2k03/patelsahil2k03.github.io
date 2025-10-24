@@ -16,7 +16,7 @@ import {
 import { useScrollAnimation, useCountAnimation } from '@/lib/hooks';
 
 export function Hero() {
-  const { ref, inView } = useScrollAnimation();
+  const { ref, inView } = useScrollAnimation({ triggerOnce: true, threshold: 0.05 });
   
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
@@ -36,8 +36,8 @@ export function Hero() {
       <motion.div 
         ref={ref}
         className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10"
-        initial="hidden"
-        animate={inView ? "visible" : "hidden"}
+        initial="visible"
+        animate="visible"
         variants={staggerContainer}
       >
         <div className="text-center space-y-8">
