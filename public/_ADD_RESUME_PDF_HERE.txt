@@ -1,0 +1,11 @@
+# Resume PDF Placeholder
+
+## Add your resume PDF here:
+- Filename: resume.pdf
+- Max size: 1MB recommended
+- Ensure it's the latest version
+- Make sure it's properly formatted
+
+This will be used for the "Download Resume" button in the Hero section.
+
+Delete this file once you add your resume.

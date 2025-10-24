@@ -1,0 +1,14 @@
+# Profile Photo Placeholder
+
+## Add your profile photo here:
+- Filename: profile.jpg (or profile.png)
+- Recommended size: 500x500px (square)
+- Format: JPG, PNG, or WebP
+- Purpose: Used in Hero section and About section
+
+## Example names:
+- profile.jpg
+- profile-photo.png
+- headshot.jpg
+
+Delete this file once you add your actual photo.
