@@ -13,5 +13,7 @@ export const personalInfo = {
     github: "https://github.com/patelsahil2k03",
     linkedin: "https://linkedin.com/in/sahil-patel-581226205",
     leetcode: "https://leetcode.com/patelsahil2k03",
+    medium: "https://medium.com/@patelsahil2k03",
+    googleScholar: "https://scholar.google.com/citations?hl=en&user=2aSb_AwAAAAJ",
   },
 };

@@ -223,8 +223,9 @@ npm run dev
 4. **Open browser**
 Navigate to `http://localhost:3000`
 
-### Build for Production
+### Build and Deploy
 
+1. **Build for Production**
 ```bash
 # Build static site
 npm run build
@@ -232,12 +233,12 @@ npm run build
 # The static files will be in the 'out' directory
 ```
 
-### Deploy to GitHub Pages
-
+2. **Deploy to GitHub Pages**
 ```bash
 # Deploy to gh-pages branch
 npm run deploy
 ```
+Your portfolio will be live at `https://patelsahil2k03.github.io/sahilpatel.dev/`.
 
 ---
 
@@ -288,24 +289,24 @@ colors: {
 - [x] Directory structure
 - [x] Data layer with all content
 
-### 🟡 Phase 2: UI Components (IN PROGRESS)
-- [ ] Navigation component
-- [ ] Button component
-- [ ] Card component
-- [ ] Badge component
-- [ ] Timeline component
+### ✅ Phase 2: UI Components (COMPLETE)
+- [x] Navigation component
+- [x] Button component
+- [x] Card component
+- [x] Badge component
+- [x] Timeline component
 
-### ⚪ Phase 3: Section Components (PLANNED)
-- [ ] Hero section
-- [ ] About section
-- [ ] Experience section
-- [ ] Skills section
-- [ ] Projects section
-- [ ] Research section
-- [ ] Achievements section
-- [ ] Contact section
+### ✅ Phase 3: Section Components (COMPLETE)
+- [x] Hero section
+- [x] About section
+- [x] Experience section
+- [x] Skills section
+- [x] Projects section
+- [x] Research section
+- [x] Achievements section
+- [x] Contact section
 
-### ⚪ Phase 4: Animations (PLANNED)
+### 🟡 Phase 4: Animations (IN PROGRESS)
 - [ ] Framer Motion integration
 - [ ] Scroll animations
 - [ ] Page transitions
@@ -331,18 +332,6 @@ colors: {
 
 ---
 
-## 📦 Key Files
-
-| File | Purpose |
-|------|---------|
-| `MIGRATION_PLAN.md` | Complete development roadmap |
-| `PROGRESS.md` | Current status and next steps |
-| `ISSUES.md` | Requirements and content tracking |
-| `SETUP_GUIDE.md` | Detailed setup instructions |
-| `src/data/*.ts` | All content and data |
-
----
-
 ## 🤝 Contributing
 
 This is a personal portfolio project, but suggestions are welcome!
@@ -352,6 +341,29 @@ This is a personal portfolio project, but suggestions are welcome!
 3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
+
+### Commit Conventions
+
+Use conventional commits format:
+
+```bash
+<type>(<scope>): <subject>
+
+<body>
+
+<footer>
+```
+
+**Types:**
+- `feat:` - New feature
+- `fix:` - Bug fix
+- `docs:` - Documentation only
+- `style:` - Code style (formatting, no logic change)
+- `refactor:` - Code restructuring
+- `perf:` - Performance improvement
+- `test:` - Adding tests
+- `chore:` - Maintenance tasks
+- `config:` - Configuration changes
 
 ---
 
@@ -386,10 +398,10 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📊 Project Stats
 
-- ⭐ **Data Files**: 7 TypeScript files with structured content
-- 📝 **Total Lines**: 25,000+ lines of code
-- 🎨 **Components**: 15+ planned components
-- 🖼️ **Sections**: 9 major sections
+- ⭐ **Data Files**: 8 TypeScript files with structured content
+- 📝 **Total Lines**: ~5,000+ lines of code
+- 🎨 **Components**: 13+ functional components
+- 🖼️ **Sections**: 8 major sections
 - 📚 **Projects**: 6 showcased projects
 - 🏆 **Achievements**: 20+ documented achievements
 - 💼 **Experience**: 5 professional positions

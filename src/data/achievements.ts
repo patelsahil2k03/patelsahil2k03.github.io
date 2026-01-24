@@ -49,7 +49,7 @@ export const achievements: Achievement[] = [
     date: 'April 2024',
     description: 'Published in Springer LNNS series (Lecture Notes in Networks and Systems). Indexed by SCOPUS, EI Compendex, INSPEC, zbMATH, and SCImago. First author contribution.',
     category: 'publication',
-    link: 'https://lnkd.in/dwVVjngv',
+    link: 'https://link.springer.com/chapter/10.1007/978-981-97-6681-9_11',
     metrics: 'First Author | SCOPUS Indexed',
   },
   {
@@ -59,7 +59,7 @@ export const achievements: Achievement[] = [
     date: 'May 2024',
     description: 'Published in AIP Conference Proceedings (Volume 3255, Issue 1, 2025). Presented at International Conference on Robotics, Automation, and Intelligent Computing. Indexed in SCOPUS and Web of Science.',
     category: 'publication',
-    link: 'https://lnkd.in/dNa4QXkW',
+    link: 'https://pubs.aip.org/aip/acp/article-abstract/3255/1/030001/3333223/Enhancing-small-object-detection-in-aerial-imagery',
     metrics: 'Co-author | Web of Science',
   },
 
