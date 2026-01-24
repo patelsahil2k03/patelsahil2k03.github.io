@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
@@ -69,10 +70,14 @@ export function Navigation() {
             onClick={() => scrollToSection('#home')}
             className="flex items-center space-x-2 group"
           >
-            <div className="relative">
-              <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-cyan-500 rounded-lg flex items-center justify-center text-white font-bold text-xl transition-transform group-hover:scale-110">
-                SP
-              </div>
+            <div className="relative w-10 h-10">
+              <Image 
+                src="/images/hero/profile.jpg" 
+                alt="Profile Picture" 
+                fill 
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                className="rounded-full object-cover border-2 border-blue-500 transition-transform group-hover:scale-110"
+              />
             </div>
             <span className="text-xl font-bold text-slate-900 hidden sm:block">
               Sahil Patel

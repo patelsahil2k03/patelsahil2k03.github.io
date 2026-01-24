@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import React from 'react';
 import { motion } from 'framer-motion';
 import { personalInfo, education, stats } from '@/data';
@@ -155,6 +156,21 @@ export function About() {
 
           {/* Right Column - Highlights & Education */}
           <motion.div className="space-y-8" variants={staggerItem}>
+            <motion.div 
+              className="flex justify-center mb-8"
+              variants={fadeInUp}
+            >
+              <div className="relative w-48 h-48 rounded-full overflow-hidden shadow-xl border-4 border-blue-200">
+                <Image
+                  src="/images/hero/profile.jpg"
+                  alt="Sahil Patel Profile"
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  className="object-cover"
+                />
+              </div>
+            </motion.div>
+
             {/* Key Highlights */}
             <div className="space-y-4">
               <h3 className="text-2xl font-bold text-slate-900 mb-6">
