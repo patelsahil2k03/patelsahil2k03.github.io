@@ -1,14 +1,21 @@
 import React from 'react';
 import { cn } from '@/lib/utils';
+import { motion } from 'framer-motion';
 
 const Card = React.forwardRef<
   HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-  <div
+  React.HTMLAttributes<HTMLDivElement> & { hoverGlow?: boolean }
+>(({ className, hoverGlow = true, ...props }, ref) => (
+  <motion.div
     ref={ref}
+    whileHover={hoverGlow ? { y: -4, scale: 1.01 } : undefined}
+    transition={{ duration: 0.2, ease: 'easeOut' }}
     className={cn(
-      'rounded-xl border border-slate-200 bg-white shadow-sm transition-all duration-300 hover:shadow-md',
+      'rounded-xl border bg-white shadow-sm transition-all duration-300',
+      hoverGlow 
+        ? 'border-slate-200 hover:border-blue-200 hover:shadow-xl hover:shadow-blue-100/50' 
+        : 'border-slate-200 hover:shadow-md',
+      'group relative overflow-hidden',
       className
     )}
     {...props}

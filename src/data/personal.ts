@@ -7,8 +7,16 @@ export const personalInfo = {
   phone: "+91 7874337475",
   cgpa: "9.35",
   university: "CHARUSAT",
-  bio: "Aspiring Data Scientist and Footballer with expertise in AI/ML, Full Stack Development, and Cloud Computing. Published researcher with 9.35 CGPA from CHARUSAT.",
+  bio: "Data Scientist and National-Level Footballer building production systems serving 2M+ users with 98%+ accuracy. Published researcher with 9.35 CGPA from CHARUSAT.",
   tagline: "Building intelligent solutions at the intersection of sports and data science",
+  impactStatement: "Built systems serving 2M+ users with 98%+ AI accuracy",
+  roles: [
+    "AI/ML Engineer",
+    "Full Stack Developer",
+    "Data Scientist",
+    "Published Researcher",
+    "National Footballer"
+  ],
   social: {
     github: "https://github.com/patelsahil2k03",
     linkedin: "https://linkedin.com/in/sahil-patel-581226205",

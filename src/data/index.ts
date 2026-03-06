@@ -25,6 +25,11 @@ export const stats = {
   certifications: '5+',
   hackathons: '3',
   leetcodeProblems: '100+',
+  // Impact metrics
+  usersServed: '2M+',
+  accuracy: '98%+',
+  technologiesUsed: '50+',
+  customersSupported: '125K+',
 };
 
 // Contact information

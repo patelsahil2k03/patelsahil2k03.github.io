@@ -65,6 +65,11 @@ logs
 # Temporary files
 /tmp/
 *.tmp
+file_list.txt
+output.txt
+
+# Trash folder
+.trash/
 
 # Optional: Keep old components for reference but don't track changes
 # /src/comps/

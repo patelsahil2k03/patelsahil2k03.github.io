@@ -8,11 +8,12 @@ import { Trophy, Award, BookOpen, Code, Calendar, ExternalLink } from 'lucide-re
 import { Button } from '@/components/ui/Button';
 
 const categoryConfig = {
-  awards: { icon: Trophy, color: 'text-orange-600 bg-orange-100', label: 'Awards & Recognition' },
-  certifications: { icon: Award, color: 'text-blue-600 bg-blue-100', label: 'Certifications' },
-  hackathons: { icon: Code, color: 'text-purple-600 bg-purple-100', label: 'Hackathons' },
-  events: { icon: Calendar, color: 'text-cyan-600 bg-cyan-100', label: 'Events & Conferences' },
-  badges: { icon: BookOpen, color: 'text-green-600 bg-green-100', label: 'Badges' },
+  award: { icon: Trophy, color: 'text-orange-600 bg-orange-100', label: 'Awards & Recognition' },
+  certification: { icon: Award, color: 'text-blue-600 bg-blue-100', label: 'Certifications' },
+  hackathon: { icon: Code, color: 'text-purple-600 bg-purple-100', label: 'Hackathons' },
+  event: { icon: Calendar, color: 'text-cyan-600 bg-cyan-100', label: 'Events & Conferences' },
+  badge: { icon: BookOpen, color: 'text-green-600 bg-green-100', label: 'Badges' },
+  publication: { icon: BookOpen, color: 'text-emerald-600 bg-emerald-100', label: 'Publications' },
 };
 
 export function Achievements() {
@@ -24,7 +25,7 @@ export function Achievements() {
 
   return (
     <section id="achievements" className="py-20 lg:py-32 bg-slate-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-[1400px] mx-auto px-6 sm:px-8 lg:px-12">
         {/* Section Header */}
         <div className="text-center mb-16">
           <Badge variant="default" size="lg" className="mb-4">

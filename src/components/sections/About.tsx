@@ -44,7 +44,7 @@ export function About() {
     <section id="about" className="py-20 lg:py-32 bg-white">
       <motion.div 
         ref={ref}
-        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
+        className="max-w-[1400px] mx-auto px-6 sm:px-8 lg:px-12"
         initial="hidden"
         animate={inView ? "visible" : "hidden"}
         variants={staggerContainer}

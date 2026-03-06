@@ -14,7 +14,7 @@ export function Skills() {
 
   return (
     <section id="skills" className="py-20 lg:py-32 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-[1400px] mx-auto px-6 sm:px-8 lg:px-12">
         {/* Section Header */}
         <div className="text-center mb-16">
           <Badge variant="default" size="lg" className="mb-4">

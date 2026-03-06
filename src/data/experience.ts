@@ -23,13 +23,16 @@ export const experiences: Experience[] = [
     endDate: 'Present',
     type: 'full-time',
     description: [
-      'Developing and integrating AI models for production-grade applications',
-      'Built responsive UIs using React.js, ensuring seamless user experience',
-      'Collaborating with cross-functional teams to deliver high-quality software',
-      'Deployed & managed ML applications with LangChain, OpenAI, AWS Sagemaker, Docker',
-      'Received Team Star Award for outstanding contribution and performance'
+      'Built production-grade AI systems serving 2M+ users across FinTech, FoodTech, and HealthTech domains',
+      'Developed 50+ AWS Lambda scrapers for FinTech platform automating data collection and processing',
+      'Engineered meal subscription chatbot supporting 125K+ customers with 90%+ AI accuracy using LangChain',
+      'Implemented sales forecasting model achieving 93.17% accuracy using CNN+LSTM hybrid architecture',
+      'Created HealthTech management platform improving operational efficiency by 40% for 44K+ workers',
+      'Built responsive React Native application with seamless user experience',
+      'Received Team Star Award for outstanding contribution and performance',
+      'Deployed ML applications using LangChain, OpenAI, AWS Sagemaker, and Docker'
     ],
-    technologies: ['Python', 'React.js', 'LangChain', 'OpenAI', 'AWS Sagemaker', 'Docker', 'MongoDB', 'Next.js'],
+    technologies: ['Python', 'React.js', 'React Native', 'LangChain', 'OpenAI', 'AWS Sagemaker', 'AWS Lambda', 'Docker', 'MongoDB', 'Next.js', 'CNN', 'LSTM'],
   },
   {
     id: 'digiflux-intern',

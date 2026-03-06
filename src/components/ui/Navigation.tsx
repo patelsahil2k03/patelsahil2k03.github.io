@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { cn } from '@/lib/utils';
 import { Menu, X } from 'lucide-react';
 import { Button } from './Button';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const navItems = [
   { name: 'Home', href: '#home' },
@@ -55,15 +56,18 @@ export function Navigation() {
   };
 
   return (
-    <nav
+    <motion.nav
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.5, ease: 'easeOut' }}
       className={cn(
         'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
         isScrolled
-          ? 'bg-white/90 backdrop-blur-md shadow-md'
-          : 'bg-transparent'
+          ? 'bg-white/80 backdrop-blur-lg shadow-lg border-b border-slate-200/50'
+          : 'bg-white/40 backdrop-blur-sm'
       )}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-[1400px] mx-auto px-6 sm:px-8 lg:px-12">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <button
@@ -84,39 +88,55 @@ export function Navigation() {
             </span>
           </button>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-1">
+          {/* Desktop Navigation - FIXED: Added z-10 and cursor-pointer for clickability */}
+          <div className="hidden md:flex items-center space-x-1 relative z-10">
             {navItems.map((item) => (
-              <button
+              <motion.button
                 key={item.name}
                 onClick={() => scrollToSection(item.href)}
                 className={cn(
-                  'px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200',
+                  'relative px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 cursor-pointer z-10',
                   activeSection === item.href.slice(1)
-                    ? 'bg-blue-50 text-blue-600'
-                    : 'text-slate-700 hover:bg-slate-100 hover:text-slate-900'
+                    ? 'text-blue-600'
+                    : 'text-slate-700 hover:text-slate-900'
                 )}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                style={{ pointerEvents: 'auto' }}
               >
-                {item.name}
-              </button>
+                <span className="relative z-10">{item.name}</span>
+                {activeSection === item.href.slice(1) && (
+                  <motion.div
+                    layoutId="activeSection"
+                    className="absolute inset-0 bg-gradient-to-r from-blue-50 to-cyan-50 rounded-lg border border-blue-200/50 -z-10"
+                    initial={false}
+                    transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                  />
+                )}
+              </motion.button>
             ))}
           </div>
 
-          {/* CTA Button (Desktop) */}
-          <div className="hidden md:flex items-center space-x-4">
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => scrollToSection('#contact')}
-            >
-              Get in Touch
-            </Button>
+          {/* CTA Button (Desktop) - FIXED: Added z-10 for clickability */}
+          <div className="hidden md:flex items-center space-x-4 relative z-10">
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => scrollToSection('#contact')}
+                className="backdrop-blur-sm bg-white/50 hover:bg-white/80 border-blue-200 hover:border-blue-400 shadow-sm hover:shadow-md transition-all cursor-pointer"
+                style={{ pointerEvents: 'auto' }}
+              >
+                Get in Touch
+              </Button>
+            </motion.div>
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile Menu Button - FIXED: Added z-10 and cursor-pointer */}
           <button
-            className="md:hidden p-2 rounded-lg text-slate-700 hover:bg-slate-100"
+            className="md:hidden p-2 rounded-lg text-slate-700 hover:bg-slate-100 relative z-10 cursor-pointer"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            style={{ pointerEvents: 'auto' }}
           >
             {isMobileMenuOpen ? (
               <X className="w-6 h-6" />
@@ -128,36 +148,52 @@ export function Navigation() {
       </div>
 
       {/* Mobile Menu */}
-      {isMobileMenuOpen && (
-        <div className="md:hidden bg-white border-t border-slate-200">
-          <div className="px-4 py-6 space-y-2">
-            {navItems.map((item) => (
-              <button
-                key={item.name}
-                onClick={() => scrollToSection(item.href)}
-                className={cn(
-                  'block w-full text-left px-4 py-3 rounded-lg text-base font-medium transition-colors',
-                  activeSection === item.href.slice(1)
-                    ? 'bg-blue-50 text-blue-600'
-                    : 'text-slate-700 hover:bg-slate-100'
-                )}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3, ease: 'easeInOut' }}
+            className="md:hidden bg-white/95 backdrop-blur-lg border-t border-slate-200/50 shadow-lg"
+          >
+            <div className="px-4 py-6 space-y-2">
+              {navItems.map((item, index) => (
+                <motion.button
+                  key={item.name}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: index * 0.05 }}
+                  onClick={() => scrollToSection(item.href)}
+                  className={cn(
+                    'block w-full text-left px-4 py-3 rounded-lg text-base font-medium transition-all',
+                    activeSection === item.href.slice(1)
+                      ? 'bg-gradient-to-r from-blue-50 to-cyan-50 text-blue-600 border border-blue-200/50 shadow-sm'
+                      : 'text-slate-700 hover:bg-slate-100'
+                  )}
+                >
+                  {item.name}
+                </motion.button>
+              ))}
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: navItems.length * 0.05 }}
+                className="pt-4"
               >
-                {item.name}
-              </button>
-            ))}
-            <div className="pt-4">
-              <Button
-                variant="primary"
-                size="md"
-                className="w-full"
-                onClick={() => scrollToSection('#contact')}
-              >
-                Get in Touch
-              </Button>
+                <Button
+                  variant="primary"
+                  size="md"
+                  className="w-full shadow-md hover:shadow-lg transition-shadow"
+                  onClick={() => scrollToSection('#contact')}
+                >
+                  Get in Touch
+                </Button>
+              </motion.div>
             </div>
-          </div>
-        </div>
-      )}
-    </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.nav>
   );
 }
