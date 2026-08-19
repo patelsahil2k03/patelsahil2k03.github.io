@@ -396,7 +396,7 @@ patelsahil2k03.github.io/
 │   │   └── page.tsx             # Homepage (all sections)
 │   ├── components/
 │   │   ├── sections/
-│   │   │   ├── Hero.tsx         # Hero section
+│   │   │   ├── HeroEnhanced.tsx # Hero section (imported as `Hero` in page.tsx)
 │   │   │   ├── About.tsx        # About section
 │   │   │   ├── Experience.tsx   # Experience timeline
 │   │   │   ├── CaseStudies.tsx  # Case studies (context + insight + contribution)
@@ -419,8 +419,7 @@ patelsahil2k03.github.io/
 │   │   ├── caseStudies.ts      # Case study narratives (see docs/CASE_STUDIES.md)
 │   │   ├── skills.ts           # Tech stack (50+ technologies)
 │   │   ├── projects.ts         # Projects (6 major + more)
-│   │   ├── achievements.ts     # 18+ achievements
-│   │   └── testimonials.ts     # Quotes, milestones
+│   │   └── achievements.ts     # 19 achievements (incl. publications)
 │   └── lib/
 │       ├── utils.ts            # Utility functions
 │       ├── animations.ts       # Framer Motion variants
@@ -434,9 +433,8 @@ patelsahil2k03.github.io/
 │   │   ├── logos/             # Company logos
 │   │   └── certifications/    # Certification badges
 │   └── resume.pdf             # Resume PDF
-├── docs/                      # Documentation
-├── PORTFOLIO_REFERENCE.md     # This file
-└── ENHANCEMENT_SUMMARY.md     # Progress tracking
+├── docs/                      # Documentation (see docs/README.md for the index)
+└── PORTFOLIO_REFERENCE.md     # This file
 ```
 
 ### Data Architecture
@@ -844,15 +842,10 @@ export const staggerItem = {
 - [ ] Animations: Scroll reveals sitewide
 
 ### Phase 3B: Case Studies (Blog Architecture) ✅ COMPLETE (May 2026)
-- [x] `/case-studies/` listing with filters
-- [x] `/case-studies/[slug]/` article pages (TOC, prev/next, related)
-- [x] Homepage teaser (3 featured + CTA)
-- [x] Experience timeline → related case study links
-- [x] UI UX Pro Max design system persisted (`design-system/sahil-patel-portfolio/`)
-- [x] Typography on live site: **Inter** (Archivo/Space Grotesk deferred in design-system)
-- [x] Deployed to GitHub Pages (2026-05-29)
-- [ ] MDX + hero images per study (assets / copy phase)
-- [ ] Content refinement (draft copy — see `docs/CASE_STUDIES.md`)
+Deployed to GitHub Pages on 2026-05-29. Item-by-item status (routes, cross-links,
+design-system notes, remaining content refinement) is tracked in
+**[`docs/PORTFOLIO_SCOPE_CHECKLIST.md`](./docs/PORTFOLIO_SCOPE_CHECKLIST.md)** — this
+file no longer keeps a second copy of that checklist.
 
 ### Phase 4: Build & Test ✅ MILESTONE (ongoing polish)
 - [x] Install all dependencies
@@ -940,9 +933,10 @@ export const staggerItem = {
 
 **Related Documentation:**
 - README.md - Project overview and setup
-- ENHANCEMENT_SUMMARY.md - Current progress tracking
-- ASSETS_NEEDED.md - Asset collection checklist
-- CRITICAL_ASSETS_CHECKLIST.md - Priority assets
+- docs/PORTFOLIO_SCOPE_CHECKLIST.md - Current build/scope status (master tracker)
+- docs/DEPLOYMENT.md - Build and deployment flow
+- docs/CASE_STUDIES.md - Case study inventory and refinement checklist
+- ASSETS_GUIDE.md - Asset collection guide and checklist
 
 **Inspiration Sources:**
 - https://github.com/emmabostian/developer-portfolios
@@ -951,9 +945,9 @@ export const staggerItem = {
 
 ---
 
-**Last Updated:** 2026-02-20  
-**Status:** Ready for Implementation  
-**Next Steps:** Install dependencies → Enhance components → Test → Deploy
+**Last Updated:** 2026-08-20 (reconciled with shipped state; original research dated 2026-02-20)  
+**Status:** Portfolio is live at https://patelsahil2k03.github.io, including `/case-studies/` — see `docs/PORTFOLIO_SCOPE_CHECKLIST.md` for current build/scope status  
+**Next Steps:** Remaining backlog items in this file are optional polish, not blockers — see [Features to Implement](#features-to-implement) and [Progress Tracking](#progress-tracking)
 
 ---
 
