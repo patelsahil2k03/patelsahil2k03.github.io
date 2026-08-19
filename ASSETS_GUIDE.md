@@ -103,15 +103,16 @@ public/
 
 ### Research Papers (2 needed):
 
-**File to Edit:** `src/data/publications.ts`
+**File to Edit:** `src/data/achievements.ts` (publications are `Achievement` entries with `category: 'publication'`)
 
 **What You Need:**
 ```javascript
 // Example:
 {
   title: "Your Paper Title",
-  venue: "Springer ICTIS 2024",
-  year: "2024",
+  organization: "Springer ICTIS 2024",
+  date: "April 2024",
+  category: 'publication',
   link: "https://doi.org/10.1007/xxxxx",  // ← Add real DOI here
   // OR
   link: "https://link.springer.com/...",  // ← Direct link
@@ -232,7 +233,7 @@ git push origin main
 - Or upload PDF to ResearchGate and get link
 
 **Step 2: Update Code**
-**File:** `src/data/publications.ts`
+**File:** `src/data/achievements.ts` (find the entry with `category: 'publication'`)
 ```javascript
 {
   title: "Your Paper Title",
@@ -249,7 +250,7 @@ npm run dev
 
 **Step 4: Commit**
 ```bash
-git add src/data/publications.ts
+git add src/data/achievements.ts
 git commit -m "[feat] Add research paper DOI links"
 git push origin main
 ```
