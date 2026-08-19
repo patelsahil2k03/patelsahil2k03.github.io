@@ -11,7 +11,6 @@ This folder organizes all non-code documentation for the portfolio project.
 - `../design-system/sahil-patel-portfolio/MASTER.md` – persisted UI design system (UI UX Pro Max)
 - `../ASSETS_GUIDE.md` – where to put images, logos, and links (Phase 3 assets)
 - `../PORTFOLIO_REFERENCE.md` – design inspiration, patterns, and enhancement ideas
-- `../TESTING_COMMANDS.md` – manual test commands and checklists
 
 ### Historical docs (archive/)
 
