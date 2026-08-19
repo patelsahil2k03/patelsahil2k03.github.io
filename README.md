@@ -52,124 +52,25 @@ This is a **modern, minimalistic, and feature-rich portfolio** built with Next.j
 
 ## 📂 Project Structure
 
-```
-patelsahil2k03.github.io/
-├── src/
-│   ├── app/                    # Next.js App Router
-│   │   ├── globals.css         # Global styles
-│   │   ├── layout.tsx          # Root layout
-│   │   └── page.tsx            # Home page (single-page portfolio)
-│   ├── components/
-│   │   ├── ui/                 # Reusable UI components (Card, Button, Navigation, etc.)
-│   │   └── sections/           # Page sections (Hero, About, Experience, Skills, Projects, Publications, Achievements, Contact)
-│   ├── data/                   # All content/data
-│   │   ├── personal.ts         # Personal info
-│   │   ├── experience.ts       # Work history and education
-│   │   ├── skills.ts           # Tech stack
-│   │   ├── projects.ts         # Project showcase
-│   │   ├── achievements.ts     # Awards, certs, events, publications
-│   │   ├── testimonials.ts     # Quotes, milestones (currently unused)
-│   │   └── index.ts            # Central export and global stats/contact/social
-│   ├── lib/
-│   │   ├── utils.ts            # Utility helpers (cn, etc.)
-│   │   ├── animations.ts       # Framer Motion variants
-│   │   └── hooks.ts            # Custom hooks (scroll/animation)
-│   └── assets/                 # Text assets (e.g. LinkedIn post text)
-├── public/
-│   ├── images/                 # Public images (profile, placeholders, etc.)
-│   └── resume.pdf              # Downloadable resume
-├── docs/
-│   ├── README.md               # Documentation index
-│   ├── DEPLOYMENT.md           # How the site is built & deployed
-│   └── archive/                # Historical plans and phase reports
-├── ASSETS_GUIDE.md             # Where to put images/logos and which are still pending
-├── PORTFOLIO_REFERENCE.md      # Design inspiration and enhancement ideas
-├── TESTING_COMMANDS.md         # Manual testing commands and scenarios
-└── .github/workflows/portfolio.yml  # GitHub Actions workflow for Pages
-```
+A Next.js 14 App Router site: `src/app/` (routes), `src/components/` (UI + page sections),
+`src/data/` (all content, e.g. `personal.ts`, `experience.ts`, `projects.ts`, `achievements.ts`),
+`src/lib/` (utils, animations, hooks), and `public/` (images, resume).
+
+For the full, current file-by-file inventory and build/scope status, see
+**[docs/PORTFOLIO_SCOPE_CHECKLIST.md](./docs/PORTFOLIO_SCOPE_CHECKLIST.md)** — the single
+source of truth for what's shipped vs pending.
 
 ---
 
 ## 🎯 Features
 
-### 1. **Hero Section**
-- Dynamic introduction with animated text
-- Professional tagline: "Footballer ⚽ | Data Scientist 📊"
-- Key statistics (CGPA, Projects, Publications)
-- Social links (GitHub, LinkedIn, LeetCode)
-- Call-to-action buttons
+The single-page portfolio covers Hero, About, Experience, Skills, Projects, Research
+Publications, Achievements, Football Highlights, Testimonials, and Contact — plus a
+`/case-studies/` section with in-depth write-ups on select projects.
 
-### 2. **About Section**
-- Unique story: The intersection of sports and technology
-- Personal journey from football field to data science
-- Core values and philosophy
-- Professional photo
-
-### 3. **Experience Timeline**
-- **5 Professional Experiences**:
-  - Digiflux Technologies (Associate Software Engineer)
-  - Digiflux Technologies (AI-ML Intern)
-  - L&T Technology Services (Web Dev Intern)
-  - L&T Energy (ML Intern)
-  - Motorola Solutions (Trainee)
-- Interactive timeline with smooth animations
-- Company logos and tech stack
-
-### 4. **Skills Grid**
-- **50+ Technologies** organized by category:
-  - Languages (Python, JavaScript, TypeScript, C/C++, C#, SQL)
-  - Frameworks (Next.js, React, Angular, Node.js, LangChain)
-  - AI/ML (TensorFlow, Scikit-learn, BERT, LSTM, YOLOv8)
-  - Cloud (AWS Sagemaker, Lambda, Docker)
-  - Databases (MongoDB, PostgreSQL, Firebase)
-- Bento-style modern layout
-- Proficiency indicators
-
-### 5. **Projects Showcase**
-- **6 Major Projects**:
-  1. **ForeSight** - IT Risk Prediction (Top 10 Hackathon)
-  2. **Lip Reading & Fruit Detection** - CNN (93%/88%)
-  3. **Meal Chatbot & Sales Forecasting** - LangChain (93.17%)
-  4. **Question Paper Quality** - NLP/BERT (98.04%) ✅ Published
-  5. **Bird Detection** - YOLOv8 ✅ Published
-  6. **VCC POINT** - MEAN Stack Management System
-- Filterable by technology/category
-- GitHub links, demos, research papers
-- Detailed metrics and achievements
-
-### 6. **Research Publications**
-- **Springer ICTIS 2024**: Question Paper Quality Evaluation (First Author)
-- **AIP ICRAIC 2024**: Small Bird Detection with YOLOv8
-- Links to full papers and Kudos profiles
-- Conference presentation details
-
-### 7. **Achievements Gallery**
-- **20+ Achievements** including:
-  - Awards (Team Star, Hackathon Finalist)
-  - Publications (2 papers)
-  - Certifications (NVIDIA, Google Cloud, AWS, NPTEL)
-  - Competitive Programming (LeetCode 100 Days)
-  - Events (IndoML, conferences, hackathons)
-  - Sports (National Football Tournament)
-- Organized by category
-- Timeline view
-
-### 8. **Football Highlights**
-- CHARUSAT Football Team achievements
-- National West Zone Inter-University Tournaments
-- Balance between sports and academics
-- Action photos (when provided)
-
-### 9. **Testimonials**
-- Key quotes from LinkedIn posts
-- Professional insights and philosophy
-- Journey milestones
-
-### 10. **Contact Section**
-- Email, phone, location
-- Social media links
-- Downloadable resume
-- Response time indicator
+For the full, current inventory of sections, project details, and status per item, see
+**[docs/PORTFOLIO_SCOPE_CHECKLIST.md](./docs/PORTFOLIO_SCOPE_CHECKLIST.md)** and
+**[docs/CASE_STUDIES.md](./docs/CASE_STUDIES.md)** rather than a second copy of the list here.
 
 ---
 
@@ -217,8 +118,8 @@ patelsahil2k03.github.io/
 
 1. **Clone the repository**
 ```bash
-git clone https://github.com/patelsahil2k03/sahilpatel.dev.git
-cd sahilpatel.dev
+git clone https://github.com/patelsahil2k03/patelsahil2k03.github.io.git
+cd patelsahil2k03.github.io
 ```
 
 2. **Install dependencies**
@@ -255,11 +156,15 @@ npm run build
 ```
 
 2. **Deploy to GitHub Pages**
+
+The site deploys automatically via GitHub Actions on every push to `main`
+(see **[docs/DEPLOYMENT.md](./docs/DEPLOYMENT.md)** for the full build/deploy flow and
+the `dev` → `main` release process).
+
 ```bash
-# Deploy to gh-pages branch
+# Legacy/manual fallback only — not the primary deploy path
 npm run deploy
 ```
-Your portfolio will be live at `https://patelsahil2k03.github.io/sahilpatel.dev/`.
 
 ---
 
@@ -436,18 +341,14 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📋 Documentation
 
-### Core Documentation
-- **README.md** - This file (project overview)
-- **DEPLOYMENT_COMPLETE.md** - Full deployment summary
-- **ASSETS_GUIDE.md** - Guide for adding images and assets
-- **PHASE1_COMPLETE_SUMMARY.md** - Phase 1 completion details
-- **PHASE2_COMPLETE.md** - Phase 2 completion and current status
+Full index: **[docs/README.md](./docs/README.md)**. Active docs:
 
-### Technical Documentation
-- **DEPLOYMENT_SUMMARY.md** - Deployment process and workflow
-- **TESTING_COMMANDS.md** - Manual testing checklist
-- **FIXES_APPLIED_TEST_NOW.md** - Recent fixes and testing
-- **ISSUES_FOUND_AND_FIXES.md** - Issue diagnosis and solutions
+- **[docs/DEPLOYMENT.md](./docs/DEPLOYMENT.md)** - How the site is built and deployed (GitHub Actions, static export)
+- **[docs/PORTFOLIO_SCOPE_CHECKLIST.md](./docs/PORTFOLIO_SCOPE_CHECKLIST.md)** - Master scope tracker (build gates, done/pending)
+- **[docs/CASE_STUDIES.md](./docs/CASE_STUDIES.md)** - Case study inventory, routes, refinement checklist
+- **[BRANCH_STRATEGY.md](./BRANCH_STRATEGY.md)** - `dev` / `main` workflow, feature branches, CI vs deploy
+- **[ASSETS_GUIDE.md](./ASSETS_GUIDE.md)** - Where to put images/logos and which are still pending
+- **[PORTFOLIO_REFERENCE.md](./PORTFOLIO_REFERENCE.md)** - Design inspiration and long-term enhancement ideas
 
 ### Archived Documentation
 See `docs/archive/` for historical documentation and planning files.
@@ -492,4 +393,4 @@ Modern, polished look suitable for career opportunities and networking.
 
 ---
 
-**Last Updated**: October 23, 2025
+**Last Updated**: August 20, 2026
