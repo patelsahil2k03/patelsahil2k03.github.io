@@ -8,7 +8,6 @@ This folder organizes all non-code documentation for the portfolio project.
 - `DEPLOYMENT.md` – how the site is built and deployed (GitHub Actions, static export)
 - `PORTFOLIO_SCOPE_CHECKLIST.md` – **master scope tracker** (build gates, done/pending, CSV inventory, commits)
 - `CASE_STUDIES.md` – case study inventory, routes, cross-links, refinement checklist
-- `../design-system/sahil-patel-portfolio/MASTER.md` – persisted UI design system (UI UX Pro Max)
 - `../ASSETS_GUIDE.md` – where to put images, logos, and links (Phase 3 assets)
 - `../PORTFOLIO_REFERENCE.md` – design inspiration, patterns, and enhancement ideas
 
