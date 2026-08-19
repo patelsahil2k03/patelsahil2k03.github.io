@@ -3,7 +3,7 @@
 import { personalInfo } from './personal';
 
 export { personalInfo };
-export { experiences, education, highSchool } from './experience';
+export { experiences, education } from './experience';
 export type { Experience } from './experience';
 export { skillCategories, topSkills } from './skills';
 export type { SkillCategory, Skill } from './skills';
@@ -23,8 +23,6 @@ export {
   highlightedAchievements 
 } from './achievements';
 export type { Achievement } from './achievements';
-export { testimonials, quotes, milestones } from './testimonials';
-export type { Testimonial } from './testimonials';
 
 // Statistics for hero/about section
 export const stats = {

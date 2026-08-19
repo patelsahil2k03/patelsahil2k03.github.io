@@ -21,53 +21,6 @@ export function useScrollAnimation(options = {}) {
 }
 
 /**
- * Hook to create counter animation (for stats)
- */
-export function useCountAnimation(end: number, duration: number = 2000, shouldStart: boolean = false) {
-  const [count, setCount] = useState(0);
-  const startTime = useRef<number | null>(null);
-  const animationFrame = useRef<number | null>(null);
-
-  useEffect(() => {
-    if (!shouldStart) {
-      setCount(0);
-      return;
-    }
-
-    const animate = (currentTime: number) => {
-      if (!startTime.current) {
-        startTime.current = currentTime;
-      }
-
-      const elapsed = currentTime - startTime.current;
-      const progress = Math.min(elapsed / duration, 1);
-
-      // Easing function (easeOutExpo)
-      const easeOut = 1 - Math.pow(2, -10 * progress);
-      const currentCount = Math.floor(easeOut * end);
-
-      setCount(currentCount);
-
-      if (progress < 1) {
-        animationFrame.current = requestAnimationFrame(animate);
-      } else {
-        setCount(end);
-      }
-    };
-
-    animationFrame.current = requestAnimationFrame(animate);
-
-    return () => {
-      if (animationFrame.current) {
-        cancelAnimationFrame(animationFrame.current);
-      }
-    };
-  }, [end, duration, shouldStart]);
-
-  return count;
-}
-
-/**
  * Hook to detect reduced motion preference
  */
 export function usePrefersReducedMotion() {

@@ -118,11 +118,3 @@ export const education = {
     'Presented papers at ICTIS 2024 and ICRAIC 2024 conferences'
   ]
 };
-
-export const highSchool = {
-  school: 'Parth School of Science and Competition',
-  board: 'HSC - GSEB',
-  location: 'Vadodara, India',
-  duration: '2018 - 2020',
-  percentage: '82.09'
-};
