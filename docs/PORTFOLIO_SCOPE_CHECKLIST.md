@@ -87,8 +87,8 @@
 |---|------|--------|-------|
 | 1 | UI UX Pro Max skill | **No** — local only | `.cursor/skills/ui-ux-pro-max/` (gitignored) |
 | 2 | Skill CSV datasets (24 files) | **No** — local only | Bundled with skill; not portfolio code |
-| 3 | Design system persisted | **Yes** | `design-system/sahil-patel-portfolio/` |
-| 4 | Page override case-studies | **Yes** | `pages/case-studies.md` |
+| 3 | Design system persisted | **Removed** | Unused Cursor-generated boilerplate, deleted 2026-08-20; design tokens now documented in `PORTFOLIO_REFERENCE.md` |
+| 4 | Page override case-studies | **Removed** | Deleted 2026-08-20 (never adapted to the real `/case-studies/` feature) |
 
 ### Install UI skill locally (optional, for Cursor UX work)
 
@@ -152,7 +152,6 @@ See `BRANCH_STRATEGY.md` at repo root.
 ## Related docs
 
 - `docs/CASE_STUDIES.md` — content inventory per slug
-- `PORTFOLIO_REFERENCE.md` — inspiration & long-term roadmap
+- `PORTFOLIO_REFERENCE.md` — inspiration, long-term roadmap, and design tokens
 - `docs/DEPLOYMENT.md` — build, deploy, Clarity, `dev` → `main` release flow
 - `BRANCH_STRATEGY.md` — default branch `dev`, production `main`
-- `design-system/sahil-patel-portfolio/MASTER.md` — design tokens (committed)

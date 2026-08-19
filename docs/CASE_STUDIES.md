@@ -94,7 +94,7 @@ Homepage shows first **3** featured studies (`homepageFeaturedCaseStudies`).
 - Hero: **Medium** + **Google Scholar** social links
 - Contact → **mailto** with pre-filled body (honest UX)
 - Fonts: **Inter** site-wide (live); Archivo/Space Grotesk kept in `design-system/` for future use
-- Design system: `design-system/sahil-patel-portfolio/MASTER.md` + `pages/case-studies.md`
+- Design system: tokens documented in `PORTFOLIO_REFERENCE.md` (unused Cursor-generated boilerplate removed 2026-08-20)
 - **Deploy:** `main` → GitHub Actions; daily work on `dev` (see `BRANCH_STRATEGY.md`)
 
 ---
