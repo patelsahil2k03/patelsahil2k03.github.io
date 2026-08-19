@@ -1,0 +1,18 @@
+# Achievement Photos Placeholder
+
+## Add your achievement/award photos here:
+
+### Awards
+- team-star-award.jpg (Digiflux award photo)
+- ai-manthan-team.jpg (Hackathon team photo)
+- convocation-2025.jpg (Graduation photo)
+
+### Certificates (optional)
+- Any certificate images you want to showcase
+
+## Recommended:
+- Size: 800x600px or larger
+- Format: JPG or PNG
+- Clear and professional quality
+
+Delete this file once you add your photos.

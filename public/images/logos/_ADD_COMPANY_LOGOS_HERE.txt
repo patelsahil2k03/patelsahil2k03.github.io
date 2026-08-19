@@ -1,0 +1,18 @@
+# Company Logos Placeholder
+
+## Add company logos here:
+
+### Companies
+- digiflux.png (Digiflux Technologies)
+- lnt.png (Larson & Toubro)
+- motorola.png (Motorola Solutions)
+- charusat.png (CHARUSAT University)
+
+## Recommended:
+- Size: 200x200px (square)
+- Format: PNG with transparent background
+- High resolution for retina displays
+
+You can usually find official logos on company websites or their media kits.
+
+Delete this file once you add your logos.

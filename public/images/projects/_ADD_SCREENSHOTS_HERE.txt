@@ -1,0 +1,30 @@
+# Project Screenshots Placeholder
+
+## Add your project screenshots here:
+
+### ForeSight (IT Risk Prediction)
+- foresight-dashboard.png
+
+### Lip Reading & Fruit Detection
+- lip-reading-demo.png
+- fruit-detection-app.png
+
+### Meal Chatbot & Sales Forecasting
+- meal-chatbot-ui.png
+- sales-forecast-graph.png
+
+### Question Paper Quality Test
+- question-paper-analyzer.png
+
+### Bird Detection (YOLOv8)
+- bird-detection-results.png
+
+### VCC POINT
+- vcc-point-dashboard.png
+
+## Recommended:
+- Size: 1200x675px (16:9 aspect ratio)
+- Format: PNG or JPG
+- Optimized: Under 200KB each
+
+Delete this file once you add your screenshots.

@@ -1,0 +1,22 @@
+# Certification Badges Placeholder
+
+## Add certification badges here:
+
+### Certifications
+- nvidia-badge.png (NVIDIA Deep Learning)
+- google-cloud-badges.png (Google Cloud)
+- aws-practitioner.png (AWS Cloud Practitioner)
+- nptel-elite.png (NPTEL Elite badges)
+
+## Recommended:
+- Size: 200x200px (square) or badge dimensions
+- Format: PNG with transparent background
+- Official certification badges from provider
+
+You can usually download these from:
+- NVIDIA: Your profile
+- Google Cloud: Credential portal
+- AWS: Certification dashboard
+- NPTEL: Certificate download
+
+Delete this file once you add your badges.

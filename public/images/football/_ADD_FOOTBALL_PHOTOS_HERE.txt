@@ -1,0 +1,20 @@
+# Football Photos Placeholder
+
+## Add your football team photos here:
+
+### Team Photos
+- charusat-team.jpg (Team photo)
+- national-tournament-2023.jpg (Tournament photo)
+
+### Action Shots
+- tournament-action.jpg (Playing action shot)
+- football-profile.jpg (Football-related profile photo)
+
+## Recommended:
+- Size: 1200x800px or larger
+- Format: JPG
+- High quality sports photos
+
+These will add personality to your "About" section!
+
+Delete this file once you add your photos.
