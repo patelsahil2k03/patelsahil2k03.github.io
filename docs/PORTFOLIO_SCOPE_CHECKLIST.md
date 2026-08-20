@@ -1,8 +1,8 @@
 # Portfolio Scope Checklist
 
 > **Project:** `patelsahil2k03.github.io`  
-> **Last updated:** 2026-05-29  
-> **Deploy:** Live on GitHub Pages (2026-05-29, includes case studies + Inter revert `7e71be5`)  
+> **Last updated:** 2026-08-21  
+> **Deploy:** Live on GitHub Pages (2026-08-20, `main@4329a4f` — production-readiness pass: dead code removal, doc consolidation, a11y fixes, SEO/sitemap, tooling cleanup; see `docs/superpowers/plans/2026-08-19-portfolio-production-readiness.md` for the full task-by-task record)  
 > **Git rules:** `UNIVERSAL_GIT_RULES.md` (Conventional Commits, no secrets, no Co-authored-by)
 
 ---
@@ -13,7 +13,6 @@
 |-----------------|----------------------------------------|
 | `src/` (Next.js app, case studies, components) | **Yes** — this is the site |
 | `public/` (images, resume) | **Yes** |
-| `design-system/` (persisted tokens — already applied in CSS/fonts) | **No at runtime** — reference for future edits; site uses baked-in styles |
 | `.cursor/skills/` (UI UX Pro Max + CSVs) | **No** — Cursor IDE only, never deployed |
 | `.env.local` / GitHub secrets (Clarity ID) | **Build-time only** — not in repo |
 
@@ -73,7 +72,7 @@
 |---|------|--------|
 | 1 | Achievements summary labels fix | Done |
 | 2 | SEO metadata ← `seo.ts` in `layout.tsx` | Done |
-| 3 | Fonts: Inter (site-wide; matches live Phase 2) | Done — Archivo/Space Grotesk deferred (see design-system/) |
+| 3 | Fonts: Inter (site-wide; matches live Phase 2) | Done — Archivo/Space Grotesk deferred (see `PORTFOLIO_REFERENCE.md`) |
 | 4 | Hero: Medium + Google Scholar | Done |
 | 5 | Contact → mailto pre-fill | Done |
 | 6 | `prefers-reduced-motion` in CSS | Done |
@@ -99,13 +98,7 @@ npx uipro-cli init --ai cursor
 
 Restart Cursor after install. Skill + CSVs stay on your machine; **do not commit `.cursor/`**.
 
-To regenerate design hints (optional):
-
-```bash
-python3 .cursor/skills/ui-ux-pro-max/scripts/search.py "portfolio case studies" --design-system --persist -p "Sahil Patel Portfolio"
-```
-
-Commit only the updated `design-system/` output if tokens change — not the skill folder.
+The skill's `--design-system --persist` output is no longer used — the generated boilerplate never matched the live site and was deleted (see row 3 above). Design tokens are now documented and manually maintained in `PORTFOLIO_REFERENCE.md` instead.
 
 ---
 
@@ -134,17 +127,11 @@ See `BRANCH_STRATEGY.md` at repo root.
 
 ---
 
-## Commit log (this milestone)
+## Commit log
 
-| Commit | Type | Summary |
-|--------|------|---------|
-| `838891a` | `feat(portfolio)` | Case studies routes + cross-links + polish |
-| `96da8f9` | `chore(tooling)` | Design system + scope checklist (skill was tracked here — later removed) |
-| `5b27962` | `docs` | Record commit SHAs in checklist |
-| `901ce48` | `chore` | Stop tracking `.cursor/` skill |
-| `7e71be5` | `fix` | Restore Inter typography on live site |
-| `d377b20` | `docs` | Mark deploy complete on checklist |
-| `6adbffc` | `docs` | `dev`/`main` branch strategy + CI workflow |
+**Case studies milestone (through 2026-05-29):** `838891a` (routes + cross-links + polish), `96da8f9` (design system + scope checklist), `5b27962` (record commit SHAs), `901ce48` (stop tracking `.cursor/` skill), `7e71be5` (restore Inter typography), `d377b20` (mark deploy complete), `6adbffc` (`dev`/`main` branch strategy + CI).
+
+**Production-readiness pass (2026-08-19 – 2026-08-20, 26 commits):** dead-code removal, doc consolidation, content accuracy fixes, git-history remediation, asset optimization, accessibility fixes, SEO/sitemap, tooling cleanup — full task-by-task record with commit SHAs in `docs/superpowers/plans/2026-08-19-portfolio-production-readiness.md`, not duplicated here.
 
 ---
 
@@ -154,3 +141,5 @@ See `BRANCH_STRATEGY.md` at repo root.
 - `PORTFOLIO_REFERENCE.md` — inspiration, long-term roadmap, and design tokens
 - `docs/DEPLOYMENT.md` — build, deploy, Clarity, `dev` → `main` release flow
 - `BRANCH_STRATEGY.md` — default branch `dev`, production `main`
+- `docs/superpowers/plans/2026-08-19-portfolio-production-readiness.md` — the full production-readiness plan and task-by-task execution ledger
+- `resume/main.tex` + `resume/RESUME_IMPROVEMENTS.md` — resume LaTeX source and pending review notes (not yet applied)

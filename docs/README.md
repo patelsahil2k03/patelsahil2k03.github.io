@@ -10,6 +10,8 @@ This folder organizes all non-code documentation for the portfolio project.
 - `CASE_STUDIES.md` – case study inventory, routes, cross-links, refinement checklist
 - `../ASSETS_GUIDE.md` – where to put images, logos, and links (Phase 3 assets)
 - `../PORTFOLIO_REFERENCE.md` – design inspiration, patterns, and enhancement ideas
+- `superpowers/plans/2026-08-19-portfolio-production-readiness.md` – production-readiness plan and full task-by-task execution ledger
+- `../resume/main.tex` + `../resume/RESUME_IMPROVEMENTS.md` – resume LaTeX source and pending review notes (not yet applied)
 
 ### Historical docs (archive/)
 
