@@ -12,6 +12,7 @@ export const metadata: Metadata = {
   description: seo.description,
   keywords: seo.keywords,
   authors: [{ name: personalInfo.name }],
+  manifest: '/site.webmanifest',
   openGraph: {
     title: seo.title,
     description: seo.description,
