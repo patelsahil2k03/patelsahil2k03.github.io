@@ -239,8 +239,8 @@ export function HeroEnhanced() {
 
           {/* Name & Typing Animation */}
           <motion.div className="space-y-6" variants={staggerItem}>
-            <motion.h1 
-              className="text-5xl sm:text-6xl lg:text-7xl font-bold text-slate-900 tracking-tight"
+            <motion.h1
+              className="text-4xl sm:text-6xl lg:text-7xl font-bold text-slate-900 tracking-tight"
               variants={fadeInUp}
             >
               Hi, I&apos;m{' '}
