@@ -7,8 +7,6 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "export": "next build",
-    "deploy": "next build && (if not exist out\\.nojekyll echo. > out\\.nojekyll) && gh-pages -d out -b gh-pages",
     "lint": "next lint"
   },
   "dependencies": {
@@ -35,7 +33,6 @@
     "autoprefixer": "^10.4.16",
     "eslint": "^8.56.0",
     "eslint-config-next": "^14.0.4",
-    "gh-pages": "^6.1.1",
     "postcss": "^8.4.32",
     "tailwindcss": "^3.4.0",
     "typescript": "5.9.3"
