@@ -161,11 +161,6 @@ The site deploys automatically via GitHub Actions on every push to `main`
 (see **[docs/DEPLOYMENT.md](./docs/DEPLOYMENT.md)** for the full build/deploy flow and
 the `dev` → `main` release process).
 
-```bash
-# Legacy/manual fallback only — not the primary deploy path
-npm run deploy
-```
-
 ---
 
 ## 🎨 Customization

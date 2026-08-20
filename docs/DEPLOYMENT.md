@@ -105,12 +105,9 @@ npm run dev
 
 # Production build (static export into out/)
 npm run build
-
-# Optional: manual gh-pages deployment (historical)
-npm run deploy
 ```
 
-The recommended path today is **GitHub Actions → Pages**, not `npm run deploy`.
+Deployment is via **GitHub Actions → Pages** on every push to `main` — there is no manual deploy script (the old `npm run deploy`/`gh-pages` path was removed).
 
 ---
 

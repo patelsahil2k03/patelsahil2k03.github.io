@@ -26,7 +26,7 @@
 | Check | Command / action | Status |
 |-------|------------------|--------|
 | Production build | `npm run build` | Pass (12 static pages) |
-| Lint | `npm run lint` | Pass (legacy `src/comps/` img warnings only) |
+| Lint | `npm run lint` | Pass |
 | No `.env` staged | `git ls-files \| grep env` | `.env.local` gitignored |
 | No `.cursor/` staged | `git ls-files .cursor` should be empty | `.cursor/` gitignored |
 | No secrets in diff | manual / grep | OK |
@@ -129,7 +129,6 @@ See `BRANCH_STRATEGY.md` at repo root.
 | Sitewide scroll reveals | `PORTFOLIO_REFERENCE.md` P3 |
 | Skills: all 50+ technologies | `PORTFOLIO_REFERENCE.md` |
 | About “Beyond Tech” | `PORTFOLIO_REFERENCE.md` |
-| Legacy `src/comps/` cleanup | Tech debt |
 | Lighthouse audit post-deploy | After push |
 | Monorepo other 19 repos | `REPO_IMPROVEMENT_PLAN.md` |
 
