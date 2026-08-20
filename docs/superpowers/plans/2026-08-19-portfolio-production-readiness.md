@@ -938,6 +938,50 @@ A rigged photo-likeness can land anywhere between genuinely memorable and uncann
 
 ---
 
+## Phase M — GitHub Contributors Cache (Monitoring, No Code Change)
+
+> Added 2026-08-21. User noticed the GitHub repo's "Contributors" sidebar still shows Ujwal Pachghare after the Phase A (out-of-band) history scrub.
+
+### Finding
+
+This is a **confirmed GitHub UI caching artifact, not a real residual problem.** Verified directly:
+- `gh api repos/patelsahil2k03/patelsahil2k03.github.io/contributors` (the live, uncached contributors endpoint) returns **only `patelsahil2k03`** — nothing else.
+- `git log --all -p | grep -ic ujwal` against the current repo still returns `0` (re-verified 2026-08-21, same result as the original scrub).
+- `gh api repos/.../stats/contributors` (GitHub's separate, heavier analytics cache used to render the sidebar widget) returned empty — consistent with it still being mid-recompute.
+- Web research confirms this is a well-documented GitHub behavior: the contributors sidebar is cached separately from live git history and does not recompute instantly after a force-push/history rewrite. Reported resolution paths, per multiple GitHub Community discussions: (1) it typically self-resolves within 24-48 hours, (2) a new real commit to the default branch (`main`) sometimes triggers an earlier refresh, (3) contacting GitHub Support to force a recompute is the documented last resort if it's still stale after 48h.
+
+### Task
+
+- [ ] **M1 — No action needed yet.** The real data is already clean; this is purely a display-cache lag. If still showing after ~48 hours from the scrub (2026-08-20 ~00:04 IST), that's the trigger to either push a small real commit to `main` first (cheap, often sufficient) or file a GitHub Support request as the last resort. Not worth spending effort on until that window passes.
+
+---
+
+## Phase N — Case Studies Presentation Upgrade (Research & Staged Plan)
+
+> Added 2026-08-21 per user request: research best practices for presenting case studies that show personal contribution and system impact — explicitly NOT copying any specific site's visual style/content, but informed by checking what's out there. User referenced `https://main.dpj9krfglv297.amplifyapp.com/work/` (Digiflux's own portfolio work-listing page) as one example to look at, not to imitate. The `frontend-design` skill was loaded for this research pass per user's explicit request to "extensively use all design skills."
+
+### What was actually checked
+
+- **Digiflux's `/work/` listing page** (fetched and confirmed viewable): a filterable grid of 29 case-study cards, each with a hero photo, one big stat + label (e.g. "40K-50K registered users"), a sequence number (001, 002...), category tag pills, title, org/location line, one-sentence hook, and a "View case study" link. Detail pages (per the two screenshots provided) use: breadcrumb-style category tags top-right, an eyebrow label, a large title, an "Outcome" callout with one highlighted stat in a bordered card, a tech-stack list, then a hero image.
+- **Broader web research** (UX/product-portfolio case-study guides, engineering-specific STAR-method writeups) on how to present case studies that emphasize personal contribution and impact.
+
+### Key finding: this site's existing case-study *structure* is already sound
+
+`docs/CASE_STUDIES.md` and `CaseStudyArticle.tsx`'s existing sections (Problem & industry context → Insight → What I built → Technical approach, plus a "Results at a glance" stat box, TOC, prev/next, related studies) map closely onto the STAR method (Situation/Task/Action/Result) that the research confirms as the industry-standard structure for engineering case studies. **This is not a "the structure is wrong, rebuild it" finding** — the gap is elsewhere:
+
+1. **Contribution clarity.** Research consistently flags this as the single biggest differentiator: "state what you owned, what you influenced, and what someone else handled... precision makes you look credible, ambiguity makes the work look inflated." Worth auditing the 7 existing case studies' "What I built" sections against this bar specifically — do they read as "I personally built/owned X" or do they blur into team/company language?
+2. **Listing-page presentation.** The current homepage `CaseStudies` teaser and the `/case-studies` index page's visual treatment (not researched in this pass — needs an actual audit against the current live components) may be a real opportunity area, informed by (but not copying) patterns like Digiflux's stat-forward card treatment — a real, deliberate design pass matters here, not a template swap.
+3. **Impact-with-context.** Research recommends benchmarking numbers against industry norms where honestly possible ("a 28% increase means more when the industry average is 12%") — worth considering for a subset of case studies where a fair comparison exists, without overstating.
+
+### Staged outline (research/plan only — actual redesign work follows the frontend-design skill's own brainstorm → plan → critique → build → critique cycle, not written blind here)
+
+- **N1 — Audit current case-study content for contribution clarity.** Read all 7 case studies in `src/data/caseStudies.ts` fully, flag any section that reads as team/company-attributed rather than clearly "I built/owned this," propose specific rewrites per study. This is a content task, can happen independently of any visual redesign.
+- **N2 — Audit current listing-page visual treatment.** Screenshot the current homepage `CaseStudies` teaser section and the `/case-studies` index page (same screenshot method as Task 18), evaluate against the researched patterns, identify concrete gaps (not just "make it look like Digiflux's").
+- **N3 — Design brainstorm pass.** Use `superpowers:brainstorming` + the `frontend-design` skill's two-pass process (token system: color/type/layout/signature → critique against the brief → build) to produce a genuinely distinctive presentation direction for this site specifically — grounded in Sahil's actual subject matter (production systems, measurable scale, technical depth), not a generic template and not a copy of any reference site.
+- **N4 — Implement approved direction.** Full task breakdown written once N3 produces an approved design plan, following this document's usual task-writing standard (exact files, exact changes, no placeholders).
+
+---
+
 ## Self-Review Notes
 
 - **Addendum (2026-08-19):** Tasks 26-34 (Phases I-J) were appended after the initial plan was written and after Task 1 was already complete, per a direct user request mid-execution. They follow the same task-writing standard (exact files, exact old→new values where known, decision gates where genuinely ambiguous) and don't renumber or otherwise disturb Tasks 1-25 or the SDD ledger's existing progress. Tasks 26-28 are pure factual corrections with exact values already known (no decision gate needed beyond the standard propose-before-commit); Tasks 29-31 and 32-34 have explicit decision gates since they involve creative/positioning judgment or research scoping that only the user can direct.
