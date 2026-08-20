@@ -56,7 +56,7 @@ export function About() {
           </Badge>
           <h2 className="text-4xl sm:text-5xl font-bold text-slate-900 mb-4">
             Where <span className="text-blue-600">Data Science</span> Meets{' '}
-            <span className="text-orange-500">Determination</span>
+            <span className="text-orange-700">Determination</span>
           </h2>
           <p className="text-xl text-slate-600 max-w-3xl mx-auto">
             A unique blend of athletic discipline and technical expertise
@@ -73,7 +73,7 @@ export function About() {
                     I&apos;m a <strong className="text-blue-600">passionate technologist</strong> who believes 
                     that the best solutions come from understanding both the problem and the people it affects. 
                     My journey spans from the football field to cutting-edge AI research, proving that 
-                    <strong className="text-orange-500"> discipline and determination</strong> transcend domains.
+                    <strong className="text-orange-700"> discipline and determination</strong> transcend domains.
                   </p>
                   
                   <p>
@@ -84,7 +84,7 @@ export function About() {
                   </p>
 
                   <p>
-                    What sets me apart is my ability to <strong className="text-cyan-600">bridge multiple worlds</strong>:
+                    What sets me apart is my ability to <strong className="text-cyan-700">bridge multiple worlds</strong>:
                   </p>
 
                   <ul className="space-y-3 ml-4">
@@ -96,14 +96,14 @@ export function About() {
                       </span>
                     </li>
                     <li className="flex items-start">
-                      <span className="text-orange-500 mr-2 mt-1">▹</span>
+                      <span className="text-orange-700 mr-2 mt-1">▹</span>
                       <span>
                         <strong>Athletic Discipline</strong>: National-level football player, balancing 
                         sports and academics with equal commitment
                       </span>
                     </li>
                     <li className="flex items-start">
-                      <span className="text-cyan-500 mr-2 mt-1">▹</span>
+                      <span className="text-cyan-600 mr-2 mt-1">▹</span>
                       <span>
                         <strong>Research Mindset</strong>: Published researcher with papers indexed in 
                         SCOPUS and Web of Science
