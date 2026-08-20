@@ -18,7 +18,7 @@ export function CaseStudyTeaserCard({ study, compact = false }: CaseStudyTeaserC
   const href = `/case-studies/${study.id}/`;
 
   return (
-    <Link href={href} className="block h-full group cursor-pointer">
+    <Link href={href} className="block h-full group cursor-pointer rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-600">
       <Card hoverGlow className="h-full flex flex-col">
         <CardHeader className={compact ? 'pb-3' : 'pb-4'}>
           <div className="flex flex-wrap items-center gap-2 mb-3">

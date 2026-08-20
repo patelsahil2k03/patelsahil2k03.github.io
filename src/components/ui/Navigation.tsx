@@ -125,7 +125,7 @@ export function Navigation() {
             <button
               type="button"
               onClick={() => scrollToSection('home')}
-              className="flex items-center space-x-2 group cursor-pointer"
+              className="flex items-center space-x-2 group cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-600 rounded-lg"
             >
               <div className="relative w-10 h-10">
                 <Image
@@ -139,7 +139,7 @@ export function Navigation() {
               <span className="text-xl font-bold text-slate-900 hidden sm:block">Sahil Patel</span>
             </button>
           ) : (
-            <Link href="/" className="flex items-center space-x-2 group cursor-pointer">
+            <Link href="/" className="flex items-center space-x-2 group cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-600 rounded-lg">
               <div className="relative w-10 h-10">
                 <Image
                   src="/images/hero/profile.jpg"
@@ -165,6 +165,7 @@ export function Navigation() {
                   item,
                   cn(
                     'relative px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 cursor-pointer z-10 block',
+                    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-600',
                     isNavActive(item) ? 'text-blue-600' : 'text-slate-700 hover:text-slate-900'
                   )
                 )}
@@ -195,7 +196,7 @@ export function Navigation() {
                   Get in Touch
                 </Button>
               ) : (
-                <Link href="/#contact">
+                <Link href="/#contact" className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-600 rounded-lg">
                   <Button
                     variant="outline"
                     size="sm"
@@ -211,7 +212,7 @@ export function Navigation() {
 
           <button
             type="button"
-            className="md:hidden p-2 rounded-lg text-slate-700 hover:bg-slate-100 relative z-10 cursor-pointer"
+            className="md:hidden p-2 rounded-lg text-slate-700 hover:bg-slate-100 relative z-10 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-600"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-expanded={isMobileMenuOpen}
             aria-label="Toggle menu"
@@ -242,6 +243,7 @@ export function Navigation() {
                     item,
                     cn(
                       'block w-full text-left px-4 py-3 rounded-lg text-base font-medium transition-all cursor-pointer',
+                      'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-600',
                       isNavActive(item)
                         ? 'bg-gradient-to-r from-blue-50 to-cyan-50 text-blue-600 border border-blue-200/50 shadow-sm'
                         : 'text-slate-700 hover:bg-slate-100'
@@ -268,7 +270,7 @@ export function Navigation() {
                     Get in Touch
                   </Button>
                 ) : (
-                  <Link href="/#contact" className="block" onClick={() => setIsMobileMenuOpen(false)}>
+                  <Link href="/#contact" className="block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-600 rounded-lg" onClick={() => setIsMobileMenuOpen(false)}>
                     <Button
                       variant="primary"
                       size="md"
