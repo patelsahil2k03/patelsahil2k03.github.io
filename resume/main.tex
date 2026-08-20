@@ -1,0 +1,299 @@
+%-------------------------
+% Resume in Latex
+% Author : Sahil
+% Based on: https://github.com/jakegut/resume (which was itself based on https://github.com/sb2nov/resume)
+% License : MIT
+%------------------------
+
+\documentclass[letterpaper,10pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\usepackage{xcolor}
+\usepackage{fontawesome5}
+\usepackage{times}
+
+
+\input{glyphtounicode}
+
+\usepackage{setspace}
+
+% Set line spacing to 1.5 (adjust as needed)
+\setstretch{1.0}
+
+
+% -------------------- FONT OPTIONS --------------------
+% sans-serif
+% \usepackage[sfdefault]{roboto}
+% \usepackage[sfdefault]{noto-sans}
+% serif
+% \usepackage{charter}
+
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Adjust margins
+\addtolength{\oddsidemargin}{-0.5in}
+\addtolength{\evensidemargin}{-0.4in}
+\addtolength{\textwidth}{1in}
+\addtolength{\topmargin}{-0.7in}
+\addtolength{\textheight}{1.5in}
+
+\urlstyle{same}
+
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Section Formatting
+\titleformat{\section}{
+  \vspace{-5pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+
+% Subsection formatting
+\titleformat{\subsection}{
+  \vspace{-4pt}\scshape\raggedright\large
+}{\hspace{-.15in}}{0em}{}[\color{black}\vspace{-8pt}]
+
+% Ensure that generated pdf is machine readable/ATS parsable
+\pdfgentounicode=1
+
+% -------------------- CUSTOM COMMANDS --------------------
+\newcommand{\resumeItem}[1]{
+  \item\small{
+    {#1 \vspace{-2pt}}
+  }
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-2pt}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & #2 \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubSubheading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \textit{\small#1} & \textit{\small #2} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeProjectHeading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \small#1 & #2 \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubItem}[1]{\resumeItem{#1}\vspace{-4pt}}
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.15in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+% \newcommand{\resumeBulletedProjectHeading}[1]{\resumeProjectHeading{\textbullet\ #1\vspace{2pt}}}
+% \newcommand{\resumeBulletedProjectHeading}[1]{\resumeProjectHeading{\textbullet\ #1}}
+\newcommand{\resumeBulletedProjectHeading}[1]{\item {\footnotesize\textbullet~{\textbf{#1}}}}
+
+
+
+
+\setlength{\footskip}{4.08003pt}
+
+% % Set the vertical spacing between paragraphs
+% \setlength{\parskip}{2pt} % Adjust the value as needed
+
+% % Set the horizontal indentation at the beginning of paragraphs
+% \setlength{\parindent}{0pt} % Adjust the value as needed
+
+% -------------------- START OF DOCUMENT --------------------
+\begin{document}
+% \small
+
+% -------------------- HEADING--------------------
+% \begin{flushright}
+%   % \vspace{-4pt}
+%   \color{gray}
+%   \item
+%   Last Updated in March, 2024
+% \end{flushright}
+
+\vspace{-5pt}
+
+\begin{center}
+    \textbf{\Huge \scshape Sahil Patel} \\ \vspace{8pt}
+    \small 
+    \faIcon{globe}
+    \href{https://patelsahil2k03.github.io/}{\underline{patelsahil2k03.github.io} \faExternalLink*}
+    $\;$
+    \faIcon{github}
+    \href{https://github.com/patelsahil2k03}{\underline{github.com/patelsahil2k03}}
+    $\;$
+    \faIcon{linkedin}
+    \href{https://www.linkedin.com/in/sahil-patel-581226205/}
+    {\underline{linkedin.com/in/sahil-patel-581226205}} 
+    $\;$
+    \faIcon{code}
+    \href{https://leetcode.com/patelsahil2k03/}
+    {\underline{leetcode.com/patelsahil2k03}}
+    \\[4pt]
+    \faIcon{envelope}
+    \href{mailto:patelsahil2k03@gmail.com}
+    {\underline{patelsahil2k03@gmail.com}}
+    $\;$
+    \faIcon{phone}
+    {\underline{+91 7874337475}}
+    $\;$
+    \faIcon{map-marker-alt}
+    {\underline{Vadodara, India}}
+
+\end{center}
+
+% -------------------- EDUCATION --------------------
+\section{Education}
+  \resumeSubHeadingListStart
+  
+    \resumeSubheading
+      {Charotar University of Science and Technology (CHARUSAT)}{Gujarat, India}
+      {B.Tech Computer Engineering $|$ \textbf{CGPA: 9.35/10}}{2020 -- 2024}
+
+  \resumeSubHeadingListEnd
+
+% -------------------- SKILLS --------------------
+\section{Skills}
+ \begin{itemize}[leftmargin=0.15in, label={}]
+    \small{\item{
+    
+     \textbf{Languages}{\hspace{0.3in}:\hspace{0.20in} C/C++, Python, JavaScript/TypeScript, C\#, SQL, HTML/CSS} \\
+     
+     \textbf{Frameworks}{\hspace{0.2in}:\hspace{0.2in} React.js, React Native, Next.js, Node.js, Angular, LangChain, Flask, FastAPI, ASP.NET MVC} \\
+     
+     \textbf{AI/ML}{\hspace{0.5in}:\hspace{0.2in} TensorFlow, PyTorch, Scikit-learn, OpenAI API, LLMS, NLP, Computer Vision, BERT, LSTM} \\
+     
+     \textbf{Cloud \& Tools}{\hspace{0.11in}:\hspace{0.19in} AWS (Lambda, SageMaker, DynamoDB, CloudWatch), Docker, Git, MongoDB, PostgreSQL} \\
+
+     \textbf{Specialties}{\hspace{0.33in}:\hspace{0.19in} Web Scraping, Agentic AI Systems, Full-Stack Development, ML Model Deployment}
+    }}
+ \end{itemize}
+
+% -------------------- EXPERIENCE --------------------
+\section{Experience}
+  \resumeSubHeadingListStart
+
+          \resumeProjectHeading
+          {\textbf{Digiflux Technologies Pvt Ltd} $|$ \footnotesize\emph{Associate Software Engineer (\textbf{Team Star Award}, June 2024)}}{Jan 2024 -- Present}
+          \resumeItemListStart
+            \resumeItem{Developing and integrating AI models; Built responsive UIs using React.js; Deployed ML applications with LangChain, OpenAI, Docker}
+            \resumeItem{\textbf{FinTech (2M+ users):} Deployed \textbf{50+ serverless AWS Lambda scrapers} for real-time data aggregation; Created React Native mobile app with trade alerts; Implemented AI-powered services with LangChain and OpenAI for efficient stock market analysis tools}
+            \resumeItem{\textbf{FoodTech (UAE, 125K+ customers):} Engineered \textbf{AI Coach with GPT-4} and meal subscription chatbot reducing manual intervention; Implemented food scanning using \textbf{USDA nutritional database \& Google Gemini AI} (90\%+ accuracy); Architected sales forecasting model with \textbf{CNN+LSTM achieving 93.17\% accuracy}; Created \textbf{20+ RESTful APIs}, dashboards; Optimized PostgreSQL}
+            \resumeItem{\textbf{HealthTech (44K+ workers):} Developed \textbf{agentic AI chatbot with LangChain \& RAG architecture}; Scraped global tuberculosis information; Reduced manual intervention by \textbf{40\%}}
+            \resumeItem{\textbf{AI SaaS:} Created \textbf{Adobe Photoshop plugin} (React); Implemented large-scale web scrapers for enterprise data collection}
+          \resumeItemListEnd
+
+          \resumeProjectHeading
+          {\textbf{L\&T Technology Services} $|$ \footnotesize\emph{Web Development Intern}}{May 2023 -- July 2023}
+          \resumeItemListStart
+            \resumeItem{Designed web request forms using \textbf{C\#, JavaScript, ASP.NET Model-View-Controller}; Streamlined client data collection workflows}
+          \resumeItemListEnd
+
+          \resumeProjectHeading
+          {\textbf{L\&T Energy-Power} $|$ \footnotesize\emph{Machine Learning Intern}}{May 2022 -- June 2022}
+          \resumeItemListStart
+            \resumeItem{Implemented \textbf{AI Chatbots using RASA framework}; Worked on Natural Language Processing and conversational AI projects}
+          \resumeItemListEnd
+
+          \resumeProjectHeading
+          {\textbf{Motorola Solutions} $|$ \footnotesize\emph{Internship Trainee}}{May 2022 -- Nov 2022}
+          \resumeItemListStart
+            \resumeItem{MEAN Stack Developer - Specialized in \textbf{Node.js, Express, Angular, Structured Query Language}; Participated in design reviews}
+          \resumeItemListEnd
+           
+    \resumeSubHeadingListEnd
+
+% -------------------- PROJECTS --------------------
+\section{Projects}
+    \resumeSubHeadingListStart
+
+        \resumeProjectHeading
+        {\href{https://github.com/patelsahil2k03/it-analytics-platform-backend}{\textbf{ForeSight - IT Project Risk Prediction} \faExternalLink*} $|$ \emph{Python, FastAPI, Next.js 15, PostgreSQL, dbt, Docker}}{Jan 2025}
+        \resumeItemListStart
+            \resumeItem{Built enterprise ML platform for operational risk prediction with real-time dashboards, anomaly detection, cost forecasting in 24 hours}
+        \resumeItemListEnd
+
+        \resumeProjectHeading
+        {\textbf{Meal Subscription Chatbot \& Sales Forecasting} $|$ \emph{Next.js, LangChain, Python, OpenAI, CNN+LSTM, MongoDB}}{2024}
+        \resumeItemListStart
+            \resumeItem{Designed AI chatbot for automating meal subscriptions reducing manual intervention; Implemented time series forecasting model using CNN+LSTM, Random Forest, ARIMA, SARIMAX achieving \textbf{93.17\% accuracy} on live sales data}
+        \resumeItemListEnd
+
+        \resumeProjectHeading
+        {\textbf{Pre-Exam Question Paper Quality Test} $|$ \emph{Python, BERT, LSTM, Bi-LSTM, NLP}}{2023 -- 2024}
+        \resumeItemListStart
+            \resumeItem{Developed AI system achieving \textbf{98.04\% accuracy} on \textbf{2,809 instances} using Bi-directional LSTM, BERT for automated quality evaluation based on Bloom's Taxonomy}
+            \resumeItem{\textbf{Published in Springer ICTIS 2024} (SCOPUS Indexed) - First author; Presented at conference in Ahmedabad}
+        \resumeItemListEnd
+
+        \resumeProjectHeading
+        {\textbf{Small Bird Detection in Aerial Imagery} $|$ \emph{Python, YOLOv8, Computer Vision}}{2024}
+        \resumeItemListStart
+            \resumeItem{Enhanced small object detection using YOLOv8 variants for drone surveillance; \textbf{Published in AIP ICRAIC 2024} (SCOPUS, Web of Science Indexed) - Co-author}
+        \resumeItemListEnd
+
+        \resumeProjectHeading
+        {\href{https://github.com/patelsahil2k03/Fruit-Detection-App}{\textbf{Lip Reading \& Fruit Detection App} \faExternalLink*} $|$ \emph{Python, CNN, TensorFlow, Flutter}}{2023}
+        \resumeItemListStart
+            \resumeItem{Created CNN lip-reading model (\textbf{93\% training, 53\% validation}); Delivered mobile app for fruit classification (\textbf{88\% accuracy} on 3,115 images)}
+        \resumeItemListEnd
+
+    \resumeSubHeadingListEnd
+
+\section{Publications \& Achievements}
+\begin{itemize}[leftmargin=0.15in, label={}]
+    \small
+    \resumeBulletedProjectHeading{Revolutionizing Educational Assessment: Deep Learning for Question Paper Quality Evaluation} \\
+    \hspace{0.04in}
+    \emph{\footnotesize First Author $|$ Springer Lecture Notes in Networks and Systems - ICTIS 2024 $|$ SCOPUS Indexed} 
+    {\href{https://link.springer.com/chapter/10.1007/978-981-97-6681-9_11}{\footnotesize \faExternalLink*}}
+
+    \resumeBulletedProjectHeading{Enhancing Small Object Detection in Aerial Imagery Using YOLOv8 Architecture} \\
+    \hspace{0.04in}
+    \emph{\footnotesize Co-Author $|$ AIP Conference Proceedings - ICRAIC 2024 $|$ SCOPUS, Web of Science Indexed}
+    {\href{https://pubs.aip.org/aip/acp/article-abstract/3255/1/030001/3333223}{\footnotesize \faExternalLink*}}
+
+    \resumeBulletedProjectHeading{Top 10 Finalist - AI-Manthan Hackathon by AtliQ Technologies among 70+ teams (January 2025)}
+    
+    \resumeBulletedProjectHeading{NVIDIA Certified (AI/Deep Learning) $|$ Google Cloud - 8 Badges (2023), Cloud Engineer Path (2022)}
+
+    \resumeBulletedProjectHeading{NPTEL Cloud Computing - Elite Certificate (66\%, IIT Kharagpur) $|$ AWS Certified Cloud Practitioner}
+    
+    \resumeBulletedProjectHeading{Attended IndoML 2022 at IIT Gandhinagar; Presented research at ICTIS 2024 \& ICRAIC 2024 Conferences}
+
+    \resumeBulletedProjectHeading{AI/ML Core Team - CHARUSAT Learning \& Development Club $|$ National Football Tournament (2022, 2023)}
+\end{itemize}
+
+\end{document}
+
+            % \resumeBulletedProjectHeading{Technical Writer for MakerFest Vadodara 2023.}
+        
+          % \resumeProjectHeading
+          % {\textbf{Playing the Drums}\vspace{8pt}}{2013 -- 2019}
+          % {\small{Played the drums in symphonic, jazz, and marching bands}}
+
+          % \resumeProjectHeading
+          % {\textbf{3\textsuperscript{rd} Place Time Keeping Challenge Championship \footnotesize{(Time Keeping Assocation)}}\vspace{8pt}}{Feb. 2022 -- May 2022}
+          % {\small{Won \$1500 nationally competing against high school students in counting seconds and minutes}}
