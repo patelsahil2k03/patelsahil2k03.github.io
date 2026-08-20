@@ -540,6 +540,28 @@ grep -rn "text-gradient\|glass-effect\|card-hover" --include="*.tsx" src/
 
 ---
 
+### Task 20a: Build image-rendering UI for Experience/Achievements (unblocks Task 15)
+
+> Added 2026-08-20, discovered while investigating Task 15. `experience.ts`'s `Experience` interface already has an unused `logo?: string` field; `achievements.ts`'s `Achievement` interface already has an unused `image?: string` field — neither is read by `Experience.tsx` or `Achievements.tsx`. Per `docs/archive/ASSETS_NEEDED.md`, this was always the intended sequencing (build the UI once assets arrive), not a bug — but it means Task 15's asset collection has nowhere to render until this exists.
+
+**Files:** `src/components/sections/Experience.tsx`, `src/components/sections/Achievements.tsx` (read both fully first)
+
+- [ ] **Step 1: Decision gate — ask the user for direction** (this is UI/design work, not mechanical): what should company-logo and achievement-image display look like? E.g., a small logo badge next to each `Experience` entry's company name; a thumbnail/photo alongside each `Achievement` card. Confirm layout intent before building — don't guess a design.
+
+- [ ] **Step 2: Implement the approved display pattern** in both components, using Next.js `<Image>` (already the pattern used elsewhere, e.g. `About.tsx`'s profile photo), reading the `logo`/`image` fields already defined on the data types. Handle the missing-image case gracefully (both fields are optional — components must not break when a given entry has no image yet, since most won't until Task 15's assets arrive).
+
+- [ ] **Step 3: Verify with a placeholder test image** (not real assets yet) that the layout renders correctly with and without an image present, then remove the test image before committing — don't ship a placeholder asset into the repo.
+
+- [ ] **Step 4: Verify build, commit.**
+
+```bash
+git commit -m "feat: add image display support to Experience and Achievements"
+```
+
+- [ ] **Step 5: Once this lands, Task 15 (asset collection) becomes actionable** — revisit it with the user to start collecting the actual images per `docs/archive/ASSETS_NEEDED.md`'s checklist (cross-check that checklist's project names against current `projects.ts`/`caseStudies.ts` first, since some naming may have drifted since it was written).
+
+---
+
 ## Phase F — Performance & SEO
 
 ### Task 21: Bundle size and Core Web Vitals check
