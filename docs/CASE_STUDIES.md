@@ -93,7 +93,7 @@ Homepage shows first **3** featured studies (`homepageFeaturedCaseStudies`).
 - SEO metadata unified via `seo` + `personalInfo` in `layout.tsx`
 - Hero: **Medium** + **Google Scholar** social links
 - Contact → **mailto** with pre-filled body (honest UX)
-- Fonts: **Inter** site-wide (live); Archivo/Space Grotesk kept in `design-system/` for future use
+- Fonts: **Inter** site-wide (live); Archivo/Space Grotesk deferred (see `PORTFOLIO_REFERENCE.md`)
 - Design system: tokens documented in `PORTFOLIO_REFERENCE.md` (unused Cursor-generated boilerplate removed 2026-08-20)
 - **Deploy:** `main` → GitHub Actions; daily work on `dev` (see `BRANCH_STRATEGY.md`)
 
@@ -108,4 +108,4 @@ cd patelsahil2k03.github.io
 npx uipro-cli init --ai cursor   # installs .cursor/skills/ locally — do not commit
 ```
 
-Restart Cursor after install. Persisted design output lives in `design-system/` (that **is** committed).
+Restart Cursor after install. The skill's persisted design-system output is no longer used — the generated boilerplate never matched the live site and was deleted 2026-08-20; design tokens are documented and manually maintained in `PORTFOLIO_REFERENCE.md` instead.
