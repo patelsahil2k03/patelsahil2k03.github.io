@@ -153,6 +153,84 @@ export const caseStudies: CaseStudy[] = [
     readTime: '5 min',
   },
   {
+    id: 'ecommerce-marketplace-content-platform',
+    title: 'AI-Powered Marketplace Content & Search Platform',
+    type: 'production',
+    industry: 'E-commerce / Creator Commerce',
+    hook: 'Owning a platform indexing 517K+ products across 29 marketplaces, with semantic search built for how creators actually search.',
+    industryContext:
+      'Creator-commerce platforms sit between influencers and marketplace catalogs spanning dozens of regional and international storefronts. Product data arrives inconsistent — mismatched categories, duplicate listings, multilingual titles — and creators need to find relevant items by intent, not just keyword match. Systems that can\'t reconcile catalog scale with search relevance either drown in stale data or return irrelevant results.',
+    insight:
+      'At this scale, the hard problem isn\'t scraping — it\'s reconciliation and retrieval. A category taxonomy that\'s 80% automated still needs the remaining 20% to be right, because a wrong mapping breaks discovery for every product under it. Vector search earns its complexity only when keyword search demonstrably fails on real creator queries — semantic search on top of a shaky data foundation just returns confidently wrong results faster.',
+    contribution:
+      'Own an AI-powered marketplace content and search platform end-to-end: architected a pipeline indexing 517K+ products across 29 marketplaces (EN + AR), built a PostgreSQL→MongoDB sync layer to bridge relational category logic with document-store product data, and shipped a gRPC semantic search API backed by Pinecone across 5,109 category mappings. Engineered Cloudflare R2 image processing to keep listing assets performant at this scale.',
+    topics: ['Vector Search', 'Data Engineering', 'gRPC', 'E-commerce'],
+    metrics: [
+      { label: 'Products indexed', value: '517K+' },
+      { label: 'Marketplaces', value: '29' },
+      { label: 'Category mappings', value: '5,109' },
+    ],
+    technologies: ['Python', 'FastAPI', 'PostgreSQL', 'MongoDB', 'Pinecone', 'gRPC', 'Cloudflare R2'],
+    relatedExperienceId: 'digiflux-ase',
+    company: 'Digiflux Technologies',
+    period: '2026 – Present',
+    publishedAt: '2026-01-12',
+    featured: true,
+    readTime: '5 min',
+  },
+  {
+    id: 'fitness-microservice-platform',
+    title: 'Microservice Mesh for a Fitness & Wellness Platform',
+    type: 'production',
+    industry: 'HealthTech / Fitness',
+    hook: 'Designing a gRPC microservice mesh and a standalone mobile app for a fitness brand built on wearable data.',
+    industryContext:
+      'Fitness platforms live or die on how well they merge data from wearables (Fitbit, Garmin, Oura) with coaching logic, meal logging, and user state — each a separate concern that still needs to feel like one coherent app. Monolithic builds tend to buckle here: a bug in meal-logging shouldn\'t be able to take down auth, but the services still need to share user context constantly.',
+    insight:
+      'Splitting by domain (auth, coach, fitness, meal-logging, user) only pays off if the service boundaries mirror how the product team actually reasons about the app — otherwise you\'ve traded one kind of coupling for another, just spread across gRPC calls instead of function calls. The wearable integrations are the real complexity: three different vendor APIs, three different data shapes, one consistent internal model.',
+    contribution:
+      'Designed and built a NestJS microservice mesh (auth, coach, fitness, meal-logging, user services) communicating over gRPC, powering a fitness and wellness platform. Built a standalone React Native app with Fitbit, Garmin, and Oura wearable integrations, unifying three vendor data models into one coaching experience.',
+    topics: ['Microservices', 'NestJS', 'gRPC', 'Mobile'],
+    metrics: [
+      { label: 'Services', value: '5-service mesh' },
+      { label: 'Wearable integrations', value: '3' },
+      { label: 'Platform', value: 'iOS + Android' },
+    ],
+    technologies: ['NestJS', 'gRPC', 'React Native', 'MongoDB', 'TypeScript'],
+    relatedExperienceId: 'digiflux-ase',
+    company: 'Digiflux Technologies',
+    period: '2026 – Present',
+    publishedAt: '2026-02-01',
+    featured: true,
+    readTime: '4 min',
+  },
+  {
+    id: 'adobe-uxp-catalog-plugin',
+    title: 'An Adobe Photoshop Plugin Real Designers Use',
+    type: 'build',
+    industry: 'E-commerce / Creative Tooling',
+    hook: 'Shipping a UXP plugin inside Photoshop itself — a different kind of UI problem than a web app.',
+    industryContext:
+      'Catalog and creative teams often bounce between Photoshop and separate web tools to prep product images for e-commerce listings — export, upload, tag, repeat. A plugin that lives inside Photoshop removes that context-switch entirely, but Adobe\'s UXP environment is a genuinely different platform: no browser DOM, a constrained runtime, and UI conventions dictated by the host app, not by React defaults.',
+    insight:
+      'Building for a host application means the plugin succeeds by disappearing into Photoshop\'s own conventions, not by looking like a web app bolted on. The real product decision is less "what can this do" and more "what would a designer expect to already exist here."',
+    contribution:
+      'Built a React-based Adobe Photoshop UXP plugin for an e-commerce catalog team, used directly by production designers to prep and tag catalog images without leaving Photoshop. Followed on with SaaS catalog data pipelines (multi-marketplace format conversion, scraper-result cleaning) and a serverless image compression service.',
+    topics: ['UXP', 'Adobe', 'Developer Tooling', 'E-commerce'],
+    metrics: [
+      { label: 'Platform', value: 'Adobe UXP' },
+      { label: 'Users', value: 'Production design team' },
+      { label: 'Stack', value: 'React + serverless' },
+    ],
+    technologies: ['React', 'Adobe UXP', 'AWS Lambda', 'Cloudflare R2'],
+    relatedExperienceId: 'digiflux-ase',
+    company: 'Digiflux Technologies',
+    period: '2024 – 2025',
+    publishedAt: '2024-08-01',
+    featured: false,
+    readTime: '3 min',
+  },
+  {
     id: 'foresight-risk-prediction',
     title: 'ForeSight — IT Project Risk Prediction (Hackathon)',
     type: 'poc',
