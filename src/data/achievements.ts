@@ -35,7 +35,7 @@ export const achievements: Achievement[] = [
     id: 'ai-manthan-top10',
     title: 'Top 10 Finalist - AI-Manthan Hackathon',
     organization: 'AtliQ Technologies',
-    date: 'January 2025',
+    date: 'October 2025',
     description: 'Selected as Top 10 finalist among 70+ teams for building ForeSight, an enterprise-grade ML-powered operational risk prediction system for IT projects.',
     category: 'hackathon',
     metrics: 'Top 10 out of 70+ proposals',
