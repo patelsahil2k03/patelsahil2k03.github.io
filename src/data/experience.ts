@@ -18,8 +18,8 @@ export const experiences: Experience[] = [
     company: 'Digiflux Technologies Pvt Ltd',
     role: 'Associate Software Engineer',
     location: 'Vadodara, India',
-    duration: 'Jan 2024 – Present',
-    startDate: '2024-01',
+    duration: 'Jul 2024 – Present',
+    startDate: '2024-07',
     endDate: 'Present',
     type: 'full-time',
     description: [
@@ -39,9 +39,9 @@ export const experiences: Experience[] = [
     company: 'Digiflux Technologies Pvt Ltd',
     role: 'Python Developer (AI-ML) Intern',
     location: 'Vadodara, India',
-    duration: 'Aug 2023 – Dec 2023',
-    startDate: '2023-08',
-    endDate: '2023-12',
+    duration: 'Jan 2024 – Jun 2024',
+    startDate: '2024-01',
+    endDate: '2024-06',
     type: 'internship',
     description: [
       'Focused on learning and implementing end-to-end ML applications',

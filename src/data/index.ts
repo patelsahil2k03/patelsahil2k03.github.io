@@ -26,7 +26,7 @@ export type { Achievement } from './achievements';
 
 // Statistics for hero/about section
 export const stats = {
-  experience: '1+ Years',
+  experience: '2+ Years',
   projects: '6+',
   publications: '2',
   cgpa: '9.35',
