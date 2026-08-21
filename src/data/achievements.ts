@@ -14,10 +14,19 @@ export interface Achievement {
 export const achievements: Achievement[] = [
   // Awards & Recognition
   {
+    id: 'ai-catalyst-2026',
+    title: 'AI Catalyst 2026 — Special Recognition',
+    organization: 'Digiflux Technologies',
+    date: 'March 2026',
+    description: 'Special Recognition at the Second Annual Townhall for advancing AI-driven solutions — one year after Team Star, reflecting the shift from finding my footing to owning AI infrastructure at scale.',
+    category: 'award',
+    metrics: 'Second Annual Townhall',
+  },
+  {
     id: 'team-star-award',
     title: 'Team Star Award',
     organization: 'Digiflux Technologies',
-    date: 'June 2024',
+    date: 'March 2025',
     description: 'Recognized at the first Annual Townhall for outstanding contributions, dedication, and performance across multiple projects over nine months.',
     category: 'award',
     metrics: '9 months of excellence',
@@ -206,6 +215,7 @@ export const achievementsByCategory = {
 };
 
 export const highlightedAchievements = [
+  achievements.find(a => a.id === 'ai-catalyst-2026'),
   achievements.find(a => a.id === 'ai-manthan-top10'),
   achievements.find(a => a.id === 'team-star-award'),
   achievements.find(a => a.id === 'springer-ictis-2024'),
