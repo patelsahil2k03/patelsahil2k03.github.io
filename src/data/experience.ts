@@ -30,7 +30,10 @@ export const experiences: Experience[] = [
       'Created HealthTech management platform improving operational efficiency by 40% for 44K+ workers',
       'Built responsive React Native application with seamless user experience',
       'Received Team Star Award for outstanding contribution and performance',
-      'Deployed ML applications using LangChain, OpenAI, AWS Sagemaker, and Docker'
+      'Deployed ML applications using LangChain, OpenAI, AWS Sagemaker, and Docker',
+      'Built a BLE-integrated React Native app for cafe POS thermal-printer control, handling device pairing and ESC/POS command sequences',
+      'Shipped a WhatsApp ordering bot (FastAPI + Supabase + Twilio) for a meal subscription platform',
+      'Built LangGraph ReAct agents automating internal Redmine-based workflows'
     ],
     technologies: ['Python', 'React.js', 'React Native', 'LangChain', 'OpenAI', 'AWS Sagemaker', 'AWS Lambda', 'Docker', 'MongoDB', 'Next.js', 'CNN', 'LSTM'],
   },
