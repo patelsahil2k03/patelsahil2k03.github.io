@@ -30,8 +30,7 @@ export function Footer() {
               {personalInfo.name}
             </Link>
             <p className="text-sm text-slate-400 leading-relaxed">
-              Building intelligent solutions at the intersection of sports and data science. 
-              Footballer ⚽ turned Data Scientist 📊.
+              {personalInfo.tagline}
             </p>
           </div>
 
