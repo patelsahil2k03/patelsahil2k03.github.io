@@ -284,7 +284,7 @@ export function HeroEnhanced() {
             >
               <Sparkles className="w-5 h-5 text-blue-600" />
               <p className="text-lg sm:text-xl font-semibold bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">
-                {personalInfo.impactStatement || 'Built systems serving 2M+ users with 98%+ AI accuracy'}
+                {personalInfo.impactStatement || 'Built and now own production systems serving 2M+ users'}
               </p>
               <Sparkles className="w-5 h-5 text-cyan-600" />
             </motion.div>

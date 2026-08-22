@@ -35,7 +35,7 @@ export const stats = {
   leetcodeProblems: '100+',
   // Impact metrics
   usersServed: '2M+',
-  accuracy: '98%+',
+  accuracy: '93%+',
   technologiesUsed: '50+',
   customersSupported: '125K+',
 };
@@ -79,7 +79,7 @@ export const social = {
 // SEO metadata
 export const seo = {
   title: 'Sahil Patel | AI/ML Engineer & Full Stack Developer',
-  description: 'Associate Software Engineer specializing in AI/ML, Full Stack Development, and Cloud Computing. Published researcher with 9.35 CGPA from CHARUSAT. Passionate footballer and data scientist.',
+  description: "Associate Software Engineer building production AI and full-stack systems across FinTech, FoodTech, and HealthTech — 2M+ users served. Published researcher, CHARUSAT '24.",
   keywords: [
     'Sahil Patel',
     'AI Engineer',
