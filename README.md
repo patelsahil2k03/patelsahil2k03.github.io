@@ -321,16 +321,16 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 - ✅ **Live Website**: https://patelsahil2k03.github.io
 - 🚀 **Deployment**: GitHub Pages (Auto-deployed via GitHub Actions)
-- ⭐ **Components**: 15+ functional components
-- 📝 **Total Lines**: ~6,000+ lines of code
-- 🎨 **Data Files**: 8 TypeScript files with structured content
-- 🖼️ **Sections**: 8 major sections (Hero, About, Experience, Skills, Projects, Publications, Achievements, Contact)
-- 📚 **Projects**: 8 showcased projects
-- 🏆 **Achievements**: 20+ documented achievements
-- 💼 **Experience**: 5 professional positions (1+ years)
+- ⭐ **Components**: 23 functional components
+- 📝 **Total Lines**: ~4,900 lines of code (`src/`)
+- 🎨 **Data Files**: 7 TypeScript files with structured content
+- 🖼️ **Sections**: 9 major sections (Hero, About, Experience, Case Studies, Skills, Projects, Publications, Achievements, Contact)
+- 📚 **Projects**: 6 showcased projects
+- 🏆 **Achievements**: 20 documented achievements
+- 💼 **Experience**: 5 professional positions (2+ years at current role)
 - 🎓 **Education**: CHARUSAT with 9.35 CGPA
 - 📄 **Publications**: 2 SCOPUS-indexed research papers
-- ⚡ **Performance**: 71.2 kB main page, 159 kB First Load JS
+- ⚡ **Performance**: 17.5 kB main page, 178 kB First Load JS
 
 ---
 
