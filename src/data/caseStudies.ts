@@ -317,8 +317,17 @@ export const caseStudies: CaseStudy[] = [
 
 export const featuredCaseStudies = caseStudies.filter((cs) => cs.featured);
 
-/** Top featured studies on homepage teaser section */
-export const homepageFeaturedCaseStudies = featuredCaseStudies.slice(0, 3);
+/**
+ * Top featured studies on homepage teaser section — explicit picks, not
+ * array-order slicing, so this stays intentional as new studies are added.
+ */
+export const homepageFeaturedCaseStudies = [
+  'ecommerce-marketplace-content-platform',
+  'fitness-microservice-platform',
+  'fintech-lambda-scrapers',
+]
+  .map((id) => caseStudies.find((cs) => cs.id === id))
+  .filter((cs): cs is CaseStudy => Boolean(cs));
 
 export const caseStudyFilters: { id: CaseStudyType | 'all'; label: string }[] = [
   { id: 'all', label: 'All' },
