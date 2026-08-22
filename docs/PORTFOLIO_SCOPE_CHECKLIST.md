@@ -37,7 +37,7 @@
 
 | # | Item | Status | Notes |
 |---|------|--------|-------|
-| 1 | Data model `src/data/caseStudies.ts` | Done | 7 studies, `publishedAt`, `articleSections` hook |
+| 1 | Data model `src/data/caseStudies.ts` | Done | 10 studies (7 original + 3 added 2026-08-21), `publishedAt`, `articleSections` hook |
 | 2 | Utils `src/lib/caseStudyUtils.ts` | Done | TOC ids, prev/next, cross-link helpers |
 | 3 | `/case-studies/` listing + filters | Done | |
 | 4 | `/case-studies/[slug]/` articles | Done | 7 static routes |

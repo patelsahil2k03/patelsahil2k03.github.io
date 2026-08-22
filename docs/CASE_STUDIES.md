@@ -1,8 +1,8 @@
 # Case Studies — Content Inventory & Status
 
-**Last updated:** 2026-05-29  
+**Last updated:** 2026-08-22  
 **Architecture:** Blog-style routes + homepage teaser  
-**Scope status:** Shipped on GitHub Pages (2026-05-29); copy/images still draft
+**Scope status:** Shipped on GitHub Pages; 10 studies live (7 original + 3 added 2026-08-21 covering more recent senior-scope work); copy/images still draft
 
 ---
 
@@ -38,15 +38,20 @@ Optional later: `articleSections[]` in data, then MDX under `content/case-studie
 
 | Slug | Title | Type | Featured (home) | Status |
 |------|-------|------|-----------------|--------|
-| `fintech-lambda-scrapers` | FinTech Data Pipeline at Scale | production | yes (teaser) | Draft |
-| `foodtech-meal-chatbot` | Conversational AI for Meal Subscriptions | production | yes (teaser) | Draft |
-| `healthtech-ops-platform` | HealthTech Workforce Operations Platform | production | yes (teaser) | Draft |
+| `ecommerce-marketplace-content-platform` | AI-Powered Marketplace Content & Search Platform | production | **yes (teaser)** | Draft |
+| `fitness-microservice-platform` | Microservice Mesh for a Fitness & Wellness Platform | production | **yes (teaser)** | Draft |
+| `fintech-lambda-scrapers` | FinTech Data Pipeline at Scale | production | **yes (teaser)** | Draft |
+| `foodtech-meal-chatbot` | Conversational AI for Meal Subscriptions | production | listing only | Draft |
+| `healthtech-ops-platform` | HealthTech Workforce Operations Platform | production | listing only | Draft |
 | `sales-forecasting-cnn-lstm` | Hybrid CNN+LSTM Sales Forecasting | production | listing only | Draft |
+| `adobe-uxp-catalog-plugin` | An Adobe Photoshop Plugin Real Designers Use | build | listing only | Draft |
 | `foresight-risk-prediction` | ForeSight — IT Project Risk Prediction | poc | listing only | Draft |
 | `edtech-question-paper-nlp` | AI-Driven Exam Paper Quality Assessment | research | listing only | Draft |
 | `bird-detection-aerial` | Small Object Detection in Aerial Imagery | research | listing only | Draft |
 
-Homepage shows first **3** featured studies (`homepageFeaturedCaseStudies`).
+Homepage teaser (`homepageFeaturedCaseStudies`) is an **explicit id-based pick**, not array-order slicing (fixed 2026-08-22 — the 2 newest studies were marked `featured: true` but weren't actually appearing on the homepage because of array-order side effects). Currently: marketplace platform, fitness microservices, FinTech pipeline.
+
+Note: `adobe-uxp-catalog-plugin` is `type: 'build'`, which has no dedicated filter button on `/case-studies/` yet (`caseStudyFilters` only has All/Production/POC/Research) — it still shows under "All". Single-item filter category not added yet; revisit if more `build`-type studies are added.
 
 ---
 

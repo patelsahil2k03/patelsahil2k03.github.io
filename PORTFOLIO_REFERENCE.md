@@ -483,7 +483,7 @@ patelsahil2k03.github.io/
 
 **Achievements (`achievements.ts`):**
 ```typescript
-- 18+ achievements
+- 20 achievements
 - Categories: award, publication, certification, hackathon, event, badge
 - Links, dates, descriptions, metrics
 ```
