@@ -281,7 +281,7 @@ transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
 ### Priority 1: Must-Have Enhancements
 
 #### 1. Enhanced Hero Section
-- [x] Add impact statement ("2M+ users, 98%+ accuracy")
+- [x] Add impact statement ("Built and now own production systems serving 2M+ users")
 - [ ] Implement typing animation for roles
 - [ ] Add counter animations for stats (count up on load)
 - [ ] Better gradient effects on name
@@ -453,7 +453,7 @@ patelsahil2k03.github.io/
 - experience, projects, publications, cgpa
 - certifications, hackathons, leetcodeProblems
 - usersServed: "2M+"
-- accuracy: "98%+"
+- accuracy: "93%+"
 - technologiesUsed: "50+"
 - customersSupported: "125K+"
 ```
@@ -706,14 +706,14 @@ export const staggerItem = {
 ### Impact Metrics Integration
 
 **Where to Highlight:**
-1. **Hero Section:** "Built systems serving 2M+ users with 98%+ accuracy"
+1. **Hero Section:** "Built and now own production systems serving 2M+ users"
 2. **Stats Cards:** Show counters for users, accuracy, technologies
 3. **Experience Descriptions:** Include specific metrics for each role
 4. **Project Cards:** Add impact numbers (users, accuracy, performance)
 
 **Metrics to Emphasize:**
 - 2M+ users served (FinTech platform)
-- 98%+ AI accuracy (various ML models)
+- 93%+ AI accuracy (various ML models)
 - 50+ technologies mastered
 - 125K+ customers supported (FoodTech)
 - 44K+ workers benefited (HealthTech)

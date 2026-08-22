@@ -28,7 +28,7 @@ All of the following are live and working in production:
 - **Hero section**
   - Typing animation over multiple roles
   - Counter animations (experience, projects, publications, CGPA, etc.)
-  - Impact statement (“2M+ users”, “98%+ accuracy”)
+  - Impact statement (“Built and now own production systems serving 2M+ users”)
   - 3 CTAs: View My Work, Get in Touch, Download Resume
   - Social links: GitHub, LinkedIn, LeetCode, Email
 

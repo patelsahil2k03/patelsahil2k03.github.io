@@ -25,7 +25,7 @@ This is a **modern, minimalistic, and feature-rich portfolio** built with Next.j
 - 🏆 **Top 10 Finalist** - AI-Manthan Hackathon
 - ⭐ **Team Star Award** - Digiflux Technologies
 - ⚽ **National Football Player** - CHARUSAT Team
-- 💻 **1+ Years Industry Experience**
+- 💻 **2+ Years Industry Experience**
 - 🎯 **6+ Major Projects** with AI/ML, Full Stack, Research
 
 ---

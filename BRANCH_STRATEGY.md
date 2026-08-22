@@ -4,7 +4,7 @@
 **Strategy:** Simplified GitFlow (solo / small team)  
 **Last updated:** 2026-05-29
 
-Inspired by the mixa-product-extractor `BRANCH_STRATEGY.md` — trimmed to **dev + main** only (no `staging` for now).
+Inspired by a similar branch strategy used on other personal/work repos — trimmed to **dev + main** only (no `staging` for now).
 
 ---
 
