@@ -787,14 +787,16 @@ git commit -m "fix(content): correct AI-Manthan hackathon date to October 2025"
 **Files:** N/A initially — decision + scoping task. Likely touches `src/data/caseStudies.ts` and/or `src/data/projects.ts` once scoped.
 
 **Missing work identified in career-growth (none currently represented anywhere on the site):**
-- **MIXA** — creator-commerce platform, 517K+ products across 29 marketplaces (EN+AR), PostgreSQL→MongoDB sync, Cloudflare R2 image processing, gRPC semantic search API with Pinecone (5,109 category mappings). Full platform ownership from Jan 2026.
-- **MOLT** — NestJS microservice mesh (auth/coach/fitness/meal-logging/user) + standalone React Native app with Fitbit/Garmin/Oura integrations. Feb 2026 onward.
-- **Zikhara** — Adobe Photoshop UXP plugin (React-based, used by real designers inside Photoshop) + follow-on SaaS catalog pipelines and serverless image compression.
-- **decodeU** — BLE thermal printer React Native app for cafe POS (real hardware integration: device pairing, ESC/POS commands).
-- **Delicut WhatsApp bot** — FastAPI + Supabase + Twilio, rule-based meal-ordering (May 2026).
+- **Marketplace content/search platform** — creator-commerce platform, 517K+ products across 29 marketplaces (EN+AR), PostgreSQL→MongoDB sync, Cloudflare R2 image processing, gRPC semantic search API with Pinecone (5,109 category mappings). Full platform ownership from Jan 2026. (Client name intentionally omitted per user instruction — see Task 29's ledger entry.)
+- **Fitness/wellness microservice platform** — NestJS microservice mesh (auth/coach/fitness/meal-logging/user) + standalone React Native app with Fitbit/Garmin/Oura integrations. Feb 2026 onward.
+- **Adobe UXP plugin** — Adobe Photoshop UXP plugin (React-based, used by real designers inside Photoshop) + follow-on SaaS catalog pipelines and serverless image compression.
+- **BLE thermal-printer app** — React Native app for cafe POS (real hardware integration: device pairing, ESC/POS commands).
+- **WhatsApp ordering bot** — FastAPI + Supabase + Twilio, rule-based meal-ordering (May 2026).
 - **LangGraph Redmine agents** — ReAct agents for internal automation (Apr 2025).
 
-- [ ] **Step 1: Decision gate — ask the user**: which of these six warrant a full case study (like the existing 7 in `caseStudies.ts`) versus a shorter `projects.ts` entry versus just an added bullet in `experience.ts`'s `digiflux-ase` description? MIXA and MOLT are the strongest case-study candidates given scale and full ownership; Zikhara's UXP angle is distinctive/memorable even if smaller in scale; decodeU/WhatsApp bot/Redmine agents may fit better as `experience.ts` bullets or `projects.ts` entries than full case studies.
+- [ ] **Step 1: Decision gate — ask the user**: which of these six warrant a full case study (like the existing 7 in `caseStudies.ts`) versus a shorter `projects.ts` entry versus just an added bullet in `experience.ts`'s `digiflux-ase` description? The marketplace and fitness platforms are the strongest case-study candidates given scale and full ownership; the Adobe UXP plugin's angle is distinctive/memorable even if smaller in scale; the BLE printer app/WhatsApp bot/Redmine agents may fit better as `experience.ts` bullets or `projects.ts` entries than full case studies.
+
+  **[RESOLVED 2026-08-21]** User approved: marketplace platform and fitness platform get full case studies; Adobe UXP plugin gets a short case study; BLE printer app, WhatsApp bot, and Redmine agents become `experience.ts` bullets. Implemented in Task 29, brand-free per user's explicit correction mid-task (see Task 29's ledger entry for the full brand-name-scope ruling).
 
 - [ ] **Step 2: Once scoped, this task splits into one sub-task per approved case study/project**, following the existing pattern in `caseStudies.ts` (read 2-3 existing entries fully first to match structure/fields exactly) or `projects.ts`. Each sub-task gets written with full detail (exact TS object, exact metrics from the table above) once the user confirms scope — not drafted blind here, since case-study depth requires the user's input on what technical detail to foreground.
 

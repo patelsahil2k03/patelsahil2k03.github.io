@@ -43,30 +43,30 @@ Nothing in `main.tex` mentions this at all. Second Annual Townhall, March 2026, 
 \resumeBulletedProjectHeading{AI Catalyst 2026 - Special Recognition, Second Annual Townhall, Digiflux Technologies (March 2026)}
 ```
 
-### 4. Missing: MIXA (your single most senior-scope project right now)
-517K+ products across 29 marketplaces (EN+AR), gRPC semantic search API with Pinecone (5,109 category mappings), PostgreSQL→MongoDB sync, Cloudflare R2 image processing — full platform ownership since Jan 2026. Not mentioned anywhere.
+### 4. Missing: the marketplace content/search platform (your single most senior-scope project right now)
+517K+ products across 29 marketplaces (EN+AR), gRPC semantic search API with Pinecone (5,109 category mappings), PostgreSQL→MongoDB sync, Cloudflare R2 image processing — full platform ownership since Jan 2026. Not mentioned anywhere. (Matches `ecommerce-marketplace-content-platform` in `src/data/caseStudies.ts` — client name intentionally omitted, same convention as the site's case studies.)
 
 **Suggested new Experience bullet**, to add after line 205 (the "AI SaaS" bullet):
 ```latex
-\resumeItem{\textbf{MIXA (Creator-Commerce Platform):} Architected and own a platform indexing \textbf{517K+ products across 29 marketplaces} (EN+AR); Built \textbf{gRPC semantic search API} with Pinecone vector search (5,109 category mappings); Engineered PostgreSQL$\to$MongoDB sync pipeline and Cloudflare R2 image processing}
+\resumeItem{\textbf{AI-Powered Marketplace Platform:} Architected and own a platform indexing \textbf{517K+ products across 29 marketplaces} (EN+AR); Built \textbf{gRPC semantic search API} with Pinecone vector search (5,109 category mappings); Engineered PostgreSQL$\to$MongoDB sync pipeline and Cloudflare R2 image processing}
 ```
 
-### 5. Missing: MOLT
-NestJS microservice mesh (auth/coach/fitness/meal-logging/user) powering Delicut's fitness ecosystem, plus a standalone React Native app with Fitbit/Garmin/Oura integrations — Feb 2026 onward.
+### 5. Missing: the fitness/wellness microservice platform
+NestJS microservice mesh (auth/coach/fitness/meal-logging/user), plus a standalone React Native app with Fitbit/Garmin/Oura integrations — Feb 2026 onward. (Matches `fitness-microservice-platform` in `src/data/caseStudies.ts`.)
 
 **Suggested new Experience bullet**, same location:
 ```latex
-\resumeItem{\textbf{MOLT:} Designed \textbf{NestJS microservice mesh} (gRPC) powering a fitness ecosystem; Built standalone \textbf{React Native app} with Fitbit/Garmin/Oura wearable integrations}
+\resumeItem{\textbf{Fitness Platform Microservices:} Designed \textbf{NestJS microservice mesh} (gRPC) powering a fitness and wellness platform; Built standalone \textbf{React Native app} with Fitbit/Garmin/Oura wearable integrations}
 ```
 
-### 6. Underrepresented: Zikhara
-Currently just "Created Adobe Photoshop plugin (React)" on line 205 — doesn't name the project, doesn't mention the SaaS follow-on (catalog data pipelines, serverless image compression). If you want to keep this brief, consider at minimum naming it:
+### 6. Underrepresented: the Adobe UXP plugin work
+Currently just "Created Adobe Photoshop plugin (React)" on line 205 — doesn't mention the SaaS follow-on (catalog data pipelines, serverless image compression). (Matches `adobe-uxp-catalog-plugin` in `src/data/caseStudies.ts`.) If you want to keep this brief, consider at minimum expanding it:
 ```latex
-\resumeItem{\textbf{Zikhara:} Built \textbf{Adobe Photoshop UXP plugin} (React) used by production designers; Engineered \textbf{SaaS catalog pipelines} and serverless image compression}
+\resumeItem{\textbf{Adobe UXP Plugin:} Built \textbf{Adobe Photoshop UXP plugin} (React) used by production designers; Engineered \textbf{SaaS catalog pipelines} and serverless image compression}
 ```
 
-### 7. Not mentioned at all: Delicut WhatsApp bot, LangGraph Redmine agents, decodeU BLE printer
-Smaller in scope than MIXA/MOLT — your call on whether any of these are worth a line, or better left out to keep the resume tight. Listed here for completeness, not urged.
+### 7. Not mentioned at all: WhatsApp ordering bot, LangGraph Redmine agents, BLE thermal-printer app
+Smaller in scope than the marketplace/fitness platforms above — your call on whether any of these are worth a line, or better left out to keep the resume tight. Listed here for completeness, not urged.
 
 ---
 
@@ -88,7 +88,7 @@ This reads as filler next to the specific, scoped bullets right below it (FinTec
 The resume goes straight from name/contact to Education. A tight 1-2 line summary before Education (or replacing the generic bullet above) could establish seniority and domain breadth before a recruiter reaches the Experience section — optional, stylistic.
 
 ### 11. Skills section doesn't reflect the newer stack
-**Lines 182-190.** No mention of gRPC, Pinecone/vector search, or NestJS — all now real, current parts of your stack via MIXA/MOLT. Worth adding to the `Frameworks`/`AI/ML`/`Cloud & Tools` lines if you add the MIXA/MOLT bullets above.
+**Lines 182-190.** No mention of gRPC, Pinecone/vector search, or NestJS — all now real, current parts of your stack via the marketplace and fitness platform work above. Worth adding to the `Frameworks`/`AI/ML`/`Cloud & Tools` lines if you add those bullets above.
 
 ---
 
@@ -97,10 +97,10 @@ The resume goes straight from name/contact to Education. A tight 1-2 line summar
 - [ ] Fix Team Star date (line 199): June 2024 → March 2025
 - [ ] Fix ForeSight/AI-Manthan date (lines 233, 278): January 2025 → October 2025
 - [ ] Add AI Catalyst 2026 (pick Option A or B above)
-- [ ] Add MIXA bullet
-- [ ] Add MOLT bullet
-- [ ] Decide on Zikhara naming/detail
-- [ ] Decide on Delicut WhatsApp bot / Redmine agents / decodeU (include or skip)
+- [ ] Add marketplace platform bullet
+- [ ] Add fitness platform microservices bullet
+- [ ] Decide on Adobe UXP plugin naming/detail
+- [ ] Decide on WhatsApp bot / Redmine agents / BLE printer app (include or skip)
 - [ ] Decide on the Jan 2024 vs Jul 2024 date range question
 - [ ] Decide on the generic opening bullet / summary line
-- [ ] Update Skills section if MIXA/MOLT bullets are added
+- [ ] Update Skills section if the marketplace/fitness bullets are added
