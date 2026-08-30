@@ -878,7 +878,7 @@ git commit -m "feat(avatar): add mode detection, kill switch, and reduced-motion
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Sparkles, SparklesIcon } from 'lucide-react';
+import { Sparkles, EyeOff } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const OPT_OUT_STORAGE_KEY = 'avatar-opt-out';
@@ -920,7 +920,7 @@ export function AvatarToggle({ className }: { className?: string }) {
       aria-label={mounted ? (optedOut ? 'Show 3D companion' : 'Hide 3D companion') : 'Toggle 3D companion'}
       title={mounted ? (optedOut ? 'Show 3D companion' : 'Hide 3D companion') : undefined}
     >
-      {mounted && optedOut ? <SparklesIcon className="w-5 h-5" aria-hidden /> : <Sparkles className="w-5 h-5" aria-hidden />}
+      {mounted && optedOut ? <EyeOff className="w-5 h-5" aria-hidden /> : <Sparkles className="w-5 h-5" aria-hidden />}
     </button>
   );
 }
