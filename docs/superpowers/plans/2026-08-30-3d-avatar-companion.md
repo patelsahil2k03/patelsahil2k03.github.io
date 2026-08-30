@@ -385,7 +385,7 @@ git commit -m "feat(avatar): support pose crossfading with graceful fallback"
 
 *Only start this phase after Task L2.3's decision gate is explicitly approved.*
 
-### Task L3.1: Extract `useActiveSection()` shared hook, refactor `Navigation.tsx`
+### Task L3.1: Extract `useActiveSection()` shared hook, refactor `Navigation.tsx` — ✅ COMPLETE (2026-08-31)
 
 **Files:**
 - Modify: `src/lib/hooks.ts`
@@ -493,11 +493,12 @@ it. Zero behavior change - isScrolled stays as its own effect."
 
 ---
 
-### Task L3.2: Wire pose changes to the active section
+### Task L3.2: Wire pose changes to the active section — ✅ COMPLETE (2026-08-31)
 
 **Files:**
 - Create: `src/components/avatar/AvatarCompanion.tsx`
-- Modify: `src/app/dev-avatar-test/page.tsx` (temporary — swap the manual buttons for real section-driven behavior, to validate before L6 wires it into the real homepage)
+- Modify (temporarily, then reverted before commit — see Step 4): `src/app/page.tsx` — this line originally said `dev-avatar-test/page.tsx`, a stale leftover from an earlier plan draft, corrected here per this task's own review finding: `dev-avatar-test` has no real sections to scroll through, so validation happens against the real homepage instead, reverted before committing.
+- Modify (permanent, folded in from Task L3.1's review): `src/components/ui/Navigation.tsx` — wraps its `sectionIds` in `useMemo` to stop an unnecessary scroll-listener re-attach on every render, flagged by that task's reviewer before this task became the hook's second consumer.
 
 **Interfaces:**
 - Consumes: `useActiveSection` (Task L3.1), `AvatarScene` (Task L2.3).
