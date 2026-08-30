@@ -211,15 +211,15 @@ export const caseStudies: CaseStudy[] = [
     industry: 'E-commerce / Creative Tooling',
     hook: 'Shipping a UXP plugin inside Photoshop itself — a different kind of UI problem than a web app.',
     industryContext:
-      'Catalog and creative teams often bounce between Photoshop and separate web tools to prep product images for e-commerce listings — export, upload, tag, repeat. A plugin that lives inside Photoshop removes that context-switch entirely, but Adobe\'s UXP environment is a genuinely different platform: no browser DOM, a constrained runtime, and UI conventions dictated by the host app, not by React defaults.',
+      'Catalog and creative teams often bounce between Photoshop and a separate web app to build product infographics for e-commerce listings — design there, export, re-import, repeat. A plugin that lives inside Photoshop removes that context-switch entirely, but Adobe\'s UXP environment is a genuinely different platform: no browser DOM, a constrained runtime, and UI conventions dictated by the host app, not by React defaults.',
     insight:
       'Building for a host application means the plugin succeeds by disappearing into Photoshop\'s own conventions, not by looking like a web app bolted on. The real product decision is less "what can this do" and more "what would a designer expect to already exist here."',
     contribution:
-      'Built a React-based Adobe Photoshop UXP plugin for an e-commerce catalog team, used directly by production designers to prep and tag catalog images without leaving Photoshop. Followed on with SaaS catalog data pipelines (multi-marketplace format conversion, scraper-result cleaning) and a serverless image compression service.',
+      'Built a React-based Adobe Photoshop UXP plugin — one of two engineers on the project — bringing an e-commerce SaaS\'s infographic-creation tooling directly into Photoshop, so production designers no longer needed to build infographics through the product\'s separate website. Followed on with SaaS catalog data pipelines (multi-marketplace format conversion, scraper-result cleaning) and a serverless image compression service.',
     topics: ['UXP', 'Adobe', 'Developer Tooling', 'E-commerce'],
     metrics: [
+      { label: 'Team size', value: '2 engineers' },
       { label: 'Platform', value: 'Adobe UXP' },
-      { label: 'Users', value: 'Production design team' },
       { label: 'Stack', value: 'React + serverless' },
     ],
     technologies: ['React', 'Adobe UXP', 'AWS Lambda', 'Cloudflare R2'],

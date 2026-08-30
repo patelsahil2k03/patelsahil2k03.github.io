@@ -8,6 +8,7 @@ This folder organizes all non-code documentation for the portfolio project.
 - `DEPLOYMENT.md` – how the site is built and deployed (GitHub Actions, static export)
 - `PORTFOLIO_SCOPE_CHECKLIST.md` – **master scope tracker** (build gates, done/pending, CSV inventory, commits)
 - `CASE_STUDIES.md` – case study inventory, routes, cross-links, refinement checklist
+- `CONTENT_DATA_REQUESTS.md` – running list of specific facts/numbers needed from Sahil for site content, surfaced during audits (don't fabricate — ask and track here instead)
 - `../ASSETS_GUIDE.md` – **the single canonical asset guide** (images, logos, links, specs, priorities, which fields are wired vs. still need display code) — supersedes the 3 archived asset docs, don't split asset guidance across other files
 - `COMPETITIVE_DESIGN_RESEARCH.md` – **the current design-inspiration/competitive-research source** (21 sites, live-site + GitHub-repo verified, plus our own design retrospective and a prioritized Tier 1-3 recommendation list) — supersedes `PORTFOLIO_REFERENCE.md`'s inspiration/patterns/features sections
 - `../PORTFOLIO_REFERENCE.md` – historical design inspiration notes (superseded by `COMPETITIVE_DESIGN_RESEARCH.md`, see banner at top of file); still load-bearing for Tools & Resources, Content Guidelines, Progress Tracking

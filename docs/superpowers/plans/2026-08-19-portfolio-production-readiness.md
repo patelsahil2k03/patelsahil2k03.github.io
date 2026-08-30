@@ -978,16 +978,18 @@ This is a **confirmed GitHub UI caching artifact, not a real residual problem.**
 
 ---
 
-### Task O2: Metrics-density audit of case-study and experience copy
+### Task O2: Metrics-density audit of case-study and experience copy — ✅ COMPLETE (2026-08-30)
 
 **Files:** `src/data/caseStudies.ts`, `src/data/experience.ts` (read-only audit; edits only after user approval).
 
 **Why:** Part 4 §4.3 item 7 — real, hard numbers correlated with perceived credibility in every site reviewed in this research (Shubhanshu Singh, Camil Bradea's CV page, Simon Aytes's 84%, Digiflux's dollar/user-count stats).
 
-- [ ] **Step 1:** Read all case-study entries and experience bullets fully.
-- [ ] **Step 2:** Flag any bullet/paragraph making a qualitative claim ("significantly improved," "helped scale," "worked on") that has a real number available elsewhere in the codebase or the user's own knowledge but isn't stated inline.
-- [ ] **Step 3:** Propose specific rewrites per flagged item (exact before → after text) — do not silently invent numbers; where no real number exists, say so and leave the qualitative claim as-is rather than fabricating one.
-- [ ] **Step 4: Present findings to the user for approval**, then apply approved rewrites as one commit.
+- [x] **Step 1:** Read all 10 case-study entries and all `digiflux-ase` experience bullets fully. Finding: already unusually well-quantified overall — most entries already hit the "Digiflux anatomy" bar (real hard numbers in hook, contribution, and metrics array).
+- [x] **Step 2:** Flagged 5 genuinely soft spots: `adobe-uxp-catalog-plugin` (weakest-quantified case study — no hard numbers at all), `bird-detection-aerial` (discusses precision-recall tradeoffs but states no actual accuracy number), and 3 `digiflux-ase` experience bullets (React Native app "seamless UX," WhatsApp ordering bot, LangGraph Redmine agents).
+- [x] **Step 3-4: Presented to user, resolved per-item:**
+  - `adobe-uxp-catalog-plugin` — user provided real detail (2-person team; the plugin brought an e-commerce SaaS's infographic-creation tooling into Photoshop, replacing the product's own web editor — kept brand-name-free per this repo's confidentiality rule). Applied: `contribution` rewritten, `metrics` now leads with `Team size: 2 engineers` (a real number) instead of the non-numeric "Users: Production design team." Type-checked clean.
+  - `bird-detection-aerial` — user didn't have the number on hand and asked for **one running doc to track pending content/data asks** rather than scattering them across chat. Created `docs/CONTENT_DATA_REQUESTS.md` for exactly this, logged the mAP/precision/recall request as item #1, added to `docs/README.md`'s index. Case-study text left as-is until answered.
+  - 3 experience bullets — user confirmed: leave as-is, not every bullet needs a forced number.
 
 ---
 
