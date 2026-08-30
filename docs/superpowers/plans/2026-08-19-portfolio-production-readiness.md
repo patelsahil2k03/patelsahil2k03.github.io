@@ -845,51 +845,28 @@ git commit -m "content: rewrite bio/tagline for hook-driven, senior-engineer voi
 
 > Added 2026-08-19 per user request: source ~20 strong software engineer/AI-engineer portfolio sites, deeply audit their design and content patterns, and produce concrete, actionable recommendations (color theme, layout, content hooks) for this site. This phase is independent of Phase I and can run in parallel with it or with the Phase A-H SDD execution — it touches no repo files until Task 34's recommendations are turned into approved follow-up tasks.
 
-### Task 32: Source a candidate list of ~20 portfolios
+### Task 32: Source a candidate list of ~20 portfolios — ✅ COMPLETE (2026-08-30)
 
-**Files:** N/A — research task. Output: a list file at `docs/superpowers/plans/2026-08-19-portfolio-scrape-candidates.md` (or similar, under this plan's workspace) listing the 20 chosen URLs with a one-line reason each.
+**Files:** N/A — research task.
 
-- [ ] **Step 1: Decision gate — confirm benchmark criteria with the user** before searching: what tier/style to benchmark against — e.g., senior/staff software engineers, AI/ML engineers specifically, a mix of minimalist vs. narrative-heavy vs. dark-mode-editorial styles? Searching blind without this produces a list that may not match what "best for us" means for this specific site's positioning (technical, production-systems-focused, not a designer/agency portfolio).
+- [x] **Step 1: Decision gate — confirmed benchmark criteria with the user**: all 3 offered — senior/staff software engineers, AI/ML engineers specifically, and mixed design styles.
+- [x] **Step 2-3:** Sourced 21 candidates from `github.com/emmabostian/developer-portfolios` (1,949-entry curated list) plus roundup articles, split into 3 batches of 7 (generalist / AI-ML-focused / design-variety) with selection reasoning recorded in the SDD ledger.
+- [x] **Step 4:** Superseded by proceeding directly to Task 33 per user's "proceed with scraping and analyzing" instruction — no separate sanity-check gate was needed given the criteria were already confirmed in Step 1.
 
-- [ ] **Step 2: Load the `firecrawl:firecrawl-search` skill** (per this session's using-superpowers rule — invoke skills before using their tools) and run a set of targeted searches (e.g., "best software engineer portfolio websites", "AI engineer portfolio design inspiration", "developer portfolio case study examples") to build a candidate pool larger than 20, then down-select to ~20 with genuine variety (not 20 near-identical templates).
+### Task 33: Scrape and structurally analyze the 21 sites — ✅ COMPLETE (2026-08-30)
 
-- [ ] **Step 3: Write the candidate list** to the output file with URL + one-line reason for inclusion (design style, seniority level represented, why it's relevant).
+**Files:** N/A — research task. Output: `docs/COMPETITIVE_DESIGN_RESEARCH.md` Part 3.
 
-- [ ] **Step 4: Present the list to the user for a quick sanity check** before the full scrape/audit in Task 33 — cheap checkpoint before spending the scrape budget.
+- [x] **Step 1-2:** Dispatched 3 parallel background research agents (one per batch), each extracting color palette, typography, content structure, hero pattern, case-study depth, and distinctive techniques — live-site fetch first, corrected/enriched with a **second supplementary pass checking each candidate's public GitHub repo** (per explicit user correction: "i hope we are also checking there github repos not just direct websites where lot of things are actually hidden as well") — recovered ground-truth colors/fonts/stack for several sites the live fetch couldn't fully resolve (Sharlee, Sahana Carlsen), corrected one platform misassumption (Jameson Nuss: Squarespace, not custom React), and surfaced two standout non-obvious findings (Simon Aytes's real peer-reviewed research repo; Marcus Sánchez's site literally built by an AI agent pipeline).
+- [x] **Step 3-4:** All findings merged into one document, per-site entries plus cross-cutting batch summaries.
 
----
+### Task 34: Synthesize recommendations and produce follow-up tasks — ✅ COMPLETE (2026-08-30)
 
-### Task 33: Scrape and structurally analyze the 20 sites
+**Files:** `docs/COMPETITIVE_DESIGN_RESEARCH.md` Part 4 (Synthesis & Recommendations).
 
-**Files:** N/A — research task. Output: per-site notes file (or one consolidated file) under this plan's workspace, not the main repo.
-
-- [ ] **Step 1: Load the `firecrawl:firecrawl-scrape` skill** (and `firecrawl:firecrawl-crawl` if a site needs more than its landing page) before scraping.
-
-- [ ] **Step 2: For each of the 20 approved candidates, scrape and extract:**
-  - Color palette (primary/accent/background — note dark vs. light default, and whether it's a themed toggle)
-  - Typography choices (heading/body font pairing, whether serif/sans/mono mixing is used)
-  - Content structure/section order (what comes first after hero, how case studies are structured, where resume/contact CTAs sit)
-  - Hero hook pattern (stat-led vs. narrative-led vs. visual-led — capture the actual hero copy verbatim for a few standout examples)
-  - Case-study depth and structure (problem/solution/impact framing, metrics usage, image/diagram usage)
-  - Any distinctive interaction/animation pattern worth noting
-
-- [ ] **Step 3: Write findings to a structured notes file** — one row per site in a table (URL, palette, hero pattern, structure notes), plus a short "standouts" list of the 3-5 most impressive/relevant examples with why.
-
-- [ ] **Step 4: Given the scale (20 sites), delegate the actual scrape+analysis to a background agent** per this repo's own cleanup-rules guidance on delegating large-volume reads — dispatch one agent with the approved candidate list and this task's extraction spec, rather than doing 20 sequential scrapes in the controller session.
-
----
-
-### Task 34: Synthesize recommendations and produce follow-up tasks
-
-**Files:** N/A — synthesis task, output feeds Phase E (frontend polish) and potentially a new Phase K.
-
-- [ ] **Step 1: Read Task 33's findings file fully.**
-
-- [ ] **Step 2: Cross-reference against the current live site's actual choices** (re-confirm, don't assume from memory): `tailwind.config.ts`'s color tokens (blue/orange/cyan per recon), Inter as the site-wide font (per the recent `7e71be5 fix(typography): restore Inter site-wide for consistency` commit — note this was a deliberate recent decision, so any font-change recommendation must be weighed against that recent explicit choice, not silently overridden), current section order in `page.tsx`, current case-study structure in `CaseStudyArticle.tsx`.
-
-- [ ] **Step 3: Produce a structured recommendations report** covering: (a) color theme — keep/adjust/replace with specific reasoning, not just "this other site's palette looks nice"; (b) content structure — specific section-order or hook-pattern changes worth adopting; (c) case-study format improvements; (d) anything explicitly NOT worth adopting and why (avoid cargo-culting trends that don't fit an engineering-focused portfolio).
-
-- [ ] **Step 4: Present the report to the user** and, for each recommendation they approve, write it as a new fully-detailed task (following this plan's task-writing standard — exact files, exact changes, no placeholders) appended under a new Phase K, rather than executing any visual/content change unilaterally from this research alone.
+- [x] **Step 1-2:** Read all research fully; cross-referenced against the live site's actual current choices (re-confirmed from source, not memory) — zero custom color tokens (Task 17 removed them), Inter site-wide, current component structure.
+- [x] **Step 3:** Produced a structured, tiered recommendations report (see Part 4) — 4 confirmed gaps cross-referenced against Part 1's self-assessment, an explicit warning against defaulting into the "generic AI-hacker terminal" cliché several competitors share, a 3-tier prioritized list, and an explicit-reject list.
+- [x] **Step 4: Presented to user, approved.** User confirmed the research and directed proceeding with the recommended tiers — see **Phase O** below for the resulting fully-detailed follow-up tasks (written under a new Phase O, not Phase K as originally sketched, to keep it adjacent to Phase N's case-study-specific staged work).
 
 ---
 
@@ -981,6 +958,81 @@ This is a **confirmed GitHub UI caching artifact, not a real residual problem.**
 - **N2 — Audit current listing-page visual treatment.** Screenshot the current homepage `CaseStudies` teaser section and the `/case-studies` index page (same screenshot method as Task 18), evaluate against the researched patterns, identify concrete gaps (not just "make it look like Digiflux's").
 - **N3 — Design brainstorm pass.** Use `superpowers:brainstorming` + the `frontend-design` skill's two-pass process (token system: color/type/layout/signature → critique against the brief → build) to produce a genuinely distinctive presentation direction for this site specifically — grounded in Sahil's actual subject matter (production systems, measurable scale, technical depth), not a generic template and not a copy of any reference site.
 - **N4 — Implement approved direction.** Full task breakdown written once N3 produces an approved design plan, following this document's usual task-writing standard (exact files, exact changes, no placeholders).
+
+---
+
+## Phase O — Competitive Research Follow-Through (Tier 1/2 Implementation)
+
+> Added 2026-08-30. User approved `docs/COMPETITIVE_DESIGN_RESEARCH.md` Part 4's synthesis and directed proceeding with the recommended tiers now, deferring Tier 3 (3D avatar — already Phase L; magazine art-direction — not spun up as its own phase, low priority, revisit only if raised again). Tasks below implement Part 4's Tier 1 + Tier 2 items. Two of the five Tier 1 items (dark mode, typography pairing) are design-system decisions and are staged per this project's own established discipline (Phase L/N precedent: brainstorm before implementation tasks are written) rather than blind-specced here. The other three Tier 1 items plus both Tier 2 items are mechanical/audit tasks with no open design judgment, so they're written in full below and ready to execute now.
+
+### Task O1: Hygiene pass — check for boilerplate/broken-live-element bugs
+
+**Files:** `src/app/layout.tsx` (or wherever `<meta name="description">` is generated), `src/lib/seo.ts` if present, any component rendering a live/dynamic counter or stat that isn't sourced from `src/data/*.ts`.
+
+**Why:** `docs/COMPETITIVE_DESIGN_RESEARCH.md` Part 4 §4.3 item 5 — two competitors shipped exactly this class of bug to production (Martin Lefebvre's unedited `create-next-app` boilerplate meta description; Ashutosh Dhakre's visitor counter stuck at "0"). Cheap to check, embarrassing if present.
+
+- [ ] **Step 1:** Grep the live/exported HTML (`out/index.html` and at least one case-study detail page) for any boilerplate string a scaffold tool would leave behind (`"Generated by create next app"`, `"Welcome to Next.js"`, default Next.js/Vercel placeholder copy) — confirm zero matches.
+- [ ] **Step 2:** Grep `src/` for any live counter/stat pattern (visitor count, view count, star count) that isn't sourced from `src/data/*.ts` or a verified-working integration (Clarity analytics is fine, a decorative static-"0" widget is not) — confirm none exists, or flag it if found.
+- [ ] **Step 3:** Spot-check `<meta name="description">` content on the homepage and at least 2 case-study pages for genuine, current copy (not a template default).
+- [ ] **Step 4: Propose findings to the user.** If clean, state that explicitly and close the task with no commit needed. If an issue is found, propose the specific fix before making it.
+
+---
+
+### Task O2: Metrics-density audit of case-study and experience copy
+
+**Files:** `src/data/caseStudies.ts`, `src/data/experience.ts` (read-only audit; edits only after user approval).
+
+**Why:** Part 4 §4.3 item 7 — real, hard numbers correlated with perceived credibility in every site reviewed in this research (Shubhanshu Singh, Camil Bradea's CV page, Simon Aytes's 84%, Digiflux's dollar/user-count stats).
+
+- [ ] **Step 1:** Read all case-study entries and experience bullets fully.
+- [ ] **Step 2:** Flag any bullet/paragraph making a qualitative claim ("significantly improved," "helped scale," "worked on") that has a real number available elsewhere in the codebase or the user's own knowledge but isn't stated inline.
+- [ ] **Step 3:** Propose specific rewrites per flagged item (exact before → after text) — do not silently invent numbers; where no real number exists, say so and leave the qualitative claim as-is rather than fabricating one.
+- [ ] **Step 4: Present findings to the user for approval**, then apply approved rewrites as one commit.
+
+---
+
+### Task O3: Design brainstorm — dark mode + typography pairing
+
+**Files:** N/A — design/planning task. Output: an approved design plan (palette tokens, font choices, usage rules), not code.
+
+**Why:** Part 4 §4.3 items 1-2 (Tier 1) and §4.2's explicit warning against defaulting into the generic "AI-hacker terminal" look that recurs across the competitive set. This needs a real design decision, not a copy of the nearest competitor's colors.
+
+- [ ] **Step 1: Load `superpowers:brainstorming`**, then the `frontend-design` skill's two-pass process (token system: color/type/layout/signature → critique against the brief → build).
+- [ ] **Step 2: Ground the brief explicitly** in Part 4 §4.2's finding: the dark-mode palette and any accent/typography choice should derive from Sahil's actual positioning (production systems at scale, 2M+ users served, reliability) — not the terminal-prompt/monospace-hacker shorthand ~half the AI/ML competitive set defaults to.
+- [ ] **Step 3: Produce a compact token system**: dark-mode color palette (4-6 named hex values, building on/replacing the current stock blue/slate/orange/cyan), a second display typeface paired with Inter (kept as body face, matching Simon Aytes's exact pairing strategy), and clear usage rules (where the display face appears — hero/section headers only, not body text).
+- [ ] **Step 4: Present the plan to the user for approval** before any implementation task is written — per Phase L/N precedent, this is a real creative decision the user should see and react to, not something to implement blind.
+
+---
+
+### Task O4: Implement approved dark mode + typography direction
+
+**Files:** TBD — depends entirely on Task O3's approved output (likely `tailwind.config.ts`, `globals.css`, a theme-toggle component, `layout.tsx` font imports, and `dark:` variants across `src/components/`).
+
+- [ ] Full task breakdown written once Task O3 produces an approved design plan, following this document's usual task-writing standard (exact files, exact changes, no placeholders) — not specced blind here.
+
+---
+
+### Task O5: Add a real architecture diagram to one flagship case study
+
+**Files:** `src/data/caseStudies.ts` (whichever case study is chosen), `src/components/case-studies/CaseStudyArticle.tsx` or equivalent detail-page component, a new diagram asset.
+
+**Why:** Part 4 §4.3 item 4 (Tier 1) — the research explicitly found **zero** of the 7 AI/ML-focused competitor sites use system architecture diagrams for their AI/ML work, making this a genuine differentiation opportunity rather than catch-up. Chosen over a live embedded AI chatbot (the Bryan Elliott / Marcus Sánchez pattern) because a chatbot is a bigger build/maintenance commitment and would land in the now-crowded "AI portfolio has a chatbot" category instead of differentiating.
+
+- [ ] **Step 1: Decision gate — which case study, and what diagramming approach.** Propose the flagship candidate (likely the fintech Lambda-scrapers or fitness microservice-platform case study — highest production-scale/AI-accuracy numbers) and a concrete rendering approach (a real, accurate Mermaid diagram embedded in the article vs. a hand-designed SVG/image asset) for the user to confirm before building anything.
+- [ ] **Step 2: Draft the diagram content** from the actual system as built (real components/data flow, not a generic "AI pipeline" template) — verify against the user's own knowledge of the system, don't invent architecture.
+- [ ] **Step 3: Implement and integrate** into the chosen case study's detail page.
+- [ ] **Step 4: Verify rendering** in both the dev build and the static export (`npm run build`, check `out/`), propose for approval, then commit.
+
+---
+
+### Task O6: Hero pattern refresh (Tier 2)
+
+**Files:** `src/components/sections/HeroEnhanced.tsx`.
+
+**Why:** Part 4 §4.3 item 6 (Tier 2) — a lower-cost hero upgrade than a full redesign, differentiating from the animated-gradient-name hero pattern shared with much of the competitive research set. Two concrete candidate patterns from the research: Jameson Nuss's two-paragraph hybrid-positioning template (who, then how), or Bryan Elliott's interactive-photo-hover cue.
+
+- [ ] **Step 1: Present both candidate patterns to the user** with the exact copy/interaction change each would require, get a direction decision before writing implementation steps (this is a content/interaction judgment call, not mechanical).
+- [ ] **Step 2-4:** Full task breakdown written once Step 1's direction is chosen — not specced blind here, consistent with Task O3/O4's staging.
 
 ---
 

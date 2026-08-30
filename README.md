@@ -337,7 +337,8 @@ Full index: **[docs/README.md](./docs/README.md)**. Active docs:
 - **[docs/CASE_STUDIES.md](./docs/CASE_STUDIES.md)** - Case study inventory, routes, refinement checklist
 - **[BRANCH_STRATEGY.md](./BRANCH_STRATEGY.md)** - `dev` / `main` workflow, feature branches, CI vs deploy
 - **[ASSETS_GUIDE.md](./ASSETS_GUIDE.md)** - Where to put images/logos and which are still pending
-- **[PORTFOLIO_REFERENCE.md](./PORTFOLIO_REFERENCE.md)** - Design inspiration and long-term enhancement ideas
+- **[docs/COMPETITIVE_DESIGN_RESEARCH.md](./docs/COMPETITIVE_DESIGN_RESEARCH.md)** - Competitive design research (21 sites, live-site + GitHub-repo verified) and prioritized next-design-pass recommendations
+- **[PORTFOLIO_REFERENCE.md](./PORTFOLIO_REFERENCE.md)** - Historical design notes (superseded by the doc above for inspiration/patterns)
 
 ### Archived Documentation
 See `docs/archive/` for historical documentation and planning files.

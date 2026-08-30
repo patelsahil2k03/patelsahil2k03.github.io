@@ -5,6 +5,8 @@
 **Purpose:** Comprehensive reference for design decisions, inspirations, and enhancement tracking  
 **Created:** 2026-02-20
 
+> ⚠️ **This file's competitive-research sections are superseded.** `docs/COMPETITIVE_DESIGN_RESEARCH.md` (2026-08-30) is the current, evidence-based source for competitive analysis and design recommendations — 21 sites analyzed with live-site + GitHub-repo verification, plus a full retrospective of our own design system and a prioritized Tier 1-3 recommendation list. The [Inspiration Sources](#inspiration-sources), [Design Patterns Analyzed](#design-patterns-analyzed), and [Features to Implement](#features-to-implement) sections below are kept for historical record but should not be treated as current guidance — check the newer doc first. The rest of this file (Tools & Resources, Content Guidelines, Progress Tracking, Links) remains accurate and load-bearing for other docs.
+
 ---
 
 ## 📚 TABLE OF CONTENTS
@@ -494,7 +496,9 @@ patelsahil2k03.github.io/
 
 ### Color Palette
 
-**Current Theme (Light & Clean):**
+> **Corrected 2026-08-30:** `tailwind.config.ts` has **zero custom color tokens** — the CSS-custom-property scale below was removed as dead code during this session's Task 17 cleanup (it was never actually wired into any component). Every component uses Tailwind's stock palette classes directly (`blue-600`, `slate-700`, `orange-500`, `cyan-500`, etc.). See `docs/COMPETITIVE_DESIGN_RESEARCH.md` Part 1 for the current, verified class-usage frequency table and WCAG contrast findings — that table is now the authoritative source for "what colors does this site actually use." The block below is kept only as a historical record of an earlier, since-removed token design.
+
+**Historical — a custom CSS-token design that was never wired in and has since been removed:**
 ```css
 /* Primary Colors */
 --primary-50:  #eff6ff;
