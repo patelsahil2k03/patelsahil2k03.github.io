@@ -205,7 +205,7 @@ Expected output includes `Idle_A`. If it doesn't, stop and re-check the file cop
 
 import { Suspense, useEffect, useRef } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { useAnimations, useGLTF } from '@react-three/drei';
+import { Bounds, Center, useAnimations, useGLTF } from '@react-three/drei';
 import type { Group } from 'three';
 import { AVATAR_CHARACTER_PATH, AVATAR_ANIMATIONS_PATH } from '@/lib/avatarConfig';
 
@@ -233,11 +233,23 @@ function Model() {
 export function AvatarScene({ className }: { className?: string }) {
   return (
     <div className={className}>
-      <Canvas camera={{ position: [0, 1.2, 3], fov: 40 }}>
+      <Canvas camera={{ fov: 40 }}>
         <ambientLight intensity={0.7} />
         <directionalLight position={[2, 4, 3]} intensity={1} />
         <Suspense fallback={null}>
-          <Model />
+          {/* Bounds auto-fits the camera to whatever Model actually
+              renders, instead of a hardcoded camera position tuned for
+              one specific character's dimensions — this is the fix for
+              the head-cropping issue Task L2.1's review flagged, and it
+              means swapping to a different KayKit character (per the
+              swappable AVATAR_CHARACTER_PATH design) never needs a
+              re-tuned camera. Center avoids the model's own pivot/origin
+              being off-center within its bounding box. */}
+          <Bounds fit clip observe margin={1.2}>
+            <Center>
+              <Model />
+            </Center>
+          </Bounds>
         </Suspense>
       </Canvas>
     </div>
@@ -248,7 +260,7 @@ useGLTF.preload(AVATAR_CHARACTER_PATH);
 useGLTF.preload(AVATAR_ANIMATIONS_PATH);
 ```
 
-- [ ] **Step 3: Verify.** `npm run dev`, confirm the character visibly animates (breathing/idle motion, not a frozen bind pose) at `/dev-avatar-test/`. Open the browser's performance/FPS overlay (devtools → Rendering → "Frame Rendering Stats" in Chrome) and confirm it holds close to 60fps on your dev machine — this is the frame-budget checkpoint from the spec's constraints (§2). If the mesh visibly deforms incorrectly (limbs stretching wrong, geometry tearing) rather than animating cleanly, that's a sign the retargeting bind failed silently — re-check Step 1's bone-name output against what Task L2.1 actually copied in.
+- [ ] **Step 3: Verify.** `npm run dev`, confirm the character visibly animates (breathing/idle motion, not a frozen bind pose) at `/dev-avatar-test/`, **and confirm the full character — head to boots — is now visible in frame** (this is the fix for the cropping issue Task L2.1's review flagged; if the head is still cut off, check that `Bounds`/`Center` are actually wrapping `Model` and that the `Canvas`'s own hardcoded `position` was removed, not left alongside the new `fov`-only camera prop). Open the browser's performance/FPS overlay (devtools → Rendering → "Frame Rendering Stats" in Chrome) and confirm it holds close to 60fps on your dev machine — this is the frame-budget checkpoint from the spec's constraints (§2). If the mesh visibly deforms incorrectly (limbs stretching wrong, geometry tearing) rather than animating cleanly, that's a sign the retargeting bind failed silently — re-check Step 1's bone-name output against what Task L2.1 actually copied in.
 
 - [ ] **Step 4: Commit.**
 
@@ -275,7 +287,7 @@ git commit -m "feat(avatar): play idle animation on loop"
 
 import { Suspense, useEffect, useRef } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { useAnimations, useGLTF } from '@react-three/drei';
+import { Bounds, Center, useAnimations, useGLTF } from '@react-three/drei';
 import type { Group } from 'three';
 import { AVATAR_CHARACTER_PATH, AVATAR_ANIMATIONS_PATH } from '@/lib/avatarConfig';
 
@@ -305,11 +317,17 @@ function Model({ pose }: { pose?: string }) {
 export function AvatarScene({ className, pose }: { className?: string; pose?: string }) {
   return (
     <div className={className}>
-      <Canvas camera={{ position: [0, 1.2, 3], fov: 40 }}>
+      <Canvas camera={{ fov: 40 }}>
         <ambientLight intensity={0.7} />
         <directionalLight position={[2, 4, 3]} intensity={1} />
         <Suspense fallback={null}>
-          <Model pose={pose} />
+          {/* Bounds/Center auto-fit — see Task L2.2's comment for why this
+              replaced a hardcoded camera position after L2.1's review. */}
+          <Bounds fit clip observe margin={1.2}>
+            <Center>
+              <Model pose={pose} />
+            </Center>
+          </Bounds>
         </Suspense>
       </Canvas>
     </div>
