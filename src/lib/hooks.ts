@@ -42,6 +42,42 @@ export function usePrefersReducedMotion() {
 }
 
 /**
+ * Tracks which of the given section ids is currently scrolled into view,
+ * using the same offset-based scroll-position check as Navigation.tsx's
+ * nav-highlighting (not IntersectionObserver). Returns sectionIds[0] until
+ * the first scroll event fires. Pass enabled=false to skip entirely (e.g.
+ * on a route where these sections don't exist).
+ */
+export function useActiveSection(sectionIds: string[], enabled: boolean = true) {
+  const [activeSection, setActiveSection] = useState(sectionIds[0] ?? '');
+
+  useEffect(() => {
+    if (!enabled || sectionIds.length === 0) return;
+
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY + 100;
+
+      for (const section of sectionIds) {
+        const element = document.getElementById(section);
+        if (element) {
+          const { offsetTop, offsetHeight } = element;
+          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+            setActiveSection(section);
+            break;
+          }
+        }
+      }
+    };
+
+    handleScroll();
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [enabled, sectionIds]);
+
+  return activeSection;
+}
+
+/**
  * Hook for mouse parallax effect
  */
 export function useMouseParallax(strength: number = 20) {
