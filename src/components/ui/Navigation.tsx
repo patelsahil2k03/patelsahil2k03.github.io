@@ -8,6 +8,7 @@ import { cn } from '@/lib/utils';
 import { Menu, X } from 'lucide-react';
 import { Button } from './Button';
 import { ThemeToggle } from './ThemeToggle';
+import { AvatarToggle } from '@/components/avatar/AvatarToggle';
 import { motion, AnimatePresence } from 'framer-motion';
 import { CLARITY_EVENTS, trackClarityEvent } from '@/lib/clarity';
 import { useActiveSection } from '@/lib/hooks';
@@ -201,6 +202,7 @@ export function Navigation() {
           </div>
 
           <div className="flex items-center gap-1 relative z-10">
+            <AvatarToggle />
             <ThemeToggle />
 
             <button

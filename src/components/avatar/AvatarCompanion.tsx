@@ -6,6 +6,7 @@ import { getNarrationForSection } from '@/data/avatarNarration';
 import { AVATAR_ENABLED, detectWebGLSupport } from '@/lib/avatarConfig';
 import { AvatarScene } from './AvatarScene';
 import { AvatarNarration } from './AvatarNarration';
+import { AVATAR_TOGGLE_EVENT } from './AvatarToggle';
 
 const HOMEPAGE_SECTION_IDS = [
   'home', 'about', 'experience', 'case-studies',
@@ -36,10 +37,21 @@ function useAvatarMode(): Mode {
 
     if (optedOut || prefersReducedMotion || !detectWebGLSupport()) {
       setMode('hidden');
-      return;
+    } else {
+      setMode(window.innerWidth < MOBILE_BREAKPOINT_PX ? 'simplified' : 'full');
     }
 
-    setMode(window.innerWidth < MOBILE_BREAKPOINT_PX ? 'simplified' : 'full');
+    const handleToggle = (event: Event) => {
+      const optedOut = (event as CustomEvent<{ optedOut: boolean }>).detail.optedOut;
+      if (optedOut) {
+        setMode('hidden');
+      } else if (!prefersReducedMotion && detectWebGLSupport()) {
+        setMode(window.innerWidth < MOBILE_BREAKPOINT_PX ? 'simplified' : 'full');
+      }
+    };
+
+    window.addEventListener(AVATAR_TOGGLE_EVENT, handleToggle);
+    return () => window.removeEventListener(AVATAR_TOGGLE_EVENT, handleToggle);
   }, [prefersReducedMotion]);
 
   return mode;
