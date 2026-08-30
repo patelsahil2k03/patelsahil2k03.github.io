@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
@@ -39,9 +39,13 @@ export function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const sectionIds = navItems
-    .filter((item): item is SectionNavItem => item.kind === 'section')
-    .map((item) => item.sectionId);
+  const sectionIds = useMemo(
+    () =>
+      navItems
+        .filter((item): item is SectionNavItem => item.kind === 'section')
+        .map((item) => item.sectionId),
+    []
+  );
   const activeSection = useActiveSection(sectionIds, onHome);
 
   useEffect(() => {
