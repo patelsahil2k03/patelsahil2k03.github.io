@@ -90,13 +90,15 @@ Do this in the Gemini app directly (not via any API), so you get the real conver
 
 **What source image to start from:** your own clear, well-lit, front-facing photo — plain background if possible, no sunglasses/hats obscuring your face, similar in spirit to a passport-style photo. Attach it to the Gemini chat as a reference image.
 
-**Prompt structure** (subject → style → technical/camera details, the structure current prompting guides recommend):
-> "Using the attached photo as the reference for facial likeness, generate a [stylization level — e.g. 'semi-realistic 3D-render style, Pixar/Disney-adjacent, not photoreal skin texture'] character portrait of this person. [Describe key features worth preserving: hair, build, any distinguishing details.] Full body, standing in a neutral A-pose (arms slightly away from the body, palms facing inward), plain white background, even diffused studio lighting with no harsh shadows, sharp focus, high detail."
+**Complete, ready-to-send prompts** (subject → style → technical/camera details, the structure current prompting guides recommend) — no placeholders left to fill in; the model reads facial/build/hair details directly from the attached photo rather than requiring a typed self-description:
 
-Then, in the same conversation (so the character stays consistent), ask for the additional angles one at a time:
-> "Now generate the exact same character, same outfit, same lighting, same pose — but from a side profile view (90°)."
-> "Now the same character from directly behind."
-> "Now a 3/4 angle view (45°)."
+Message 1 (attach the photo first, then send):
+> "Using the attached photo as the reference for facial likeness, generate a semi-realistic 3D-render character portrait of this person — Pixar/Disney-adjacent stylization, not photoreal skin texture, with clean smooth shading and slightly simplified but still recognizable facial proportions. Preserve this person's exact hairstyle, hair color, skin tone, build, and any distinguishing facial features from the photo. Full body, standing in a neutral A-pose (arms held slightly away from the body, palms facing inward, feet shoulder-width apart). Plain solid white background. Even, diffused studio lighting with no harsh directional shadows. Sharp focus throughout, high detail, 1024x1024 resolution, 1:1 aspect ratio."
+
+Then, in the same conversation (so the character stays consistent), send these in order:
+> Message 2: "Now generate the exact same character — same face, same outfit, same hairstyle, same lighting, same A-pose — but shown from a direct side profile view (90° turn), still on a plain white background."
+> Message 3: "Now the exact same character, same everything, but shown from directly behind (back view), plain white background."
+> Message 4: "Now the exact same character, same everything, but shown from a 3/4 angle (45° turn between front and side), plain white background."
 
 **Why this specific approach, not a single multi-view prompt:** current guides note Nano Banana can generate one image containing multiple framed views (front/45°/90° in one composited sheet) *or* separate images in a running conversation — the separate/iterative route is recommended here specifically because it's what lets you correct likeness drift ("that's not quite my nose") between angles, which a single one-shot composite prompt doesn't allow you to do per-angle.
 
