@@ -62,6 +62,24 @@ New module: `src/components/avatar/`.
 5. `AvatarScene` crossfades to the matching animation clip; `AvatarNarration` updates its text.
 6. In `simplified` (mobile) mode: same data flow, smaller canvas, animation loop reduced (idle pose held between section changes rather than continuously animating) to manage battery/perf — exact reduction mechanism (e.g., pausing the render loop between transitions vs. a lower frame-rate cap) decided at implementation time based on real device testing.
 
+**Note on scope — per-section pose variation is v1, not a future enhancement.** Steps 4-5 above (a different animation clip playing per section, e.g. idle in the hero vs. a "thinking" pose in About) are core v1 functionality — the whole point of the section-reactivity system. What's deferred to §7 instead is the character's *screen position* changing (traveling through 3D space between sections) and *click/hover*-triggered reactions — a meaningfully different, bigger scope than simply swapping which clip is playing.
+
+**Candidate pose-per-section mapping** (a starting proposal, not a commitment — the actual clip names depend on what Meshy's auto-rig delivers; Meshy ships 600+ built-in animation presets per the original Phase L research, so the raw material should exist, but this needs re-confirming once a real model is in hand):
+
+| Section | Candidate pose | Why |
+|---|---|---|
+| Home (hero) | Idle / wave hello | First thing a visitor sees — a greeting fits |
+| About | Idle / thinking | Reflective, matches personal-story content |
+| Experience | Pointing / gesturing | Directing attention to the timeline |
+| Case Studies | Presenting | "Here's what I built" framing |
+| Skills | Idle / thinking | Neutral — no strong pose need here |
+| Projects | Pointing / presenting | Same logic as Case Studies |
+| Publications | Idle / reading (if available) | Matches academic/research content |
+| Achievements | Celebrating | Directly fits an "achievements" section |
+| Contact | Wave | Inviting engagement, mirrors the hero's greeting |
+
+This table is exactly what `avatarNarration.ts`'s per-entry `pose` field would reference — finalized once L2's prototype confirms the real clip names.
+
 ## 6. Asset generation workflow (human-driven) — concrete prompts and settings
 
 No Meshy API/MCP access exists in this environment, and the Nano Banana stylization step benefits from interactive refinement the assistant can't replicate through one-shot API calls. This step is explicitly **not** automated by the assistant. The guidance below is grounded in current (2026) documentation for both tools, fetched and read directly during this brainstorm — not assumed from general knowledge (a real correction surfaced doing this: Meshy's current default model is **Meshy 7** ("latest"), not Meshy 6 as the earlier, staler Phase L research note said).
@@ -160,4 +178,4 @@ Recorded here so the fuller original vision isn't lost, per user direction ("rec
 - Exact fixed-corner placement (bottom-right assumed as a sensible default; not yet confirmed with the user).
 - Exact mechanism for "reduced animation" on mobile (paused loop between transitions vs. lower frame-rate cap) — a real-device-testing decision, not a design-time one.
 - Exact opt-out toggle placement relative to `ThemeToggle`.
-- Number and content of the pose/animation clips actually available, once Meshy's auto-rigging output is in hand — the narration data file's `pose` field names depend on what clips actually exist.
+- Final pose/animation clip names, once Meshy's auto-rigging output is in hand — a candidate per-section mapping is already proposed in §5, to be confirmed/adjusted against whatever clips the real rig actually provides.
