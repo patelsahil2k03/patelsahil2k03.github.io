@@ -1,11 +1,40 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Inter, Space_Grotesk, JetBrains_Mono } from 'next/font/google';
 import './globals.css';
 import { Toaster } from 'react-hot-toast';
 import { ClarityAnalytics } from '@/components/analytics/ClarityAnalytics';
 import { seo, personalInfo } from '@/data';
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
+const spaceGrotesk = Space_Grotesk({
+  subsets: ['latin'],
+  variable: '--font-space-grotesk',
+  weight: ['500', '600', '700'],
+});
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ['latin'],
+  variable: '--font-jetbrains-mono',
+  weight: ['500', '600', '700'],
+});
+
+// Blocking inline script — runs before first paint (static export has no
+// server to read cookies/headers, so this is the standard no-flash pattern
+// for a client-persisted theme). Reads localStorage, falls back to the OS
+// preference, and sets/removes `.dark` on <html> synchronously.
+const themeInitScript = `
+(function () {
+  try {
+    var stored = localStorage.getItem('theme');
+    var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    var isDark = stored ? stored === 'dark' : prefersDark;
+    if (isDark) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  } catch (e) {}
+})();
+`;
 
 export const metadata: Metadata = {
   title: seo.title,
@@ -29,8 +58,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable}`}>
       <body className={`${inter.className} antialiased`}>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
         <ClarityAnalytics />
         <Toaster
           position="bottom-right"

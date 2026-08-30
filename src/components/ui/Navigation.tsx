@@ -7,6 +7,7 @@ import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import { Menu, X } from 'lucide-react';
 import { Button } from './Button';
+import { ThemeToggle } from './ThemeToggle';
 import { motion, AnimatePresence } from 'framer-motion';
 import { CLARITY_EVENTS, trackClarityEvent } from '@/lib/clarity';
 
@@ -125,7 +126,7 @@ export function Navigation() {
             <button
               type="button"
               onClick={() => scrollToSection('home')}
-              className="flex items-center space-x-2 group cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-600 rounded-lg"
+              className="flex items-center space-x-2 group cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-signal-blue rounded-lg"
             >
               <div className="relative w-10 h-10">
                 <Image
@@ -133,20 +134,20 @@ export function Navigation() {
                   alt="Profile Picture"
                   fill
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  className="rounded-full object-cover border-2 border-blue-500 transition-transform group-hover:scale-110"
+                  className="rounded-full object-cover border-2 border-signal-blue transition-transform group-hover:scale-110"
                 />
               </div>
               <span className="text-xl font-bold text-slate-900 hidden sm:block">Sahil Patel</span>
             </button>
           ) : (
-            <Link href="/" className="flex items-center space-x-2 group cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-600 rounded-lg">
+            <Link href="/" className="flex items-center space-x-2 group cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-signal-blue rounded-lg">
               <div className="relative w-10 h-10">
                 <Image
                   src="/images/hero/profile.jpg"
                   alt="Profile Picture"
                   fill
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  className="rounded-full object-cover border-2 border-blue-500 transition-transform group-hover:scale-110"
+                  className="rounded-full object-cover border-2 border-signal-blue transition-transform group-hover:scale-110"
                 />
               </div>
               <span className="text-xl font-bold text-slate-900 hidden sm:block">Sahil Patel</span>
@@ -165,14 +166,14 @@ export function Navigation() {
                   item,
                   cn(
                     'relative px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 cursor-pointer z-10 block',
-                    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-600',
-                    isNavActive(item) ? 'text-blue-600' : 'text-slate-700 hover:text-slate-900'
+                    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-signal-blue',
+                    isNavActive(item) ? 'text-signal-blue' : 'text-slate-700 hover:text-slate-900'
                   )
                 )}
                 {isNavActive(item) && (
                   <motion.div
                     layoutId="activeSection"
-                    className="absolute inset-0 bg-gradient-to-r from-blue-50 to-cyan-50 rounded-lg border border-blue-200/50 -z-10 pointer-events-none"
+                    className="absolute inset-0 bg-gradient-to-r from-signal-blue/5 to-status-teal-icon/5 rounded-lg border border-signal-blue/15 -z-10 pointer-events-none"
                     initial={false}
                     transition={{ type: 'spring', stiffness: 380, damping: 30 }}
                   />
@@ -191,17 +192,17 @@ export function Navigation() {
                     trackClarityEvent(CLARITY_EVENTS.CONTACT_CTA);
                     scrollToSection('contact');
                   }}
-                  className="backdrop-blur-sm bg-white/50 hover:bg-white/80 border-blue-200 hover:border-blue-400 shadow-sm hover:shadow-md transition-all cursor-pointer"
+                  className="backdrop-blur-sm bg-white/50 hover:bg-white/80 border-signal-blue/20 hover:border-signal-blue/50 shadow-sm hover:shadow-md transition-all cursor-pointer"
                 >
                   Get in Touch
                 </Button>
               ) : (
-                <Link href="/#contact" className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-600 rounded-lg">
+                <Link href="/#contact" className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-signal-blue rounded-lg">
                   <Button
                     variant="outline"
                     size="sm"
                     onClick={() => trackClarityEvent(CLARITY_EVENTS.CONTACT_CTA)}
-                    className="backdrop-blur-sm bg-white/50 hover:bg-white/80 border-blue-200 hover:border-blue-400 shadow-sm hover:shadow-md transition-all cursor-pointer"
+                    className="backdrop-blur-sm bg-white/50 hover:bg-white/80 border-signal-blue/20 hover:border-signal-blue/50 shadow-sm hover:shadow-md transition-all cursor-pointer"
                   >
                     Get in Touch
                   </Button>
@@ -210,15 +211,19 @@ export function Navigation() {
             </motion.div>
           </div>
 
-          <button
-            type="button"
-            className="md:hidden p-2 rounded-lg text-slate-700 hover:bg-slate-100 relative z-10 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-600"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            aria-expanded={isMobileMenuOpen}
-            aria-label="Toggle menu"
-          >
-            {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
+          <div className="flex items-center gap-1 relative z-10">
+            <ThemeToggle />
+
+            <button
+              type="button"
+              className="md:hidden p-2 rounded-lg text-slate-700 hover:bg-slate-100 dark:hover:bg-surface-hover cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-signal-blue"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              aria-expanded={isMobileMenuOpen}
+              aria-label="Toggle menu"
+            >
+              {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+          </div>
         </div>
       </div>
 
@@ -243,9 +248,9 @@ export function Navigation() {
                     item,
                     cn(
                       'block w-full text-left px-4 py-3 rounded-lg text-base font-medium transition-all cursor-pointer',
-                      'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-600',
+                      'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-signal-blue',
                       isNavActive(item)
-                        ? 'bg-gradient-to-r from-blue-50 to-cyan-50 text-blue-600 border border-blue-200/50 shadow-sm'
+                        ? 'bg-gradient-to-r from-signal-blue/5 to-status-teal-icon/5 text-signal-blue border border-signal-blue/15 shadow-sm'
                         : 'text-slate-700 hover:bg-slate-100'
                     )
                   )}
@@ -270,7 +275,7 @@ export function Navigation() {
                     Get in Touch
                   </Button>
                 ) : (
-                  <Link href="/#contact" className="block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-600 rounded-lg" onClick={() => setIsMobileMenuOpen(false)}>
+                  <Link href="/#contact" className="block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-signal-blue rounded-lg" onClick={() => setIsMobileMenuOpen(false)}>
                     <Button
                       variant="primary"
                       size="md"
