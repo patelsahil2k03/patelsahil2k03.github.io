@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Image from 'next/image';
 import { achievements, achievementsByCategory, highlightedAchievements } from '@/data';
 import { Badge } from '@/components/ui/Badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
@@ -110,10 +111,21 @@ export function Achievements() {
                 </CardHeader>
 
                 <CardContent className="space-y-4">
-                  {/* Description */}
-                  <p className="text-sm text-slate-700 leading-relaxed">
-                    {achievement.description}
-                  </p>
+                  {/* Description (+ optional photo evidence) */}
+                  <div className="flex items-start gap-3">
+                    {achievement.image && (
+                      <Image
+                        src={achievement.image}
+                        alt={`${achievement.title} photo`}
+                        width={56}
+                        height={56}
+                        className="shrink-0 w-14 h-14 rounded-lg object-cover border border-slate-200"
+                      />
+                    )}
+                    <p className="text-sm text-slate-700 leading-relaxed">
+                      {achievement.description}
+                    </p>
+                  </div>
 
                   {/* Metrics */}
                   {achievement.metrics && (

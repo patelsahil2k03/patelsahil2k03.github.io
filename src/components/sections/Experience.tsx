@@ -26,7 +26,7 @@ export function Experience() {
             Professional <span className="text-blue-600">Journey</span>
           </h2>
           <p className="text-xl text-slate-600 max-w-3xl mx-auto mb-8">
-            1+ years of industry experience across AI/ML, Full Stack Development, and Cloud Computing
+            2+ years of industry experience across AI/ML, Full Stack Development, and Cloud Computing
           </p>
 
           {/* Filter Buttons */}
@@ -94,6 +94,8 @@ export function Experience() {
                   caseStudyLinks={caseStudyLinks.length > 0 ? caseStudyLinks : undefined}
                   icon={<Briefcase className="w-4 h-4" />}
                   active={index === 0 && filter === 'all'}
+                  logo={exp.logo}
+                  logoAlt={`${exp.company} logo`}
                 />
               );
             })}
@@ -115,7 +117,7 @@ export function Experience() {
             </div>
           </div>
           <div className="text-center p-6 bg-white rounded-xl shadow-md">
-            <div className="text-4xl font-bold text-cyan-600 mb-2">1+</div>
+            <div className="text-4xl font-bold text-cyan-600 mb-2">2+</div>
             <div className="text-sm text-slate-600 font-medium">
               Years Experience
             </div>

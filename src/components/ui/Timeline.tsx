@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { FileText } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -33,6 +34,9 @@ interface TimelineItemProps {
   caseStudyLinks?: CaseStudyLink[];
   className?: string;
   active?: boolean;
+  /** Company/org logo — square-ish source recommended, rendered with object-contain, never cropped to a circle */
+  logo?: string;
+  logoAlt?: string;
 }
 
 export function TimelineItem({
@@ -45,6 +49,8 @@ export function TimelineItem({
   caseStudyLinks,
   className,
   active = false,
+  logo,
+  logoAlt,
 }: TimelineItemProps) {
   return (
     <div className={cn('relative pl-12 pb-8', className)}>
@@ -76,13 +82,26 @@ export function TimelineItem({
         >
           {/* Header */}
           <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-3">
-            <div>
-              <h3 className="text-xl font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
-                {title}
-              </h3>
-              {subtitle && (
-                <p className="text-sm text-slate-600 mt-1">{subtitle}</p>
+            <div className="flex items-start gap-3">
+              {logo && (
+                <div className="shrink-0 w-12 h-12 rounded-lg border border-slate-200 bg-white p-1.5 flex items-center justify-center">
+                  <Image
+                    src={logo}
+                    alt={logoAlt ?? `${subtitle ?? title} logo`}
+                    width={40}
+                    height={40}
+                    className="w-full h-full object-contain"
+                  />
+                </div>
               )}
+              <div>
+                <h3 className="text-xl font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
+                  {title}
+                </h3>
+                {subtitle && (
+                  <p className="text-sm text-slate-600 mt-1">{subtitle}</p>
+                )}
+              </div>
             </div>
             <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-700 whitespace-nowrap">
               {date}

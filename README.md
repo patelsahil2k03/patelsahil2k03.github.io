@@ -78,7 +78,7 @@ For the full, current inventory of sections, project details, and status per ite
 
 ### Professional Experience
 - **Current**: Associate Software Engineer @ Digiflux Technologies
-- **Duration**: 1+ years (5 internships/positions)
+- **Duration**: 2+ years (5 internships/positions)
 - **Tech Focus**: AI/ML, Full Stack, Cloud Computing
 
 ### Education
