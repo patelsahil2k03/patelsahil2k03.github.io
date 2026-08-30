@@ -964,6 +964,8 @@ This is a **confirmed GitHub UI caching artifact, not a real residual problem.**
 ## Phase O — Competitive Research Follow-Through (Tier 1/2 Implementation)
 
 > Added 2026-08-30. User approved `docs/COMPETITIVE_DESIGN_RESEARCH.md` Part 4's synthesis and directed proceeding with the recommended tiers now, deferring Tier 3 (3D avatar — already Phase L; magazine art-direction — not spun up as its own phase, low priority, revisit only if raised again). Tasks below implement Part 4's Tier 1 + Tier 2 items. Two of the five Tier 1 items (dark mode, typography pairing) are design-system decisions and are staged per this project's own established discipline (Phase L/N precedent: brainstorm before implementation tasks are written) rather than blind-specced here. The other three Tier 1 items plus both Tier 2 items are mechanical/audit tasks with no open design judgment, so they're written in full below and ready to execute now.
+>
+> **Sequencing confirmed by user (2026-08-30):** finish O3→O4 (dark mode + typography) completely first, using relevant design/frontend skills throughout. Then move to the two remaining big tasks — **O5** (architecture diagram) and **O6** (hero pattern refresh). After those, return to whatever remains: Tier 3's deferred items and any other ideas surfaced during this research that haven't become tasks yet.
 
 ### Task O1: Hygiene pass — check for boilerplate/broken-live-element bugs
 
@@ -993,24 +995,47 @@ This is a **confirmed GitHub UI caching artifact, not a real residual problem.**
 
 ---
 
-### Task O3: Design brainstorm — dark mode + typography pairing
+### Task O3: Design brainstorm — dark mode + typography pairing — ✅ COMPLETE (2026-08-30)
 
 **Files:** N/A — design/planning task. Output: an approved design plan (palette tokens, font choices, usage rules), not code.
 
 **Why:** Part 4 §4.3 items 1-2 (Tier 1) and §4.2's explicit warning against defaulting into the generic "AI-hacker terminal" look that recurs across the competitive set. This needs a real design decision, not a copy of the nearest competitor's colors.
 
-- [ ] **Step 1: Load `superpowers:brainstorming`**, then the `frontend-design` skill's two-pass process (token system: color/type/layout/signature → critique against the brief → build).
-- [ ] **Step 2: Ground the brief explicitly** in Part 4 §4.2's finding: the dark-mode palette and any accent/typography choice should derive from Sahil's actual positioning (production systems at scale, 2M+ users served, reliability) — not the terminal-prompt/monospace-hacker shorthand ~half the AI/ML competitive set defaults to.
-- [ ] **Step 3: Produce a compact token system**: dark-mode color palette (4-6 named hex values, building on/replacing the current stock blue/slate/orange/cyan), a second display typeface paired with Inter (kept as body face, matching Simon Aytes's exact pairing strategy), and clear usage rules (where the display face appears — hero/section headers only, not body text).
-- [ ] **Step 4: Present the plan to the user for approval** before any implementation task is written — per Phase L/N precedent, this is a real creative decision the user should see and react to, not something to implement blind.
+- [x] **Step 1-2:** Loaded `superpowers:brainstorming` (classified **Bounded** — existing code, not a new subsystem), grounded the brief in Part 4 §4.2. User picked the **"systems/observability" direction** over "refined editorial" — a deep navy/teal palette evoking dashboards and uptime, explicitly not the terminal-hacker look. User also opted to refine light mode alongside dark (not dark-only) so both feel like one coherent identity.
+- [x] **Step 3: Approved token system** (WCAG-verified — see below):
+
+  | Token | Light (small text) | Light (large/icon/UI) | Dark | Role |
+  |---|---|---|---|---|
+  | `signal-blue` | `#2563EB` (4.94:1) | same | `#3B82F6` (5.09:1) | Primary — evolved from stock `blue-600`, kept close (real signature equity), deepened for an infrastructure/reliability read over "SaaS product" |
+  | `status-teal` | `#0F766E` (5.47:1) | `#0D9488` (3.74:1, icons/large text only) | `#2DD4BF` (10.06:1) | Secondary — replaces the fairly arbitrary `cyan-500`; teal is the actual vocabulary of monitoring-dashboard "operational/healthy" status |
+  | `alert-amber` | `#B45309` (5.02:1) | `#D97706` (3.19:1, icons/large text only) | `#F59E0B` (8.72:1) | Tertiary — evolved from `orange-500`, same role (secondary CTA, achievement badges) |
+  | bg | `#F8FAFC` (existing `slate-50`, unchanged) | | `#0B1220` | Deep navy in dark mode, deliberately not near-black (`#050505`-style terminal-hacker default) |
+  | surface (dark only) | — | | `#161F35` | Card/panel elevation, visually distinct from bg (not a WCAG text pairing) |
+  | text primary (dark) | — | | `#F1F5F9` (17.09:1) | |
+  | text secondary (dark) | — | | `#CBD5E1` (12.61:1) | |
+  | text muted (dark) | — | | `#94A3B8` (7.30:1) | |
+
+  **Two-tier light-mode rule** (same pattern Task 17 already established for this codebase): `status-teal`/`alert-amber`'s brighter values only pass AA at large-text/icon size (3:1) — use the deeper `-700`-equivalent hex for any small/body text use in light mode. All dark-mode values clear AA-normal (4.5:1) comfortably, several well past AAA — verified via the same manual luminance/contrast-ratio Python script as Task 17, not eyeballed.
+
+  **Typography:** Inter stays as body face (unchanged, already a legitimate restrained choice). **Space Grotesk** added as display face — hero name/section headers only, sparingly — a geometric grotesk with enough technical character to read "engineered" without being decorative. **JetBrains Mono** (already declared in `tailwind.config.ts`, currently dead/unused) repurposed specifically for stat/metric numerals (2M+, 517K+, 93%+) with tabular figures — mono becomes "the font data is set in," not a terminal-prompt hero conceit.
+
+  **Signature element:** keep the existing animated gradient mechanic (current real signature), retune its stops to `signal-blue → status-teal`, and pair the hero's existing count-up-on-load stat animation with the new mono numerals so the number visibly "arrives" at its real value in the typeface data is conventionally set in.
+
+- [x] **Step 4: Presented and approved.** User confirmed: *"Yes. We can proceed with the recommended tears and color designs, but make sure that the light and the dark designs are visually accessible, viewable, engaging, not very hard on the view."* — the two-tier light-mode fix above directly answers that; all values re-verified via the contrast script before being written here, not assumed clean.
 
 ---
 
 ### Task O4: Implement approved dark mode + typography direction
 
-**Files:** TBD — depends entirely on Task O3's approved output (likely `tailwind.config.ts`, `globals.css`, a theme-toggle component, `layout.tsx` font imports, and `dark:` variants across `src/components/`).
+**Files:** `tailwind.config.ts`, `src/app/globals.css`, `src/app/layout.tsx` (font imports — add Space Grotesk alongside existing Inter/JetBrains Mono Google Font imports), a new theme-toggle component (e.g. `src/components/ui/ThemeToggle.tsx`), `src/components/ui/Navigation.tsx` (mount the toggle), and `dark:` variants added across every component in `src/components/` that currently has hardcoded light-only classes (`Button.tsx`, `Card.tsx`, `Timeline.tsx`, `Badge.tsx`, all `sections/*.tsx`).
 
-- [ ] Full task breakdown written once Task O3 produces an approved design plan, following this document's usual task-writing standard (exact files, exact changes, no placeholders) — not specced blind here.
+- [ ] **Step 1: `tailwind.config.ts`** — add the approved token hex values as named colors (`signal-blue`, `status-teal`, `alert-amber` each with light/dark-appropriate shades, or as CSS custom properties consumed via `dark:` variants — pick whichever matches this codebase's existing Tailwind v3 conventions, confirm during implementation) and register **Space Grotesk** in `fontFamily` alongside existing `sans`/`mono`.
+- [ ] **Step 2: Theme persistence + toggle.** Implement a `ThemeToggle` component using `localStorage` + `prefers-color-scheme` fallback (standard `next-themes`-style pattern, or hand-rolled given this is a static export — confirm approach doesn't break SSG), mount it in `Navigation.tsx`. No flash-of-wrong-theme on load (blocking inline script in `layout.tsx`'s `<head>`, a well-established pattern for this exact problem).
+- [ ] **Step 3: Apply tokens across components.** Systematic pass: every `blue-600`/`orange-500`/`cyan-500` class usage gets an equivalent `dark:` variant using the new dark-mode tokens; light-mode classes get updated to the refined `signal-blue`/`status-teal`/`alert-amber` values per the two-tier table above (small text uses the deeper shade). Re-verify via `grep` that no component is missed (same "re-sweep after every change" discipline as the rest of this plan).
+- [ ] **Step 4: Typography application.** Space Grotesk on hero name + section headers only (not body, not nav, not buttons) — confirm against Task O3's usage rule before broad application. JetBrains Mono on stat-card numerals in `HeroEnhanced.tsx`'s `StatCard`.
+- [ ] **Step 5: Signature gradient retune + mono numeral pairing** in `HeroEnhanced.tsx` per Task O3's signature-element note.
+- [ ] **Step 6: Verify** — `npm run build` passes, `prefers-reduced-motion` still respected on any new animation, visible keyboard focus preserved on the new toggle, re-run the WCAG contrast script against final rendered classes (not just planned tokens) to confirm nothing drifted during implementation. Screenshot both modes for a visual gut-check before proposing.
+- [ ] **Step 7: Propose to user, then commit** (likely 2-3 atomic commits: config/tokens, theme toggle + persistence, component-by-component `dark:` application — confirm split during implementation rather than one giant diff).
 
 ---
 
