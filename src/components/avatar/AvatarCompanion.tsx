@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useActiveSection, usePrefersReducedMotion } from '@/lib/hooks';
 import { getNarrationForSection } from '@/data/avatarNarration';
 import { AVATAR_ENABLED, detectWebGLSupport } from '@/lib/avatarConfig';
@@ -15,6 +15,14 @@ const HOMEPAGE_SECTION_IDS = [
 
 const OPT_OUT_STORAGE_KEY = 'avatar-opt-out';
 const MOBILE_BREAKPOINT_PX = 768; // matches this codebase's existing Tailwind `md` breakpoint
+// A real-device test found the narration bubble sitting persistently over
+// body text on every mobile section — this content-dense single-column
+// layout has no dedicated empty gutter for a fixed overlay to live in
+// without covering something. On mobile the bubble now shows briefly on
+// each section change, then fades, leaving only the small character; on
+// desktop there's room for it to stay up the whole time, matching how this
+// feature was originally designed and tested (no complaints there).
+const NARRATION_VISIBLE_MS = 4000;
 
 type Mode = 'full' | 'simplified' | 'hidden';
 
@@ -77,17 +85,43 @@ export function AvatarCompanion() {
   const activeSection = useActiveSection(HOMEPAGE_SECTION_IDS, mode !== 'hidden');
   const { pose, thought } = getNarrationForSection(activeSection);
 
+  // See NARRATION_VISIBLE_MS above: on mobile the bubble is transient
+  // (shows on section change, fades after a few seconds); on desktop it
+  // stays up the whole time a section is active.
+  const [showNarration, setShowNarration] = useState(true);
+  const fadeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    if (mode !== 'simplified') {
+      setShowNarration(true);
+      return;
+    }
+    setShowNarration(true);
+    if (fadeTimer.current) clearTimeout(fadeTimer.current);
+    fadeTimer.current = setTimeout(() => setShowNarration(false), NARRATION_VISIBLE_MS);
+    return () => {
+      if (fadeTimer.current) clearTimeout(fadeTimer.current);
+    };
+  }, [mode, activeSection]);
+
   if (mode === 'hidden') return null;
 
-  const sizeClass = mode === 'simplified' ? 'w-20 h-20' : 'w-32 h-32';
+  const sizeClass = mode === 'simplified' ? 'w-16 h-16' : 'w-32 h-32';
 
   return (
     <div
-      className="fixed right-6 z-40 flex flex-col items-end gap-3 pointer-events-none"
+      className="fixed right-6 z-40 flex flex-col items-end gap-6 pointer-events-none"
       style={{ bottom: 'calc(1.5rem + env(safe-area-inset-bottom))' }}
     >
-      <AvatarNarration thought={thought} />
-      <AvatarScene className={`${sizeClass} rounded-xl bg-surface border border-edge shadow-md`} pose={pose} />
+      <div className={`transition-opacity duration-500 ${showNarration ? 'opacity-100' : 'opacity-0'}`}>
+        <AvatarNarration thought={thought} />
+      </div>
+      {/* No card/border here on purpose — the canvas background stays
+          transparent and a drop-shadow follows the character's own
+          silhouette instead of boxing it in a rectangle, so it reads as a
+          small figure standing in the page rather than a separate floating
+          UI widget. */}
+      <AvatarScene className={`${sizeClass} drop-shadow-lg`} pose={pose} />
     </div>
   );
 }

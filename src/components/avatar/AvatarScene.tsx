@@ -50,8 +50,18 @@ export function AvatarScene({ className, pose }: { className?: string; pose?: st
               means swapping to a different KayKit character (per the
               swappable AVATAR_CHARACTER_PATH design) never needs a
               re-tuned camera. Center avoids the model's own pivot/origin
-              being off-center within its bounding box. */}
-          <Bounds fit clip observe margin={1.2}>
+              being off-center within its bounding box.
+
+              Deliberately NOT passing `observe`: real-device testing found
+              the frame visibly zooming/shifting for ~1-2s after every pose
+              change (scrolling between sections re-triggers this
+              constantly) — the 0.4s crossfade blends two different clips'
+              skeletons together, producing a transient bounding box wider
+              than either pose alone, and `observe` was re-fitting the
+              camera to that transient shape before settling back down.
+              Fitting once on mount keeps the frame permanently stable
+              regardless of which pose is blending in or out. */}
+          <Bounds fit clip margin={1.2}>
             <Center>
               <Model pose={pose} />
             </Center>
