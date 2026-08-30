@@ -35,6 +35,8 @@ export interface CaseStudy {
   image?: string;
   github?: string;
   paper?: string;
+  /** Optional Mermaid diagram definition, rendered on the article page when set */
+  architectureDiagram?: string;
 }
 
 export const caseStudyTypeLabels: Record<CaseStudyType, string> = {
@@ -157,18 +159,18 @@ export const caseStudies: CaseStudy[] = [
     title: 'AI-Powered Marketplace Content & Search Platform',
     type: 'production',
     industry: 'E-commerce / Creator Commerce',
-    hook: 'Owning a platform indexing 517K+ products across 29 marketplaces, with semantic search built for how creators actually search.',
+    hook: 'Owning a two-service platform — 602K+ searchable listings across 36 marketplaces — with multi-modal semantic search (text and photo, EN + AR) built for how creators actually search.',
     industryContext:
       'Creator-commerce platforms sit between influencers and marketplace catalogs spanning dozens of regional and international storefronts. Product data arrives inconsistent — mismatched categories, duplicate listings, multilingual titles — and creators need to find relevant items by intent, not just keyword match. Systems that can\'t reconcile catalog scale with search relevance either drown in stale data or return irrelevant results.',
     insight:
-      'At this scale, the hard problem isn\'t scraping — it\'s reconciliation and retrieval. A category taxonomy that\'s 80% automated still needs the remaining 20% to be right, because a wrong mapping breaks discovery for every product under it. Vector search earns its complexity only when keyword search demonstrably fails on real creator queries — semantic search on top of a shaky data foundation just returns confidently wrong results faster.',
+      'At this scale, the hard problem isn\'t scraping — it\'s reconciliation and retrieval. A category taxonomy that\'s 80% automated still needs the remaining 20% to be right, because a wrong mapping breaks discovery for every product under it. Vector search earns its complexity only when keyword search demonstrably fails on real creator queries — semantic search on top of a shaky data foundation just returns confidently wrong results faster. The two services stay deliberately decoupled — search reads a database snapshot, never live Postgres or the scrapers directly — so acquisition-side slowness or failure never shows up as a slow search response.',
     contribution:
-      'Own an AI-powered marketplace content and search platform end-to-end: architected a pipeline indexing 517K+ products across 29 marketplaces (EN + AR), built a PostgreSQL→MongoDB sync layer to bridge relational category logic with document-store product data, and shipped a gRPC semantic search API backed by Pinecone across 5,109 category mappings. Engineered Cloudflare R2 image processing to keep listing assets performant at this scale.',
+      'Own an AI-powered marketplace content and search platform end-to-end, split into two deliberately decoupled services sharing only a database. The acquisition side extracts and categorizes products from 36 marketplaces (EN + AR) into PostgreSQL, processes imagery through Cloudflare R2, and writes a clean catalog to MongoDB — 602K+ searchable listings today, run via a FastAPI orchestrator and ops dashboard. The discovery side reads that MongoDB snapshot and embeds every product across 5 Pinecone vector indexes — English text, Arabic text, product photos, and colour/style intent — so a creator\'s query, typed or an uploaded photo, resolves to real, in-stock, regionally-correct results (a product with no presence in a region correctly returns nothing there, rather than something unbuyable).',
     topics: ['Vector Search', 'Data Engineering', 'gRPC', 'E-commerce'],
     metrics: [
-      { label: 'Products indexed', value: '517K+' },
-      { label: 'Marketplaces', value: '29' },
-      { label: 'Category mappings', value: '5,109' },
+      { label: 'Products indexed', value: '602K+' },
+      { label: 'Marketplaces', value: '36' },
+      { label: 'Search vector indexes', value: '5' },
     ],
     technologies: ['Python', 'FastAPI', 'PostgreSQL', 'MongoDB', 'Pinecone', 'gRPC', 'Cloudflare R2'],
     relatedExperienceId: 'digiflux-ase',
@@ -177,6 +179,36 @@ export const caseStudies: CaseStudy[] = [
     publishedAt: '2026-01-12',
     featured: true,
     readTime: '5 min',
+    architectureDiagram: `flowchart TB
+    subgraph ACQ["Acquisition — writes MongoDB"]
+        direction TB
+        MKT["36 Marketplaces (EN + AR)"]
+        PIPE["Extraction & Categorization Pipeline"]
+        PG[("PostgreSQL — Product & Taxonomy Data")]
+        IMG["Imagery Processing"]
+        R2["Cloudflare R2 / CDN"]
+        OPS["FastAPI Orchestrator + Ops Dashboard"]
+
+        MKT --> PIPE
+        PIPE --> PG
+        PIPE --> IMG --> R2
+        OPS -.controls.-> PIPE
+    end
+
+    PG --> MONGO[("MongoDB — 602K+ Searchable Listings")]
+
+    subgraph DISC["Discovery — reads MongoDB, owns search"]
+        direction TB
+        MONGO -- "snapshot read, never live" --> EMBED["gRPC Embedding Service"]
+        EMBED --> P1[("Pinecone — EN Text")]
+        EMBED --> P2[("Pinecone — AR Text")]
+        EMBED --> P3[("Pinecone — Product Photos")]
+        EMBED --> P4[("Pinecone — Colour / Style Intent")]
+        P1 & P2 & P3 & P4 --> MATCH["Semantic Match + Regional Resolution"]
+    end
+
+    QUERY["Creator Query — text or photo"] --> MATCH
+    MATCH --> RESULT["In-Stock, Regionally-Correct Results"]`,
   },
   {
     id: 'fitness-microservice-platform',

@@ -11,6 +11,7 @@ import {
 } from 'lucide-react';
 import type { CaseStudy } from '@/data/caseStudies';
 import { Badge } from '@/components/ui/Badge';
+import { CaseStudyDiagram } from './CaseStudyDiagram';
 import { CaseStudyTeaserCard } from './CaseStudyTeaserCard';
 import { CaseStudyViewTracker } from './CaseStudyViewTracker';
 import { CaseStudyTableOfContents } from './CaseStudyTableOfContents';
@@ -132,6 +133,18 @@ export function CaseStudyArticle({ study }: { study: CaseStudy }) {
         )}
 
         <CaseStudyTableOfContents sections={sections} />
+
+        {study.architectureDiagram && (
+          <section className="mb-12" aria-labelledby="architecture-diagram-heading">
+            <h2
+              id="architecture-diagram-heading"
+              className="font-display text-xl sm:text-2xl font-bold text-slate-900 dark:text-ink-primary mb-4"
+            >
+              System architecture
+            </h2>
+            <CaseStudyDiagram definition={study.architectureDiagram} />
+          </section>
+        )}
 
         <div className="case-study-prose space-y-10">
           {sections.map((section, index) => (
