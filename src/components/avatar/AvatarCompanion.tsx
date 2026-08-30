@@ -18,6 +18,10 @@ const MOBILE_BREAKPOINT_PX = 768; // matches this codebase's existing Tailwind `
 
 type Mode = 'full' | 'simplified' | 'hidden';
 
+function widthToMode(): Mode {
+  return window.innerWidth < MOBILE_BREAKPOINT_PX ? 'simplified' : 'full';
+}
+
 function useAvatarMode(): Mode {
   const prefersReducedMotion = usePrefersReducedMotion();
   const [mode, setMode] = useState<Mode>('hidden');
@@ -38,7 +42,7 @@ function useAvatarMode(): Mode {
     if (optedOut || prefersReducedMotion || !detectWebGLSupport()) {
       setMode('hidden');
     } else {
-      setMode(window.innerWidth < MOBILE_BREAKPOINT_PX ? 'simplified' : 'full');
+      setMode(widthToMode());
     }
 
     const handleToggle = (event: Event) => {
@@ -46,12 +50,23 @@ function useAvatarMode(): Mode {
       if (optedOut) {
         setMode('hidden');
       } else if (!prefersReducedMotion && detectWebGLSupport()) {
-        setMode(window.innerWidth < MOBILE_BREAKPOINT_PX ? 'simplified' : 'full');
+        setMode(widthToMode());
       }
     };
 
+    const handleResize = () => {
+      // Resize never undoes an opt-out, reduced-motion preference, or missing
+      // WebGL support — it only re-checks the width-based full/simplified
+      // split, and only while the avatar is already visible.
+      setMode((current) => (current === 'hidden' ? current : widthToMode()));
+    };
+
     window.addEventListener(AVATAR_TOGGLE_EVENT, handleToggle);
-    return () => window.removeEventListener(AVATAR_TOGGLE_EVENT, handleToggle);
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener(AVATAR_TOGGLE_EVENT, handleToggle);
+      window.removeEventListener('resize', handleResize);
+    };
   }, [prefersReducedMotion]);
 
   return mode;
