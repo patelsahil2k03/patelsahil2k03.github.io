@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { achievements, achievementsByCategory } from '@/data';
+import { achievements, achievementsByCategory, highlightedAchievements } from '@/data';
 import { Badge } from '@/components/ui/Badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
 import { Trophy, Award, BookOpen, Code, Calendar, ExternalLink } from 'lucide-react';
@@ -45,7 +45,7 @@ export function Achievements() {
             Awards & <span className="text-blue-600">Recognition</span>
           </h2>
           <p className="text-xl text-slate-600 max-w-3xl mx-auto mb-8">
-            20+ achievements across awards, certifications, hackathons, and national sports
+            {achievements.length}+ achievements across awards, certifications, hackathons, and national sports
           </p>
 
           {/* Category Filter */}
@@ -158,26 +158,29 @@ export function Achievements() {
             ))}
         </div>
 
-        {/* Highlight Card */}
-        <div className="mt-16">
-          <Card className="max-w-4xl mx-auto bg-gradient-to-br from-orange-50 to-blue-50 border-2 border-orange-100">
-            <CardContent className="p-8 text-center">
-              <Trophy className="w-12 h-12 text-orange-600 mx-auto mb-4" />
-              <h3 className="text-2xl font-bold text-slate-900 mb-3">
-                Most Recent Achievement
-              </h3>
-              <p className="text-lg text-slate-700 mb-2">
-                <strong>Top 10 Finalist</strong> - AI-Manthan Hackathon
-              </p>
-              <p className="text-slate-600 mb-4">
-                Built ForeSight: Enterprise ML-powered risk prediction system for IT projects
-              </p>
-              <Badge variant="secondary" size="lg">
-                January 2025 • Top 10 out of 70+ teams
-              </Badge>
-            </CardContent>
-          </Card>
-        </div>
+        {/* Highlight Card — pulls from highlightedAchievements[0], never goes stale again */}
+        {highlightedAchievements[0] && (
+          <div className="mt-16">
+            <Card className="max-w-4xl mx-auto bg-gradient-to-br from-orange-50 to-blue-50 border-2 border-orange-100">
+              <CardContent className="p-8 text-center">
+                <Trophy className="w-12 h-12 text-orange-600 mx-auto mb-4" />
+                <h3 className="text-2xl font-bold text-slate-900 mb-3">
+                  Most Recent Achievement
+                </h3>
+                <p className="text-lg text-slate-700 mb-2">
+                  <strong>{highlightedAchievements[0].title}</strong>
+                </p>
+                <p className="text-slate-600 mb-4">
+                  {highlightedAchievements[0].description}
+                </p>
+                <Badge variant="secondary" size="lg">
+                  {highlightedAchievements[0].date}
+                  {highlightedAchievements[0].metrics ? ` • ${highlightedAchievements[0].metrics}` : ''}
+                </Badge>
+              </CardContent>
+            </Card>
+          </div>
+        )}
       </div>
     </section>
   );
