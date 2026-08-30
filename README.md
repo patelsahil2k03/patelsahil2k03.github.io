@@ -229,13 +229,7 @@ colors: {
 - [ ] Draft copy refinement + hero images (see `docs/CASE_STUDIES.md`)
 
 ### 🟡 Phase 3: Asset Collection (PENDING USER)
-- [ ] Project screenshots (8 images)
-- [ ] Achievement photos
-- [ ] Company logos
-- [ ] Research paper DOI links (2 papers)
-- [ ] Project GitHub repo links (6 repos)
-- [ ] Professional headshots
-- [ ] Case study hero images (`public/case-studies/`)
+Full current checklist, priorities, and specs: **[ASSETS_GUIDE.md](./ASSETS_GUIDE.md)** — this file no longer keeps a second copy that can drift out of sync.
 
 ### ⚪ Phase 4: Advanced Features (PLANNED)
 - [ ] 3D Football model (React Three Fiber)

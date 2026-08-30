@@ -1,25 +1,33 @@
 # 📦 Complete Assets Guide
 
-**Purpose:** Comprehensive guide for adding images, links, and content to your portfolio  
+**Purpose:** Single canonical reference for every image, link, and content asset the portfolio can use — organized by priority.  
 **Status:** Portfolio works WITHOUT these assets (has fallbacks)  
-**Add When:** Convenient - no pressure!
+**Add When:** Convenient - no pressure!  
+**Last updated:** 2026-08-22 (consolidated the remaining unique content from `docs/archive/ASSET_PLAN.md`, `ASSETS_NEEDED.md`, `CRITICAL_ASSETS_CHECKLIST.md` — those 3 archived docs are historical only now, this is the one place to check)
 
 ---
 
 ## 🎯 QUICK PRIORITY GUIDE
 
+### ✅ Done:
+1. Profile photo (`public/images/hero/profile.jpg`, compressed to 55.8KB)
+2. Resume PDF (`public/resume.pdf`)
+3. Company-logo / achievement-photo **display code** — `TimelineItem`/`Achievement` cards render these when set (Task 20a); only the actual image *files* are still missing (see below)
+
 ### 🔴 Optional but High Impact:
-1. Project screenshots (2-3 most impressive projects)
-2. Research paper DOI/links (2 links)
-3. GitHub repository links for projects (6 links)
+1. Case study hero images (**field exists on `CaseStudy.image` but nothing renders it yet** — needs the same display-wiring work Task 20a did for logos/achievement photos before this is even worth collecting; see note below)
+2. Project screenshots (2-3 most impressive projects)
+3. Research paper DOI/links (2 links)
+4. GitHub repository links for projects (6 links)
 
 ### 🟡 Nice to Have:
-1. Company logos (4 images)
-2. Achievement photos (2-3 photos)
+1. Company logos (4 image files — display code is ready, just needs the files)
+2. Achievement photos (2-3 photos — display code is ready, just needs the files)
 3. Football team photos (2-3 photos)
+4. Certification badges (4 image files)
 
 ### 🟢 Future Enhancement:
-1. Certification badges
+1. Research paper PDFs (optional, only if you have hosting permission)
 2. Additional social links
 3. Blog posts/articles
 4. Testimonials
@@ -52,11 +60,21 @@ public/
 │   │   ├── charusat-team.jpg ⏳
 │   │   ├── tournament-action.jpg ⏳
 │   │   └── national-tournament-2023.jpg ⏳
-│   └── logos/
-│       ├── digiflux.png ⏳
-│       ├── lnt.png ⏳
-│       ├── motorola.png ⏳
-│       └── charusat.png ⏳
+│   ├── logos/
+│   │   ├── digiflux.png ⏳
+│   │   ├── lnt.png ⏳
+│   │   ├── motorola.png ⏳
+│   │   └── charusat.png ⏳
+│   ├── certifications/
+│   │   ├── nvidia-badge.png ⏳
+│   │   ├── google-cloud-badges.png ⏳ (covers both the 2022 and 2023 Google Cloud entries)
+│   │   ├── aws-practitioner.png ⏳
+│   │   └── nptel-elite.png ⏳
+│   └── case-studies/ ⏳ (doesn't exist yet — create when case-study hero images are wired up, see note above)
+│       └── {slug}.png — one per case study you want a hero image for (10 slugs currently, see docs/CASE_STUDIES.md)
+├── papers/ ⏳ (optional, only if you have hosting permission)
+│   ├── springer-ictis-2024.pdf
+│   └── aip-icraic-2024.pdf
 └── resume.pdf ✅ DONE
 ```
 
@@ -92,10 +110,31 @@ public/
   - Presentation moments
 
 ### Company Logos:
-- **Size:** 200x200px (square)
+- **Size:** 200x200px, ideally square-ish (the display code uses `object-contain` in a 48px badge, so non-square logos won't be cropped — but square/near-square looks best)
 - **Format:** PNG with transparent background
 - **Max File Size:** 50KB each
 - **Where to Get:** Company websites or LinkedIn
+- **Display code:** already wired (Task 20a) — drop the file in `public/images/logos/`, then add `logo: '/images/logos/digiflux.png'` to the matching entry in `src/data/experience.ts`, and it renders automatically next to that role in the Experience timeline. No other code changes needed.
+
+### Certification Badges:
+- **Size:** 200x200px (square)
+- **Format:** PNG, transparent background preferred
+- **Max File Size:** 50KB each
+- **Where to Get:** Your certificate's official badge (NVIDIA, Google Cloud, AWS, NPTEL all provide downloadable badge images)
+- **Files needed:** `nvidia-badge.png`, `google-cloud-badges.png` (one image covering both the 2022 Cloud Engineer Path and 2023 Study Jam entries), `aws-practitioner.png`, `nptel-elite.png`
+- **Display code:** **not yet wired** — `Achievement.image` (Task 20a's addition) renders in the general achievement-card grid, but there's no dedicated "certification badge" treatment distinct from that yet. Using the same `image` field on the 5 certification entries in `src/data/achievements.ts` will work with the current 56px inline-thumbnail treatment; a larger/different badge-specific display would be a separate small design task if wanted later.
+
+### Case Study Hero Images:
+- **Size:** 1200x630px (matches the OG-image aspect ratio convention already used elsewhere on the site) or 1200x675px (16:9, matches project screenshots)
+- **Format:** PNG or JPG
+- **Max File Size:** 300KB each
+- **Where they'd go:** `public/images/case-studies/{slug}.png` — folder doesn't exist yet, create it when this gets wired up
+- **⚠️ Not wired to any component yet.** `CaseStudy.image` is defined on the interface (`src/data/caseStudies.ts`) but neither `CaseStudyTeaserCard.tsx` nor `CaseStudyArticle.tsx` currently render it — this needs the same kind of display-wiring work Task 20a did for `Experience.logo`/`Achievement.image` before collecting these images is worth doing. Flagged as a candidate for a future task, not started.
+
+### Research Paper PDFs (optional):
+- **Only if you have hosting permission** from the publisher/co-authors — check your publishing agreement first.
+- **Destination:** `public/papers/springer-ictis-2024.pdf`, `public/papers/aip-icraic-2024.pdf`
+- **Display code:** not currently wired to anything — `achievements.ts`'s publication entries already link out to the real DOI/publisher pages via the `link` field, which is the primary way papers are surfaced today. Self-hosting the PDF would need its own small addition if wanted (e.g. a "Download PDF" button alongside the existing "View Details" link).
 
 ---
 
@@ -182,6 +221,8 @@ social: {
 
 ### Adding Project Screenshots:
 
+**⚠️ Field not wired yet:** `Project.image` exists on the interface but `src/components/sections/Projects.tsx` doesn't render it currently (confirmed 2026-08-22) — this needs the same display-wiring work Task 20a did for `Experience.logo`/`Achievement.image` before screenshots would actually show up. The steps below prepare/place the files and set the data field correctly, but step 4's visual verification will show nothing changed until that wiring task happens.
+
 **Step 1: Prepare Images**
 1. Take screenshot or create diagram
 2. Resize to 1200x675px
@@ -190,19 +231,18 @@ social: {
 
 **Step 2: Add to Project**
 ```bash
-# Copy image to project
-cp /path/to/your/image.png /home/lenovo/Sahil/sahil-personal-projects/patelsahil2k03.github.io/public/images/projects/
-
+# Copy image to the repo (adjust the source path to wherever your image actually is)
+cp /path/to/your/image.png public/images/projects/
 # Verify it's there
 ls -la public/images/projects/
 ```
 
 **Step 3: Update Code**
 **File:** `src/data/projects.ts`
-```javascript
+```typescript
 {
   title: "ForeSight",
-  image: "/images/projects/foresight-dashboard.png",  // ← Add this line
+  image: "/images/projects/foresight-dashboard.png",  // sets the data, doesn't render yet — see warning above
   // ... rest of project data
 }
 ```
@@ -210,17 +250,14 @@ ls -la public/images/projects/
 **Step 4: Test**
 ```bash
 npm run dev
-# Open http://localhost:3000
-# Scroll to Projects section
-# Verify image displays
+# Open http://localhost:3000, scroll to Projects section
 ```
 
 **Step 5: Commit**
 ```bash
-git add public/images/projects/foresight-dashboard.png
-git add src/data/projects.ts
-git commit -m "[feat] Add ForeSight project screenshot"
-git push origin main
+git add public/images/projects/foresight-dashboard.png src/data/projects.ts
+git commit -m "content: add ForeSight project screenshot"
+git push origin dev   # this repo's workflow: dev is where daily work lands, main deploys via fast-forward after review
 ```
 
 ---
@@ -234,25 +271,24 @@ git push origin main
 
 **Step 2: Update Code**
 **File:** `src/data/achievements.ts` (find the entry with `category: 'publication'`)
-```javascript
+```typescript
 {
   title: "Your Paper Title",
-  link: "https://doi.org/10.1007/your-doi",  // ← Update this
+  link: "https://doi.org/10.1007/your-doi",  // update this — already wired and clickable
 }
 ```
 
 **Step 3: Test**
 ```bash
 npm run dev
-# Scroll to Publications section
-# Click link, verify it opens correctly
+# Scroll to Achievements/Publications section, click link, verify it opens correctly
 ```
 
 **Step 4: Commit**
 ```bash
 git add src/data/achievements.ts
-git commit -m "[feat] Add research paper DOI links"
-git push origin main
+git commit -m "content: add research paper DOI links"
+git push origin dev
 ```
 
 ---
@@ -269,21 +305,21 @@ git push origin main
 cp /path/to/digiflux-logo.png public/images/logos/digiflux.png
 ```
 
-**Step 3: Update Code (if needed)**
-**File:** `src/data/experience.ts`
-```javascript
+**Step 3: Update Code**
+**File:** `src/data/experience.ts` — the `logo` field and its display code already exist (Task 20a), just set it:
+```typescript
 {
   company: "Digiflux Technologies",
-  logo: "/images/logos/digiflux.png",  // ← Add if field exists
+  logo: "/images/logos/digiflux.png",  // renders automatically in the Experience timeline
 }
 ```
 
 **Step 4: Test & Commit**
 ```bash
 npm run dev
-git add public/images/logos/digiflux.png
-git commit -m "[feat] Add company logos"
-git push origin main
+git add public/images/logos/digiflux.png src/data/experience.ts
+git commit -m "feat(content): add Digiflux company logo"
+git push origin dev   # this repo's workflow: dev is where daily work lands, main deploys via fast-forward after review
 ```
 
 ---
@@ -460,26 +496,29 @@ du -h public/images/projects/your-image.png
 
 ## ✅ ASSET CHECKLIST
 
-### Critical (Optional):
-- [ ] 2-3 project screenshots
-- [ ] Research paper DOI links
-- [ ] Project GitHub URLs
+### Needs display-wiring before collecting (small dev task, not just a file drop):
+- [ ] Wire `Project.image` into `Projects.tsx` (currently unrendered)
+- [ ] Wire `CaseStudy.image` into `CaseStudyTeaserCard.tsx`/`CaseStudyArticle.tsx` (currently unrendered)
 
-### Nice to Have:
-- [ ] All project screenshots
-- [ ] Company logos
-- [ ] Achievement photos
-- [ ] Football photos
+### Ready to collect now (display code already works):
+- [ ] Company logos (4 files → `src/data/experience.ts`'s `logo` field)
+- [ ] Achievement photos (`src/data/achievements.ts`'s `image` field)
+- [ ] Certification badges (4 files, same `image` field as achievement photos)
+- [ ] Research paper DOI links (2 links, already-wired `link` field)
+- [ ] Project GitHub URLs (6 links, already-wired `github` field)
 
-### Future:
-- [ ] Certification badges
+### Nice to have, no code changes needed either way:
+- [ ] Football photos (no dedicated section renders these yet — would need its own small feature, not just an asset drop; see `PORTFOLIO_REFERENCE.md`'s "Beyond Tech" idea)
+
+### Future / optional:
+- [ ] Research paper PDFs (self-hosted, only with publisher permission)
 - [ ] Blog posts
-- [ ] Testimonials
+- [ ] Testimonials (data exists in git history, deleted in Task 3 — would need fresh content if revisited)
 - [ ] Video demos
 
 ---
 
-**Status:** Reference guide created  
+**Status:** Consolidated single reference (2026-08-22) — supersedes `docs/archive/ASSET_PLAN.md`, `ASSETS_NEEDED.md`, `CRITICAL_ASSETS_CHECKLIST.md`, which are historical only now.  
 **Portfolio Status:** 100% functional without assets  
 **Add Assets:** At your convenience, no pressure!
 

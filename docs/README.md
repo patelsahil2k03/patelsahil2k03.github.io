@@ -8,7 +8,7 @@ This folder organizes all non-code documentation for the portfolio project.
 - `DEPLOYMENT.md` – how the site is built and deployed (GitHub Actions, static export)
 - `PORTFOLIO_SCOPE_CHECKLIST.md` – **master scope tracker** (build gates, done/pending, CSV inventory, commits)
 - `CASE_STUDIES.md` – case study inventory, routes, cross-links, refinement checklist
-- `../ASSETS_GUIDE.md` – where to put images, logos, and links (Phase 3 assets)
+- `../ASSETS_GUIDE.md` – **the single canonical asset guide** (images, logos, links, specs, priorities, which fields are wired vs. still need display code) — supersedes the 3 archived asset docs, don't split asset guidance across other files
 - `../PORTFOLIO_REFERENCE.md` – design inspiration, patterns, and enhancement ideas
 - `superpowers/plans/2026-08-19-portfolio-production-readiness.md` – production-readiness plan and full task-by-task execution ledger
 - `../resume/main.tex` + `../resume/RESUME_IMPROVEMENTS.md` – resume LaTeX source and pending review notes (not yet applied)
