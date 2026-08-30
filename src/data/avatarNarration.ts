@@ -11,7 +11,7 @@ export const avatarNarration: AvatarNarrationEntry[] = [
   {
     sectionId: 'home',
     pose: 'Idle_A',
-    thought: "Hi — I'm the 3D-sized version of Sahil. Scroll on, I'll keep up.",
+    thought: "Hey there — I'll be your guide through what Sahil's built.",
   },
   {
     sectionId: 'about',

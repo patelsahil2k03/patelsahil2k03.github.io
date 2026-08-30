@@ -67,9 +67,12 @@ export function AvatarCompanion() {
   const sizeClass = mode === 'simplified' ? 'w-20 h-20' : 'w-32 h-32';
 
   return (
-    <div className="fixed bottom-6 right-6 z-40 flex flex-col items-end gap-2 pointer-events-none">
+    <div
+      className="fixed right-6 z-40 flex flex-col items-end gap-3 pointer-events-none"
+      style={{ bottom: 'calc(1.5rem + env(safe-area-inset-bottom))' }}
+    >
       <AvatarNarration thought={thought} />
-      <AvatarScene className={sizeClass} pose={pose} />
+      <AvatarScene className={`${sizeClass} rounded-xl bg-surface border border-edge shadow-md`} pose={pose} />
     </div>
   );
 }
