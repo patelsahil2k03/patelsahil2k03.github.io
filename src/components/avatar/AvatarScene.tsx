@@ -6,7 +6,7 @@ import { Bounds, Center, useAnimations, useGLTF } from '@react-three/drei';
 import type { Group } from 'three';
 import { AVATAR_CHARACTER_PATH, AVATAR_ANIMATIONS_PATH } from '@/lib/avatarConfig';
 
-function Model() {
+function Model({ pose }: { pose?: string }) {
   const group = useRef<Group>(null);
   const { scene } = useGLTF(AVATAR_CHARACTER_PATH);
   const { animations } = useGLTF(AVATAR_ANIMATIONS_PATH);
@@ -14,20 +14,29 @@ function Model() {
   // matching bone/node names — this is the retargeting step verified
   // compatible in spec section 6c (24 matching bone names between the
   // character and the animation library).
-  const { actions } = useAnimations(animations, group);
+  const { actions, names } = useAnimations(animations, group);
+  const currentActionName = useRef<string | null>(null);
 
   useEffect(() => {
-    const action = actions['Idle_A'];
-    action?.reset().fadeIn(0.3).play();
-    return () => {
-      action?.fadeOut(0.3);
-    };
-  }, [actions]);
+    if (names.length === 0) return;
+    // Falls back to the literal 'Idle_A' (not names[0]) now that the real
+    // clip names are known — this is the defensive fallback Task L3.2
+    // will rely on when an unmapped/unknown pose name is passed in.
+    const targetName = pose && names.includes(pose) ? pose : 'Idle_A';
+    if (targetName === currentActionName.current) return;
+
+    const nextAction = actions[targetName];
+    const prevAction = currentActionName.current ? actions[currentActionName.current] : null;
+
+    nextAction?.reset().fadeIn(0.4).play();
+    prevAction?.fadeOut(0.4);
+    currentActionName.current = targetName;
+  }, [pose, actions, names]);
 
   return <primitive ref={group} object={scene} />;
 }
 
-export function AvatarScene({ className }: { className?: string }) {
+export function AvatarScene({ className, pose }: { className?: string; pose?: string }) {
   return (
     <div className={className}>
       <Canvas camera={{ fov: 40 }}>
@@ -44,7 +53,7 @@ export function AvatarScene({ className }: { className?: string }) {
               being off-center within its bounding box. */}
           <Bounds fit clip observe margin={1.2}>
             <Center>
-              <Model />
+              <Model pose={pose} />
             </Center>
           </Bounds>
         </Suspense>
