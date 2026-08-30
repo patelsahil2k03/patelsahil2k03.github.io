@@ -72,7 +72,7 @@ export function Contact() {
           {/* Contact Information */}
           <div className="lg:col-span-2 space-y-6">
             {/* Availability Card */}
-            <Card className="border-2 border-green-200 bg-green-50">
+            <Card className="border-2 border-green-200 bg-green-50 dark:border-green-500/30 dark:bg-green-500/10">
               <CardContent className="p-6">
                 <div className="flex items-center gap-3 mb-3">
                   <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse" />
@@ -184,9 +184,9 @@ export function Contact() {
                 <h3 className="text-2xl font-bold text-slate-900 mb-6">Send a Message</h3>
 
                 {isSubmitted && (
-                  <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg flex items-center gap-3">
-                    <CheckCircle2 className="w-5 h-5 text-green-600" />
-                    <p className="text-sm text-green-800">
+                  <div className="mb-6 p-4 bg-green-50 border border-green-200 dark:bg-green-500/10 dark:border-green-500/30 rounded-lg flex items-center gap-3">
+                    <CheckCircle2 className="w-5 h-5 text-green-600 dark:text-green-400" />
+                    <p className="text-sm text-green-800 dark:text-green-400">
                       Thanks for reaching out! I&apos;ll get back to you soon.
                     </p>
                   </div>
