@@ -276,17 +276,19 @@ export function HeroEnhanced() {
               ]} />
             </motion.div>
 
-            {/* Impact Statement */}
-            <motion.div 
-              className="flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-signal-blue/5 to-status-teal-icon/5 rounded-full border-2 border-signal-blue/20 max-w-2xl mx-auto"
+            {/* Positioning — two-paragraph hybrid identity (who, then how) */}
+            <motion.div
+              className="max-w-2xl mx-auto text-left space-y-4"
               variants={fadeInUp}
-              whileHover={{ scale: 1.02 }}
             >
-              <Sparkles className="w-5 h-5 text-signal-blue" />
-              <p className="text-lg sm:text-xl font-semibold bg-gradient-to-r from-signal-blue to-status-teal-icon bg-clip-text text-transparent">
-                {personalInfo.impactStatement || 'Built and now own production systems serving 2M+ users'}
-              </p>
-              <Sparkles className="w-5 h-5 text-status-teal-icon" />
+              {personalInfo.bio.map((paragraph, index) => (
+                <p
+                  key={index}
+                  className="text-lg text-slate-600 dark:text-ink-secondary leading-relaxed"
+                >
+                  {paragraph}
+                </p>
+              ))}
             </motion.div>
           </motion.div>
 

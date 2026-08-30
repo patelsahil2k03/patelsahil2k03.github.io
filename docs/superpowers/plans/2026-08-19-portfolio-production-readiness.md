@@ -1040,27 +1040,30 @@ This is a **confirmed GitHub UI caching artifact, not a real residual problem.**
 
 ---
 
-### Task O5: Add a real architecture diagram to one flagship case study
+### Task O5: Add a real architecture diagram to one flagship case study — ✅ COMPLETE (2026-08-30)
 
-**Files:** `src/data/caseStudies.ts` (whichever case study is chosen), `src/components/case-studies/CaseStudyArticle.tsx` or equivalent detail-page component, a new diagram asset.
+**Files:** `src/data/caseStudies.ts` (`ecommerce-marketplace-content-platform` — new `architectureDiagram` field + updated copy/metrics), `src/components/case-studies/CaseStudyDiagram.tsx` (new), `src/components/case-studies/CaseStudyArticle.tsx` (mount point), `package.json`/`package-lock.json` (new `mermaid` dependency).
 
 **Why:** Part 4 §4.3 item 4 (Tier 1) — the research explicitly found **zero** of the 7 AI/ML-focused competitor sites use system architecture diagrams for their AI/ML work, making this a genuine differentiation opportunity rather than catch-up. Chosen over a live embedded AI chatbot (the Bryan Elliott / Marcus Sánchez pattern) because a chatbot is a bigger build/maintenance commitment and would land in the now-crowded "AI portfolio has a chatbot" category instead of differentiating.
 
-- [ ] **Step 1: Decision gate — which case study, and what diagramming approach.** Propose the flagship candidate (likely the fintech Lambda-scrapers or fitness microservice-platform case study — highest production-scale/AI-accuracy numbers) and a concrete rendering approach (a real, accurate Mermaid diagram embedded in the article vs. a hand-designed SVG/image asset) for the user to confirm before building anything.
-- [ ] **Step 2: Draft the diagram content** from the actual system as built (real components/data flow, not a generic "AI pipeline" template) — verify against the user's own knowledge of the system, don't invent architecture.
-- [ ] **Step 3: Implement and integrate** into the chosen case study's detail page.
-- [ ] **Step 4: Verify rendering** in both the dev build and the static export (`npm run build`, check `out/`), propose for approval, then commit.
+- [x] **Step 1: Decision gate resolved** — `ecommerce-marketplace-content-platform` (most genuinely complex real architecture: multi-service sync, multi-modal vector search) + Mermaid (renders natively, stays maintainable as text, no design-tool dependency).
+- [x] **Step 2: Drafted from real system reference docs** the user pointed to directly (kept the actual product/company name out of the repo, same as this session's standing confidentiality rule — all names used are generic technology names). This surfaced a genuinely richer, more current architecture than the case study's existing text described — two deliberately decoupled services (search reads a MongoDB snapshot, never live Postgres/scrapers), 5 separate Pinecone vector indexes (EN/AR text, photos, colour/style intent), and updated real numbers. **Decision gate on scope, resolved by user**: use the fuller picture (not the simpler prior text), and update the case study's stated numbers to the current ones (602K+ listings / 36 marketplaces, up from 517K+/29) rather than leave them stale.
+- [x] **Step 3: Implemented.** New `CaseStudyDiagram.tsx` — lazily loads `mermaid` client-side only (never blocks static-export content), themes itself to the current light/dark mode on mount, re-renders live via a `MutationObserver` if the visitor toggles theme, fails silently (not with a broken diagram) if rendering errors.
+- [x] **Step 4: Verified** — `npx tsc --noEmit`/`npm run lint`/`npm run build` clean, screenshotted both themes via a scratch Playwright install (confirmed correct rendering + live theme-reactivity), presented to user. User confirmed ship as-is over further visual polish (Mermaid's default palette vs. matching site tokens) — committed `55e8801`, pushed.
+- **Incidental finding, not acted on yet**: `npm install mermaid` surfaced 5 pre-existing high-severity `npm audit` findings (Next.js 14, postcss, glob via eslint tooling) — confirmed unrelated to `mermaid` itself (checked its dependency tree). Full fix needs a Next.js major-version upgrade (14→16), a separate, bigger decision — flagged for a future task, not blocking this one.
 
 ---
 
-### Task O6: Hero pattern refresh (Tier 2)
+### Task O6: Hero pattern refresh (Tier 2) — ✅ COMPLETE (2026-08-30)
 
-**Files:** `src/components/sections/HeroEnhanced.tsx`.
+**Files:** `src/components/sections/HeroEnhanced.tsx`, `src/data/personal.ts`.
 
 **Why:** Part 4 §4.3 item 6 (Tier 2) — a lower-cost hero upgrade than a full redesign, differentiating from the animated-gradient-name hero pattern shared with much of the competitive research set. Two concrete candidate patterns from the research: Jameson Nuss's two-paragraph hybrid-positioning template (who, then how), or Bryan Elliott's interactive-photo-hover cue.
 
-- [ ] **Step 1: Present both candidate patterns to the user** with the exact copy/interaction change each would require, get a direction decision before writing implementation steps (this is a content/interaction judgment call, not mechanical).
-- [ ] **Step 2-4:** Full task breakdown written once Step 1's direction is chosen — not specced blind here, consistent with Task O3/O4's staging.
+- [x] **Step 1: Presented both patterns, user picked the two-paragraph hybrid positioning** (lower risk/effort than the interactive-photo-hover cue, direct fit for an AI/ML + full-stack hybrid identity).
+- [x] **Step 2-4: Implemented.** Found while drafting the copy that `personalInfo.bio` was defined but **never rendered anywhere** on the site (confirmed via grep) — and carried the same now-stale 517K+/29-marketplace numbers Task O5 had just corrected elsewhere. Fixed both at once: restructured `bio` from a single string to a 2-paragraph array (who → how) with the current numbers, wired it into `HeroEnhanced.tsx` in place of the old single-line `impactStatement` pill badge. Presented the exact copy for approval before implementing (per this task's own step 1 requirement, copy is a content judgment call, not something to guess silently) — approved as drafted.
+  - Removing the old pill left `personalInfo.impactStatement` itself fully unused (confirmed via grep, zero remaining references) — removed as a direct byproduct of this change, not separate scope creep.
+  - `npx tsc --noEmit`, `npm run lint`, `npm run build` all clean. Screenshotted both themes (Playwright) — clean typography, good contrast, count-up stats settled to their real final values in the screenshot this time (a prior screenshot in this session caught them mid-animation, noted as a non-issue then).
 
 ---
 
