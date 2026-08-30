@@ -7,6 +7,52 @@
     --color-primary: #18181b;
     --color-cta: #2563eb;
     --color-background: #fafafa;
+
+    /*
+     * Design tokens — Task O3/O4 (systems/observability palette).
+     * Stored as space-separated R G B triplets (not hex) so Tailwind's
+     * `rgb(var(--x) / <alpha-value>)` color functions in tailwind.config.ts
+     * can drive opacity modifiers, e.g. `bg-signal-blue/10`.
+     */
+    --signal-blue: 37 99 235;       /* #2563EB */
+    --signal-blue-hover: 29 78 216; /* #1D4ED8 */
+    --status-teal: 15 118 110;      /* #0F766E */
+    --status-teal-icon: 13 148 136; /* #0D9488 */
+    --status-teal-hover: 17 94 89;  /* #115E59 */
+    --alert-amber: 180 83 9;        /* #B45309 */
+    --alert-amber-icon: 217 119 6;  /* #D97706 */
+    --alert-amber-hover: 146 64 14; /* #92400E */
+
+    --bg-page: 248 250 252;         /* #F8FAFC */
+    --bg-surface: 255 255 255;      /* #FFFFFF */
+    --bg-surface-hover: 241 245 249;/* #F1F5F9 */
+    --text-primary: 15 23 42;       /* #0F172A */
+    --text-secondary: 51 65 85;     /* #334155 */
+    --text-muted: 100 116 139;      /* #64748B */
+    --border-default: 226 232 240;  /* #E2E8F0 */
+    --border-strong: 203 213 225;   /* #CBD5E1 */
+  }
+
+  .dark {
+    color-scheme: dark;
+
+    --signal-blue: 64 136 247;      /* #4088F7 — nudged up from the Task O3 #3B82F6 draft: at #3B82F6, text-signal-blue on the card surface (#161F35) measured 4.46:1, just under AA. This is the smallest shift that clears 4.5:1 there while staying visually indistinguishable from the original. */
+    --signal-blue-hover: 96 165 250;/* #60A5FA */
+    --status-teal: 45 212 191;      /* #2DD4BF */
+    --status-teal-icon: 45 212 191; /* #2DD4BF */
+    --status-teal-hover: 94 234 212;/* #5EEAD4 */
+    --alert-amber: 245 158 11;      /* #F59E0B */
+    --alert-amber-icon: 245 158 11; /* #F59E0B */
+    --alert-amber-hover: 251 191 36;/* #FBBF24 */
+
+    --bg-page: 11 18 32;            /* #0B1220 */
+    --bg-surface: 22 31 53;         /* #161F35 */
+    --bg-surface-hover: 30 42 68;   /* #1E2A44 */
+    --text-primary: 241 245 249;    /* #F1F5F9 */
+    --text-secondary: 203 213 225;  /* #CBD5E1 */
+    --text-muted: 148 163 184;      /* #94A3B8 */
+    --border-default: 38 50 82;     /* #263252 */
+    --border-strong: 51 72 105;     /* #334869 */
   }
 
   * {
@@ -17,6 +63,74 @@
     @apply bg-white text-slate-900;
     font-feature-settings: "rlig" 1, "calt" 1;
   }
+
+  .dark body {
+    background-color: rgb(var(--bg-page));
+    color: rgb(var(--text-primary));
+  }
+
+  /*
+   * Neutral background/text/border retrofit for dark mode.
+   *
+   * Rather than hand-adding a `dark:` sibling to every one of the ~120
+   * existing `bg-white` / `bg-slate-*` / `text-slate-*` / `border-slate-*`
+   * usages across 21 components, we override the compiled utility classes
+   * themselves under `.dark`. This is scoped to the exact closed set of
+   * neutral classes actually used in this codebase (verified via grep) and
+   * keeps every component's className string untouched — a deliberate
+   * maintainability trade-off, see Task O4 report.
+   */
+  .dark .bg-white { background-color: rgb(var(--bg-surface)); }
+  .dark .bg-white\/40 { background-color: rgb(var(--bg-surface) / 0.4); }
+  .dark .bg-white\/50 { background-color: rgb(var(--bg-surface) / 0.5); }
+  .dark .bg-white\/80 { background-color: rgb(var(--bg-surface) / 0.8); }
+  .dark .bg-white\/95 { background-color: rgb(var(--bg-surface) / 0.95); }
+
+  .dark .bg-slate-50 { background-color: rgb(var(--bg-page)); }
+  .dark .bg-slate-50\/50 { background-color: rgb(var(--bg-page) / 0.5); }
+  .dark .bg-slate-50\/80 { background-color: rgb(var(--bg-page) / 0.8); }
+  .dark .bg-slate-100 { background-color: rgb(var(--bg-surface-hover)); }
+  .dark .bg-slate-200 { background-color: rgb(var(--border-strong)); }
+  .dark .bg-slate-700 { background-color: rgb(var(--border-strong)); }
+  .dark .bg-slate-800 { background-color: rgb(var(--bg-surface-hover)); }
+  .dark .bg-slate-900 { background-color: rgb(var(--bg-page)); }
+
+  .dark .text-slate-300 { color: rgb(var(--text-secondary)); }
+  .dark .text-slate-400 { color: rgb(var(--text-muted)); }
+  .dark .text-slate-500 { color: rgb(var(--text-muted)); }
+  .dark .text-slate-600 { color: rgb(var(--text-secondary)); }
+  .dark .text-slate-700 { color: rgb(var(--text-secondary)); }
+  .dark .text-slate-800 { color: rgb(var(--text-primary)); }
+  .dark .text-slate-900 { color: rgb(var(--text-primary)); }
+
+  .dark .border-slate-100 { border-color: rgb(var(--border-default)); }
+  .dark .border-slate-200 { border-color: rgb(var(--border-default)); }
+  .dark .border-slate-200\/50 { border-color: rgb(var(--border-default) / 0.5); }
+  .dark .border-slate-300 { border-color: rgb(var(--border-strong)); }
+  .dark .border-slate-800 { border-color: rgb(var(--border-strong)); }
+  .dark .border-slate-900 { border-color: rgb(var(--border-strong)); }
+
+  /*
+   * Solid button/CTA fills carrying white text (Button.tsx primary/secondary,
+   * active filter pills, Timeline's active dot, and the handful of standalone
+   * CTA links that reuse the same classes) are a different contrast pairing
+   * than the "foreground accent" role `--signal-blue` / `--alert-amber-icon`
+   * otherwise play: those tokens are tuned to read as bright text against a
+   * dark page, but at that same brightness a white label on top of them fails
+   * AA (e.g. #F59E0B behind white text is only ~2.1:1). Rather than thread a
+   * second contrast-aware token through every button/CTA usage, pin the
+   * handful of *exact* utility classes that are always paired with white
+   * text to fixed deep values in dark mode, independent of the theme-flipping
+   * CSS variables above. This intentionally also mutes a few purely
+   * decorative, textless usages of these same classes (the hero's typing
+   * cursor, Skills' progress-bar fill/legend dots) to a deeper tone in dark
+   * mode — a deliberate, minor trade-off in exchange for not having to touch
+   * every button/CTA call site individually.
+   */
+  .dark .bg-signal-blue { background-color: rgb(29 78 216); }       /* #1D4ED8 */
+  .dark .bg-signal-blue-hover { background-color: rgb(37 99 235); } /* #2563EB — lighter than the base, for hover feedback */
+  .dark .bg-alert-amber { background-color: rgb(146 64 14); }       /* #92400E */
+  .dark .bg-alert-amber-hover { background-color: rgb(180 83 9); }  /* #B45309 — lighter than the base, for hover feedback */
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -50,10 +164,22 @@
   background: #555;
 }
 
+.dark ::-webkit-scrollbar-thumb {
+  background: #334869;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #46608c;
+}
+
 html {
   scroll-behavior: smooth;
 }
 
 ::selection {
   background-color: rgba(59, 130, 246, 0.3);
+}
+
+.dark ::selection {
+  background-color: rgba(59, 130, 246, 0.4);
 }

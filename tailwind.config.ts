@@ -10,8 +10,39 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Inter', 'sans-serif'],
-        mono: ['JetBrains Mono', 'monospace'],
+        sans: ['var(--font-inter)', 'Inter', 'sans-serif'],
+        display: ['var(--font-space-grotesk)', 'Space Grotesk', 'sans-serif'],
+        mono: ['var(--font-jetbrains-mono)', 'JetBrains Mono', 'monospace'],
+      },
+      colors: {
+        'signal-blue': {
+          DEFAULT: 'rgb(var(--signal-blue) / <alpha-value>)',
+          hover: 'rgb(var(--signal-blue-hover) / <alpha-value>)',
+        },
+        'status-teal': {
+          DEFAULT: 'rgb(var(--status-teal) / <alpha-value>)',
+          icon: 'rgb(var(--status-teal-icon) / <alpha-value>)',
+          hover: 'rgb(var(--status-teal-hover) / <alpha-value>)',
+        },
+        'alert-amber': {
+          DEFAULT: 'rgb(var(--alert-amber) / <alpha-value>)',
+          icon: 'rgb(var(--alert-amber-icon) / <alpha-value>)',
+          hover: 'rgb(var(--alert-amber-hover) / <alpha-value>)',
+        },
+        page: 'rgb(var(--bg-page) / <alpha-value>)',
+        surface: {
+          DEFAULT: 'rgb(var(--bg-surface) / <alpha-value>)',
+          hover: 'rgb(var(--bg-surface-hover) / <alpha-value>)',
+        },
+        ink: {
+          primary: 'rgb(var(--text-primary) / <alpha-value>)',
+          secondary: 'rgb(var(--text-secondary) / <alpha-value>)',
+          muted: 'rgb(var(--text-muted) / <alpha-value>)',
+        },
+        edge: {
+          DEFAULT: 'rgb(var(--border-default) / <alpha-value>)',
+          strong: 'rgb(var(--border-strong) / <alpha-value>)',
+        },
       },
       animation: {
         'float': 'float 6s ease-in-out infinite',
