@@ -1,6 +1,6 @@
 # 3D Avatar Companion — Design Spec
 
-**Status:** Core design decisions (§3) approved via discussion. This written document — including the concrete Nano Banana/Meshy workflow (§6), GitHub Pages verification (§6a), and gap analysis (§6b), all added after that discussion — awaits the user's review before moving to implementation planning.
+**Status:** Approved, in implementation (Phase L in progress — see `docs/superpowers/plans/2026-08-30-3d-avatar-companion.md`). Asset source pivoted from the planned Meshy personal-likeness pipeline to the CC0-licensed KayKit Adventurers pack (§6c) after the Meshy export paywall blocked the original plan — the Nano Banana/Meshy workflow (§6) remains valid, documented reference for a possible future personal-likeness upgrade, just not what v1 actually uses.
 **Plan reference:** `docs/superpowers/plans/2026-08-19-portfolio-production-readiness.md`, Phase L (this spec fulfills L1 — the required brainstorm/design pass before any implementation task is written).
 **Related:** `docs/COMPETITIVE_DESIGN_RESEARCH.md` (Bruno Simon reference analysis, both live-site and GitHub-repo level).
 
@@ -64,21 +64,21 @@ New module: `src/components/avatar/`.
 
 **Note on scope — per-section pose variation is v1, not a future enhancement.** Steps 4-5 above (a different animation clip playing per section, e.g. idle in the hero vs. a "thinking" pose in About) are core v1 functionality — the whole point of the section-reactivity system. What's deferred to §7 instead is the character's *screen position* changing (traveling through 3D space between sections) and *click/hover*-triggered reactions — a meaningfully different, bigger scope than simply swapping which clip is playing.
 
-**Candidate pose-per-section mapping** (a starting proposal, not a commitment — the actual clip names depend on what Meshy's auto-rig delivers; Meshy ships 600+ built-in animation presets per the original Phase L research, so the raw material should exist, but this needs re-confirming once a real model is in hand):
+**Pose-per-section mapping — final, using KayKit's real clip names** (superseded from an earlier Meshy-based placeholder table now that §6c's pivot gives us the actual, known animation library — no more guessing pending an unknown asset). Only non-combat clips used; `Hit_*`/`Death_*` are available in the pack but not appropriate for a professional portfolio companion:
 
-| Section | Candidate pose | Why |
+| Section | Clip (from `Rig_Medium_General.glb`) | Why |
 |---|---|---|
-| Home (hero) | Idle / wave hello | First thing a visitor sees — a greeting fits |
-| About | Idle / thinking | Reflective, matches personal-story content |
-| Experience | Pointing / gesturing | Directing attention to the timeline |
-| Case Studies | Presenting | "Here's what I built" framing |
-| Skills | Idle / thinking | Neutral — no strong pose need here |
-| Projects | Pointing / presenting | Same logic as Case Studies |
-| Publications | Idle / reading (if available) | Matches academic/research content |
-| Achievements | Celebrating | Directly fits an "achievements" section |
-| Contact | Wave | Inviting engagement, mirrors the hero's greeting |
+| Home (hero) | `Idle_A` | First thing a visitor sees — the default idle |
+| About | `Idle_B` | A distinct secondary idle, subtle variation from the hero |
+| Experience | `Interact` | Generic engagement gesture, fits "let's look at this" |
+| Case Studies | `Use_Item` | "Demonstrating/operating something" — fits the built-systems framing |
+| Skills | `PickUp` | Handling/gathering — a reasonable stand-in for skills |
+| Projects | `Throw` | "Shipping something out into the world" — apt for projects specifically |
+| Publications | `Idle_A` | No thematically closer clip in the pack; falls back to the default idle |
+| Achievements | `Spawn_Air` | The closest available "ta-da" / triumphant-arrival flourish to a celebration, without being combat-coded |
+| Contact | `Idle_B` | Closing symmetry with the hero, inviting rather than repetitive |
 
-This table is exactly what `avatarNarration.ts`'s per-entry `pose` field would reference — finalized once L2's prototype confirms the real clip names.
+This table is exactly what `avatarNarration.ts`'s per-entry `pose` field references — implemented directly in Task L3.2/L4.1 of the plan, no longer a placeholder.
 
 ## 6. Asset generation workflow (human-driven) — concrete prompts and settings
 
@@ -136,6 +136,35 @@ If a Meshy API key becomes available later, steps 2 could be scripted end-to-end
 
 **Sources:** [Meshy multi-view guide](https://www.meshy.ai/tutorials/multi-view-image-to-3d) · [Meshy image-to-3D tips](https://help.meshy.ai/en/articles/15723519-how-to-get-better-image-to-3d-results-in-meshy) · [Meshy Multi-Image to 3D API docs](https://docs.meshy.ai/en/api/multi-image-to-3d) · [Nano Banana prompting guide (Google Cloud)](https://cloud.google.com/blog/products/ai-machine-learning/ultimate-prompting-guide-for-nano-banana) · [Nano Banana character-consistency guide](https://www.nenobanana.com/blogs/nano-banana-character-consistency-12-prompts-that-actually-work--2026-guide)
 
+## 6c. Actual v1 asset — pivoted to KayKit (Meshy paywall)
+
+**What happened:** the user generated a character in Meshy successfully, but Meshy's *export/download* step requires a paid tier — the generation itself worked, the file just couldn't be downloaded for free. A first attempt to work around this via a different (unnamed) conversion site produced a GLB with **zero materials, zero textures, zero rigging, and zero animations** — confirmed by parsing the file's glTF JSON directly (not by rendering alone): a single untextured mesh, rendering as flat grey in Three.js purely because no material was ever defined, with no skeleton to animate at all. That file was not usable for this feature and was not the reason to second-guess Meshy's *quality* — it was a symptom of using a lesser tool as a free workaround.
+
+**Decision: use a free, professionally-made asset pack instead of continuing to chase a personal-likeness workaround.** The user provided `KayKit_Adventurers_2.0_FREE` (Kay Lousberg, kaylousberg.com) for evaluation.
+
+**License — verified, zero risk:** CC0 (public domain). Free for personal, educational, and commercial projects; attribution appreciated but explicitly not mandatory (`License.txt`, read in full).
+
+**Pack contents — verified by parsing every file, not by trusting the preview images alone:**
+
+| Character | Visible face? | Texture confirmed | Rigged (skin) | Vibe |
+|---|---|---|---|---|
+| Knight | No — full helmet | Yes | Yes | Armored, combat-coded |
+| Barbarian | Yes | Yes | Yes | Shirtless, aggressive fantasy trope |
+| Mage | Yes | Yes | Yes | Purple robe/hat — "engineer as wizard" is a thematically apt trope, but purple has no relation to the site's blue/teal palette |
+| Ranger | Yes | Yes | Yes | Cream tunic + **blue** cape, bow — friendly, approachable |
+| Rogue | Partially (check before use — not individually re-rendered this pass) | Yes | Yes | Adventurer, green cloak |
+| Rogue_Hooded | No — hood + face scarf | Yes | Yes | Mysterious/sneaky-coded, not ideal for trust-building |
+
+Each character file (330-480KB) has exactly 1 material with a real `baseColorTexture` (confirmed via glTF JSON parse — these are properly textured, not flat-color placeholders) and exactly 1 skin (properly rigged). **Animations ship separately**, in two shared-rig library files under `Animations/gltf/Rig_Medium/`: `Rig_Medium_General.glb` (15 clips: `Idle_A`, `Idle_B`, `Hit_A`, `Hit_B`, `Interact`, `PickUp`, `Throw`, `Use_Item`, `Death_A`/`B` [+ pose variants], `Spawn_Air`, `Spawn_Ground`, `T-Pose`) and `Rig_Medium_MovementBasic.glb` (11 clips: `Walking_A`/`B`/`C`, `Running_A`/`B`, `Jump_*` variants, `T-Pose`).
+
+**Retargeting verified technically, not assumed:** parsed both `Ranger.glb`'s skeleton and the animation library's skeleton directly — **24 bone names match exactly** (`root`, `hips`, `chest`, `head`, `lowerarm.l/.r`, `lowerleg.l/.r`, `hand.l/.r`, `foot.l/.r`, `handslot.l/.r`, etc.). The non-matching names are just each file's own mesh-part labels (`Ranger_Body`, `Ranger_Cape` vs. the animation file's placeholder `Mannequin_*` mesh), which don't matter for retargeting — only the skeleton hierarchy does. This confirms the standard Mixamo-style workflow applies here: load the character's mesh+skeleton, load `AnimationClip`s from the separate animation file, play them against the character's own skeleton via `AnimationMixer`. This is a materially different asset shape than the original Meshy plan assumed (one self-contained GLB with animations baked in) — the implementation plan's Task L2 has been revised to load and combine two files instead of one.
+
+**Chosen character: Ranger.** Rendered Ranger and Mage (the two strongest candidates) against the site's actual background colors (`#F8FAFC` light, `#0B1220` dark) rather than judging from the isolated preview art. Ranger's cream-and-blue palette reads clearly against both, and the blue cape **is the same hue family as the site's `signal-blue` design token** — a real, concrete visual tie-in to the existing design system, not a coincidence asserted after the fact. Mage's deep purple is a cleverer thematic fit ("wizard" ~ "engineer who knows arcane technical things") but loses contrast against the dark navy background and has no relationship to the blue/teal palette. Knight and Rogue_Hooded were ruled out primarily for hiding the face entirely, losing the "companion with personality" quality the feature is going for; Barbarian for being a less professional-appropriate design for a recruiter-facing site.
+
+**Designed to be swapped later without friction.** The implementation (Task L2.1, revised) uses a single named constant for which character file loads — switching to Mage, Knight, or any other character in the pack (or a future personal-likeness model, if the Meshy export cost is paid later) is a one-line change, not a restructuring. The animation-retargeting code doesn't care which character mesh it's driving, since it only depends on the shared skeleton bone names being present — true for every character in this pack.
+
+**Not lost, just deprioritized:** the full Nano Banana → Meshy pipeline above (§6, Steps 1-2) remains valid and documented for a future personal-likeness upgrade, if/when a paid Meshy export (or an equivalent full pipeline) is worth doing. Nothing about adopting KayKit for v1 invalidates that research.
+
 ## 6a. GitHub Pages deployment — verified, no known blockers
 
 Checked directly against this repo's actual config, not assumed:
@@ -180,4 +209,4 @@ Recorded here so the fuller original vision isn't lost, per user direction ("rec
 - Exact fixed-corner placement (bottom-right assumed as a sensible default; not yet confirmed with the user).
 - Exact mechanism for "reduced animation" on mobile (paused loop between transitions vs. lower frame-rate cap) — a real-device-testing decision, not a design-time one.
 - Exact opt-out toggle placement relative to `ThemeToggle`.
-- Final pose/animation clip names, once Meshy's auto-rigging output is in hand — a candidate per-section mapping is already proposed in §5, to be confirmed/adjusted against whatever clips the real rig actually provides.
+- ~~Final pose/animation clip names~~ — **resolved**, per §5 and §6c: pivoted to the KayKit asset pack, real clip names confirmed and mapped.
