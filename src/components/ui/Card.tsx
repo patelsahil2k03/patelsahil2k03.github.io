@@ -13,7 +13,7 @@ const Card = React.forwardRef<
     className={cn(
       'rounded-xl border bg-white shadow-sm transition-all duration-300',
       hoverGlow 
-        ? 'border-slate-200 hover:border-blue-200 hover:shadow-xl hover:shadow-blue-100/50' 
+        ? 'border-slate-200 hover:border-signal-blue/25 hover:shadow-xl hover:shadow-signal-blue/10' 
         : 'border-slate-200 hover:shadow-md',
       'group relative overflow-hidden',
       className

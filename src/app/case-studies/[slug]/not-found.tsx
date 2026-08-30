@@ -12,7 +12,7 @@ export default function CaseStudyNotFound() {
         </p>
         <Link
           href="/case-studies/"
-          className="inline-flex items-center gap-2 h-11 px-6 rounded-lg bg-blue-600 text-white font-medium hover:bg-blue-700 transition-colors"
+          className="inline-flex items-center gap-2 h-11 px-6 rounded-lg bg-signal-blue text-white font-medium hover:bg-signal-blue-hover transition-colors"
         >
           <ArrowLeft className="w-4 h-4" aria-hidden />
           Browse all case studies

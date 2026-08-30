@@ -23,7 +23,7 @@ export function CaseStudyIndex() {
       <div className="max-w-[1400px] mx-auto px-6 sm:px-8 lg:px-12">
         <Link
           href="/"
-          className="inline-flex items-center gap-2 text-sm text-slate-600 hover:text-blue-600 mb-8 transition-colors cursor-pointer"
+          className="inline-flex items-center gap-2 text-sm text-slate-600 hover:text-signal-blue mb-8 transition-colors cursor-pointer"
         >
           <ArrowLeft className="w-4 h-4" aria-hidden />
           Back to portfolio
@@ -48,9 +48,9 @@ export function CaseStudyIndex() {
               key={item.id}
               type="button"
               onClick={() => setFilter(item.id)}
-              className={`px-4 py-2 rounded-lg text-sm font-medium transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 ${
+              className={`px-4 py-2 rounded-lg text-sm font-medium transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-signal-blue ${
                 filter === item.id
-                  ? 'bg-blue-600 text-white shadow-md'
+                  ? 'bg-signal-blue text-white shadow-md'
                   : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-200'
               }`}
             >

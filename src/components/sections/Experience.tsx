@@ -22,8 +22,8 @@ export function Experience() {
           <Badge variant="default" size="lg" className="mb-4">
             Experience
           </Badge>
-          <h2 className="text-4xl sm:text-5xl font-bold text-slate-900 mb-4">
-            Professional <span className="text-blue-600">Journey</span>
+          <h2 className="font-display text-4xl sm:text-5xl font-bold text-slate-900 mb-4">
+            Professional <span className="text-signal-blue">Journey</span>
           </h2>
           <p className="text-xl text-slate-600 max-w-3xl mx-auto mb-8">
             2+ years of industry experience across AI/ML, Full Stack Development, and Cloud Computing
@@ -35,7 +35,7 @@ export function Experience() {
               onClick={() => setFilter('all')}
               className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
                 filter === 'all'
-                  ? 'bg-blue-600 text-white shadow-md'
+                  ? 'bg-signal-blue text-white shadow-md'
                   : 'bg-white text-slate-700 hover:bg-slate-100'
               }`}
             >
@@ -45,7 +45,7 @@ export function Experience() {
               onClick={() => setFilter('full-time')}
               className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
                 filter === 'full-time'
-                  ? 'bg-blue-600 text-white shadow-md'
+                  ? 'bg-signal-blue text-white shadow-md'
                   : 'bg-white text-slate-700 hover:bg-slate-100'
               }`}
             >
@@ -55,7 +55,7 @@ export function Experience() {
               onClick={() => setFilter('internship')}
               className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
                 filter === 'internship'
-                  ? 'bg-blue-600 text-white shadow-md'
+                  ? 'bg-signal-blue text-white shadow-md'
                   : 'bg-white text-slate-700 hover:bg-slate-100'
               }`}
             >
@@ -65,7 +65,7 @@ export function Experience() {
               onClick={() => setFilter('training')}
               className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
                 filter === 'training'
-                  ? 'bg-blue-600 text-white shadow-md'
+                  ? 'bg-signal-blue text-white shadow-md'
                   : 'bg-white text-slate-700 hover:bg-slate-100'
               }`}
             >
@@ -105,19 +105,19 @@ export function Experience() {
         {/* Summary Stats */}
         <div className="mt-16 grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-4xl mx-auto">
           <div className="text-center p-6 bg-white rounded-xl shadow-md">
-            <div className="text-4xl font-bold text-blue-600 mb-2">5</div>
+            <div className="text-4xl font-bold text-signal-blue mb-2">5</div>
             <div className="text-sm text-slate-600 font-medium">
               Professional Positions
             </div>
           </div>
           <div className="text-center p-6 bg-white rounded-xl shadow-md">
-            <div className="text-4xl font-bold text-orange-600 mb-2">3</div>
+            <div className="text-4xl font-bold text-alert-amber-icon mb-2">3</div>
             <div className="text-sm text-slate-600 font-medium">
               Top Companies
             </div>
           </div>
           <div className="text-center p-6 bg-white rounded-xl shadow-md">
-            <div className="text-4xl font-bold text-cyan-600 mb-2">2+</div>
+            <div className="text-4xl font-bold text-status-teal-icon mb-2">2+</div>
             <div className="text-sm text-slate-600 font-medium">
               Years Experience
             </div>

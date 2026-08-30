@@ -87,13 +87,13 @@ function TypingAnimation({ roles }: { roles: string[] }) {
 
   return (
     <span className="inline-flex items-center">
-      <span className="bg-gradient-to-r from-blue-600 via-cyan-500 to-purple-600 bg-clip-text text-transparent font-bold">
+      <span className="bg-gradient-to-r from-signal-blue via-status-teal-icon to-purple-600 bg-clip-text text-transparent font-bold">
         {displayText}
       </span>
       <motion.span
         animate={{ opacity: [1, 0] }}
         transition={{ duration: 0.5, repeat: Infinity, repeatType: 'reverse' }}
-        className="ml-1 w-0.5 h-8 bg-blue-600 inline-block"
+        className="ml-1 w-0.5 h-8 bg-signal-blue inline-block"
       />
     </span>
   );
@@ -128,14 +128,14 @@ function StatCard({ icon, label, value, delay = 0, isCounter = false }: {
 
   return (
     <motion.div
-      className="group relative p-6 rounded-2xl bg-white/80 backdrop-blur-sm shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-slate-100 hover:border-blue-300 cursor-pointer overflow-hidden"
+      className="group relative p-6 rounded-2xl bg-white/80 backdrop-blur-sm shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-slate-100 hover:border-signal-blue/40 cursor-pointer overflow-hidden"
       variants={scaleIn}
       whileHover={{ scale: 1.05, y: -8 }}
       whileTap={{ scale: 0.98 }}
       animate={controls}
     >
       {/* Glow effect on hover */}
-      <div className="absolute inset-0 bg-gradient-to-r from-blue-400/0 via-cyan-400/0 to-blue-400/0 group-hover:from-blue-400/10 group-hover:via-cyan-400/10 group-hover:to-blue-400/10 transition-all duration-500" />
+      <div className="absolute inset-0 bg-gradient-to-r from-signal-blue/0 via-status-teal-icon/0 to-signal-blue/0 group-hover:from-signal-blue/10 group-hover:via-status-teal-icon/10 group-hover:to-signal-blue/10 transition-all duration-500" />
       
       <motion.div 
         className="text-4xl mb-3 relative z-10"
@@ -144,7 +144,7 @@ function StatCard({ icon, label, value, delay = 0, isCounter = false }: {
       >
         {icon}
       </motion.div>
-      <div className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent mb-2 relative z-10">
+      <div className="font-mono tabular-nums text-3xl font-bold bg-gradient-to-r from-signal-blue to-status-teal-icon bg-clip-text text-transparent mb-2 relative z-10">
         {isCounter && shouldCount ? `${counter}${suffix}` : value}
       </div>
       <div className="text-sm text-slate-600 font-medium relative z-10">
@@ -165,11 +165,11 @@ export function HeroEnhanced() {
   };
 
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-slate-50 via-blue-50 to-cyan-50">
+    <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-slate-50 via-signal-blue/5 to-status-teal-icon/5 dark:from-page dark:via-signal-blue/10 dark:to-status-teal-icon/10">
       {/* Enhanced animated background - CRITICAL: pointer-events-none to allow clicks through */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
         <motion.div 
-          className="absolute -top-1/2 -right-1/2 w-full h-full bg-gradient-to-br from-blue-400/10 to-cyan-400/10 rounded-full blur-3xl pointer-events-none"
+          className="absolute -top-1/2 -right-1/2 w-full h-full bg-gradient-to-br from-signal-blue/10 to-status-teal-icon/10 rounded-full blur-3xl pointer-events-none"
           animate={{
             scale: [1, 1.1, 1],
             opacity: [0.3, 0.5, 0.3],
@@ -181,7 +181,7 @@ export function HeroEnhanced() {
           }}
         />
         <motion.div 
-          className="absolute -bottom-1/2 -left-1/2 w-full h-full bg-gradient-to-tr from-orange-400/10 to-purple-400/10 rounded-full blur-3xl pointer-events-none"
+          className="absolute -bottom-1/2 -left-1/2 w-full h-full bg-gradient-to-tr from-alert-amber-icon/10 to-purple-400/10 rounded-full blur-3xl pointer-events-none"
           animate={{
             scale: [1.1, 1, 1.1],
             opacity: [0.4, 0.6, 0.4],
@@ -209,7 +209,7 @@ export function HeroEnhanced() {
           >
             <Badge variant="secondary" size="lg" className="relative overflow-hidden group">
               <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-orange-400/20 to-orange-600/20"
+                className="absolute inset-0 bg-gradient-to-r from-alert-amber-icon/20 to-alert-amber-icon/20"
                 animate={{
                   x: ['-100%', '100%'],
                 }}
@@ -221,7 +221,7 @@ export function HeroEnhanced() {
               />
               <span className="flex items-center gap-2 relative z-10">
                 <motion.span 
-                  className="w-2 h-2 bg-orange-600 rounded-full"
+                  className="w-2 h-2 bg-alert-amber-icon rounded-full"
                   animate={{
                     scale: [1, 1.2, 1],
                     opacity: [1, 0.7, 1],
@@ -244,8 +244,8 @@ export function HeroEnhanced() {
               variants={fadeInUp}
             >
               Hi, I&apos;m{' '}
-              <motion.span 
-                className="bg-gradient-to-r from-blue-600 via-cyan-500 to-blue-600 bg-clip-text text-transparent inline-block"
+              <motion.span
+                className="font-display bg-gradient-to-r from-signal-blue via-status-teal-icon to-signal-blue bg-clip-text text-transparent inline-block"
                 style={{
                   backgroundSize: '200% 100%',
                 }}
@@ -278,15 +278,15 @@ export function HeroEnhanced() {
 
             {/* Impact Statement */}
             <motion.div 
-              className="flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-50 to-cyan-50 rounded-full border-2 border-blue-200 max-w-2xl mx-auto"
+              className="flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-signal-blue/5 to-status-teal-icon/5 rounded-full border-2 border-signal-blue/20 max-w-2xl mx-auto"
               variants={fadeInUp}
               whileHover={{ scale: 1.02 }}
             >
-              <Sparkles className="w-5 h-5 text-blue-600" />
-              <p className="text-lg sm:text-xl font-semibold bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">
+              <Sparkles className="w-5 h-5 text-signal-blue" />
+              <p className="text-lg sm:text-xl font-semibold bg-gradient-to-r from-signal-blue to-status-teal-icon bg-clip-text text-transparent">
                 {personalInfo.impactStatement || 'Built and now own production systems serving 2M+ users'}
               </p>
-              <Sparkles className="w-5 h-5 text-cyan-600" />
+              <Sparkles className="w-5 h-5 text-status-teal-icon" />
             </motion.div>
           </motion.div>
 
@@ -331,7 +331,7 @@ export function HeroEnhanced() {
               >
                 <span className="relative z-10">View My Work</span>
                 <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-blue-700 to-cyan-600 pointer-events-none"
+                  className="absolute inset-0 bg-gradient-to-r from-signal-blue-hover to-status-teal-icon pointer-events-none"
                   initial={{ x: '-100%' }}
                   whileHover={{ x: 0 }}
                   transition={{ duration: 0.3 }}
@@ -377,14 +377,14 @@ export function HeroEnhanced() {
           >
             {[
               { icon: <Github className="w-6 h-6" />, url: social.github.url, label: 'GitHub', color: 'hover:text-slate-900 hover:border-slate-900' },
-              { icon: <Linkedin className="w-6 h-6" />, url: social.linkedin.url, label: 'LinkedIn', color: 'hover:text-blue-600 hover:border-blue-600' },
+              { icon: <Linkedin className="w-6 h-6" />, url: social.linkedin.url, label: 'LinkedIn', color: 'hover:text-signal-blue hover:border-signal-blue' },
               { 
                 icon: <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor"><path d="M13.483 0a1.374 1.374 0 0 0-.961.438L7.116 6.226l-3.854 4.126a5.266 5.266 0 0 0-1.209 2.104 5.35 5.35 0 0 0-.125.513 5.527 5.527 0 0 0 .062 2.362 5.83 5.83 0 0 0 .349 1.017 5.938 5.938 0 0 0 1.271 1.818l4.277 4.193.039.038c2.248 2.165 5.852 2.133 8.063-.074l2.396-2.392c.54-.54.54-1.414.003-1.955a1.378 1.378 0 0 0-1.951-.003l-2.396 2.392a3.021 3.021 0 0 1-4.205.038l-.02-.019-4.276-4.193c-.652-.64-.972-1.469-.948-2.263a2.68 2.68 0 0 1 .066-.523 2.545 2.545 0 0 1 .619-1.164L9.13 8.114c1.058-1.134 3.204-1.27 4.43-.278l3.501 2.831c.593.48 1.461.387 1.94-.207a1.384 1.384 0 0 0-.207-1.943l-3.5-2.831c-2.365-1.914-5.766-1.649-7.974.632L5.304 8.16l-3.853 4.126c-.184.198-.35.417-.495.652a5.266 5.266 0 0 0-.653 1.379 5.376 5.376 0 0 0-.233 1.64 5.527 5.527 0 0 0 .062 1.062c.058.362.153.72.282 1.068.13.348.296.682.495 1l.039.038c2.248 2.165 5.852 2.133 8.063-.074l2.396-2.392c.54-.54.54-1.414.003-1.955a1.378 1.378 0 0 0-1.951-.003l-2.396 2.392a3.021 3.021 0 0 1-4.205.038l-.02-.019" /></svg>,
                 url: social.leetcode.url, 
                 label: 'LeetCode',
-                color: 'hover:text-orange-600 hover:border-orange-600'
+                color: 'hover:text-alert-amber-icon hover:border-alert-amber-icon'
               },
-              { icon: <Mail className="w-6 h-6" />, url: `mailto:${personalInfo.email}`, label: 'Email', color: 'hover:text-cyan-600 hover:border-cyan-600' },
+              { icon: <Mail className="w-6 h-6" />, url: `mailto:${personalInfo.email}`, label: 'Email', color: 'hover:text-status-teal-icon hover:border-status-teal-icon' },
               { icon: <BookOpen className="w-6 h-6" />, url: personalInfo.social.medium, label: 'Medium', color: 'hover:text-slate-800 hover:border-slate-800' },
               { icon: <GraduationCap className="w-6 h-6" />, url: personalInfo.social.googleScholar, label: 'Google Scholar', color: 'hover:text-emerald-600 hover:border-emerald-600' },
             ].map((link, index) => (
@@ -421,7 +421,7 @@ export function HeroEnhanced() {
                 transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
               >
                 <svg
-                  className="w-8 h-8 mx-auto group-hover:text-blue-600 transition-colors"
+                  className="w-8 h-8 mx-auto group-hover:text-signal-blue transition-colors"
                   fill="none"
                   strokeLinecap="round"
                   strokeLinejoin="round"

@@ -18,8 +18,8 @@ export function Publications() {
           <Badge variant="default" size="lg" className="mb-4">
             Research Publications
           </Badge>
-          <h2 className="text-4xl sm:text-5xl font-bold text-slate-900 mb-4">
-            Published <span className="text-blue-600">Research</span>
+          <h2 className="font-display text-4xl sm:text-5xl font-bold text-slate-900 mb-4">
+            Published <span className="text-signal-blue">Research</span>
           </h2>
           <p className="text-xl text-slate-600 max-w-3xl mx-auto">
             Peer-reviewed research papers published in renowned conferences, indexed in SCOPUS and Web of Science
@@ -31,7 +31,7 @@ export function Publications() {
           {publications.map((pub, index) => (
             <Card
               key={pub.id}
-              className="group hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border-2 hover:border-blue-300"
+              className="group hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border-2 hover:border-signal-blue/40"
             >
               <CardHeader className="space-y-4">
                 {/* Publication Badge */}
@@ -46,13 +46,13 @@ export function Publications() {
                 </div>
 
                 {/* Title */}
-                <CardTitle className="text-2xl group-hover:text-blue-600 transition-colors leading-tight">
+                <CardTitle className="text-2xl group-hover:text-signal-blue transition-colors leading-tight">
                   {pub.title}
                 </CardTitle>
 
                 {/* Organization */}
                 <div className="flex items-center gap-2 text-slate-600">
-                  <Award className="w-5 h-5 text-blue-500" />
+                  <Award className="w-5 h-5 text-signal-blue" />
                   <span className="font-medium">{pub.organization}</span>
                 </div>
               </CardHeader>
@@ -66,13 +66,13 @@ export function Publications() {
                 {/* Key Highlights */}
                 <div className="space-y-3">
                   <h4 className="font-semibold text-slate-900 flex items-center gap-2">
-                    <BookOpen className="w-4 h-4 text-blue-600" />
+                    <BookOpen className="w-4 h-4 text-signal-blue" />
                     Key Highlights:
                   </h4>
                   <ul className="space-y-2">
                     {getPublicationHighlights(pub.id).map((highlight, idx) => (
                       <li key={idx} className="flex items-start text-sm text-slate-700">
-                        <span className="text-blue-500 mr-2 mt-0.5">▹</span>
+                        <span className="text-signal-blue mr-2 mt-0.5">▹</span>
                         <span>{highlight}</span>
                       </li>
                     ))}
@@ -119,7 +119,7 @@ export function Publications() {
         <div className="mt-16 grid grid-cols-1 sm:grid-cols-4 gap-6 max-w-4xl mx-auto">
           <Card className="text-center hover:shadow-lg transition-shadow">
             <CardContent className="p-6">
-              <div className="text-4xl font-bold text-blue-600 mb-2">2</div>
+              <div className="text-4xl font-bold text-signal-blue mb-2">2</div>
               <div className="text-sm text-slate-600 font-medium">Publications</div>
             </CardContent>
           </Card>
@@ -131,13 +131,13 @@ export function Publications() {
           </Card>
           <Card className="text-center hover:shadow-lg transition-shadow">
             <CardContent className="p-6">
-              <div className="text-4xl font-bold text-orange-600 mb-2">1</div>
+              <div className="text-4xl font-bold text-alert-amber-icon mb-2">1</div>
               <div className="text-sm text-slate-600 font-medium">First Author</div>
             </CardContent>
           </Card>
           <Card className="text-center hover:shadow-lg transition-shadow">
             <CardContent className="p-6">
-              <div className="text-4xl font-bold text-cyan-600 mb-2">2024</div>
+              <div className="text-4xl font-bold text-status-teal-icon mb-2">2024</div>
               <div className="text-sm text-slate-600 font-medium">Latest</div>
             </CardContent>
           </Card>
@@ -145,7 +145,7 @@ export function Publications() {
 
         {/* Research Interests */}
         <div className="mt-16">
-          <Card className="max-w-4xl mx-auto bg-gradient-to-br from-blue-50 to-cyan-50 border-2 border-blue-100">
+          <Card className="max-w-4xl mx-auto bg-gradient-to-br from-signal-blue/5 to-status-teal-icon/5 border-2 border-signal-blue/15">
             <CardContent className="p-8">
               <h3 className="text-2xl font-bold text-slate-900 mb-4 text-center">
                 Research Interests

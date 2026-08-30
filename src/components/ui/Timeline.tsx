@@ -18,7 +18,7 @@ export function Timeline({ children, className }: TimelineProps) {
   return (
     <div className={cn('relative space-y-8', className)}>
       {/* Vertical line */}
-      <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-gradient-to-b from-blue-600 via-cyan-500 to-blue-600" />
+      <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-gradient-to-b from-signal-blue via-status-teal-icon to-signal-blue" />
       {children}
     </div>
   );
@@ -59,8 +59,8 @@ export function TimelineItem({
         className={cn(
           'absolute left-0 flex items-center justify-center w-8 h-8 rounded-full border-4 border-white transition-all duration-300',
           active
-            ? 'bg-blue-600 shadow-lg shadow-blue-200 scale-110'
-            : 'bg-slate-200 hover:bg-blue-100'
+            ? 'bg-signal-blue shadow-lg shadow-signal-blue/20 scale-110'
+            : 'bg-slate-200 hover:bg-signal-blue/10'
         )}
       >
         {icon ? (
@@ -76,8 +76,8 @@ export function TimelineItem({
           className={cn(
             'p-6 rounded-xl border-2 transition-all duration-300',
             active
-              ? 'bg-blue-50 border-blue-200 shadow-md'
-              : 'bg-white border-slate-200 hover:border-blue-300 hover:shadow-md'
+              ? 'bg-signal-blue/5 border-signal-blue/20 shadow-md'
+              : 'bg-white border-slate-200 hover:border-signal-blue/40 hover:shadow-md'
           )}
         >
           {/* Header */}
@@ -95,7 +95,7 @@ export function TimelineItem({
                 </div>
               )}
               <div>
-                <h3 className="text-xl font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
+                <h3 className="text-xl font-bold text-slate-900 group-hover:text-signal-blue transition-colors">
                   {title}
                 </h3>
                 {subtitle && (
@@ -103,7 +103,7 @@ export function TimelineItem({
                 )}
               </div>
             </div>
-            <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-700 whitespace-nowrap">
+            <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-signal-blue/10 text-signal-blue whitespace-nowrap">
               {date}
             </span>
           </div>
@@ -115,7 +115,7 @@ export function TimelineItem({
                 <ul className="space-y-1.5">
                   {description.map((item, index) => (
                     <li key={index} className="flex items-start">
-                      <span className="text-blue-500 mr-2 mt-1">▹</span>
+                      <span className="text-signal-blue mr-2 mt-1">▹</span>
                       <span className="text-sm">{item}</span>
                     </li>
                   ))}
@@ -132,7 +132,7 @@ export function TimelineItem({
               {technologies.map((tech) => (
                 <span
                   key={tech}
-                  className="px-2.5 py-1 rounded-md text-xs font-medium bg-slate-100 text-slate-700 hover:bg-blue-100 hover:text-blue-700 transition-colors"
+                  className="px-2.5 py-1 rounded-md text-xs font-medium bg-slate-100 text-slate-700 hover:bg-signal-blue/10 hover:text-signal-blue-hover transition-colors"
                 >
                   {tech}
                 </span>
@@ -150,7 +150,7 @@ export function TimelineItem({
                   <li key={link.id}>
                     <Link
                       href={`/case-studies/${link.id}/`}
-                      className="inline-flex items-center gap-2 text-sm font-medium text-blue-600 hover:text-blue-700 transition-colors duration-200 cursor-pointer"
+                      className="inline-flex items-center gap-2 text-sm font-medium text-signal-blue hover:text-signal-blue-hover transition-colors duration-200 cursor-pointer"
                     >
                       <FileText className="w-4 h-4 shrink-0" aria-hidden />
                       <span className="line-clamp-1">{link.title}</span>

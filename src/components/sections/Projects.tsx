@@ -24,8 +24,8 @@ export function Projects() {
           <Badge variant="default" size="lg" className="mb-4">
             Projects
           </Badge>
-          <h2 className="text-4xl sm:text-5xl font-bold text-slate-900 mb-4">
-            Featured <span className="text-blue-600">Work</span>
+          <h2 className="font-display text-4xl sm:text-5xl font-bold text-slate-900 mb-4">
+            Featured <span className="text-signal-blue">Work</span>
           </h2>
           <p className="text-xl text-slate-600 max-w-3xl mx-auto mb-8">
             Repos, research builds, and experiments—deeper production narratives live in Case Studies above
@@ -39,7 +39,7 @@ export function Projects() {
                 onClick={() => setFilter(category.id)}
                 className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
                   filter === category.id
-                    ? 'bg-blue-600 text-white shadow-md'
+                    ? 'bg-signal-blue text-white shadow-md'
                     : 'bg-white text-slate-700 hover:bg-slate-100'
                 }`}
               >
@@ -74,7 +74,7 @@ export function Projects() {
                   )}
                 </div>
 
-                <CardTitle className="group-hover:text-blue-600 transition-colors">
+                <CardTitle className="group-hover:text-signal-blue transition-colors">
                   {project.title}
                 </CardTitle>
                 <CardDescription className="line-clamp-2">
@@ -92,7 +92,7 @@ export function Projects() {
                         className="p-3 bg-slate-50 rounded-lg border border-slate-100"
                       >
                         <div className="flex items-center gap-1 mb-1">
-                          <TrendingUp className="w-3 h-3 text-blue-600" />
+                          <TrendingUp className="w-3 h-3 text-signal-blue" />
                           <span className="text-xs text-slate-600">{metric.label}</span>
                         </div>
                         <div className="text-sm font-bold text-slate-900">
@@ -124,7 +124,7 @@ export function Projects() {
                     <Link
                       key={cs.id}
                       href={`/case-studies/${cs.id}/`}
-                      className="flex items-center gap-2 text-sm font-medium text-blue-600 hover:text-blue-700 transition-colors duration-200 cursor-pointer"
+                      className="flex items-center gap-2 text-sm font-medium text-signal-blue hover:text-signal-blue-hover transition-colors duration-200 cursor-pointer"
                     >
                       <FileText className="w-4 h-4 shrink-0" aria-hidden />
                       Case study: {cs.title}
@@ -183,7 +183,7 @@ export function Projects() {
 
         {/* GitHub CTA */}
         <div className="mt-16 text-center">
-          <Card className="max-w-2xl mx-auto bg-gradient-to-br from-blue-50 to-cyan-50 border-2 border-blue-100">
+          <Card className="max-w-2xl mx-auto bg-gradient-to-br from-signal-blue/5 to-status-teal-icon/5 border-2 border-signal-blue/15">
             <CardContent className="p-8">
               <div className="flex items-center justify-center mb-4">
                 <div className="p-4 bg-white rounded-full shadow-md">

@@ -25,7 +25,7 @@ export function Footer() {
           <div>
             <Link
               href="/"
-              className="text-2xl font-bold text-white mb-4 hover:text-blue-400 transition-colors inline-block"
+              className="text-2xl font-bold text-white mb-4 hover:text-signal-blue-hover transition-colors inline-block"
             >
               {personalInfo.name}
             </Link>
@@ -40,7 +40,7 @@ export function Footer() {
             <ul className="space-y-2 text-sm">
               {quickLinks.map((link) => (
                 <li key={link.label}>
-                  <Link href={link.href} className="hover:text-blue-400 transition-colors">
+                  <Link href={link.href} className="hover:text-signal-blue-hover transition-colors">
                     {link.label}
                   </Link>
                 </li>
@@ -56,7 +56,7 @@ export function Footer() {
                 href={social.github.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 bg-slate-800 rounded-lg hover:bg-blue-600 transition-colors"
+                className="p-2 bg-slate-800 rounded-lg hover:bg-signal-blue transition-colors"
                 aria-label="GitHub"
               >
                 <Github className="w-5 h-5" />
@@ -65,21 +65,21 @@ export function Footer() {
                 href={social.linkedin.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 bg-slate-800 rounded-lg hover:bg-blue-600 transition-colors"
+                className="p-2 bg-slate-800 rounded-lg hover:bg-signal-blue transition-colors"
                 aria-label="LinkedIn"
               >
                 <Linkedin className="w-5 h-5" />
               </a>
               <a
                 href={`mailto:${personalInfo.email}`}
-                className="p-2 bg-slate-800 rounded-lg hover:bg-blue-600 transition-colors"
+                className="p-2 bg-slate-800 rounded-lg hover:bg-signal-blue transition-colors"
                 aria-label="Email"
               >
                 <Mail className="w-5 h-5" />
               </a>
             </div>
             <p className="text-sm text-slate-400">
-              <a href={`mailto:${personalInfo.email}`} className="hover:text-blue-400 transition-colors">
+              <a href={`mailto:${personalInfo.email}`} className="hover:text-signal-blue-hover transition-colors">
                 {personalInfo.email}
               </a>
             </p>

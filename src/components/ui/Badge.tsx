@@ -7,13 +7,13 @@ const badgeVariants = cva(
   {
     variants: {
       variant: {
-        default: 'bg-blue-100 text-blue-800 hover:bg-blue-200',
-        secondary: 'bg-orange-100 text-orange-800 hover:bg-orange-200',
-        success: 'bg-green-100 text-green-800 hover:bg-green-200',
-        warning: 'bg-yellow-100 text-yellow-800 hover:bg-yellow-200',
-        danger: 'bg-red-100 text-red-800 hover:bg-red-200',
-        outline: 'border border-slate-300 text-slate-700 hover:bg-slate-50',
-        cyan: 'bg-cyan-100 text-cyan-800 hover:bg-cyan-200',
+        default: 'bg-signal-blue/[8%] text-signal-blue hover:bg-signal-blue/[16%] dark:bg-signal-blue/[4%] dark:hover:bg-signal-blue/[8%]',
+        secondary: 'bg-alert-amber-icon/10 text-alert-amber hover:bg-alert-amber-icon/20',
+        success: 'bg-green-100 text-green-800 hover:bg-green-200 dark:bg-green-500/10 dark:text-green-400 dark:hover:bg-green-500/20',
+        warning: 'bg-yellow-100 text-yellow-800 hover:bg-yellow-200 dark:bg-yellow-500/10 dark:text-yellow-400 dark:hover:bg-yellow-500/20',
+        danger: 'bg-red-100 text-red-800 hover:bg-red-200 dark:bg-red-500/10 dark:text-red-400 dark:hover:bg-red-500/20',
+        outline: 'border border-slate-300 text-slate-700 hover:bg-slate-50 dark:border-edge dark:text-ink-secondary dark:hover:bg-surface-hover',
+        cyan: 'bg-status-teal-icon/10 text-status-teal hover:bg-status-teal-icon/20',
       },
       size: {
         sm: 'px-2 py-0.5 text-xs',

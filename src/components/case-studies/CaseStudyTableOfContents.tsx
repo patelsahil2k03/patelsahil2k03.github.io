@@ -19,7 +19,7 @@ export function CaseStudyTableOfContents({ sections }: { sections: ArticleSectio
             <li key={section.title}>
               <a
                 href={`#${id}`}
-                className="text-sm text-slate-700 hover:text-blue-600 transition-colors duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded"
+                className="text-sm text-slate-700 hover:text-signal-blue transition-colors duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-signal-blue rounded"
               >
                 {section.title}
               </a>

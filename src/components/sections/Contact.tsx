@@ -50,8 +50,8 @@ export function Contact() {
     <section id="contact" className="py-20 lg:py-32 bg-white relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-1/2 -right-1/4 w-96 h-96 bg-blue-400/5 rounded-full blur-3xl" />
-        <div className="absolute -bottom-1/2 -left-1/4 w-96 h-96 bg-cyan-400/5 rounded-full blur-3xl" />
+        <div className="absolute -top-1/2 -right-1/4 w-96 h-96 bg-signal-blue/5 rounded-full blur-3xl" />
+        <div className="absolute -bottom-1/2 -left-1/4 w-96 h-96 bg-status-teal-icon/5 rounded-full blur-3xl" />
       </div>
 
       <div className="max-w-[1400px] mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
@@ -60,8 +60,8 @@ export function Contact() {
           <Badge variant="default" size="lg" className="mb-4">
             Get in Touch
           </Badge>
-          <h2 className="text-4xl sm:text-5xl font-bold text-slate-900 mb-4">
-            Let&apos;s <span className="text-blue-600">Connect</span>
+          <h2 className="font-display text-4xl sm:text-5xl font-bold text-slate-900 mb-4">
+            Let&apos;s <span className="text-signal-blue">Connect</span>
           </h2>
           <p className="text-xl text-slate-600 max-w-3xl mx-auto">
             Open to opportunities, collaborations, and interesting conversations
@@ -94,8 +94,8 @@ export function Contact() {
                   href={`mailto:${contact.email}`}
                   className="flex items-center gap-3 p-3 rounded-lg hover:bg-slate-50 transition-colors group"
                 >
-                  <div className="p-2 bg-blue-100 rounded-lg group-hover:bg-blue-200 transition-colors">
-                    <Mail className="w-5 h-5 text-blue-600" />
+                  <div className="p-2 bg-signal-blue/10 rounded-lg group-hover:bg-signal-blue/20 transition-colors">
+                    <Mail className="w-5 h-5 text-signal-blue" />
                   </div>
                   <div>
                     <p className="text-xs text-slate-500 font-medium">Email</p>
@@ -119,8 +119,8 @@ export function Contact() {
 
                 {/* Location */}
                 <div className="flex items-center gap-3 p-3 rounded-lg">
-                  <div className="p-2 bg-orange-100 rounded-lg">
-                    <MapPin className="w-5 h-5 text-orange-600" />
+                  <div className="p-2 bg-alert-amber-icon/10 rounded-lg">
+                    <MapPin className="w-5 h-5 text-alert-amber-icon" />
                   </div>
                   <div>
                     <p className="text-xs text-slate-500 font-medium">Location</p>
@@ -205,7 +205,7 @@ export function Contact() {
                       required
                       value={formData.name}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
+                      className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-signal-blue focus:border-signal-blue outline-none transition-all"
                       placeholder="John Doe"
                     />
                   </div>
@@ -222,7 +222,7 @@ export function Contact() {
                       required
                       value={formData.email}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
+                      className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-signal-blue focus:border-signal-blue outline-none transition-all"
                       placeholder="john@example.com"
                     />
                   </div>
@@ -239,7 +239,7 @@ export function Contact() {
                       required
                       value={formData.subject}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
+                      className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-signal-blue focus:border-signal-blue outline-none transition-all"
                       placeholder="Job Opportunity / Collaboration / General Inquiry"
                     />
                   </div>
@@ -256,7 +256,7 @@ export function Contact() {
                       value={formData.message}
                       onChange={handleChange}
                       rows={6}
-                      className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all resize-none"
+                      className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-signal-blue focus:border-signal-blue outline-none transition-all resize-none"
                       placeholder="Tell me about your project, opportunity, or just say hi..."
                     />
                   </div>
@@ -275,7 +275,7 @@ export function Contact() {
 
                   <p className="text-xs text-center text-slate-500">
                     Submit opens your email app with this message pre-filled. Or email directly at{' '}
-                    <a href={`mailto:${contact.email}`} className="text-blue-600 hover:underline font-medium">
+                    <a href={`mailto:${contact.email}`} className="text-signal-blue hover:underline font-medium">
                       {contact.email}
                     </a>
                   </p>
@@ -287,7 +287,7 @@ export function Contact() {
 
         {/* Footer Note */}
         <div className="mt-16 text-center">
-          <Card className="max-w-3xl mx-auto bg-gradient-to-r from-blue-50 to-cyan-50 border-2 border-blue-100">
+          <Card className="max-w-3xl mx-auto bg-gradient-to-r from-signal-blue/5 to-status-teal-icon/5 border-2 border-signal-blue/15">
             <CardContent className="p-6">
               <p className="text-slate-700">
                 <strong className="text-slate-900">Looking for opportunities?</strong> I&apos;m currently exploring roles in AI/ML Engineering, Full Stack Development, and Data Science. Feel free to reach out!

@@ -18,19 +18,19 @@ export function About() {
       icon: <Trophy className="w-6 h-6" />,
       title: 'Top 10 Finalist',
       description: 'AI-Manthan Hackathon among 70+ teams',
-      color: 'text-orange-600 bg-orange-100',
+      color: 'text-alert-amber-icon bg-alert-amber-icon/10',
     },
     {
       icon: <BookOpen className="w-6 h-6" />,
       title: '2 Publications',
       description: 'Springer ICTIS & AIP ICRAIC 2024',
-      color: 'text-blue-600 bg-blue-100',
+      color: 'text-signal-blue bg-signal-blue/10',
     },
     {
       icon: <Award className="w-6 h-6" />,
       title: 'Team Star Award',
       description: 'Digiflux Technologies 2024',
-      color: 'text-cyan-600 bg-cyan-100',
+      color: 'text-status-teal-icon bg-status-teal-icon/10',
     },
     {
       icon: <Target className="w-6 h-6" />,
@@ -54,9 +54,9 @@ export function About() {
           <Badge variant="default" size="lg" className="mb-4">
             About Me
           </Badge>
-          <h2 className="text-4xl sm:text-5xl font-bold text-slate-900 mb-4">
-            Where <span className="text-blue-600">Data Science</span> Meets{' '}
-            <span className="text-orange-700">Determination</span>
+          <h2 className="font-display text-4xl sm:text-5xl font-bold text-slate-900 mb-4">
+            Where <span className="text-signal-blue">Data Science</span> Meets{' '}
+            <span className="text-alert-amber">Determination</span>
           </h2>
           <p className="text-xl text-slate-600 max-w-3xl mx-auto">
             A unique blend of athletic discipline and technical expertise
@@ -66,44 +66,44 @@ export function About() {
         <motion.div className="grid lg:grid-cols-2 gap-12 items-start" variants={staggerContainer}>
           {/* Left Column - Story */}
           <motion.div className="space-y-6" variants={staggerItem}>
-            <Card className="border-2 border-blue-100 hover:border-blue-300 transition-colors">
+            <Card className="border-2 border-signal-blue/15 hover:border-signal-blue/40 transition-colors">
               <CardContent className="p-8">
                 <div className="space-y-4 text-slate-700 leading-relaxed">
                   <p className="text-lg">
-                    I&apos;m a <strong className="text-blue-600">passionate technologist</strong> who believes 
+                    I&apos;m a <strong className="text-signal-blue">passionate technologist</strong> who believes 
                     that the best solutions come from understanding both the problem and the people it affects. 
                     My journey spans from the football field to cutting-edge AI research, proving that 
-                    <strong className="text-orange-700"> discipline and determination</strong> transcend domains.
+                    <strong className="text-alert-amber"> discipline and determination</strong> transcend domains.
                   </p>
                   
                   <p>
-                    With a <strong className="text-blue-600">{education.cgpa} CGPA</strong> from {education.university}, 
+                    With a <strong className="text-signal-blue">{education.cgpa} CGPA</strong> from {education.university}, 
                     I&apos;ve published <strong>{stats.publications} research papers</strong> in renowned conferences while 
                     gaining hands-on industry experience at companies like <strong>Digiflux Technologies</strong>, 
                     <strong> L&T</strong>, and <strong>Motorola Solutions</strong>.
                   </p>
 
                   <p>
-                    What sets me apart is my ability to <strong className="text-cyan-700">bridge multiple worlds</strong>:
+                    What sets me apart is my ability to <strong className="text-status-teal">bridge multiple worlds</strong>:
                   </p>
 
                   <ul className="space-y-3 ml-4">
                     <li className="flex items-start">
-                      <span className="text-blue-500 mr-2 mt-1">▹</span>
+                      <span className="text-signal-blue mr-2 mt-1">▹</span>
                       <span>
                         <strong>Technical Excellence</strong>: From building production-grade ML systems with 
                         LangChain and AWS to creating NLP models with 98%+ accuracy
                       </span>
                     </li>
                     <li className="flex items-start">
-                      <span className="text-orange-700 mr-2 mt-1">▹</span>
+                      <span className="text-alert-amber mr-2 mt-1">▹</span>
                       <span>
                         <strong>Athletic Discipline</strong>: National-level football player, balancing 
                         sports and academics with equal commitment
                       </span>
                     </li>
                     <li className="flex items-start">
-                      <span className="text-cyan-600 mr-2 mt-1">▹</span>
+                      <span className="text-status-teal-icon mr-2 mt-1">▹</span>
                       <span>
                         <strong>Research Mindset</strong>: Published researcher with papers indexed in 
                         SCOPUS and Web of Science
@@ -133,7 +133,7 @@ export function About() {
             <div className="grid grid-cols-2 gap-4">
               <Card className="text-center hover:shadow-lg transition-shadow">
                 <CardContent className="p-6">
-                  <div className="text-3xl font-bold text-blue-600 mb-1">
+                  <div className="text-3xl font-bold text-signal-blue mb-1">
                     {stats.certifications}
                   </div>
                   <div className="text-sm text-slate-600 font-medium">
@@ -143,7 +143,7 @@ export function About() {
               </Card>
               <Card className="text-center hover:shadow-lg transition-shadow">
                 <CardContent className="p-6">
-                  <div className="text-3xl font-bold text-orange-600 mb-1">
+                  <div className="text-3xl font-bold text-alert-amber-icon mb-1">
                     {stats.hackathons}
                   </div>
                   <div className="text-sm text-slate-600 font-medium">
@@ -160,7 +160,7 @@ export function About() {
               className="flex justify-center mb-8"
               variants={fadeInUp}
             >
-              <div className="relative w-48 h-48 rounded-full overflow-hidden shadow-xl border-4 border-blue-200">
+              <div className="relative w-48 h-48 rounded-full overflow-hidden shadow-xl border-4 border-signal-blue/20">
                 <Image
                   src="/images/hero/profile.jpg"
                   alt="Sahil Patel Profile"
@@ -202,11 +202,11 @@ export function About() {
             </div>
 
             {/* Education */}
-            <Card className="border-2 border-slate-100 hover:border-blue-200 transition-colors">
+            <Card className="border-2 border-slate-100 hover:border-signal-blue/25 transition-colors">
               <CardContent className="p-8">
                 <div className="flex items-start gap-4 mb-6">
-                  <div className="p-3 bg-blue-100 rounded-lg">
-                    <BookOpen className="w-6 h-6 text-blue-600" />
+                  <div className="p-3 bg-signal-blue/10 rounded-lg">
+                    <BookOpen className="w-6 h-6 text-signal-blue" />
                   </div>
                   <div className="flex-1">
                     <h3 className="text-xl font-bold text-slate-900 mb-1">
@@ -229,7 +229,7 @@ export function About() {
                   <ul className="space-y-2">
                     {education.highlights.map((highlight, index) => (
                       <li key={index} className="flex items-start text-sm text-slate-700">
-                        <span className="text-blue-500 mr-2 mt-0.5">✓</span>
+                        <span className="text-signal-blue mr-2 mt-0.5">✓</span>
                         <span>{highlight}</span>
                       </li>
                     ))}
@@ -239,11 +239,11 @@ export function About() {
             </Card>
 
             {/* Current Focus */}
-            <Card className="bg-gradient-to-br from-blue-50 to-cyan-50 border-2 border-blue-100">
+            <Card className="bg-gradient-to-br from-signal-blue/5 to-status-teal-icon/5 border-2 border-signal-blue/15">
               <CardContent className="p-8">
                 <div className="flex items-start gap-4">
                   <div className="p-3 bg-white rounded-lg shadow-sm">
-                    <Briefcase className="w-6 h-6 text-blue-600" />
+                    <Briefcase className="w-6 h-6 text-signal-blue" />
                   </div>
                   <div>
                     <h4 className="font-bold text-slate-900 mb-2">

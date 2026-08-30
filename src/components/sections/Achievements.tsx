@@ -19,10 +19,10 @@ const categorySummaryLabels: Record<string, string> = {
 };
 
 const categoryConfig = {
-  award: { icon: Trophy, color: 'text-orange-600 bg-orange-100', label: 'Awards & Recognition' },
-  certification: { icon: Award, color: 'text-blue-600 bg-blue-100', label: 'Certifications' },
+  award: { icon: Trophy, color: 'text-alert-amber-icon bg-alert-amber-icon/10', label: 'Awards & Recognition' },
+  certification: { icon: Award, color: 'text-signal-blue bg-signal-blue/10', label: 'Certifications' },
   hackathon: { icon: Code, color: 'text-purple-600 bg-purple-100', label: 'Hackathons' },
-  event: { icon: Calendar, color: 'text-cyan-600 bg-cyan-100', label: 'Events & Conferences' },
+  event: { icon: Calendar, color: 'text-status-teal-icon bg-status-teal-icon/10', label: 'Events & Conferences' },
   badge: { icon: BookOpen, color: 'text-green-600 bg-green-100', label: 'Badges' },
   publication: { icon: BookOpen, color: 'text-emerald-600 bg-emerald-100', label: 'Publications' },
 };
@@ -42,8 +42,8 @@ export function Achievements() {
           <Badge variant="default" size="lg" className="mb-4">
             Achievements
           </Badge>
-          <h2 className="text-4xl sm:text-5xl font-bold text-slate-900 mb-4">
-            Awards & <span className="text-blue-600">Recognition</span>
+          <h2 className="font-display text-4xl sm:text-5xl font-bold text-slate-900 mb-4">
+            Awards & <span className="text-signal-blue">Recognition</span>
           </h2>
           <p className="text-xl text-slate-600 max-w-3xl mx-auto mb-8">
             {achievements.length}+ achievements across awards, certifications, hackathons, and national sports
@@ -55,7 +55,7 @@ export function Achievements() {
               onClick={() => setSelectedCategory(null)}
               className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
                 selectedCategory === null
-                  ? 'bg-blue-600 text-white shadow-md'
+                  ? 'bg-signal-blue text-white shadow-md'
                   : 'bg-white text-slate-700 hover:bg-slate-100'
               }`}
             >
@@ -67,7 +67,7 @@ export function Achievements() {
                 onClick={() => setSelectedCategory(key)}
                 className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
                   selectedCategory === key
-                    ? 'bg-blue-600 text-white shadow-md'
+                    ? 'bg-signal-blue text-white shadow-md'
                     : 'bg-white text-slate-700 hover:bg-slate-100'
                 }`}
               >
@@ -100,7 +100,7 @@ export function Achievements() {
                   </div>
 
                   {/* Title */}
-                  <CardTitle className="text-lg group-hover:text-blue-600 transition-colors leading-tight mb-2">
+                  <CardTitle className="text-lg group-hover:text-signal-blue transition-colors leading-tight mb-2">
                     {achievement.title}
                   </CardTitle>
 
@@ -159,7 +159,7 @@ export function Achievements() {
           {Object.entries(achievementsByCategory).map(([key, items]) => (
               <Card key={key} className="text-center hover:shadow-lg transition-shadow">
                 <CardContent className="p-6">
-                  <div className="text-3xl font-bold text-blue-600 mb-2">
+                  <div className="text-3xl font-bold text-signal-blue mb-2">
                     {items.length}
                   </div>
                   <div className="text-xs text-slate-600 font-medium">
@@ -173,9 +173,9 @@ export function Achievements() {
         {/* Highlight Card — pulls from highlightedAchievements[0], never goes stale again */}
         {highlightedAchievements[0] && (
           <div className="mt-16">
-            <Card className="max-w-4xl mx-auto bg-gradient-to-br from-orange-50 to-blue-50 border-2 border-orange-100">
+            <Card className="max-w-4xl mx-auto bg-gradient-to-br from-alert-amber-icon/5 to-signal-blue/5 border-2 border-alert-amber-icon/15">
               <CardContent className="p-8 text-center">
-                <Trophy className="w-12 h-12 text-orange-600 mx-auto mb-4" />
+                <Trophy className="w-12 h-12 text-alert-amber-icon mx-auto mb-4" />
                 <h3 className="text-2xl font-bold text-slate-900 mb-3">
                   Most Recent Achievement
                 </h3>

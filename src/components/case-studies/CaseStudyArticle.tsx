@@ -36,7 +36,7 @@ export function CaseStudyArticle({ study }: { study: CaseStudy }) {
 
       <div className="max-w-3xl mx-auto px-6 sm:px-8 lg:px-12">
         <nav className="flex flex-wrap items-center gap-2 text-sm text-slate-500 mb-8">
-          <Link href="/case-studies/" className="hover:text-blue-600 transition-colors">
+          <Link href="/case-studies/" className="hover:text-signal-blue transition-colors">
             Case Studies
           </Link>
           <span aria-hidden>/</span>
@@ -45,7 +45,7 @@ export function CaseStudyArticle({ study }: { study: CaseStudy }) {
 
         <Link
           href="/case-studies/"
-          className="inline-flex items-center gap-2 text-sm text-slate-600 hover:text-blue-600 mb-8 transition-colors"
+          className="inline-flex items-center gap-2 text-sm text-slate-600 hover:text-signal-blue mb-8 transition-colors"
         >
           <ArrowLeft className="w-4 h-4" aria-hidden />
           All case studies
@@ -94,7 +94,7 @@ export function CaseStudyArticle({ study }: { study: CaseStudy }) {
                   href={study.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center h-9 px-4 py-2 text-sm font-medium rounded-lg border-2 border-blue-600 text-blue-600 hover:bg-blue-50 transition-colors"
+                  className="inline-flex items-center justify-center h-9 px-4 py-2 text-sm font-medium rounded-lg border-2 border-signal-blue text-signal-blue hover:bg-signal-blue/5 transition-colors"
                 >
                   <Github className="w-4 h-4 mr-2" aria-hidden />
                   View code
@@ -105,7 +105,7 @@ export function CaseStudyArticle({ study }: { study: CaseStudy }) {
                   href={study.paper}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center h-9 px-4 py-2 text-sm font-medium rounded-lg bg-blue-600 text-white hover:bg-blue-700 transition-colors"
+                  className="inline-flex items-center justify-center h-9 px-4 py-2 text-sm font-medium rounded-lg bg-signal-blue text-white hover:bg-signal-blue-hover transition-colors"
                 >
                   <BookOpen className="w-4 h-4 mr-2" aria-hidden />
                   Read paper
@@ -136,8 +136,8 @@ export function CaseStudyArticle({ study }: { study: CaseStudy }) {
         <div className="case-study-prose space-y-10">
           {sections.map((section, index) => (
             <section key={section.title} id={slugToSectionId(section.title)} className="scroll-mt-24">
-              <h2 className="text-xl sm:text-2xl font-bold text-slate-900 mb-4 flex items-center gap-2">
-                {index === 0 && <Building2 className="w-5 h-5 text-blue-600 shrink-0" aria-hidden />}
+              <h2 className="font-display text-xl sm:text-2xl font-bold text-slate-900 mb-4 flex items-center gap-2">
+                {index === 0 && <Building2 className="w-5 h-5 text-signal-blue shrink-0" aria-hidden />}
                 {index === 1 && <Lightbulb className="w-5 h-5 text-amber-600 shrink-0" aria-hidden />}
                 {index === 2 && <Target className="w-5 h-5 text-emerald-600 shrink-0" aria-hidden />}
                 {section.title}
@@ -166,7 +166,7 @@ export function CaseStudyArticle({ study }: { study: CaseStudy }) {
       {related.length > 0 && (
         <div className="mt-20 pt-16 border-t border-slate-200 bg-slate-50">
           <div className="max-w-[1400px] mx-auto px-6 sm:px-8 lg:px-12">
-            <h2 className="text-2xl font-bold text-slate-900 mb-8">Related case studies</h2>
+            <h2 className="font-display text-2xl font-bold text-slate-900 mb-8">Related case studies</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {related.map((item) => (
                 <CaseStudyTeaserCard key={item.id} study={item} compact />

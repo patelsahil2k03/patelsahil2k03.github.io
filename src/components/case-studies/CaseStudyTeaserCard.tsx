@@ -18,7 +18,7 @@ export function CaseStudyTeaserCard({ study, compact = false }: CaseStudyTeaserC
   const href = `/case-studies/${study.id}/`;
 
   return (
-    <Link href={href} className="block h-full group cursor-pointer rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-600">
+    <Link href={href} className="block h-full group cursor-pointer rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-signal-blue">
       <Card hoverGlow className="h-full flex flex-col">
         <CardHeader className={compact ? 'pb-3' : 'pb-4'}>
           <div className="flex flex-wrap items-center gap-2 mb-3">
@@ -38,7 +38,7 @@ export function CaseStudyTeaserCard({ study, compact = false }: CaseStudyTeaserC
               <span>{study.readTime}</span>
             </span>
           </div>
-          <CardTitle className="text-xl sm:text-2xl leading-snug group-hover:text-blue-600 transition-colors duration-200">
+          <CardTitle className="text-xl sm:text-2xl leading-snug group-hover:text-signal-blue transition-colors duration-200">
             {study.title}
           </CardTitle>
           {study.company && (
@@ -60,7 +60,7 @@ export function CaseStudyTeaserCard({ study, compact = false }: CaseStudyTeaserC
                   className="p-3 bg-slate-50 rounded-lg border border-slate-100"
                 >
                   <div className="flex items-center gap-1 mb-1">
-                    <TrendingUp className="w-3 h-3 text-blue-600" aria-hidden />
+                    <TrendingUp className="w-3 h-3 text-signal-blue" aria-hidden />
                     <span className="text-xs text-slate-600">{metric.label}</span>
                   </div>
                   <div className="text-sm font-bold text-slate-900">{metric.value}</div>
@@ -77,7 +77,7 @@ export function CaseStudyTeaserCard({ study, compact = false }: CaseStudyTeaserC
             ))}
           </div>
 
-          <span className="mt-auto inline-flex items-center gap-1.5 text-sm font-medium text-blue-600 group-hover:gap-2.5 transition-all">
+          <span className="mt-auto inline-flex items-center gap-1.5 text-sm font-medium text-signal-blue group-hover:gap-2.5 transition-all">
             Read case study
             <ArrowRight className="w-4 h-4" aria-hidden />
           </span>
