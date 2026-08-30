@@ -27,14 +27,16 @@ These apply to every task below (from the spec and this project's own `ai_guidel
 
 ---
 
-## ⛔ Blocking precondition — before Task L2 can start
+## ✅ Blocking precondition — resolved (asset pivot)
 
-This plan cannot begin until the user has generated the character asset via the human-driven pipeline in spec §6 (Nano Banana reference images → Meshy multi-view image-to-3D → auto-rig) and handed the assistant the resulting file(s):
+The original precondition (a Meshy-generated personal-likeness GLB) hit a real blocker: Meshy's export requires a paid tier. A free-tool workaround produced a structurally empty file (zero materials/textures/rigging/animations — confirmed by parsing it directly, not just by it looking grey). Per spec §6c, the project pivoted to the CC0-licensed `KayKit_Adventurers_2.0_FREE` pack instead. The precondition is satisfied with these actual files, verified (not assumed) to be properly textured, rigged, and animation-compatible:
 
-- **Required:** one rigged `.glb` file containing the character mesh, at minimum one "idle" animation clip.
-- **Strongly preferred:** the same GLB (or a second one) with additional pose clips from Meshy's animation library, so Task L3.2's per-section pose mapping has real clips to reference instead of falling back to idle everywhere.
+- **Character:** `/home/lenovo/Downloads/KayKit_Adventurers_2.0_FREE/Characters/gltf/Ranger.glb` (473KB, 1 material with a real baseColorTexture, 1 skin/rig, 0 embedded animations by design)
+- **Animation library:** `/home/lenovo/Downloads/KayKit_Adventurers_2.0_FREE/Animations/gltf/Rig_Medium/Rig_Medium_General.glb` (809KB, 15 clips — verified 24 matching skeleton bone names against Ranger's rig, confirming animation retargeting will work)
 
-**Do not start Task L2.1 without this file in hand.** If it isn't ready yet, stop here and wait — this is an external dependency this plan cannot task-break further (per the spec's own §6 and the brainstorming discussion that produced it).
+Combined asset budget: ~1.28MB, well within the lean-asset-budget constraint — `Rig_Medium_MovementBasic.glb` (walking/running/jumping, 674KB) is deliberately **not** included in v1, since no v1 pose mapping (spec §5) uses a movement clip; only relevant if the deferred "traveling companion" enhancement (spec §7) is built later.
+
+Task L2.1 below copies both files in and sets up a swappable character-selection constant, so switching to a different KayKit character (or a future personal-likeness model) later is a one-line change.
 
 ---
 
@@ -42,27 +44,47 @@ This plan cannot begin until the user has generated the character asset via the 
 
 *Validates visual quality, file size, and frame budget before anything is wired into the real homepage — per the spec's "prototype before committing" philosophy. Nothing in this phase touches `page.tsx` or any live route.*
 
-### Task L2.1: Isolated test route + confirm the GLB loads
+### Task L2.1: Isolated test route + confirm both files load and retarget
 
 **Files:**
-- Create: `public/models/avatar.glb` (the user-provided file from the blocking precondition — copy it in, don't regenerate it)
+- Create: `public/models/character-ranger.glb` (copied from the KayKit pack — see the resolved precondition above)
+- Create: `public/models/animations-general.glb` (copied from the KayKit pack)
+- Create: `src/lib/avatarConfig.ts`
 - Create: `src/components/avatar/AvatarScene.tsx`
 - Create: `src/app/dev-avatar-test/page.tsx`
 
 **Interfaces:**
-- Produces: `AvatarScene` component with props `{ className?: string }`, rendering a `@react-three/fiber` `<Canvas>` containing the loaded GLB. Later tasks (L2.2 onward) extend this same file — this task's job is just "it loads and renders."
+- Produces: `AVATAR_CHARACTER_PATH`, `AVATAR_ANIMATIONS_PATH` constants (the swap point for changing character later). `AvatarScene` component with props `{ className?: string }`, loading the character mesh and separately loading animation clips from the animation-library file, binding them to the character's own skeleton (standard Mixamo-style retargeting — verified compatible in spec §6c by matching bone names directly, not assumed). Later tasks (L2.2 onward) extend this same file.
 
-- [ ] **Step 1: Copy the handed-off GLB into place.**
+- [ ] **Step 1: Copy both files into place.**
 
 ```bash
 mkdir -p public/models
-cp <path-the-user-gave-you> public/models/avatar.glb
-ls -lh public/models/avatar.glb
+cp "/home/lenovo/Downloads/KayKit_Adventurers_2.0_FREE/Characters/gltf/Ranger.glb" public/models/character-ranger.glb
+cp "/home/lenovo/Downloads/KayKit_Adventurers_2.0_FREE/Animations/gltf/Rig_Medium/Rig_Medium_General.glb" public/models/animations-general.glb
+ls -lh public/models/
 ```
 
-Note the file size in your task report — this is the first checkpoint against the spec's lean-asset-budget constraint (low single-digit MB). If it's already over ~5MB, stop and flag it to the user before continuing (may need re-exporting from Meshy at a lower texture resolution, per spec §6's "2K is enough" guidance) rather than building further on an oversized asset.
+Confirm the combined size is close to the ~1.28MB noted in the precondition section above — this is the lean-asset-budget checkpoint (spec §2).
 
-- [ ] **Step 2: Write `AvatarScene.tsx`.**
+- [ ] **Step 2: Write `avatarConfig.ts`** with the swappable character-selection constant (this file is extended later in Task L5.1 with `AVATAR_ENABLED` and WebGL detection — created here, not there):
+
+```typescript
+// src/lib/avatarConfig.ts
+
+/**
+ * Swap these two paths to change which character the companion uses.
+ * Any character from the KayKit Adventurers pack works here as long as
+ * it shares the animation library's skeleton bone names (verified true
+ * for every character in the pack — see spec section 6c). A future
+ * personal-likeness model (e.g. from Meshy) would also work here, as
+ * long as it's rigged with a compatible skeleton.
+ */
+export const AVATAR_CHARACTER_PATH = '/models/character-ranger.glb';
+export const AVATAR_ANIMATIONS_PATH = '/models/animations-general.glb';
+```
+
+- [ ] **Step 3: Write `AvatarScene.tsx`**, loading the character for its mesh/skeleton and the animation file separately for its clips:
 
 ```tsx
 'use client';
@@ -70,11 +92,13 @@ Note the file size in your task report — this is the first checkpoint against 
 import { Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { useGLTF } from '@react-three/drei';
-
-const MODEL_PATH = '/models/avatar.glb';
+import { AVATAR_CHARACTER_PATH, AVATAR_ANIMATIONS_PATH } from '@/lib/avatarConfig';
 
 function Model() {
-  const { scene } = useGLTF(MODEL_PATH);
+  const { scene } = useGLTF(AVATAR_CHARACTER_PATH);
+  // Loaded here only to confirm it resolves — its own animations/scene
+  // are used starting in Task L2.2, not yet in this step.
+  useGLTF(AVATAR_ANIMATIONS_PATH);
   return <primitive object={scene} />;
 }
 
@@ -92,10 +116,11 @@ export function AvatarScene({ className }: { className?: string }) {
   );
 }
 
-useGLTF.preload(MODEL_PATH);
+useGLTF.preload(AVATAR_CHARACTER_PATH);
+useGLTF.preload(AVATAR_ANIMATIONS_PATH);
 ```
 
-- [ ] **Step 3: Write the unlisted test route.**
+- [ ] **Step 4: Write the unlisted test route.**
 
 ```tsx
 // src/app/dev-avatar-test/page.tsx
@@ -122,7 +147,7 @@ export default function AvatarTestPage() {
 
 This route is intentionally not linked from `Navigation.tsx` or any nav item — it's reachable only by typing the URL directly, and gets deleted in Task L6.1 once the feature ships for real.
 
-- [ ] **Step 4: Verify.**
+- [ ] **Step 5: Verify.**
 
 ```bash
 npx tsc --noEmit
@@ -133,13 +158,13 @@ npm run dev
 
 Run `npm run build` here specifically (not just `npm run dev`) — this is the concrete check that the `dynamic(..., { ssr: false })` wrapping actually prevents the static-export prerender pass from choking on `Canvas`/`useGLTF`'s browser-only globals. If `npm run build` fails at this step, that's the bug to fix before moving on, not something to defer.
 
-Then open `http://localhost:3000/dev-avatar-test/` in a browser — confirm the character renders (even in a static bind pose, no animation yet — that's L2.2). If nothing renders, check the browser console for a `GLTFLoader` error before proceeding (common causes: wrong path, GLB not actually placed under `public/`, or the file being corrupted in transfer — verify with `file public/models/avatar.glb` reporting a valid glTF binary).
+Then open `http://localhost:3000/dev-avatar-test/` in a browser — confirm the character renders (even in a static bind pose, no animation yet — that's L2.2). If nothing renders, check the browser console for a `GLTFLoader` error before proceeding (common causes: wrong path, files not actually placed under `public/models/`, or a file corrupted in transfer — verify with `file public/models/character-ranger.glb` reporting a valid glTF binary).
 
-- [ ] **Step 5: Stop the dev server, propose to user with a screenshot, then commit.**
+- [ ] **Step 6: Stop the dev server, propose to user with a screenshot, then commit.**
 
 ```bash
-git add public/models/avatar.glb src/components/avatar/AvatarScene.tsx src/app/dev-avatar-test/page.tsx
-git commit -m "feat(avatar): load character model in isolated test route"
+git add public/models/character-ranger.glb public/models/animations-general.glb src/lib/avatarConfig.ts src/components/avatar/AvatarScene.tsx src/app/dev-avatar-test/page.tsx
+git commit -m "feat(avatar): load KayKit Ranger character in isolated test route"
 ```
 
 ---
@@ -150,22 +175,30 @@ git commit -m "feat(avatar): load character model in isolated test route"
 - Modify: `src/components/avatar/AvatarScene.tsx`
 
 **Interfaces:**
-- Consumes: `MODEL_PATH` constant from Task L2.1.
-- Produces: `AvatarScene` now plays a continuous idle animation. Exposes no new props yet — this task validates the animation pipeline works before Task L3.2 wires it to real section data.
+- Consumes: `AVATAR_CHARACTER_PATH`, `AVATAR_ANIMATIONS_PATH` from Task L2.1.
+- Produces: `AvatarScene` now plays a continuous idle animation (`Idle_A`, per spec §5's finalized pose table — a real, known clip name, not a guess). Exposes no new props yet — this task validates the retargeted-animation pipeline works before Task L3.2 wires it to real section data.
 
-- [ ] **Step 1: List the GLB's actual animation clip names.** Before writing the idle-loop code, confirm what clips actually exist — don't assume a name. Add a temporary console log:
+- [ ] **Step 1: Confirm the animation file's actual clip names match the spec.** The clip names are already known (spec §5/§6c — `Idle_A`, `Idle_B`, `Interact`, `PickUp`, `Throw`, `Use_Item`, `Spawn_Air`, `Spawn_Ground`, `T-Pose`, plus `Hit_*`/`Death_*` which this plan deliberately never uses), verified directly by parsing the GLB during this session — not left to discover at runtime. Sanity-check this once with a quick Python check before writing any component code (faster than a browser round-trip):
 
-```tsx
-function Model() {
-  const { scene, animations } = useGLTF(MODEL_PATH);
-  console.log('Available animation clips:', animations.map((clip) => clip.name));
-  return <primitive object={scene} />;
-}
+```bash
+python3 -c "
+import struct, json
+with open('public/models/animations-general.glb', 'rb') as f:
+    data = f.read()
+offset = 12
+while offset < len(data):
+    chunk_len, chunk_type = struct.unpack('<II', data[offset:offset+8])
+    if chunk_type.to_bytes(4, 'little') == b'JSON':
+        gltf = json.loads(data[offset+8:offset+8+chunk_len])
+        print([a['name'] for a in gltf.get('animations', [])])
+        break
+    offset += 8 + chunk_len + (4 - chunk_len % 4 if chunk_len % 4 else 0)
+"
 ```
 
-Run `npm run dev`, open `/dev-avatar-test/` and the browser console, note the exact clip names. This is the concrete answer to spec §9's open item — write the real names down now, you'll need them for Task L3.2's pose mapping.
+Expected output includes `Idle_A`. If it doesn't, stop and re-check the file copied in Task L2.1 Step 1 before writing any more code against a wrong assumption.
 
-- [ ] **Step 2: Play the first clip (assumed idle) on a loop.**
+- [ ] **Step 2: Load the character and animation clips separately, bind them via retargeting, and play `Idle_A` on a loop.**
 
 ```tsx
 'use client';
@@ -174,23 +207,25 @@ import { Suspense, useEffect, useRef } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { useAnimations, useGLTF } from '@react-three/drei';
 import type { Group } from 'three';
-
-const MODEL_PATH = '/models/avatar.glb';
+import { AVATAR_CHARACTER_PATH, AVATAR_ANIMATIONS_PATH } from '@/lib/avatarConfig';
 
 function Model() {
   const group = useRef<Group>(null);
-  const { scene, animations } = useGLTF(MODEL_PATH);
-  const { actions, names } = useAnimations(animations, group);
+  const { scene } = useGLTF(AVATAR_CHARACTER_PATH);
+  const { animations } = useGLTF(AVATAR_ANIMATIONS_PATH);
+  // useAnimations binds these foreign clips to `group`'s own hierarchy by
+  // matching bone/node names — this is the retargeting step verified
+  // compatible in spec section 6c (24 matching bone names between the
+  // character and the animation library).
+  const { actions } = useAnimations(animations, group);
 
   useEffect(() => {
-    const idleClipName = names[0];
-    if (!idleClipName) return;
-    const action = actions[idleClipName];
+    const action = actions['Idle_A'];
     action?.reset().fadeIn(0.3).play();
     return () => {
       action?.fadeOut(0.3);
     };
-  }, [actions, names]);
+  }, [actions]);
 
   return <primitive ref={group} object={scene} />;
 }
@@ -209,12 +244,11 @@ export function AvatarScene({ className }: { className?: string }) {
   );
 }
 
-useGLTF.preload(MODEL_PATH);
+useGLTF.preload(AVATAR_CHARACTER_PATH);
+useGLTF.preload(AVATAR_ANIMATIONS_PATH);
 ```
 
-Remove the `console.log` from Step 1 once you've noted the clip names — don't ship a stray console log.
-
-- [ ] **Step 3: Verify.** `npm run dev`, confirm the character visibly animates (breathing/idle motion, not a frozen bind pose) at `/dev-avatar-test/`. Open the browser's performance/FPS overlay (devtools → Rendering → "Frame Rendering Stats" in Chrome) and confirm it holds close to 60fps on your dev machine — this is the frame-budget checkpoint from the spec's constraints (§2).
+- [ ] **Step 3: Verify.** `npm run dev`, confirm the character visibly animates (breathing/idle motion, not a frozen bind pose) at `/dev-avatar-test/`. Open the browser's performance/FPS overlay (devtools → Rendering → "Frame Rendering Stats" in Chrome) and confirm it holds close to 60fps on your dev machine — this is the frame-budget checkpoint from the spec's constraints (§2). If the mesh visibly deforms incorrectly (limbs stretching wrong, geometry tearing) rather than animating cleanly, that's a sign the retargeting bind failed silently — re-check Step 1's bone-name output against what Task L2.1 actually copied in.
 
 - [ ] **Step 4: Commit.**
 
@@ -243,18 +277,18 @@ import { Suspense, useEffect, useRef } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { useAnimations, useGLTF } from '@react-three/drei';
 import type { Group } from 'three';
-
-const MODEL_PATH = '/models/avatar.glb';
+import { AVATAR_CHARACTER_PATH, AVATAR_ANIMATIONS_PATH } from '@/lib/avatarConfig';
 
 function Model({ pose }: { pose?: string }) {
   const group = useRef<Group>(null);
-  const { scene, animations } = useGLTF(MODEL_PATH);
+  const { scene } = useGLTF(AVATAR_CHARACTER_PATH);
+  const { animations } = useGLTF(AVATAR_ANIMATIONS_PATH);
   const { actions, names } = useAnimations(animations, group);
   const currentActionName = useRef<string | null>(null);
 
   useEffect(() => {
     if (names.length === 0) return;
-    const targetName = pose && names.includes(pose) ? pose : names[0];
+    const targetName = pose && names.includes(pose) ? pose : 'Idle_A';
     if (targetName === currentActionName.current) return;
 
     const nextAction = actions[targetName];
@@ -282,10 +316,13 @@ export function AvatarScene({ className, pose }: { className?: string; pose?: st
   );
 }
 
-useGLTF.preload(MODEL_PATH);
+useGLTF.preload(AVATAR_CHARACTER_PATH);
+useGLTF.preload(AVATAR_ANIMATIONS_PATH);
 ```
 
-- [ ] **Step 2: Add temporary pose-switch buttons to the test route** (using the real clip names you noted in Task L2.2 Step 1 — replace `'Idle'`/`'Wave'` below with whatever your GLB actually contains):
+Note the fallback changed from `names[0]` (Task L2.2's "assume the first clip is idle") to the literal `'Idle_A'` — now that the real clip names are known, the fallback should name the actual idle clip rather than guess positionally.
+
+- [ ] **Step 2: Add temporary pose-switch buttons to the test route**, using two real clip names from spec §5's table — `Idle_A` (the default) and `Interact` (the Experience-section pose, a good visually-distinct test case):
 
 ```tsx
 'use client';
@@ -305,15 +342,15 @@ export default function AvatarTestPage() {
     <main className="min-h-screen bg-slate-100 flex flex-col items-center justify-center gap-4">
       <AvatarScene className="w-[400px] h-[500px] border-2 border-slate-300 rounded-xl bg-white" pose={pose} />
       <div className="flex gap-2">
-        <button onClick={() => setPose('Idle')} className="px-4 py-2 bg-white border rounded">Idle</button>
-        <button onClick={() => setPose('Wave')} className="px-4 py-2 bg-white border rounded">Wave</button>
+        <button onClick={() => setPose('Idle_A')} className="px-4 py-2 bg-white border rounded">Idle</button>
+        <button onClick={() => setPose('Interact')} className="px-4 py-2 bg-white border rounded">Interact</button>
       </div>
     </main>
   );
 }
 ```
 
-- [ ] **Step 3: Verify.** `npm run dev`, click between the two buttons at `/dev-avatar-test/`, confirm the character visibly crossfades between poses without snapping or T-posing mid-transition. If only one clip exists in your GLB (no separate "Wave"), this step just confirms clicking the second button doesn't break anything (falls back to idle per the defensive logic in Step 1) — that's an acceptable L2 outcome, it just means Task L3.2's pose mapping will need to lean more heavily on the idle clip for now, revisit once more clips are generated later.
+- [ ] **Step 3: Verify.** `npm run dev`, click between the two buttons at `/dev-avatar-test/`, confirm the character visibly crossfades between the idle and interact poses without snapping or T-posing mid-transition.
 
 - [ ] **Step 4: Commit.**
 
@@ -322,7 +359,7 @@ git add src/components/avatar/AvatarScene.tsx src/app/dev-avatar-test/page.tsx
 git commit -m "feat(avatar): support pose crossfading with graceful fallback"
 ```
 
-- [ ] **Step 5: DECISION GATE — propose to the user before proceeding to L3.** Take a screenshot of the working prototype (both idle and — if available — a second pose), report the actual GLB file size, the real animation clip names found, and frame-rate observations. Ask explicitly: does this look right to keep building on, or does the character need to be regenerated (different stylization, a rigging issue, an unexpected visual problem) before any more work goes on top of it? **Do not proceed to Phase L3 without an explicit yes** — this is the single checkpoint the whole "prototype before committing" philosophy exists for.
+- [ ] **Step 5: DECISION GATE — propose to the user before proceeding to L3.** Take a screenshot of the working prototype (both `Idle_A` and `Interact` poses), report the combined asset size and frame-rate observations. Ask explicitly: does the retargeted animation look right — no visible mesh distortion, clean crossfades — or does something need fixing (a different character from the pack, a different pose mapping) before more work goes on top of it? **Do not proceed to Phase L3 without an explicit yes** — this is the single checkpoint the whole "prototype before committing" philosophy exists for.
 
 ---
 
@@ -469,24 +506,26 @@ const HOMEPAGE_SECTION_IDS = [
   'contact',
 ];
 
-// Replace each value with a real clip name from your GLB (Task L2.2's
-// console.log output) — anything not present falls back to the idle
-// clip automatically via AvatarScene's own fallback logic.
+// Per spec section 5's finalized mapping against KayKit's real clip
+// names (Idle_A/Idle_B/Interact/PickUp/Throw/Use_Item/Spawn_Air) —
+// anything not present falls back to Idle_A via AvatarScene's own
+// fallback logic. Superseded by avatarNarration.ts in Task L4.2, which
+// becomes the single source of truth for both pose and copy together.
 const SECTION_POSES: Record<string, string> = {
-  home: 'Idle',
-  about: 'Idle',
-  experience: 'Idle',
-  'case-studies': 'Idle',
-  skills: 'Idle',
-  projects: 'Idle',
-  publications: 'Idle',
-  achievements: 'Idle',
-  contact: 'Idle',
+  home: 'Idle_A',
+  about: 'Idle_B',
+  experience: 'Interact',
+  'case-studies': 'Use_Item',
+  skills: 'PickUp',
+  projects: 'Throw',
+  publications: 'Idle_A',
+  achievements: 'Spawn_Air',
+  contact: 'Idle_B',
 };
 
 export function AvatarCompanion() {
   const activeSection = useActiveSection(HOMEPAGE_SECTION_IDS);
-  const pose = SECTION_POSES[activeSection] ?? 'Idle';
+  const pose = SECTION_POSES[activeSection] ?? 'Idle_A';
 
   return (
     <AvatarScene
@@ -544,50 +583,53 @@ export interface AvatarNarrationEntry {
   thought: string;
 }
 
+// Pose values match spec section 5's finalized mapping against KayKit's
+// real animation clip names, not a placeholder — Idle_A/Idle_B/Interact/
+// Use_Item/PickUp/Throw/Spawn_Air, deliberately never Hit_*/Death_*.
 export const avatarNarration: AvatarNarrationEntry[] = [
   {
     sectionId: 'home',
-    pose: 'Idle',
+    pose: 'Idle_A',
     thought: "Hi — I'm the 3D-sized version of Sahil. Scroll on, I'll keep up.",
   },
   {
     sectionId: 'about',
-    pose: 'Idle',
+    pose: 'Idle_B',
     thought: "Production AI/ML systems, not slideware — that's the actual story here.",
   },
   {
     sectionId: 'experience',
-    pose: 'Idle',
+    pose: 'Interact',
     thought: 'Two years in, already the person other teams ping when something breaks.',
   },
   {
     sectionId: 'case-studies',
-    pose: 'Idle',
+    pose: 'Use_Item',
     thought: 'These are real systems at real scale, not demos — worth a proper look.',
   },
   {
     sectionId: 'skills',
-    pose: 'Idle',
-    thought: "50+ technologies. I only know how to stand here, so we're even.",
+    pose: 'PickUp',
+    thought: "50+ technologies — still figuring out how to hold all of them at once.",
   },
   {
     sectionId: 'projects',
-    pose: 'Idle',
+    pose: 'Throw',
     thought: 'Side projects that occasionally out-ambition the day job.',
   },
   {
     sectionId: 'publications',
-    pose: 'Idle',
+    pose: 'Idle_A',
     thought: 'Actual peer review, actual publication — this part took real work.',
   },
   {
     sectionId: 'achievements',
-    pose: 'Idle',
+    pose: 'Spawn_Air',
     thought: 'A few wins worth mentioning — on the field and off it.',
   },
   {
     sectionId: 'contact',
-    pose: 'Idle',
+    pose: 'Idle_B',
     thought: "Go ahead, say hi — I'll be right here.",
   },
 ];
@@ -599,7 +641,7 @@ export function getNarrationForSection(sectionId: string): AvatarNarrationEntry 
 }
 ```
 
-Note: `pose` values are all `'Idle'` as a safe starting default — update these to match `AvatarCompanion.tsx`'s `SECTION_POSES` map from Task L3.2 once real distinct clips exist (the two should stay in sync; consider consolidating them into one source of truth during Task L6.3's QA pass if by then it's clear they'll always move together).
+Note: `pose` values here already match `AvatarCompanion.tsx`'s `SECTION_POSES` map from Task L3.2 (both come from spec §5's same table) — Task L4.2 below consolidates them into this one file as the single source of truth, removing the temporary duplication.
 
 - [ ] **Step 2: Verify.** `npx tsc --noEmit` — confirms the interface and lookup function compile cleanly.
 
@@ -689,15 +731,15 @@ git commit -m "feat(avatar): add thought-bubble narration overlay"
 
 **Files:**
 - Modify: `src/components/avatar/AvatarCompanion.tsx`
-- Create: `src/lib/avatarConfig.ts`
+- Modify: `src/lib/avatarConfig.ts` (already created in Task L2.1 with the character-path constants — append to it, don't recreate it)
 
 **Interfaces:**
 - Produces: `AVATAR_ENABLED` constant (the kill-switch from spec §6b), `detectWebGLSupport(): boolean`, and `AvatarCompanion`'s internal `mode: 'full' | 'simplified' | 'hidden'` computation.
 
-- [ ] **Step 1: Create the kill-switch + WebGL detection helper.**
+- [ ] **Step 1: Append the kill-switch + WebGL detection helper to the existing `avatarConfig.ts`** (read the file first — it currently has just the two path constants from Task L2.1):
 
 ```typescript
-// src/lib/avatarConfig.ts
+// Add below the existing AVATAR_CHARACTER_PATH/AVATAR_ANIMATIONS_PATH exports
 
 /**
  * Site-wide kill switch. Flip to false to hide the avatar companion
