@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useActiveSection, usePrefersReducedMotion } from '@/lib/hooks';
 import { getNarrationForSection } from '@/data/avatarNarration';
 import { AVATAR_ENABLED, detectWebGLSupport } from '@/lib/avatarConfig';
+import { CLARITY_EVENTS, trackClarityEvent } from '@/lib/clarity';
 import { AvatarScene } from './AvatarScene';
 import { AvatarNarration } from './AvatarNarration';
 import { AVATAR_TOGGLE_EVENT } from './AvatarToggle';
@@ -82,6 +83,17 @@ function useAvatarMode(): Mode {
 
 export function AvatarCompanion() {
   const mode = useAvatarMode();
+  const reportedShown = useRef(false);
+
+  // Report once per page view that the companion actually rendered, so the
+  // opt-out rate has a denominator. Guarded by a ref because mode can settle
+  // through more than one value (e.g. on resize across the breakpoint).
+  useEffect(() => {
+    if (mode === 'hidden' || reportedShown.current) return;
+    reportedShown.current = true;
+    trackClarityEvent(CLARITY_EVENTS.AVATAR_SHOWN);
+  }, [mode]);
+
   const activeSection = useActiveSection(HOMEPAGE_SECTION_IDS, mode !== 'hidden');
   const { pose, thought } = getNarrationForSection(activeSection);
 

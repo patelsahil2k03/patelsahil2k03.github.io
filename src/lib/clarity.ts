@@ -6,6 +6,9 @@ export const CLARITY_EVENTS = {
   CONTACT_CTA: 'contact-cta',
   RESUME_DOWNLOAD: 'resume-download',
   CONTACT_FORM_SUBMIT: 'contact-form-submit',
+  AVATAR_SHOWN: 'avatar-shown',
+  AVATAR_OPT_OUT: 'avatar-opt-out',
+  AVATAR_OPT_IN: 'avatar-opt-in',
 } as const;
 
 const isEnabled =

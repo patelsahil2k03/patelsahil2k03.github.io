@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { Sparkles, EyeOff } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { CLARITY_EVENTS, trackClarityEvent } from '@/lib/clarity';
 
 const OPT_OUT_STORAGE_KEY = 'avatar-opt-out';
 export const AVATAR_TOGGLE_EVENT = 'avatar-opt-out-changed';
@@ -30,6 +31,7 @@ export function AvatarToggle({ className }: { className?: string }) {
       // it just won't persist across reloads
     }
     window.dispatchEvent(new CustomEvent(AVATAR_TOGGLE_EVENT, { detail: { optedOut: next } }));
+    trackClarityEvent(next ? CLARITY_EVENTS.AVATAR_OPT_OUT : CLARITY_EVENTS.AVATAR_OPT_IN);
   };
 
   return (
