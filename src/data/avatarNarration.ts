@@ -23,7 +23,7 @@ export const avatarNarration: AvatarNarrationEntry[] = [
   {
     sectionId: 'about',
     pose: 'Idle_B',
-    thought: "Production AI/ML systems, not slideware — that's the actual story here.",
+    thought: 'The short version: he builds AI systems that make it to production.',
   },
   {
     sectionId: 'experience',
@@ -38,17 +38,17 @@ export const avatarNarration: AvatarNarrationEntry[] = [
   {
     sectionId: 'skills',
     pose: 'PickUp',
-    thought: "50+ technologies — still figuring out how to hold all of them at once.",
+    thought: '50+ technologies. I can barely carry them all.',
   },
   {
     sectionId: 'projects',
     pose: 'Throw',
-    thought: 'Side projects that occasionally out-ambition the day job.',
+    thought: 'Side projects, built purely because he wanted to.',
   },
   {
     sectionId: 'publications',
     pose: 'Idle_A',
-    thought: 'Actual peer review, actual publication — this part took real work.',
+    thought: 'Two papers, peer-reviewed and published.',
   },
   {
     sectionId: 'achievements',
