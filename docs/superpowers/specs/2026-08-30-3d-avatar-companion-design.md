@@ -1,6 +1,6 @@
 # 3D Avatar Companion — Design Spec
 
-**Status:** Approved, in implementation (Phase L in progress — see `docs/superpowers/plans/2026-08-30-3d-avatar-companion.md`). Asset source pivoted from the planned Meshy personal-likeness pipeline to the CC0-licensed KayKit Adventurers pack (§6c) after the Meshy export paywall blocked the original plan — the Nano Banana/Meshy workflow (§6) remains valid, documented reference for a possible future personal-likeness upgrade, just not what v1 actually uses.
+**Status:** Shipped. Mounted on the live homepage; narration copy reviewed and approved by the user (§9a); all §9 open items resolved. See `docs/superpowers/plans/2026-08-30-3d-avatar-companion.md`. Asset source pivoted from the planned Meshy personal-likeness pipeline to the CC0-licensed KayKit Adventurers pack (§6c) after the Meshy export paywall blocked the original plan — the Nano Banana/Meshy workflow (§6) remains valid, documented reference for a possible future personal-likeness upgrade, just not what v1 actually uses.
 **Plan reference:** `docs/superpowers/plans/2026-08-19-portfolio-production-readiness.md`, Phase L (this spec fulfills L1 — the required brainstorm/design pass before any implementation task is written).
 **Related:** `docs/COMPETITIVE_DESIGN_RESEARCH.md` (Bruno Simon reference analysis, both live-site and GitHub-repo level).
 
@@ -206,7 +206,59 @@ Recorded here so the fuller original vision isn't lost, per user direction ("rec
 
 ## 9. Open items for the implementation plan (not decided here, deliberately)
 
-- Exact fixed-corner placement (bottom-right assumed as a sensible default; not yet confirmed with the user).
-- Exact mechanism for "reduced animation" on mobile (paused loop between transitions vs. lower frame-rate cap) — a real-device-testing decision, not a design-time one.
-- Exact opt-out toggle placement relative to `ThemeToggle`.
-- ~~Final pose/animation clip names~~ — **resolved**, per §5 and §6c: pivoted to the KayKit asset pack, real clip names confirmed and mapped.
+All items below are now **resolved**; kept for the record of how each was settled.
+
+- ~~Exact fixed-corner placement~~ — **resolved**: bottom-right, `fixed right-6` with
+  `bottom: calc(1.5rem + env(safe-area-inset-bottom))` so iOS/Android bottom chrome can't clip it.
+- ~~Exact mechanism for "reduced animation" on mobile~~ — **resolved by real-device testing**, and
+  differently than either option anticipated. The problem on a phone wasn't animation cost, it was
+  that a persistent narration bubble covers body text on a content-dense single-column layout. So
+  mobile (`simplified`, <768px) keeps the live canvas but makes the *bubble* transient — it appears
+  on section change and fades after 4s, leaving just the character. Desktop keeps it persistent.
+- ~~Exact opt-out toggle placement relative to `ThemeToggle`~~ — **resolved**: immediately before
+  `ThemeToggle` in `Navigation.tsx`'s button row. Both were bumped 40px → 44px to meet the
+  recommended minimum touch-target size.
+- ~~Final pose/animation clip names~~ — **resolved**, per §5 and §6c: pivoted to the KayKit asset
+  pack, real clip names confirmed and mapped.
+- ~~Narration copy approval~~ — **resolved**: the nine lines were drafted by the assistant, reviewed
+  line-by-line with the user, and four were rewritten before ship (see §9a).
+
+### 9a. Narration copy review (pre-ship)
+
+The user reviewed all nine lines. Four were rewritten:
+
+| Section | Problem found | Change |
+|---|---|---|
+| `about` | "not slideware" rebutted an accusation nobody made | "The short version: he builds AI systems that make it to production." |
+| `skills` | "still figuring out how to hold all of them" depended on the PickUp animation for context; read as plain text beside a skills list it risks implying the stack isn't mastered | "50+ technologies. I can barely carry them all." — the *character* is the one struggling, matching what the animation shows |
+| `projects` | "out-ambition the day job" implied the paid work was the less interesting part, awkward with the employer named directly above | "Side projects, built purely because he wanted to." |
+| `publications` | "this part took real work" implied the other eight sections didn't | "Two papers, peer-reviewed and published." |
+
+Two set-level tics were also reduced: the "X, not Y" defensive construction went from three lines to
+one, and the em-dash rhythm from 7 of 9 lines to 4, so the set stops sounding like one joke shape
+repeated nine times.
+
+### 9b. Framing defect found and fixed during implementation
+
+Worth recording because the symptom was misleading. On a real phone the character's head appeared to
+be "hidden behind something". It wasn't occluded — it was being **clipped by the canvas's own top
+edge**, which looks identical because the canvas background is transparent.
+
+Measured on a 320×320 probe at the companion's real 1:1 aspect, every normal pose rendered with 0px
+headroom, 113–146 character pixels bleeding through the top row, and 155px of the 320px frame empty
+below the feet. Cause: drei's `<Bounds fit>`/`<Center>` fitted once against the model's rest pose (a
+T-pose, 1.94 × 2.28 units per the GLB's own POSITION accessors) and aimed the camera at the model's
+origin — which on this rig sits at the **feet** — so the body extended upward out of frame. `Bounds`'
+`clip` prop was independently tightening the near/far planes to that same wrong box.
+
+Replaced with an explicit fit: measure the model's bounding box at runtime, centre it on the origin,
+and derive camera distance from that measurement plus `AVATAR_FRAME_MARGIN`. Measuring at runtime
+rather than hardcoding a camera is what preserves the swappable-character requirement (§3) — a
+different character re-derives its own framing with no manual re-tuning. After the change: 39px
+headroom, zero pixels touching any edge, and the character renders *larger* than before (245px vs
+165px of a 320px frame).
+
+Related landmine, documented so it isn't rediscovered the hard way: `useGLTF(...).scene` returns a
+single shared `Object3D`. Mounting two `AvatarScene` components makes the second silently steal the
+model from the first, leaving one canvas blank. Only one is mounted, so this isn't live — but any
+future second instance needs `SkeletonUtils.clone`.

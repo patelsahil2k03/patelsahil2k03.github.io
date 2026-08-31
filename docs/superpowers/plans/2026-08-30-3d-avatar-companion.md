@@ -989,7 +989,7 @@ git commit -m "feat(avatar): add opt-out toggle with live hide/show"
 
 ---
 
-### Task L5.4: Clarity analytics events
+### Task L5.4: Clarity analytics events ✅ COMPLETE (2026-08-31)
 
 **Files:**
 - Modify: `src/components/avatar/AvatarCompanion.tsx`
@@ -1038,7 +1038,7 @@ git commit -m "feat(avatar): track shown/opt-out events in Clarity"
 
 ## Phase L6 — Full-site integration + QA pass
 
-### Task L6.1: Mount into the real homepage, remove the test route
+### Task L6.1: Mount into the real homepage, remove the test route ✅ COMPLETE (2026-08-31)
 
 **Files:**
 - Modify: `src/app/page.tsx`
@@ -1100,7 +1100,7 @@ git push origin main
 
 ---
 
-### Task L6.3: Full QA pass
+### Task L6.3: Full QA pass ✅ COMPLETE (2026-08-31)
 
 **Files:** none — verification and sign-off only.
 

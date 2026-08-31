@@ -47,6 +47,10 @@ This is a **modern, minimalistic, and feature-rich portfolio** built with Next.j
 - 🚀 Optimized for GitHub Pages deployment
 - ♿ Accessible (WCAG compliant)
 - 🔍 SEO optimized
+- 🧙 3D avatar companion — a small character in the corner of the homepage that changes pose and
+  narration as you scroll between sections. Dynamically imported so it never blocks page load, and
+  it fully unmounts (not just hides) for `prefers-reduced-motion`, missing WebGL support, or the
+  visitor's opt-out toggle in the nav. See `docs/superpowers/specs/2026-08-30-3d-avatar-companion-design.md`.
 
 ---
 
