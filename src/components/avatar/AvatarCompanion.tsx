@@ -110,7 +110,7 @@ export function AvatarCompanion() {
 
   return (
     <div
-      className="fixed right-6 z-40 flex flex-col items-end gap-2 pointer-events-none"
+      className="fixed right-6 z-40 flex flex-col items-end gap-3 pointer-events-none"
       style={{ bottom: 'calc(1.5rem + env(safe-area-inset-bottom))' }}
     >
       <div className={`transition-opacity duration-500 ${showNarration ? 'opacity-100' : 'opacity-0'}`}>
