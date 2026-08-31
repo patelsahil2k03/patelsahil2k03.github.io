@@ -194,9 +194,9 @@ export function HeroEnhanced() {
         />
       </div>
 
-      <motion.div 
+      <motion.div
         ref={ref}
-        className="max-w-[1400px] mx-auto px-6 sm:px-8 lg:px-12 py-20 relative z-10"
+        className="w-full min-w-0 max-w-[1400px] mx-auto px-6 sm:px-8 lg:px-12 py-20 relative z-10"
         initial="visible"
         animate="visible"
         variants={staggerContainer}

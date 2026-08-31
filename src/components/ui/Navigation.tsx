@@ -1,15 +1,17 @@
 'use client';
 
 import Image from 'next/image';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import { Menu, X } from 'lucide-react';
 import { Button } from './Button';
 import { ThemeToggle } from './ThemeToggle';
+import { AvatarToggle } from '@/components/avatar/AvatarToggle';
 import { motion, AnimatePresence } from 'framer-motion';
 import { CLARITY_EVENTS, trackClarityEvent } from '@/lib/clarity';
+import { useActiveSection } from '@/lib/hooks';
 
 type SectionNavItem = { name: string; kind: 'section'; sectionId: string };
 type RouteNavItem = { name: string; kind: 'route'; href: string };
@@ -37,31 +39,19 @@ export function Navigation() {
 
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState('home');
+
+  const sectionIds = useMemo(
+    () =>
+      navItems
+        .filter((item): item is SectionNavItem => item.kind === 'section')
+        .map((item) => item.sectionId),
+    []
+  );
+  const activeSection = useActiveSection(sectionIds, onHome);
 
   useEffect(() => {
     if (!onHome) return;
-
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-
-      const sectionIds = navItems
-        .filter((item): item is SectionNavItem => item.kind === 'section')
-        .map((item) => item.sectionId);
-      const scrollPosition = window.scrollY + 100;
-
-      for (const section of sectionIds) {
-        const element = document.getElementById(section);
-        if (element) {
-          const { offsetTop, offsetHeight } = element;
-          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
-            setActiveSection(section);
-            break;
-          }
-        }
-      }
-    };
-
+    const handleScroll = () => setIsScrolled(window.scrollY > 20);
     handleScroll();
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
@@ -212,6 +202,7 @@ export function Navigation() {
           </div>
 
           <div className="flex items-center gap-1 relative z-10">
+            <AvatarToggle />
             <ThemeToggle />
 
             <button
