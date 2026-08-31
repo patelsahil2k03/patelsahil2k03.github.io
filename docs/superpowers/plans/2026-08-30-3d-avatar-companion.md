@@ -1079,7 +1079,7 @@ git commit -m "feat(avatar): mount companion on the live homepage, remove test r
 
 ---
 
-### Task L6.2: GitHub Pages live verification
+### Task L6.2: GitHub Pages live verification ✅ COMPLETE (2026-08-31)
 
 **Files:** none — verification only, per spec §6a's flagged "worth a concrete verification" item.
 
