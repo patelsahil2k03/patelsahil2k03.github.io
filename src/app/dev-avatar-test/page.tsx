@@ -11,15 +11,38 @@ const AvatarScene = dynamic(
   { ssr: false }
 );
 
+const POSES = ['Idle_A', 'Idle_B', 'Interact', 'Use_Item', 'PickUp', 'Throw', 'Spawn_Ground', 'Spawn_Air'];
+
 export default function AvatarTestPage() {
-  const [pose, setPose] = useState<string | undefined>(undefined);
+  const [pose, setPose] = useState<string | undefined>('Idle_A');
 
   return (
-    <main className="min-h-screen bg-slate-100 flex flex-col items-center justify-center gap-4">
-      <AvatarScene className="w-[400px] h-[500px] border-2 border-slate-300 rounded-xl bg-white" pose={pose} />
-      <div className="flex gap-2">
-        <button onClick={() => setPose('Idle_A')} className="px-4 py-2 bg-white border rounded">Idle</button>
-        <button onClick={() => setPose('Interact')} className="px-4 py-2 bg-white border rounded">Interact</button>
+    <main className="min-h-screen bg-slate-100 flex flex-col items-center gap-6 p-8">
+      <div className="flex flex-wrap gap-2 justify-center">
+        {POSES.map((p) => (
+          <button
+            key={p}
+            onClick={() => setPose(p)}
+            className={`px-3 py-2 border rounded text-sm ${pose === p ? 'bg-blue-600 text-white' : 'bg-white'}`}
+          >
+            {p}
+          </button>
+        ))}
+      </div>
+
+      <p className="text-sm text-slate-600">Current pose: {pose}</p>
+
+      {/* NOTE: exactly ONE AvatarScene on this page. useGLTF(...).scene returns a
+          single shared THREE.Object3D — mounting two of these makes the second
+          steal the model out of the first, leaving one canvas empty. */}
+      {/* Same 1:1 square aspect as the real companion, rendered large so the
+          framing is measurable. Magenta = anywhere the character is NOT drawn,
+          so cropping at any edge is unambiguous. */}
+      <div className="flex flex-col items-center gap-2">
+        <span className="text-xs text-slate-500">square 320x320 (real 1:1 aspect, scaled up)</span>
+        <div id="probe-square" className="w-[320px] h-[320px] bg-fuchsia-500">
+          <AvatarScene className="w-full h-full" pose={pose} />
+        </div>
       </div>
     </main>
   );

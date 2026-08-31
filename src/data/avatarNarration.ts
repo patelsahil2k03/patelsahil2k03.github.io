@@ -6,15 +6,14 @@ export interface AvatarNarrationEntry {
 
 // Pose values match spec section 5's finalized mapping against KayKit's
 // real animation clip names, not a placeholder — Idle_A/Idle_B/Interact/
-// Use_Item/PickUp/Throw, deliberately never Hit_*/Death_*/Spawn_*.
-// Neither Spawn_Air nor Spawn_Ground is used: parsing the GLB's own
-// animation data showed Spawn_Air bakes in ~2 units of vertical root-bone
-// motion (flies in from off-frame) and Spawn_Ground — despite no root
-// motion — still swings its `hips` bone across ~0.98 units on its own
-// (0.28 to 1.26, versus ~0.01-0.10 for every other pose here) as part of
-// its own crouch-then-rise landing animation. Both blow well past what a
-// small fixed camera frame can hold, so achievements uses Idle_A instead —
-// confirmed stable across repeated pose transitions.
+// Use_Item/PickUp/Throw/Spawn_Air, deliberately never Hit_*/Death_*.
+//
+// Spawn_Air on `achievements` is intentional: its root bone starts 2 units
+// up and falls to 0 over the first ~0.73s, so it plays as "drop in from
+// above and land" — an arrival, which suits the section. It's declared in
+// AVATAR_ONE_SHOT_POSES so it plays once and then settles into the idle
+// loop instead of repeating. Starting off-frame above is the intended
+// effect of the animation, not clipping.
 export const avatarNarration: AvatarNarrationEntry[] = [
   {
     sectionId: 'home',
@@ -53,7 +52,7 @@ export const avatarNarration: AvatarNarrationEntry[] = [
   },
   {
     sectionId: 'achievements',
-    pose: 'Idle_A',
+    pose: 'Spawn_Air',
     thought: 'A few wins worth mentioning — on the field and off it.',
   },
   {
