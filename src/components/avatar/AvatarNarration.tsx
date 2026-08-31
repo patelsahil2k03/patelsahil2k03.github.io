@@ -9,10 +9,14 @@ export function AvatarNarration({ thought }: { thought: string }) {
     >
       {thought}
       {/* Speech-bubble tail pointing toward the character below, so this
-          reads as an in-scene speech bubble rather than a generic card. */}
+          reads as an in-scene speech bubble rather than a generic card.
+          right-7 lines the tail up with the centre of the character's frame
+          (the companion's canvas is 32px narrower than this bubble and
+          right-aligned with it), so it points at the character rather than
+          off to one side of them. */}
       <span
         aria-hidden
-        className="absolute -bottom-[4px] right-5 w-2 h-2 bg-surface border-b border-r border-edge rotate-45"
+        className="absolute -bottom-[5px] right-7 w-2.5 h-2.5 bg-surface border-b border-r border-edge rotate-45"
       />
     </div>
   );
