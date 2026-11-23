@@ -1,0 +1,22 @@
+{
+ "2+ Years": "2026-11-23 redesign (U-06): hero stat card removed; tenure is shown by the dated experience record (internship from January 2024). Value kept in src/data/index.ts.",
+ "2020 - 2024": "2026-11-24: hyphen replaced by an en dash ('2020 – 2024'), the site's date style.",
+ "50+ AWS Lambda scrapers": "2026-11-23 polish: system-figure steps carry no figures (an uncited number in a diagram); the value still renders as a footnoted metric of the same case study.",
+ "85+ marketplaces, English and Arabic": "2026-11-23 polish: system-figure steps carry no figures (an uncited number in a diagram); the value still renders as a footnoted metric of the same case study.",
+ "93%+": "2026-11-23 redesign (U-06): ambiguous 'AI Accuracy' stat card removed; the underlying 93.17% forecasting figure still renders with its footnote.",
+ "All Projects": "2026-11-23 redesign: project filter buttons removed; every project is listed.",
+ "From the owner’s own records; not independently measured": "2026-11-23 polish: owner-material label reworded to 'Reported from the owner's project records; no independent measurement yet' (same meaning, less deflating).",
+ "Fruit Model Validation Accuracy": "2026-11-23 polish: lip-reading/fruit metric labels clarified ('Fruit model validation accuracy', 'Lip-reading training/validation accuracy'); values unchanged.",
+ "Mobile Apps": "2026-11-23 redesign: filter label for a category with no projects; filters removed.",
+ "MongoDB snapshot of 500K+ products": "2026-11-23 polish: system-figure steps carry no figures (an uncited number in a diagram); the value still renders as a footnoted metric of the same case study.",
+ "POC": "2026-11-23 polish: filter label spelled out as 'Proof of concept'.",
+ "Platform serving 2M+ users": "2026-11-23 polish: system-figure steps carry no figures (an uncited number in a diagram); the value still renders as a footnoted metric of the same case study.",
+ "Remote (client based in Dubai, UAE)": "2026-11-23: owner decision C12; the city and country with the LinkedIn listing could identify the client. Now 'Remote'.",
+ "SDE II · AI/ML & Full Stack": "2026-11-23 polish: title spelled out as 'Software Development Engineer II · AI/ML & Full Stack'.",
+ "The published paper (Springer ICTIS 2024).": "2026-11-23 polish: source now adds that the paywalled full text was not re-read for the site.",
+ "The published paper (Springer ICTIS 2024, first author).": "2026-11-23 polish: source now adds that the paywalled full text was not re-read for the site.",
+ "Training Accuracy": "2026-11-23 polish: relabelled 'Lip-reading training accuracy'; value 93% unchanged.",
+ "Validation Accuracy": "2026-11-23 polish: relabelled 'Lip-reading validation accuracy'; value 53% unchanged.",
+ "Verified against a primary source": "2026-11-24 critique: article endnotes now use the short status tag with a one-line legend ('verified: checked against a primary source'), like the homepage; the full label still shows when an inline note is opened.",
+ "gRPC embedding service, 6 vector indexes": "2026-11-23 polish: system-figure steps carry no figures (an uncited number in a diagram); the value still renders as a footnoted metric of the same case study."
+}
