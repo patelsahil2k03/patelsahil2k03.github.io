@@ -14,6 +14,22 @@ export interface Experience {
 
 export const experiences: Experience[] = [
   {
+    id: 'client-sde2',
+    company: 'Digiflux Technologies Pvt Ltd · client engagement (creator-commerce marketplace platform)',
+    role: 'Software Development Engineer II',
+    location: 'Remote',
+    duration: 'Nov 2025 – Present',
+    startDate: '2025-11',
+    endDate: 'Present',
+    type: 'full-time',
+    description: [
+      'Founding member of the three-person team: primary developer of the extractor and core services covering 500K+ unique products from 85+ marketplace storefronts in English and Arabic',
+      'Built multi-modal semantic search (text and photo) over 6 vector indexes, served by a gRPC service decoupled from the acquisition pipeline',
+      'Built the FastAPI orchestrator and operations dashboard that run extraction, categorization and image processing (Cloudflare R2) into PostgreSQL and a MongoDB catalog',
+    ],
+    technologies: ['Python', 'FastAPI', 'gRPC', 'PostgreSQL', 'MongoDB', 'Pinecone', 'Cloudflare R2'],
+  },
+  {
     id: 'digiflux-ase',
     company: 'Digiflux Technologies Pvt Ltd',
     role: 'Associate Software Engineer',
@@ -23,19 +39,18 @@ export const experiences: Experience[] = [
     endDate: 'Present',
     type: 'full-time',
     description: [
-      'Built production-grade AI systems serving 2M+ users across FinTech, FoodTech, and HealthTech domains',
-      'Developed 50+ AWS Lambda scrapers for FinTech platform automating data collection and processing',
-      'Engineered meal subscription chatbot supporting 125K+ customers with 90%+ AI accuracy using LangChain',
-      'Implemented sales forecasting model achieving 93.17% accuracy using CNN+LSTM hybrid architecture',
-      'Created HealthTech management platform improving operational efficiency by 40% for 44K+ workers',
-      'Built responsive React Native application with seamless user experience',
-      'Received Team Star Award for outstanding contribution and performance',
-      'Deployed ML applications using LangChain, OpenAI, AWS Sagemaker, and Docker',
+      'Delivered production AI and full-stack systems across FinTech (2M+ users), FoodTech (125K+ customers), HealthTech and e-commerce',
+      'Primary developer of the nutrition-scanning service (90%+ accuracy) for a meal-subscription business; migrated its AI Coach from GPT-4 to Gemini after benchmarking',
+      'Co-developed the content-automation pipeline for a public-health platform supporting 44,500+ health workers, reducing manual intervention by 40%',
+      'Primary developer of the Python gRPC meal-logging service (Google Gemini) and the coach, admin and monitoring dashboards for a fitness and wellness platform, released as a production test launch',
+      'Primary developer of the 50+ AWS Lambda scrapers and the market open/close analysis pipeline for a FinTech platform',
+      'Developed a LangChain retrieval-augmented assistant for the same public-health platform, taking it from prototype to production (2025)',
+      'Received Team Star Award (March 2025) and AI Catalyst 2026 Special Recognition (March 2026) at Digiflux annual townhalls',
       'Built a BLE-integrated React Native app for cafe POS thermal-printer control, handling device pairing and ESC/POS command sequences',
       'Shipped a WhatsApp ordering bot (FastAPI + Supabase + Twilio) for a meal subscription platform',
       'Built LangGraph ReAct agents automating internal Redmine-based workflows'
     ],
-    technologies: ['Python', 'React.js', 'React Native', 'LangChain', 'OpenAI', 'AWS Sagemaker', 'AWS Lambda', 'Docker', 'MongoDB', 'Next.js', 'CNN', 'LSTM'],
+    technologies: ['Python', 'FastAPI', 'gRPC', 'Google Gemini', 'OpenAI', 'LangChain', 'AWS Lambda', 'PostgreSQL', 'MongoDB', 'Pinecone', 'TypeScript', 'React', 'Next.js', 'Docker'],
   },
   {
     id: 'digiflux-intern',
@@ -47,33 +62,28 @@ export const experiences: Experience[] = [
     endDate: '2024-06',
     type: 'internship',
     description: [
-      'Focused on learning and implementing end-to-end ML applications',
-      'Gained hands-on experience with Python, LLMs, Langchain, OpenAI, Sagemaker, Docker',
-      'Deepened understanding of AI-ML workflows and contributed to real-world projects',
-      'Adapted to corporate culture and collaborated with experienced professionals'
+      'Developed a CNN+LSTM sales-forecasting model reaching 93.17% accuracy on live sales data, benchmarked against Random Forest, ARIMA and SARIMAX',
+      'Gained hands-on experience with Python, LLMs, LangChain, OpenAI, SageMaker (experimentation) and Docker'
     ],
     technologies: ['Python', 'LangChain', 'OpenAI', 'AWS Sagemaker', 'Docker', 'Machine Learning'],
   },
   {
     id: 'lt-web-intern',
-    company: 'Larson & Toubro Technology Services',
-    role: 'Web Development Intern',
+    company: 'L&T Technology Services',
+    role: 'C# Developer Intern',
     location: 'Vadodara, India',
     duration: 'May 2023 – July 2023',
     startDate: '2023-05',
     endDate: '2023-07',
     type: 'internship',
     description: [
-      'Designed and implemented web request forms for client interactions',
-      'Streamlined client interactions and data collection using C# and JavaScript',
-      'Worked with ASP.NET MVC and ASP.NET Core frameworks',
-      'Collaborated with skilled professionals and gained practical industry insights'
+      'Built web request forms in C# and JavaScript on ASP.NET MVC and ASP.NET Core to streamline client data collection'
     ],
     technologies: ['C#', 'JavaScript', 'ASP.NET MVC', 'ASP.NET Core', 'SQL', 'HTML/CSS'],
   },
   {
     id: 'lt-ml-intern',
-    company: 'Larson & Toubro Energy-Power',
+    company: 'Larsen & Toubro (L&T Power)',
     role: 'Machine Learning Intern',
     location: 'Vadodara, India',
     duration: 'May 2022 – June 2022',
@@ -81,27 +91,23 @@ export const experiences: Experience[] = [
     endDate: '2022-06',
     type: 'internship',
     description: [
-      'Developed AI Chatbots using RASA framework',
-      'Worked on NLP and conversational AI projects',
-      'Applied machine learning concepts to real-world problems',
-      'Gained experience in Python and NLP libraries'
+      'Built machine-learning chatbots with the RASA framework (Python, NLP)',
+      'Developed web features in ASP.NET'
     ],
     technologies: ['Python', 'RASA', 'NLP', 'Machine Learning', 'ASP.NET'],
   },
   {
     id: 'motorola',
     company: 'Motorola Solutions',
-    role: 'Internship Trainee',
-    location: 'Bangalore, India',
-    duration: 'May 2022 – Nov 2022',
+    role: 'Web Development Intern',
+    location: 'Bengaluru, India',
+    duration: 'May 2022 – Dec 2022',
     startDate: '2022-05',
-    endDate: '2022-11',
-    type: 'training',
+    endDate: '2022-12',
+    type: 'internship',
     description: [
-      'MEAN Stack Developer Role and Elective Course Proficiency',
-      'Specialized in Node, Express, Angular, SQL',
-      'Covered wide range of technologies in front-end and back-end development',
-      'Participated in design reviews, group discussions, and collaborative projects'
+      'Built MEAN-stack applications (MongoDB, Express, Angular, Node.js) with SQL, across front end and back end',
+      'Took part in design reviews and team projects'
     ],
     technologies: ['Angular', 'Node.js', 'Express', 'SQL', 'MongoDB', 'JavaScript', 'TypeScript'],
   },
@@ -111,13 +117,13 @@ export const education = {
   degree: 'B.Tech Computer Engineering',
   university: 'Charotar University of Science and Technology (CHARUSAT)',
   location: 'Gujarat, India',
-  duration: '2020 - 2024',
+  duration: '2020 – 2024',
   cgpa: '9.35',
   highlights: [
     'Published 2 research papers in Springer and AIP conferences',
     'Member of CHARUSAT Football Team (2022, 2023)',
     'Core Team Member - CLDC AI/ML Division',
-    'Participated in National West Zone Inter-University Football Tournament',
+    'Played in the West Zone Inter-University Football Tournament',
     'Presented papers at ICTIS 2024 and ICRAIC 2024 conferences'
   ]
 };

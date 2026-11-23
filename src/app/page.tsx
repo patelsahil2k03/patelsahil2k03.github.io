@@ -1,43 +1,42 @@
-import dynamic from 'next/dynamic';
+import type { Metadata } from 'next';
 import { Navigation } from '@/components/ui/Navigation';
 import { Footer } from '@/components/ui/Footer';
-import { HeroEnhanced as Hero } from '@/components/sections/HeroEnhanced';
-import { About } from '@/components/sections/About';
-import { Experience } from '@/components/sections/Experience';
-import { CaseStudies } from '@/components/sections/CaseStudies';
-import { Skills } from '@/components/sections/Skills';
-import { Projects } from '@/components/sections/Projects';
-import { Publications } from '@/components/sections/Publications';
-import { Achievements } from '@/components/sections/Achievements';
-import { Contact } from '@/components/sections/Contact';
+import { Hero } from '@/components/home/Hero';
+import { SelectedWork } from '@/components/home/SelectedWork';
+import { ExperienceSection } from '@/components/home/ExperienceSection';
+import { ResearchSection } from '@/components/home/ResearchSection';
+import { ProjectsSection } from '@/components/home/ProjectsSection';
+import { SkillsSection } from '@/components/home/SkillsSection';
+import { AboutSection } from '@/components/home/AboutSection';
+import { NotesSection } from '@/components/home/NotesSection';
+import { ContactSection } from '@/components/home/ContactSection';
 
-// ssr: false is required, not optional — AvatarCompanion pulls in a
-// react-three-fiber Canvas that touches WebGL/DOM globals which don't exist
-// during Next.js's static-export prerender pass. A plain import breaks the
-// build. Loading it dynamically also keeps the 3D bundle out of the initial
-// payload, so it never blocks the core content.
-const AvatarCompanion = dynamic(
-  () => import('@/components/avatar/AvatarCompanion').then((m) => m.AvatarCompanion),
-  { ssr: false }
-);
+export const metadata: Metadata = { alternates: { canonical: '/' } };
 
+// The 3D avatar companion (src/components/avatar/) is hidden (AVATAR_ENABLED = false) and deliberately NOT imported here:
+// Next.js bundles any dynamic() import a page contains, so even an unrendered one shipped 668 kB of three.js on every visit.
+// To restore it (finding U-02): set AVATAR_ENABLED, then add back
+//   const AvatarCompanion = dynamic(() => import('@/components/avatar/AvatarCompanion').then((m) => m.AvatarCompanion), { ssr: false });
+// and render <AvatarCompanion /> after <Footer />. ssr: false is required: react-three-fiber touches WebGL globals.
+
+// Reading order (docs/design/DESIGN_DIRECTION.md §4, revised after the 2026-11-23 reviews): claim, proof, record,
+// research, builds, skills, person, sources, contact: the evidence closes the argument and the page ends on the ask.
 export default function Home() {
   return (
     <>
       <Navigation />
-      <main className="min-h-screen">
+      <main id="main">
         <Hero />
-        <About />
-        <Experience />
-        <CaseStudies />
-        <Skills />
-        <Projects />
-        <Publications />
-        <Achievements />
-        <Contact />
+        <SelectedWork />
+        <ExperienceSection />
+        <ResearchSection />
+        <ProjectsSection />
+        <SkillsSection />
+        <AboutSection />
+        <NotesSection />
+        <ContactSection />
       </main>
       <Footer />
-      <AvatarCompanion />
     </>
   );
 }

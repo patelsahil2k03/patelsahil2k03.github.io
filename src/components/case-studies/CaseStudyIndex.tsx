@@ -1,76 +1,73 @@
 'use client';
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
-import { caseStudies, caseStudyFilters, type CaseStudyType } from '@/data/caseStudies';
-import { Badge } from '@/components/ui/Badge';
-import { CaseStudyTeaserCard } from './CaseStudyTeaserCard';
-import { Button } from '@/components/ui/Button';
 import { ArrowLeft } from 'lucide-react';
+import { caseStudies, caseStudyFilters, type CaseStudyType } from '@/data/caseStudies';
+import { cn } from '@/lib/utils';
+import { CaseStudyRow } from './CaseStudyRow';
+import { indexOrder } from '@/lib/caseStudyUtils';
+import { NotesSection } from '@/components/home/NotesSection';
+import { indexNoteOrder } from '@/lib/notes';
 
+/** Every case study, newest first, with a type filter. */
 export function CaseStudyIndex() {
   const [filter, setFilter] = useState<CaseStudyType | 'all'>('all');
-
-  const sorted = [...caseStudies].sort((a, b) =>
-    (b.publishedAt ?? '').localeCompare(a.publishedAt ?? '')
-  );
-
-  const filtered =
-    filter === 'all' ? sorted : sorted.filter((cs) => cs.type === filter);
+  const sorted = [...caseStudies].sort(indexOrder);
+  const filtered = filter === 'all' ? sorted : sorted.filter((cs) => cs.type === filter);
 
   return (
-    <div className="py-16 lg:py-24 bg-slate-50 min-h-[calc(100vh-4rem)]">
-      <div className="max-w-[1400px] mx-auto px-6 sm:px-8 lg:px-12">
-        <Link
-          href="/"
-          className="inline-flex items-center gap-2 text-sm text-slate-600 hover:text-signal-blue mb-8 transition-colors cursor-pointer"
-        >
-          <ArrowLeft className="w-4 h-4" aria-hidden />
+    <div className="pb-24 pt-12 lg:pt-16">
+      <div className="mx-auto max-w-[1200px] px-5 sm:px-8 lg:px-12">
+        <Link href="/" className="inline-flex min-h-[44px] items-center gap-1.5 font-sans text-sm text-ev-muted hover:text-ev-accent">
+          <ArrowLeft className="h-4 w-4" strokeWidth={1.75} aria-hidden />
           Back to portfolio
         </Link>
 
-        <div className="max-w-3xl mb-12">
-          <Badge variant="default" size="lg" className="mb-4">
-            Case Studies
-          </Badge>
-          <h1 className="text-4xl sm:text-5xl font-bold text-slate-900 mb-4 tracking-tight">
-            Engineering notes from production & research
-          </h1>
-          <p className="text-lg text-slate-600 leading-relaxed">
-            Problem context, patterns learned, and what shipped—written like an internal tech blog.
-            Drafts mapped from real work; depth and visuals will grow over time.
+        <header className="mt-6 max-w-[62ch]">
+          <h1 className="ev-display text-[2.5rem] font-bold leading-[1.02] text-ev-ink sm:text-[3.25rem]">Case studies</h1>
+          <p className="ev-prose mt-4 font-serif text-lg leading-relaxed text-ev-ink2">
+            Engineering notes from production systems, hackathons and research: the problem, what was learned, and what I
+            built. The figures that make the case are footnoted to their source.
           </p>
-        </div>
+        </header>
 
-        <div className="flex flex-wrap gap-2 mb-10">
+        <div role="group" aria-label="Filter by type" className="mt-10 flex flex-wrap gap-2 border-b border-ev-rule pb-6">
           {caseStudyFilters.map((item) => (
             <button
               key={item.id}
               type="button"
+              aria-pressed={filter === item.id}
               onClick={() => setFilter(item.id)}
-              className={`px-4 py-2 rounded-lg text-sm font-medium transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-signal-blue ${
-                filter === item.id
-                  ? 'bg-signal-blue text-white shadow-md'
-                  : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-200'
-              }`}
+              className={cn(
+                'min-h-[44px] border px-4 font-sans text-sm font-semibold transition-colors',
+                filter === item.id ? 'border-ev-ink bg-ev-ink text-ev-paper' : 'border-ev-rule text-ev-ink hover:border-ev-ink'
+              )}
             >
               {item.label}
             </button>
           ))}
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {filtered.map((study) => (
-            <CaseStudyTeaserCard key={study.id} study={study} />
-          ))}
-        </div>
+        <p aria-live="polite" className="pt-4 font-sans text-sm text-ev-muted">
+          {filtered.length} {filtered.length === 1 ? 'case study' : 'case studies'}
+        </p>
 
-        {filtered.length === 0 && (
-          <div className="text-center py-16">
-            <p className="text-slate-600 mb-4">No case studies in this category yet.</p>
-            <Button onClick={() => setFilter('all')}>View all</Button>
-          </div>
+        {filtered.length > 0 ? (
+          <ul className="divide-y divide-ev-rule border-b border-ev-rule">
+            {filtered.map((study) => (
+              <CaseStudyRow key={study.id} study={study} level={2} />
+            ))}
+          </ul>
+        ) : (
+          <p className="py-16 font-serif text-lg text-ev-ink2">
+            No case studies of this type yet.{' '}
+            <button type="button" className="ev-link font-sans font-semibold" onClick={() => setFilter('all')}>
+              Show all
+            </button>
+          </p>
         )}
+        <NotesSection order={indexNoteOrder} inset={false} />
       </div>
     </div>
   );

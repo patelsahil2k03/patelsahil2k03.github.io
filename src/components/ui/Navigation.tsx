@@ -1,287 +1,184 @@
 'use client';
 
-import Image from 'next/image';
-import React, { useState, useEffect, useMemo } from 'react';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
-import { cn } from '@/lib/utils';
 import { Menu, X } from 'lucide-react';
-import { Button } from './Button';
+import { cn } from '@/lib/utils';
+import { personalInfo } from '@/data/personal';
 import { ThemeToggle } from './ThemeToggle';
 import { AvatarToggle } from '@/components/avatar/AvatarToggle';
-import { motion, AnimatePresence } from 'framer-motion';
+import { AVATAR_ENABLED } from '@/lib/avatarConfig';
 import { CLARITY_EVENTS, trackClarityEvent } from '@/lib/clarity';
 import { useActiveSection } from '@/lib/hooks';
 
-type SectionNavItem = { name: string; kind: 'section'; sectionId: string };
-type RouteNavItem = { name: string; kind: 'route'; href: string };
-type NavItem = SectionNavItem | RouteNavItem;
+type NavItem = { name: string; sectionId?: string; href?: string };
+
+// Section ids are unchanged from the earlier design (analytics and old links still resolve); labels follow the new order.
+const SPY_IDS = ['case-studies', 'experience', 'publications', 'projects', 'about'];
 
 const navItems: NavItem[] = [
-  { name: 'Home', kind: 'section', sectionId: 'home' },
-  { name: 'About', kind: 'section', sectionId: 'about' },
-  { name: 'Experience', kind: 'section', sectionId: 'experience' },
-  { name: 'Case Studies', kind: 'route', href: '/case-studies/' },
-  { name: 'Skills', kind: 'section', sectionId: 'skills' },
-  { name: 'Projects', kind: 'section', sectionId: 'projects' },
-  { name: 'Publications', kind: 'section', sectionId: 'publications' },
-  { name: 'Achievements', kind: 'section', sectionId: 'achievements' },
-  { name: 'Contact', kind: 'section', sectionId: 'contact' },
+  { name: 'Work', sectionId: 'case-studies' },
+  { name: 'Experience', sectionId: 'experience' },
+  { name: 'Research', sectionId: 'publications' },
+  { name: 'Projects', sectionId: 'projects' },
+  { name: 'About', sectionId: 'about' },
 ];
 
-function isOnHome(pathname: string) {
-  return pathname === '/' || pathname === '';
-}
-
+/**
+ * Light bar over paper; transparent over the ink band at the top of the homepage. The band check uses an
+ * IntersectionObserver on #home rather than a scroll listener.
+ */
 export function Navigation() {
-  const pathname = usePathname();
-  const onHome = isOnHome(pathname ?? '/');
-
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-  const sectionIds = useMemo(
-    () =>
-      navItems
-        .filter((item): item is SectionNavItem => item.kind === 'section')
-        .map((item) => item.sectionId),
-    []
-  );
-  const activeSection = useActiveSection(sectionIds, onHome);
+  const pathname = usePathname() ?? '/';
+  const onHome = pathname === '/' || pathname === '';
+  const [overBand, setOverBand] = useState(onHome);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    if (!onHome) return;
-    const handleScroll = () => setIsScrolled(window.scrollY > 20);
-    handleScroll();
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    if (!onHome) {
+      setOverBand(false);
+      return;
+    }
+    const hero = document.getElementById('home');
+    if (!hero) return;
+    const io = new IntersectionObserver(([entry]) => setOverBand(entry.intersectionRatio > 0.08), {
+      threshold: [0, 0.08, 0.2],
+      rootMargin: '-64px 0px 0px 0px',
+    });
+    io.observe(hero);
+    return () => io.disconnect();
   }, [onHome]);
 
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-      setIsMobileMenuOpen(false);
-    }
-  };
+  // Escape closes the mobile menu and returns focus to its button.
+  useEffect(() => {
+    if (!menuOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== 'Escape') return;
+      setMenuOpen(false);
+      document.querySelector<HTMLButtonElement>('[aria-controls="mobile-menu"]')?.focus();
+    };
+    document.addEventListener('keydown', onKey);
+    return () => document.removeEventListener('keydown', onKey);
+  }, [menuOpen]);
 
-  const sectionHref = (sectionId: string) => `/#${sectionId}`;
-
-  const isNavActive = (item: NavItem) => {
-    if (item.kind === 'route') {
-      return pathname?.startsWith('/case-studies') ?? false;
-    }
-    return onHome && activeSection === item.sectionId;
-  };
-
-  const renderNavControl = (item: NavItem, className: string) => {
-    if (item.kind === 'route') {
-      return (
-        <Link href={item.href} className={className} onClick={() => setIsMobileMenuOpen(false)}>
-          {item.name}
-        </Link>
-      );
-    }
-
-    if (onHome) {
-      return (
-        <button type="button" onClick={() => scrollToSection(item.sectionId)} className={className}>
-          {item.name}
-        </button>
-      );
-    }
-
-    return (
-      <Link href={sectionHref(item.sectionId)} className={className} onClick={() => setIsMobileMenuOpen(false)}>
-        {item.name}
-      </Link>
-    );
-  };
+  const inView = useActiveSection(SPY_IDS, onHome);
+  const hrefFor = (item: NavItem) => item.href ?? (onHome ? `#${item.sectionId}` : `/#${item.sectionId}`);
+  // On the homepage the item for the section in view is marked; elsewhere "Work" covers /case-studies/.
+  const isActive = (item: NavItem) =>
+    onHome ? item.sectionId === inView : item.sectionId === 'case-studies' && pathname.startsWith('/case-studies');
+  const currentKind = onHome ? 'location' : 'page';
+  const dark = overBand && !menuOpen;
 
   return (
-    <motion.nav
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.5, ease: 'easeOut' }}
+    <header
       className={cn(
-        'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
-        isScrolled || !onHome
-          ? 'bg-white/80 backdrop-blur-lg shadow-lg border-b border-slate-200/50'
-          : 'bg-white/40 backdrop-blur-sm'
+        'fixed inset-x-0 top-0 z-50',
+        // Band and paper switch at once, both ways: an eased color change passes through an illegible grey (motion review, U-17).
+        // Over the band the header carries the band color itself, so its text contrast never depends on what is behind it.
+        dark
+          ? 'bg-ev-band text-ev-band-ink'
+          : menuOpen
+            ? 'border-b border-ev-rule bg-ev-paper text-ev-ink'
+            : 'border-b border-ev-rule bg-ev-paper/95 text-ev-ink backdrop-blur-sm'
       )}
     >
-      <div className="max-w-[1400px] mx-auto px-6 sm:px-8 lg:px-12">
-        <div className="flex items-center justify-between h-16">
-          {onHome ? (
-            <button
-              type="button"
-              onClick={() => scrollToSection('home')}
-              className="flex items-center space-x-2 group cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-signal-blue rounded-lg"
-            >
-              <div className="relative w-10 h-10">
-                <Image
-                  src="/images/hero/profile.jpg"
-                  alt="Profile Picture"
-                  fill
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  className="rounded-full object-cover border-2 border-signal-blue transition-transform group-hover:scale-110"
-                />
-              </div>
-              <span className="text-xl font-bold text-slate-900 hidden sm:block">Sahil Patel</span>
-            </button>
-          ) : (
-            <Link href="/" className="flex items-center space-x-2 group cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-signal-blue rounded-lg">
-              <div className="relative w-10 h-10">
-                <Image
-                  src="/images/hero/profile.jpg"
-                  alt="Profile Picture"
-                  fill
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  className="rounded-full object-cover border-2 border-signal-blue transition-transform group-hover:scale-110"
-                />
-              </div>
-              <span className="text-xl font-bold text-slate-900 hidden sm:block">Sahil Patel</span>
-            </Link>
-          )}
+      <nav aria-label="Main" className="mx-auto flex h-16 w-full max-w-[1200px] items-center justify-between px-5 sm:px-8 lg:px-12">
+        <Link href="/" className="inline-flex min-h-[44px] items-center font-sans text-lg font-bold tracking-tight" onClick={() => setMenuOpen(false)}>
+          {personalInfo.name}
+        </Link>
 
-          <div className="hidden md:flex items-center space-x-1 relative z-10">
-            {navItems.map((item) => (
-              <motion.div
-                key={item.name}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="relative"
+        <ul className="hidden items-center gap-1 lg:flex">
+          {navItems.map((item) => (
+            <li key={item.name}>
+              <Link
+                href={hrefFor(item)}
+                aria-current={isActive(item) ? currentKind : undefined}
+                className={cn(
+                  'inline-flex min-h-[44px] items-center px-3 font-sans text-[0.95rem] font-medium underline-offset-[6px] hover:underline',
+                  isActive(item) && 'underline decoration-ev-accent decoration-2'
+                )}
               >
-                {renderNavControl(
-                  item,
-                  cn(
-                    'relative px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 cursor-pointer z-10 block',
-                    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-signal-blue',
-                    isNavActive(item) ? 'text-signal-blue' : 'text-slate-700 hover:text-slate-900'
-                  )
-                )}
-                {isNavActive(item) && (
-                  <motion.div
-                    layoutId="activeSection"
-                    className="absolute inset-0 bg-gradient-to-r from-signal-blue/5 to-status-teal-icon/5 rounded-lg border border-signal-blue/15 -z-10 pointer-events-none"
-                    initial={false}
-                    transition={{ type: 'spring', stiffness: 380, damping: 30 }}
-                  />
-                )}
-              </motion.div>
-            ))}
-          </div>
-
-          <div className="hidden md:flex items-center space-x-4 relative z-10">
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              {onHome ? (
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => {
-                    trackClarityEvent(CLARITY_EVENTS.CONTACT_CTA);
-                    scrollToSection('contact');
-                  }}
-                  className="backdrop-blur-sm bg-white/50 hover:bg-white/80 border-signal-blue/20 hover:border-signal-blue/50 shadow-sm hover:shadow-md transition-all cursor-pointer"
-                >
-                  Get in Touch
-                </Button>
-              ) : (
-                <Link href="/#contact" className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-signal-blue rounded-lg">
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => trackClarityEvent(CLARITY_EVENTS.CONTACT_CTA)}
-                    className="backdrop-blur-sm bg-white/50 hover:bg-white/80 border-signal-blue/20 hover:border-signal-blue/50 shadow-sm hover:shadow-md transition-all cursor-pointer"
-                  >
-                    Get in Touch
-                  </Button>
-                </Link>
+                {item.name}
+              </Link>
+            </li>
+          ))}
+          <li>
+            <a
+              href="/resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => trackClarityEvent(CLARITY_EVENTS.RESUME_DOWNLOAD)}
+              className="inline-flex min-h-[44px] items-center px-3 font-sans text-[0.95rem] font-medium underline-offset-[6px] hover:underline"
+            >
+              Resume
+            </a>
+          </li>
+          <li>
+            <a
+              href={`mailto:${personalInfo.email}`}
+              onClick={() => trackClarityEvent(CLARITY_EVENTS.CONTACT_CTA)}
+              className={cn(
+                'ml-3 inline-flex min-h-[40px] items-center px-4 font-sans text-[0.95rem] font-semibold',
+                dark ? 'bg-ev-band-ink text-ev-band' : 'bg-ev-ink text-ev-paper'
               )}
-            </motion.div>
-          </div>
-
-          <div className="flex items-center gap-1 relative z-10">
-            <AvatarToggle />
-            <ThemeToggle />
-
-            <button
-              type="button"
-              className="md:hidden p-2 rounded-lg text-slate-700 hover:bg-slate-100 dark:hover:bg-surface-hover cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-signal-blue"
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              aria-expanded={isMobileMenuOpen}
-              aria-label="Toggle menu"
             >
-              {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-            </button>
-          </div>
-        </div>
-      </div>
+              Email
+            </a>
+          </li>
+        </ul>
 
-      <AnimatePresence>
-        {isMobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3, ease: 'easeInOut' }}
-            className="md:hidden bg-white/95 backdrop-blur-lg border-t border-slate-200/50 shadow-lg"
+        <div className="flex items-center gap-1">
+          {AVATAR_ENABLED && <AvatarToggle />}
+          <ThemeToggle />
+          <button
+            type="button"
+            className="inline-flex h-11 w-11 items-center justify-center lg:hidden"
+            onClick={() => setMenuOpen((o) => !o)}
+            aria-expanded={menuOpen}
+            aria-controls="mobile-menu"
+            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
           >
-            <div className="px-4 py-6 space-y-2">
-              {navItems.map((item, index) => (
-                <motion.div
-                  key={item.name}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.05 }}
-                >
-                  {renderNavControl(
-                    item,
-                    cn(
-                      'block w-full text-left px-4 py-3 rounded-lg text-base font-medium transition-all cursor-pointer',
-                      'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-signal-blue',
-                      isNavActive(item)
-                        ? 'bg-gradient-to-r from-signal-blue/5 to-status-teal-icon/5 text-signal-blue border border-signal-blue/15 shadow-sm'
-                        : 'text-slate-700 hover:bg-slate-100'
-                    )
-                  )}
-                </motion.div>
-              ))}
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: navItems.length * 0.05 }}
-                className="pt-4"
+            {menuOpen ? <X className="h-6 w-6" strokeWidth={1.75} /> : <Menu className="h-6 w-6" strokeWidth={1.75} />}
+          </button>
+        </div>
+      </nav>
+
+      <div id="mobile-menu" hidden={!menuOpen} className="border-t border-ev-rule bg-ev-paper lg:hidden">
+        <ul className="mx-auto max-w-[1200px] px-5 py-4 sm:px-8">
+          {navItems.map((item) => (
+            <li key={item.name}>
+              <Link
+                href={hrefFor(item)}
+                onClick={() => setMenuOpen(false)}
+                className="flex min-h-[48px] items-center font-sans text-lg font-medium text-ev-ink"
               >
-                {onHome ? (
-                  <Button
-                    variant="primary"
-                    size="md"
-                    className="w-full shadow-md hover:shadow-lg transition-shadow cursor-pointer"
-                    onClick={() => {
-                      trackClarityEvent(CLARITY_EVENTS.CONTACT_CTA);
-                      scrollToSection('contact');
-                    }}
-                  >
-                    Get in Touch
-                  </Button>
-                ) : (
-                  <Link href="/#contact" className="block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-signal-blue rounded-lg" onClick={() => setIsMobileMenuOpen(false)}>
-                    <Button
-                      variant="primary"
-                      size="md"
-                      className="w-full shadow-md hover:shadow-lg transition-shadow cursor-pointer"
-                      onClick={() => trackClarityEvent(CLARITY_EVENTS.CONTACT_CTA)}
-                    >
-                      Get in Touch
-                    </Button>
-                  </Link>
-                )}
-              </motion.div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.nav>
+                {item.name}
+              </Link>
+            </li>
+          ))}
+          <li>
+            <a
+              href="/resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => trackClarityEvent(CLARITY_EVENTS.RESUME_DOWNLOAD)}
+              className="flex min-h-[48px] items-center font-sans text-lg font-medium text-ev-ink"
+            >
+              Resume (PDF)
+            </a>
+          </li>
+          <li>
+            <a
+              href={`mailto:${personalInfo.email}`}
+              onClick={() => trackClarityEvent(CLARITY_EVENTS.CONTACT_CTA)}
+              className="mt-2 flex min-h-[48px] items-center justify-center bg-ev-ink font-sans text-lg font-semibold text-ev-paper"
+            >
+              Email
+            </a>
+          </li>
+        </ul>
+      </div>
+    </header>
   );
 }

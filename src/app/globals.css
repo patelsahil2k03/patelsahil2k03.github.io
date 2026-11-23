@@ -31,6 +31,21 @@
     --text-muted: 100 116 139;      /* #64748B */
     --border-default: 226 232 240;  /* #E2E8F0 */
     --border-strong: 203 213 225;   /* #CBD5E1 */
+
+    /* Evidence world (DESIGN.md). Paper and ink for reading; a plot-ink band for the opening and the close;
+       one accent, matplotlib tab:blue, for footnotes, links and figure strokes; tab:orange only inside figures. */
+    --ev-paper: 251 251 249;        /* #FBFBF9 */
+    --ev-figure: 243 244 241;       /* #F3F4F1 figure ground */
+    --ev-ink: 20 22 26;             /* #14161A */
+    --ev-ink2: 60 64 72;            /* #3C4048 */
+    --ev-muted: 94 100 112;         /* #5E6470, 5.74:1 on paper (measured) */
+    --ev-rule: 218 220 214;         /* #DADCD6 */
+    --ev-band: 14 21 38;            /* #0E1526 */
+    --ev-band-ink: 242 241 236;     /* #F2F1EC */
+    --ev-band-muted: 168 176 192;   /* #A8B0C0, 8:1 on band */
+    --ev-accent: 28 107 163;        /* #1C6BA3 tab:blue hue, lightness lowered: 5.51:1 on paper (was #1F77B4 at 4.65:1) */
+    --ev-accent-band: 110 176 230;  /* #6EB0E6 tab:blue lifted for the band */
+    --ev-accent2: 255 127 14;       /* #FF7F0E tab:orange, figures only */
   }
 
   .dark {
@@ -53,6 +68,16 @@
     --text-muted: 148 163 184;      /* #94A3B8 */
     --border-default: 38 50 82;     /* #263252 */
     --border-strong: 51 72 105;     /* #334869 */
+
+    --ev-paper: 14 21 38;           /* #0E1526 */
+    --ev-figure: 20 29 51;          /* #141D33 */
+    --ev-ink: 236 235 230;          /* #ECEBE6 */
+    --ev-ink2: 194 197 204;         /* #C2C5CC */
+    --ev-muted: 154 161 173;        /* #9AA1AD */
+    --ev-rule: 38 48 74;            /* #26304A */
+    --ev-band: 3 5 10;              /* #03050A; separated from the dark paper by a hairline (see .ev-band-edge) */
+    --ev-accent: 110 176 230;       /* #6EB0E6 */
+    --ev-accent-band: 110 176 230;
   }
 
   * {
@@ -60,13 +85,9 @@
   }
 
   body {
-    @apply bg-white text-slate-900;
+    background-color: rgb(var(--ev-paper));
+    color: rgb(var(--ev-ink));
     font-feature-settings: "rlig" 1, "calt" 1;
-  }
-
-  .dark body {
-    background-color: rgb(var(--bg-page));
-    color: rgb(var(--text-primary));
   }
 
   /*
@@ -110,27 +131,6 @@
   .dark .border-slate-800 { border-color: rgb(var(--border-strong)); }
   .dark .border-slate-900 { border-color: rgb(var(--border-strong)); }
 
-  /*
-   * Solid button/CTA fills carrying white text (Button.tsx primary/secondary,
-   * active filter pills, Timeline's active dot, and the handful of standalone
-   * CTA links that reuse the same classes) are a different contrast pairing
-   * than the "foreground accent" role `--signal-blue` / `--alert-amber-icon`
-   * otherwise play: those tokens are tuned to read as bright text against a
-   * dark page, but at that same brightness a white label on top of them fails
-   * AA (e.g. #F59E0B behind white text is only ~2.1:1). Rather than thread a
-   * second contrast-aware token through every button/CTA usage, pin the
-   * handful of *exact* utility classes that are always paired with white
-   * text to fixed deep values in dark mode, independent of the theme-flipping
-   * CSS variables above. This intentionally also mutes a few purely
-   * decorative, textless usages of these same classes (the hero's typing
-   * cursor, Skills' progress-bar fill/legend dots) to a deeper tone in dark
-   * mode — a deliberate, minor trade-off in exchange for not having to touch
-   * every button/CTA call site individually.
-   */
-  .dark .bg-signal-blue { background-color: rgb(29 78 216); }       /* #1D4ED8 */
-  .dark .bg-signal-blue-hover { background-color: rgb(37 99 235); } /* #2563EB — lighter than the base, for hover feedback */
-  .dark .bg-alert-amber { background-color: rgb(146 64 14); }       /* #92400E */
-  .dark .bg-alert-amber-hover { background-color: rgb(180 83 9); }  /* #B45309 — lighter than the base, for hover feedback */
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -143,7 +143,7 @@
   *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
+    transition: none !important;
   }
 }
 
@@ -156,30 +156,118 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #888;
-  border-radius: 4px;
+  background: rgb(var(--ev-rule));
+  border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  background: rgb(var(--ev-muted));
 }
 
-.dark ::-webkit-scrollbar-thumb {
-  background: #334869;
-}
-
-.dark ::-webkit-scrollbar-thumb:hover {
-  background: #46608c;
-}
-
+/* Smooth anchor scrolling only for people who have not asked for reduced motion; the fixed 64px header never covers a target. */
 html {
-  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
 ::selection {
-  background-color: rgba(59, 130, 246, 0.3);
+  background-color: rgb(var(--ev-accent) / 0.22);
 }
 
 .dark ::selection {
-  background-color: rgba(59, 130, 246, 0.4);
+  background-color: rgb(var(--ev-accent) / 0.35);
+}
+
+/* Evidence world: browser surfaces themed from the palette (craft floor). */
+:focus-visible {
+  outline: 2px solid rgb(var(--ev-accent));
+  outline-offset: 3px;
+}
+.ev-poster {
+  font-family: var(--font-display);
+  font-stretch: 75%;
+  font-variation-settings: 'wdth' 75, 'opsz' 96;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 0.92;
+  text-wrap: balance;
+}
+.ev-display {
+  font-family: var(--font-display);
+  font-variation-settings: 'wdth' 85, 'opsz' 48;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+.ev-prose {
+  font-variant-numeric: oldstyle-nums proportional-nums;
+  hanging-punctuation: first;
+  text-wrap: pretty;
+}
+/* No paragraph ends on a lone word (body copy, captions and record text alike). */
+p { text-wrap: pretty; }
+/* A note reached by its "note n" link is tinted, so the reader sees which one they jumped to. */
+li[id^='note-']:target { background: rgb(var(--ev-accent) / 0.08); outline: 1px solid rgb(var(--ev-accent) / 0.35); outline-offset: 4px; }
+.dark .ev-band-edge-b { border-bottom: 1px solid rgb(var(--ev-rule)); }
+.dark .ev-band-edge-t { border-top: 1px solid rgb(var(--ev-rule)); }
+.ev-num {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums lining-nums;
+}
+.ev-link {
+  color: rgb(var(--ev-accent));
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  text-decoration-color: rgb(var(--ev-accent) / 0.4);
+}
+.ev-link:hover {
+  text-decoration-color: rgb(var(--ev-accent));
+}
+/* The hero claim is the page's largest paint: it starts visible (no opacity fade, which would hold back LCP) and settles. */
+@keyframes ev-rise {
+  from { transform: translateY(0.35em); filter: blur(6px); }
+  to { opacity: 1; transform: none; filter: none; }
+}
+/*
+ * Motion (DESIGN.md, Motion): the hero entrance and the figure build are the two authored moments; everything else is a
+ * short state change. Nothing loops, content is visible by default, and under reduced motion all of it is skipped
+ * (the state changes still happen, instantly).
+ */
+@keyframes ev-step {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes ev-spine {
+  from { clip-path: inset(0 0 100% 0); }
+  to { clip-path: inset(0 0 0 0); }
+}
+@keyframes ev-reveal {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes ev-menu {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  /* Figure build: steps in pipeline order, the spine drawn down to the next step; at most about 0.7 s. */
+  [data-build='pending'] .ev-step,
+  [data-build='pending'] .ev-spine { opacity: 0; }
+  [data-build='play'] .ev-step { animation: ev-step 360ms cubic-bezier(0.16, 1, 0.3, 1) both; animation-delay: calc(var(--i) * 70ms); }
+  [data-build='play'] .ev-spine { animation: ev-spine 240ms linear both; animation-delay: calc(var(--i) * 70ms + 120ms); }
+  /* Notes, folds and the mobile menu settle into place where they open; closing is instant. */
+  .ev-reveal { animation: ev-reveal 180ms cubic-bezier(0.16, 1, 0.3, 1) both; }
+  details[open] > :not(summary) { animation: ev-reveal 200ms cubic-bezier(0.16, 1, 0.3, 1) both; }
+  #mobile-menu:not([hidden]) { animation: ev-menu 180ms cubic-bezier(0.16, 1, 0.3, 1) both; }
+  /* Link arrows: the icon nudges toward where the link goes; the link itself never moves. */
+  .ev-arrow { transition: transform 150ms cubic-bezier(0.16, 1, 0.3, 1); }
+  a:hover > .ev-arrow,
+  a:focus-visible > .ev-arrow { transform: translate(2px, -2px); }
+  .ev-rise { animation: ev-rise 900ms cubic-bezier(0.16, 1, 0.3, 1) both; }
+  .ev-rise-2 { animation-delay: 140ms; }
+  .ev-rise-3 { animation-delay: 320ms; }
 }

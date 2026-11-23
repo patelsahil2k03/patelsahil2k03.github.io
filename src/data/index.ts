@@ -31,7 +31,7 @@ export const stats = {
   publications: '2',
   cgpa: '9.35',
   certifications: '5+',
-  hackathons: '3',
+  hackathons: '5',
   leetcodeProblems: '100+',
   // Impact metrics
   usersServed: '2M+',
@@ -43,7 +43,6 @@ export const stats = {
 // Contact information
 export const contact = {
   email: 'patelsahil2k03@gmail.com',
-  phone: '+91 7874337475',
   location: 'Vadodara, Gujarat, India',
   availability: 'Open to opportunities',
 };
@@ -79,7 +78,7 @@ export const social = {
 // SEO metadata
 export const seo = {
   title: 'Sahil Patel | AI/ML Engineer & Full Stack Developer',
-  description: "Associate Software Engineer building production AI and full-stack systems across FinTech, FoodTech, and HealthTech — 2M+ users served. Published researcher, CHARUSAT '24.",
+  description: "AI/ML and full-stack engineer (SDE II on a client engagement, Associate Software Engineer at Digiflux) building production systems across e-commerce, FinTech, FoodTech and HealthTech. Published researcher, CHARUSAT '24.",
   keywords: [
     'Sahil Patel',
     'AI Engineer',
@@ -98,5 +97,11 @@ export const seo = {
     type: 'website',
     locale: 'en_US',
     siteName: 'Sahil Patel Portfolio',
+    image: {
+      url: '/preview.png',
+      width: 1200,
+      height: 630,
+      alt: 'Systems that make it to production. Sahil Patel, Software Development Engineer II, AI/ML and Full Stack.',
+    },
   },
 };

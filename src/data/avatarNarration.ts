@@ -4,7 +4,7 @@ export interface AvatarNarrationEntry {
   thought: string;
 }
 
-// Pose values match spec section 5's finalized mapping against KayKit's
+// Pose values match docs/design/avatar-companion-spec.md section 5's finalized mapping against KayKit's
 // real animation clip names, not a placeholder — Idle_A/Idle_B/Interact/
 // Use_Item/PickUp/Throw/Spawn_Air, deliberately never Hit_*/Death_*.
 //
@@ -18,7 +18,7 @@ export const avatarNarration: AvatarNarrationEntry[] = [
   {
     sectionId: 'home',
     pose: 'Idle_A',
-    thought: "Hey there — I'll be your guide through what Sahil's built.",
+    thought: "Hey there. I'll be your guide through what Sahil's built.",
   },
   {
     sectionId: 'about',
@@ -28,12 +28,12 @@ export const avatarNarration: AvatarNarrationEntry[] = [
   {
     sectionId: 'experience',
     pose: 'Interact',
-    thought: 'Two years in, already the person other teams ping when something breaks.',
+    thought: 'Almost three years in, across FinTech, FoodTech, HealthTech and e-commerce.',
   },
   {
     sectionId: 'case-studies',
     pose: 'Use_Item',
-    thought: 'These are real systems at real scale, not demos — worth a proper look.',
+    thought: 'Production systems first, then a hackathon build and two papers.',
   },
   {
     sectionId: 'skills',
@@ -43,7 +43,7 @@ export const avatarNarration: AvatarNarrationEntry[] = [
   {
     sectionId: 'projects',
     pose: 'Throw',
-    thought: 'Side projects, built purely because he wanted to.',
+    thought: 'University research, hackathon builds and side projects.',
   },
   {
     sectionId: 'publications',
@@ -53,12 +53,12 @@ export const avatarNarration: AvatarNarrationEntry[] = [
   {
     sectionId: 'achievements',
     pose: 'Spawn_Air',
-    thought: 'A few wins worth mentioning — on the field and off it.',
+    thought: 'A few wins worth mentioning, on the field and off it.',
   },
   {
     sectionId: 'contact',
     pose: 'Idle_B',
-    thought: "Go ahead, say hi — I'll be right here.",
+    thought: "Go ahead, say hi. I'll be right here.",
   },
 ];
 

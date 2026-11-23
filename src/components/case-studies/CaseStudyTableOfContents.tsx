@@ -1,31 +1,26 @@
-'use client';
-
 import type { ArticleSection } from '@/lib/caseStudyUtils';
 import { slugToSectionId } from '@/lib/caseStudyUtils';
 
-export function CaseStudyTableOfContents({ sections }: { sections: ArticleSection[] }) {
+export function CaseStudyTableOfContents({
+  sections,
+  extra = [],
+}: {
+  sections: ArticleSection[];
+  extra?: { id: string; title: string }[];
+}) {
   return (
-    <nav
-      aria-label="Table of contents"
-      className="mb-10 p-5 rounded-xl border border-slate-200 bg-slate-50/80"
-    >
-      <p className="text-xs font-semibold uppercase tracking-wide text-slate-500 mb-3">
+    <nav aria-labelledby="toc-heading" className="mt-10">
+      <h2 id="toc-heading" className="font-sans text-base font-semibold text-ev-ink">
         On this page
-      </p>
-      <ol className="space-y-2">
-        {sections.map((section) => {
-          const id = slugToSectionId(section.title);
-          return (
-            <li key={section.title}>
-              <a
-                href={`#${id}`}
-                className="text-sm text-slate-700 hover:text-signal-blue transition-colors duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-signal-blue rounded"
-              >
-                {section.title}
-              </a>
-            </li>
-          );
-        })}
+      </h2>
+      <ol className="mt-2 list-decimal pl-5 font-sans text-sm text-ev-ink2 marker:text-ev-muted">
+        {[...extra, ...sections.map((s) => ({ id: slugToSectionId(s.title), title: s.title }))].map((item) => (
+          <li key={item.id}>
+            <a href={`#${item.id}`} className="inline-flex min-h-[32px] items-center hover:text-ev-accent hover:underline underline-offset-4">
+              {item.title}
+            </a>
+          </li>
+        ))}
       </ol>
     </nav>
   );

@@ -1,0 +1,13 @@
+# One case-insensitive regex per line: claims that were found false or unsupported and removed. They must not return to src/ or resume/.
+# Format:  regex   (everything after  #  on a line is the reason)
+NestJS microservice mesh      # authorship: shared services were a small share of the owner's commits
+\bFitbit\b                    # wearable vendor integrations were not the owner's work
+\bGarmin\b                    # same
+\bOura\b                      # same
+602K\+                        # superseded marketplace listing figure (different grain)
+36 marketplaces               # superseded
+\b517K\b                      # superseded
+AWS Certified Cloud Practitioner   # the credential is an academic-institution course, not the AWS certification
+lnkd\.in/dwVV|lnkd\.in/dNa4   # publication short links replaced by DOI links
+\bprincipal engineer          # seniority is Associate Software Engineer
+\bco-?authored a Springer     # Springer paper: first author

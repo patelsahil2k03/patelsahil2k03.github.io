@@ -1,100 +1,43 @@
-'use client';
-
-import React from 'react';
 import Link from 'next/link';
-import { personalInfo, social } from '@/data';
-import { Github, Linkedin, Mail, Heart } from 'lucide-react';
+import { personalInfo } from '@/data/personal';
 
+const profiles = [
+  { label: 'GitHub', href: personalInfo.social.github },
+  { label: 'LinkedIn', href: personalInfo.social.linkedin },
+  { label: 'Google Scholar', href: personalInfo.social.googleScholar },
+];
+
+/** The quiet end of every page, on the ink band. */
 export function Footer() {
-  const currentYear = new Date().getFullYear();
-
-  const quickLinks = [
-    { label: 'About', href: '/#about' },
-    { label: 'Experience', href: '/#experience' },
-    { label: 'Case Studies', href: '/case-studies/' },
-    { label: 'Projects', href: '/#projects' },
-    { label: 'Publications', href: '/#publications' },
-    { label: 'Contact', href: '/#contact' },
-  ];
-
   return (
-    <footer className="bg-slate-900 text-slate-300">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-          {/* Brand */}
-          <div>
-            <Link
-              href="/"
-              className="text-2xl font-bold text-white mb-4 hover:text-signal-blue-hover transition-colors inline-block"
-            >
-              {personalInfo.name}
-            </Link>
-            <p className="text-sm text-slate-400 leading-relaxed">
-              {personalInfo.tagline}
-            </p>
-          </div>
-
-          {/* Quick Links */}
-          <div>
-            <h3 className="text-white font-semibold mb-4">Quick Links</h3>
-            <ul className="space-y-2 text-sm">
-              {quickLinks.map((link) => (
-                <li key={link.label}>
-                  <Link href={link.href} className="hover:text-signal-blue-hover transition-colors">
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Social & Contact */}
-          <div>
-            <h3 className="text-white font-semibold mb-4">Connect</h3>
-            <div className="flex gap-3 mb-4">
-              <a
-                href={social.github.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-2 bg-slate-800 rounded-lg hover:bg-signal-blue transition-colors"
-                aria-label="GitHub"
-              >
-                <Github className="w-5 h-5" />
+    <footer className="border-t border-ev-band-ink/10 bg-ev-band text-ev-band-muted">
+      <div className="mx-auto flex w-full max-w-[1200px] flex-col gap-3 px-5 py-8 font-sans text-sm sm:flex-row sm:items-center sm:justify-between sm:px-8 lg:px-12">
+        <p>
+          <Link href="/" className="font-semibold text-ev-band-ink hover:underline underline-offset-4">
+            {personalInfo.name}
+          </Link>
+          <span className="ml-2">{personalInfo.tagline}</span>
+        </p>
+        <ul className="flex flex-wrap gap-x-5 gap-y-1">
+          {profiles.map((p) => (
+            <li key={p.label}>
+              <a href={p.href} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-[32px] items-center hover:text-ev-band-ink hover:underline underline-offset-4">
+                {p.label}
               </a>
-              <a
-                href={social.linkedin.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-2 bg-slate-800 rounded-lg hover:bg-signal-blue transition-colors"
-                aria-label="LinkedIn"
-              >
-                <Linkedin className="w-5 h-5" />
-              </a>
-              <a
-                href={`mailto:${personalInfo.email}`}
-                className="p-2 bg-slate-800 rounded-lg hover:bg-signal-blue transition-colors"
-                aria-label="Email"
-              >
-                <Mail className="w-5 h-5" />
-              </a>
-            </div>
-            <p className="text-sm text-slate-400">
-              <a href={`mailto:${personalInfo.email}`} className="hover:text-signal-blue-hover transition-colors">
-                {personalInfo.email}
-              </a>
-            </p>
-          </div>
-        </div>
-
-        {/* Bottom Bar */}
-        <div className="pt-8 border-t border-slate-800 flex flex-col sm:flex-row justify-between items-center gap-4 text-sm">
-          <p className="text-slate-400">
-            © {currentYear} {personalInfo.name}. All rights reserved.
-          </p>
-          <p className="flex items-center gap-2 text-slate-400">
-            Built with <Heart className="w-4 h-4 text-red-500 fill-red-500" /> using Next.js & TypeScript
-          </p>
-        </div>
+            </li>
+          ))}
+          <li>
+            <a href={`mailto:${personalInfo.email}`} className="inline-flex min-h-[32px] items-center hover:text-ev-band-ink hover:underline underline-offset-4">
+              Email
+            </a>
+          </li>
+        </ul>
+        <p>
+          <span className="ev-num">{new Date().getFullYear()}</span> ·{' '}
+          <Link href="/#notes" className="hover:text-ev-band-ink hover:underline underline-offset-4">
+            Sources
+          </Link>
+        </p>
       </div>
     </footer>
   );

@@ -1,4 +1,4 @@
-# Build and lint on non-production branches (no GitHub Pages deploy)
+# Checks on non-production branches (no GitHub Pages deploy): lint, types, project checks, build, content check
 name: CI
 
 on:
@@ -29,7 +29,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "22"
           cache: npm
 
       - name: Install dependencies
@@ -38,7 +38,25 @@ jobs:
       - name: Lint
         run: npm run lint
 
+      - name: Type check
+        run: npx tsc --noEmit
+
+      - name: Setup Python (project checks)
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Project checks (claims, public safety, guard tests, task index)
+        run: |
+          python3 tools/checks/check_claims.py
+          python3 tools/checks/check_public_safe.py
+          python3 -m unittest discover -s tools/agent-guard/tests
+          python3 tools/checks/build_pending_index.py --check
+
       - name: Build
         env:
           NEXT_PUBLIC_CLARITY_PROJECT_ID: ${{ secrets.NEXT_PUBLIC_CLARITY_PROJECT_ID }}
         run: npm run build
+
+      - name: Content check (no rendered detail lost)
+        run: node tools/checks/content_inventory.mjs

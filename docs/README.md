@@ -1,29 +1,19 @@
-## Documentation Index
+# docs/
 
-This folder organizes all non-code documentation for the portfolio project.
+Where each kind of fact lives. One home per fact; a file's own header says what it is, so this list does not describe files twice. Rules for working here: `../nextprompt.md`.
 
-### Active docs
+| Question | File |
+|---|---|
+| What is open, and what can start now? | `PENDING_TASKS.md` (index) → `findings/<ID>.md` (one per finding) |
+| What do we need from the owner? | `OWNER_INPUTS.md` |
+| Is this figure or claim true? | `CLAIMS_LEDGER.md` |
+| What was decided? | `DECISIONS.md` |
+| What happened before? | `HISTORY.md` |
+| Who is the owner (profile originals)? | `PROFILE_SOURCES.md` → `private/profile/` (git-ignored) |
+| How do we build, branch and release? | `DEPLOYMENT.md` |
+| How a case study is shaped, routed and planned? | `CASE_STUDIES.md` (the studies are in `src/data/caseStudies.ts`) |
+| What does the design aim for, and why? | `design/DESIGN_DIRECTION.md`; research in `design/` |
+| How does an agent start a session? | `SESSION_START_PROMPTS.md`; the card `AGENT_CARD.md` is generated from `../nextprompt.md` |
+| Which agent skills are available? | `SKILLS_DIRECTORY.md` |
 
-- `../BRANCH_STRATEGY.md` – **dev / main** workflow, feature branches, CI vs deploy
-- `DEPLOYMENT.md` – how the site is built and deployed (GitHub Actions, static export)
-- `PORTFOLIO_SCOPE_CHECKLIST.md` – **master scope tracker** (build gates, done/pending, CSV inventory, commits)
-- `CASE_STUDIES.md` – case study inventory, routes, cross-links, refinement checklist
-- `CONTENT_DATA_REQUESTS.md` – running list of specific facts/numbers needed from Sahil for site content, surfaced during audits (don't fabricate — ask and track here instead)
-- `../ASSETS_GUIDE.md` – **the single canonical asset guide** (images, logos, links, specs, priorities, which fields are wired vs. still need display code) — supersedes the 3 archived asset docs, don't split asset guidance across other files
-- `COMPETITIVE_DESIGN_RESEARCH.md` – **the current design-inspiration/competitive-research source** (21 sites, live-site + GitHub-repo verified, plus our own design retrospective and a prioritized Tier 1-3 recommendation list) — supersedes `PORTFOLIO_REFERENCE.md`'s inspiration/patterns/features sections
-- `../PORTFOLIO_REFERENCE.md` – historical design inspiration notes (superseded by `COMPETITIVE_DESIGN_RESEARCH.md`, see banner at top of file); still load-bearing for Tools & Resources, Content Guidelines, Progress Tracking
-- `superpowers/plans/2026-08-19-portfolio-production-readiness.md` – production-readiness plan and full task-by-task execution ledger
-- `../resume/main.tex` + `../resume/RESUME_IMPROVEMENTS.md` – resume LaTeX source and pending review notes (not yet applied)
-
-### Historical docs (archive/)
-
-Located under `docs/archive/`:
-
-- `PORTFOLIO_UI_PHASE1.md` – Phase 1 UI enhancement summary (HeroEnhanced, Navigation)
-- `PHASE2_MILESTONE.md` – Phase 2 completion and roadmap (merged content)
-- `DEBUG_PHASE2.md` – Issue investigations and fixes applied during Phase 2
-- `NEXT_STEPS.md` – early next-steps notes (superseded by newer plans)
-- `PHASE3_ANIMATIONS_PLAN.md` – early plan for advanced animations/3D
-- `PHASE3A_PLAN.md` – follow-up details for animations
-- Existing archive files created during earlier cleanup (`ASSET_PLAN.md`, etc.)
-
+`private/` is git-ignored: evidence that names clients, credential findings and the profile originals. This repository is public, so nothing tracked may name a client, an internal project or a credential file.
