@@ -46,7 +46,16 @@ next-env.d.ts
 # IDE
 .vscode/
 .idea/
-.cursor/
+# Project skills under .cursor/skills/ are tracked (one home for every harness); only the vendored UI skill and personal settings stay local
+.cursor/skills/ui-ux-pro-max/
+.cursor/sandbox.json
+.claude/settings.local.json
+# Word resumes carry the employer's template and personal contact data: local only (docs/private/ holds working notes)
+/Resume_FullStack.docx
+resume/*.docx
+# GCP service-account keys never enter this public repository (the owner keeps them outside it).
+sahil-test-*.json
+*service-account*.json
 *.swp
 *.swo
 *~
@@ -71,6 +80,10 @@ output.txt
 
 # Trash folder
 .trash/
+
+# Python bytecode from tools/ (checks, agent guard)
+__pycache__/
+*.py[cod]
 
 # Optional: Keep old components for reference but don't track changes
 # /src/comps/
