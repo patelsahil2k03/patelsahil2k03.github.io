@@ -10,9 +10,10 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['var(--font-inter)', 'Inter', 'sans-serif'],
-        display: ['var(--font-space-grotesk)', 'Space Grotesk', 'sans-serif'],
-        mono: ['var(--font-jetbrains-mono)', 'JetBrains Mono', 'monospace'],
+        sans: ['var(--font-display)', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        display: ['var(--font-display)', 'ui-sans-serif', 'sans-serif'],
+        serif: ['var(--font-serif)', 'Georgia', 'serif'],
+        mono: ['var(--font-mono)', 'ui-monospace', 'monospace'],
       },
       colors: {
         'signal-blue': {
@@ -29,6 +30,21 @@ const config: Config = {
           icon: 'rgb(var(--alert-amber-icon) / <alpha-value>)',
           hover: 'rgb(var(--alert-amber-hover) / <alpha-value>)',
         },
+        // Evidence world tokens (DESIGN.md). Values flip under .dark in globals.css.
+        ev: {
+          paper: 'rgb(var(--ev-paper) / <alpha-value>)',
+          figure: 'rgb(var(--ev-figure) / <alpha-value>)',
+          ink: 'rgb(var(--ev-ink) / <alpha-value>)',
+          ink2: 'rgb(var(--ev-ink2) / <alpha-value>)',
+          muted: 'rgb(var(--ev-muted) / <alpha-value>)',
+          rule: 'rgb(var(--ev-rule) / <alpha-value>)',
+          band: 'rgb(var(--ev-band) / <alpha-value>)',
+          'band-ink': 'rgb(var(--ev-band-ink) / <alpha-value>)',
+          'band-muted': 'rgb(var(--ev-band-muted) / <alpha-value>)',
+          accent: 'rgb(var(--ev-accent) / <alpha-value>)',
+          'accent-band': 'rgb(var(--ev-accent-band) / <alpha-value>)',
+          accent2: 'rgb(var(--ev-accent2) / <alpha-value>)',
+        },
         page: 'rgb(var(--bg-page) / <alpha-value>)',
         surface: {
           DEFAULT: 'rgb(var(--bg-surface) / <alpha-value>)',
@@ -42,35 +58,6 @@ const config: Config = {
         edge: {
           DEFAULT: 'rgb(var(--border-default) / <alpha-value>)',
           strong: 'rgb(var(--border-strong) / <alpha-value>)',
-        },
-      },
-      animation: {
-        'float': 'float 6s ease-in-out infinite',
-        'fade-in': 'fade-in 0.5s ease-in',
-        'slide-up': 'slide-up 0.5s ease-out',
-        'slide-down': 'slide-down 0.5s ease-out',
-        'scale-in': 'scale-in 0.3s ease-out',
-      },
-      keyframes: {
-        float: {
-          '0%, 100%': { transform: 'translateY(0px)' },
-          '50%': { transform: 'translateY(-20px)' },
-        },
-        'fade-in': {
-          '0%': { opacity: '0' },
-          '100%': { opacity: '1' },
-        },
-        'slide-up': {
-          '0%': { transform: 'translateY(20px)', opacity: '0' },
-          '100%': { transform: 'translateY(0)', opacity: '1' },
-        },
-        'slide-down': {
-          '0%': { transform: 'translateY(-20px)', opacity: '0' },
-          '100%': { transform: 'translateY(0)', opacity: '1' },
-        },
-        'scale-in': {
-          '0%': { transform: 'scale(0.9)', opacity: '0' },
-          '100%': { transform: 'scale(1)', opacity: '1' },
         },
       },
     },

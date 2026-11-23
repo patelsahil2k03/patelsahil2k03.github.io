@@ -1,16 +1,25 @@
 import type { Metadata } from 'next';
 import { PageShell } from '@/components/layout/PageShell';
 import { CaseStudyIndex } from '@/components/case-studies/CaseStudyIndex';
+import { seo } from '@/data';
 
 export const metadata: Metadata = {
   title: 'Case Studies | Sahil Patel',
   description:
-    'Engineering case studies from production AI systems, hackathons, and research—problem context, insights, and delivery notes.',
+    'Case studies from production AI systems, a hackathon build and published research: the problem, the approach, and what I built.',
+  alternates: { canonical: '/case-studies/' },
   openGraph: {
     title: 'Case Studies | Sahil Patel',
-    description: 'Production systems, POCs, and research—written like an internal tech blog.',
+    description: 'Case studies from production AI systems, a hackathon build and published research: the problem, the approach, and what I built.',
     url: 'https://patelsahil2k03.github.io/case-studies/',
     type: 'website',
+    images: [seo.og.image],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Case Studies | Sahil Patel',
+    description: 'Case studies from production AI systems, a hackathon build and published research: the problem, the approach, and what I built.',
+    images: [seo.og.image.url],
   },
 };
 

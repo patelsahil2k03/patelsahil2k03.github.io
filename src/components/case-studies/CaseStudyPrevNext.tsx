@@ -2,48 +2,29 @@ import Link from 'next/link';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import type { CaseStudy } from '@/data/caseStudies';
 
-export function CaseStudyPrevNext({
-  prev,
-  next,
-}: {
-  prev: CaseStudy | null;
-  next: CaseStudy | null;
-}) {
+export function CaseStudyPrevNext({ prev, next }: { prev: CaseStudy | null; next: CaseStudy | null }) {
   if (!prev && !next) return null;
 
   return (
-    <nav
-      className="mt-16 pt-10 border-t border-slate-200 grid grid-cols-1 sm:grid-cols-2 gap-4"
-      aria-label="Case study navigation"
-    >
+    <nav aria-label="Case study navigation" className="mt-14 grid grid-cols-1 gap-6 border-t border-ev-rule pt-8 sm:grid-cols-2">
       {prev ? (
-        <Link
-          href={`/case-studies/${prev.id}/`}
-          className="group p-5 rounded-xl border border-slate-200 bg-slate-50/50 hover:border-signal-blue/25 hover:bg-signal-blue/10 transition-all duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-signal-blue"
-        >
-          <span className="inline-flex items-center gap-1.5 text-xs font-medium text-slate-500 mb-2">
-            <ArrowLeft className="w-3.5 h-3.5" aria-hidden />
+        <Link href={`/case-studies/${prev.id}/`} className="group block">
+          <span className="inline-flex items-center gap-1.5 font-sans text-sm text-ev-muted">
+            <ArrowLeft className="h-4 w-4" strokeWidth={1.75} aria-hidden />
             Previous
           </span>
-          <span className="block text-sm font-semibold text-slate-900 group-hover:text-signal-blue transition-colors line-clamp-2">
-            {prev.title}
-          </span>
+          <span className="mt-1 block font-sans text-base font-semibold text-ev-ink group-hover:text-ev-accent">{prev.title}</span>
         </Link>
       ) : (
         <div />
       )}
       {next ? (
-        <Link
-          href={`/case-studies/${next.id}/`}
-          className="group p-5 rounded-xl border border-slate-200 bg-slate-50/50 hover:border-signal-blue/25 hover:bg-signal-blue/10 transition-all duration-200 cursor-pointer text-right sm:col-start-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-signal-blue"
-        >
-          <span className="inline-flex items-center gap-1.5 text-xs font-medium text-slate-500 mb-2 justify-end w-full">
+        <Link href={`/case-studies/${next.id}/`} className="group block text-right sm:col-start-2">
+          <span className="inline-flex items-center gap-1.5 font-sans text-sm text-ev-muted">
             Next
-            <ArrowRight className="w-3.5 h-3.5" aria-hidden />
+            <ArrowRight className="h-4 w-4" strokeWidth={1.75} aria-hidden />
           </span>
-          <span className="block text-sm font-semibold text-slate-900 group-hover:text-signal-blue transition-colors line-clamp-2">
-            {next.title}
-          </span>
+          <span className="mt-1 block font-sans text-base font-semibold text-ev-ink group-hover:text-ev-accent">{next.title}</span>
         </Link>
       ) : null}
     </nav>

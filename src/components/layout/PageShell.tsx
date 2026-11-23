@@ -6,7 +6,7 @@ export function PageShell({ children }: { children: React.ReactNode }) {
   return (
     <>
       <Navigation />
-      <main className="min-h-screen pt-16">{children}</main>
+      <main id="main" className="min-h-screen pt-16">{children}</main>
       <Footer />
     </>
   );

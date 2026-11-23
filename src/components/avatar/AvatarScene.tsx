@@ -21,7 +21,7 @@ function Model({ pose }: { pose?: string }) {
   const { animations } = useGLTF(AVATAR_ANIMATIONS_PATH);
   // useAnimations binds these foreign clips to `group`'s own hierarchy by
   // matching bone/node names — this is the retargeting step verified
-  // compatible in spec section 6c (24 matching bone names between the
+  // compatible in docs/design/avatar-companion-spec.md section 6c (24 matching bone names between the
   // character and the animation library).
   const { actions, names, mixer } = useAnimations(animations, group);
   const currentActionName = useRef<string | null>(null);
@@ -142,6 +142,7 @@ export function AvatarScene({
   className?: string;
   pose?: string;
 }) {
+  useEffect(preloadAvatarModels, []);
   return (
     <div className={className}>
       <Canvas camera={{ fov: 40 }}>
@@ -155,5 +156,11 @@ export function AvatarScene({
   );
 }
 
-useGLTF.preload(AVATAR_CHARACTER_PATH);
-useGLTF.preload(AVATAR_ANIMATIONS_PATH);
+// Preloaded on first mount, not at module load: loading the module (e.g. a route prefetch) must not fetch 1.3 MB of models.
+let preloaded = false;
+export function preloadAvatarModels() {
+  if (preloaded) return;
+  preloaded = true;
+  useGLTF.preload(AVATAR_CHARACTER_PATH);
+  useGLTF.preload(AVATAR_ANIMATIONS_PATH);
+}

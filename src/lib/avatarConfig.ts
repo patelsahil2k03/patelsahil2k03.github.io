@@ -4,7 +4,7 @@
  * Swap these two paths to change which character the companion uses.
  * Any character from the KayKit Adventurers pack works here as long as
  * it shares the animation library's skeleton bone names (verified true
- * for every character in the pack — see spec section 6c). A future
+ * for every character in the pack — see docs/design/avatar-companion-spec.md section 6c). A future
  * personal-likeness model (e.g. from Meshy) would also work here, as
  * long as it's rigged with a compatible skeleton.
  */
@@ -12,11 +12,11 @@ export const AVATAR_CHARACTER_PATH = '/models/character-ranger.glb';
 export const AVATAR_ANIMATIONS_PATH = '/models/animations-general.glb';
 
 /**
- * Site-wide kill switch. Flip to false to hide the avatar companion
- * entirely without a code revert, if something looks wrong in
- * production that wasn't caught in testing (spec section 6b).
+ * Site-wide kill switch. Off since 2026-11-23 while the homepage design is
+ * reworked (finding U-02 holds the restore condition). When false, neither
+ * the companion nor its nav toggle renders, and the 3D chunk is never requested.
  */
-export const AVATAR_ENABLED = true;
+export const AVATAR_ENABLED = false;
 
 /**
  * How much room to leave around the character when framing it.

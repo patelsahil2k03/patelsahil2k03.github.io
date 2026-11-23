@@ -1,24 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
-import { useInView } from 'react-intersection-observer';
-
-/**
- * Hook to detect when an element is in viewport
- * Used for triggering scroll animations
- */
-export function useScrollAnimation(options = {}) {
-  const defaultOptions = {
-    triggerOnce: true,
-    threshold: 0.1,
-    rootMargin: '0px 0px -100px 0px',
-    ...options
-  };
-
-  const { ref, inView } = useInView(defaultOptions);
-
-  return { ref, inView };
-}
+import { useEffect, useState } from 'react';
 
 /**
  * Hook to detect reduced motion preference
@@ -42,57 +24,33 @@ export function usePrefersReducedMotion() {
 }
 
 /**
- * Tracks which of the given section ids is currently scrolled into view,
- * using the same offset-based scroll-position check as Navigation.tsx's
- * nav-highlighting (not IntersectionObserver). Returns sectionIds[0] until
- * the first scroll event fires. Pass enabled=false to skip entirely (e.g.
- * on a route where these sections don't exist).
+ * Which of the given section ids is in view: the one crossing a thin line 40% down the viewport (sections are stacked,
+ * so at most one crosses it).
+ * IntersectionObserver, not a scroll listener. Returns '' until a section reaches that line; pass enabled=false to skip.
+ * Used by the nav's active-section marker and by the (hidden) avatar companion.
  */
 export function useActiveSection(sectionIds: string[], enabled: boolean = true) {
-  const [activeSection, setActiveSection] = useState(sectionIds[0] ?? '');
+  const [activeSection, setActiveSection] = useState('');
+  const key = sectionIds.join('|');
 
   useEffect(() => {
     if (!enabled || sectionIds.length === 0) return;
-
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY + 100;
-
-      for (const section of sectionIds) {
-        const element = document.getElementById(section);
-        if (element) {
-          const { offsetTop, offsetHeight } = element;
-          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
-            setActiveSection(section);
-            break;
-          }
-        }
-      }
-    };
-
-    handleScroll();
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [enabled, sectionIds]);
+    const visible = new Set<string>();
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => (e.isIntersecting ? visible.add(e.target.id) : visible.delete(e.target.id)));
+        setActiveSection(sectionIds.find((id) => visible.has(id)) ?? '');
+      },
+      { rootMargin: '-40% 0px -59% 0px' }
+    );
+    sectionIds.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) io.observe(el);
+    });
+    return () => io.disconnect();
+    // key carries sectionIds' content, so a new array with the same ids does not re-subscribe
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [enabled, key]);
 
   return activeSection;
-}
-
-/**
- * Hook for mouse parallax effect
- */
-export function useMouseParallax(strength: number = 20) {
-  const [position, setPosition] = useState({ x: 0, y: 0 });
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      const x = (e.clientX / window.innerWidth - 0.5) * strength;
-      const y = (e.clientY / window.innerHeight - 0.5) * strength;
-      setPosition({ x, y });
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, [strength]);
-
-  return position;
 }

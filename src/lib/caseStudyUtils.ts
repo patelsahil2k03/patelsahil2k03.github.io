@@ -27,12 +27,7 @@ export function getArticleSections(study: CaseStudy): ArticleSection[] {
     { title: 'What I built', content: study.contribution },
   ];
 
-  const stack: ArticleSection = {
-    title: 'Technical approach',
-    content: `Stack and tooling for this work: ${study.technologies.join(', ')}. Topics covered: ${study.topics.join(', ')}.`,
-  };
-
-  return [...core, ...(study.articleSections ?? []), stack];
+  return [...core, ...(study.articleSections ?? [])];
 }
 
 export function getRelatedCaseStudies(study: CaseStudy, limit = 3): CaseStudy[] {
@@ -47,25 +42,20 @@ export function getRelatedCaseStudies(study: CaseStudy, limit = 3): CaseStudy[] 
     .slice(0, limit);
 }
 
-export function getTypeVariant(
-  type: CaseStudyType
-): 'default' | 'secondary' | 'success' | 'cyan' {
-  const map: Record<CaseStudyType, 'default' | 'secondary' | 'success' | 'cyan'> = {
-    production: 'default',
-    poc: 'cyan',
-    research: 'success',
-    'deep-dive': 'secondary',
-    build: 'secondary',
-  };
-  return map[type] ?? 'default';
+const TYPE_ORDER: Record<string, number> = { production: 0, build: 1, poc: 2, research: 3, 'deep-dive': 4 };
+
+/** Index order: production first, then builds, proofs of concept and research; newest first within each. */
+export function indexOrder(a: CaseStudy, b: CaseStudy): number {
+  return (TYPE_ORDER[a.type] ?? 9) - (TYPE_ORDER[b.type] ?? 9) || (b.publishedAt ?? '').localeCompare(a.publishedAt ?? '');
 }
 
 export function formatPublishedDate(isoDate?: string): string {
   if (!isoDate) return '';
-  return new Date(isoDate).toLocaleDateString('en-US', {
-    month: 'long',
-    year: 'numeric',
-  });
+  // Year-only values (e.g. '2025') are shown as-is rather than as a guessed month.
+  if (/^\d{4}$/.test(isoDate)) return isoDate;
+  // Format in UTC: a bare ISO date is UTC midnight, so a local time zone west of UTC would show the previous month
+  // (and disagree with the server render).
+  return new Date(isoDate).toLocaleDateString('en-US', { month: 'long', year: 'numeric', timeZone: 'UTC' });
 }
 
 export function getCaseStudiesForExperience(experienceId: string): CaseStudy[] {

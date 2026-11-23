@@ -31,6 +31,9 @@ export const skillCategories: SkillCategory[] = [
       { name: 'Angular', proficiency: 75 },
       { name: 'Node.js', proficiency: 80 },
       { name: 'Express', proficiency: 80 },
+      { name: 'FastAPI' },
+      { name: 'React Native' },
+      { name: 'gRPC' },
       { name: 'LangChain', proficiency: 85 },
       { name: 'TensorFlow', proficiency: 80 },
       { name: 'Scikit-learn', proficiency: 85 },
@@ -58,13 +61,17 @@ export const skillCategories: SkillCategory[] = [
       { name: 'Time Series Analysis', proficiency: 80 },
       { name: 'LLMs', proficiency: 85 },
       { name: 'OpenAI API', proficiency: 85 },
+      { name: 'Google Gemini' },
+      { name: 'RAG' },
+      { name: 'Pinecone' },
     ]
   },
   {
     category: 'Cloud & DevOps',
     skills: [
-      { name: 'AWS Sagemaker', proficiency: 80 },
+      { name: 'AWS Sagemaker' },
       { name: 'AWS Lambda', proficiency: 75 },
+      { name: 'AWS S3' },
       { name: 'DynamoDB', proficiency: 75 },
       { name: 'CloudWatch', proficiency: 70 },
       { name: 'Docker', proficiency: 80 },
