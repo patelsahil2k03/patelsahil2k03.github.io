@@ -17,3 +17,9 @@ Resolved decisions that shape the work. Open decisions live in the "Start here" 
 | D-11 | Avatar companion | **Off** behind `AVATAR_ENABLED`; code kept; restore condition in U-02. | 2026-11-23 |
 | D-13 | Redesign direction | **Option C, Evidence**: poster-type ink band, then paper-and-figures reading with every metric footnoted to the ledger; audience AI/ML engineer hiring; email-only contact; client described as a creator-commerce marketplace platform. | 2026-11-23 |
 | D-12 | One home per kind of document | Owner inputs in `OWNER_INPUTS.md`, history in `HISTORY.md`, deploy and branches in `DEPLOYMENT.md`; the archive and session plans are retired. | 2026-11-23 |
+| D-14 | Hero visual | **Type only.** A pencil-sketch plate, a line-screen portrait and a pipeline drawing were tried and rejected; the real photo lives in About. | 2026-11-23 |
+| D-15 | Motion | **Purposeful only:** hero entrance, figure build in pipeline order, short reveals for notes, folds and menu, arrow nudge; nothing loops; reduced motion shows final states. | 2026-11-24 |
+| D-16 | Footnote scope | **Ten key figures** (`KEY_FIGURES`: production scale and headline accuracy) carry footnotes; every other figure keeps its ledger row and renders plain; repeated figures removed from results rows and About. | 2026-11-24 |
+| D-17 | Homepage ending | **Sources before Contact**, so the page ends on the ask; each source leads with its kind of evidence. | 2026-11-24 |
+| D-18 | Analytics | **Keep Clarity**, loaded after the page is idle with its call queue created at once (no events lost). | 2026-11-24 |
+| D-19 | Résumé | **One page**, rebuilt from `resume/main.tex` in a throwaway TeX Live container; phone number kept by the owner's choice (the site is email-only). | 2026-11-24 |

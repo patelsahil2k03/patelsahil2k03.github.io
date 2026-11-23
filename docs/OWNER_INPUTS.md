@@ -36,10 +36,9 @@ Specifications: images as WebP or JPG, under 500 KB, at 2× the displayed size; 
 
 | # | Decision | Recommendation | Finding |
 |---|---|---|---|
-| C7 | Commit grouping and commits (no trailers) | Approve the proposed groups | H-01 |
 | C8 | Push the corrected GitHub profile README; bio, location, pins | Show the diff first | F-03 |
-| C9 | Rotate the credentials in public history; move plaintext credential files | Do this first: the only item with real exposure | F-09, F-10 |
 | C11 | Framework upgrade on its own branch | After the redesign lands | F-11 |
+| C16 | Switch GitHub Pages to deploy from GitHub Actions only (today it also builds from the branch on every push) | Yes | H-04 |
 
 ## Answered
 
@@ -51,6 +50,8 @@ Specifications: images as WebP or JPG, under 500 KB, at 2× the displayed size; 
 | AI-Manthan / ForeSight date | 2025-10-11, the hackathon repository's first commit | git | 2026-08 |
 | Publication links | DOI links from the publisher records | Crossref, Springer | 2026-10-26 |
 | "Typically responds within 24 hours" | Removed (no source) | — | 2026-11-23 |
+| C9: rotate credentials exposed in three other repositories; move plaintext key files out of work folders (F-09, F-10) | Owner: the keys are old free-tier keys and expired; the other repositories and folders will be cleaned later as their own task, outside this repository. This repository's history holds no credential (96 commits scanned) | Sahil, in session | 2026-11-24 |
+| C7: commit grouping and commits (no trailers) | Approved; 7 commits on `dev`, CI green, released to `main` as `7c0dce9` | Sahil, in session | 2026-11-24 |
 | C10: rebuild `resume.pdf` on a machine with LaTeX | Done in a throwaway TeX Live container: one page, 0 errors, installed as `public/resume.pdf` | Agent, owner yes to recommended | 2026-11-24 |
 | C3: keep numeric skill self-ratings, or drop them | Default applied: dropped; skills are plain grouped lists (AI/ML first) | Redesign U-15 | 2026-11-23 |
 | C6: remove the committed LinkedIn export from the tree | Yes (with C14): trashed, private copy kept; still in git history | Sahil, in session | 2026-11-23 |

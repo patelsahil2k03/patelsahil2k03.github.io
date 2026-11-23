@@ -2,7 +2,7 @@
 
 | Priority | Status | Area | Owner | Opened | Updated |
 |---|---|---|---|---|---|
-| P2 | Done (uncommitted) | ui | UI agent; Sahil | 2026-10-26 | 2026-11-23 |
+| P2 | Done (released 2026-11-24) | ui | UI agent; Sahil | 2026-10-26 | 2026-11-23 |
 
 ## Finding
 

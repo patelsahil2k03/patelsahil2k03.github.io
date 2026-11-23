@@ -14,7 +14,7 @@ Next.js 14.2 (latest 16.4), React 18.2 (19.3), Tailwind 3.4 (4.3), react-three-f
 
 ## Done so far
 
-Workflows moved to Node 22 and `npm ci` (uncommitted).
+Workflows moved to Node 22 and `npm ci` (released 2026-11-24).
 
 ## Next action
 

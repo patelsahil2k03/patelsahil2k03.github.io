@@ -40,7 +40,7 @@ git checkout dev
 
 Before the merge, `python3 tools/checks/check_links.py` must report 0 broken outbound links (local only: it needs a browser for sites that refuse scripted requests). Rollback is a revert commit on `main` (its own yes), never a force push. After a deploy, check: HTTP 200 on `/`, `/case-studies/`, one case-study page, `sitemap.xml`, `robots.txt` and `resume.pdf`, and spot-check one changed fact on the live page.
 
-**Repository settings (recommended):** default branch `dev`; protect `main`.
+**Repository settings (recommended):** default branch `dev`; protect `main`; Pages source "GitHub Actions" (today Pages also builds from the branch on every push and races the Next.js deploy: finding H-04). After a release, confirm the Next.js deploy finished last, then run Lighthouse on the live site (local servers send files uncompressed).
 
 ## Microsoft Clarity (analytics)
 

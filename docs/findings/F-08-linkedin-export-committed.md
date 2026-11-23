@@ -2,7 +2,7 @@
 
 | Priority | Status | Area | Owner | Opened | Updated |
 |---|---|---|---|---|---|
-| P1 | Done 2026-11-23 (uncommitted): removed from the tree; still in git history | security | Sahil (approval) | 2026-10-26 | 2026-11-24 |
+| P1 | Done 2026-11-23 (released 2026-11-24): removed from the tree; still in git history | security | Sahil (approval) | 2026-10-26 | 2026-11-24 |
 
 ## Finding
 

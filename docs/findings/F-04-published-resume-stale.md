@@ -2,7 +2,7 @@
 
 | Priority | Status | Area | Owner | Opened | Updated |
 |---|---|---|---|---|---|
-| P0 | Done 2026-11-24 (uncommitted): PDF rebuilt from the corrected source, one page | resume | Resume agent; Sahil (rebuild machine) | 2026-10-26 | 2026-11-24 |
+| P0 | Done 2026-11-24 (released 2026-11-24): PDF rebuilt from the corrected source, one page | resume | Resume agent; Sahil (rebuild machine) | 2026-10-26 | 2026-11-24 |
 
 ## Finding
 
@@ -14,7 +14,7 @@ The former resume review notes, items 1-11 (all applied to the source on 2026-10
 
 ## Done so far
 
-Dates, AI Catalyst entry, marketplace and fitness bullets and AWS wording edited in the source; on 2026-10-26 every experience bullet was also corrected to the evidence ladder (F-19) and the claims check passes on the source (uncommitted).
+Dates, AI Catalyst entry, marketplace and fitness bullets and AWS wording edited in the source; on 2026-10-26 every experience bullet was also corrected to the evidence ladder (F-19) and the claims check passes on the source (released 2026-11-24).
 
 **2026-11-23:** independent content review found the served PDF and `main.tex` still wrong (fruit 88%, Team Star date, ASE start, no SDE II, 20+ APIs without a ledger row, Web of Science indexing). `main.tex` corrected to match the site and ledger; the PDF must be rebuilt from it (OWNER_INPUTS C10).
 

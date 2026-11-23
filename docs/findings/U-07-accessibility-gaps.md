@@ -2,7 +2,7 @@
 
 | Priority | Status | Area | Owner | Opened | Updated |
 |---|---|---|---|---|---|
-| P1 | Done 2026-11-24 (uncommitted): keyboard walk, contrast and reduced motion verified | ui | UI agent | 2026-10-26 | 2026-11-24 |
+| P1 | Done 2026-11-24 (released 2026-11-24): keyboard walk, contrast and reduced motion verified | ui | UI agent | 2026-10-26 | 2026-11-24 |
 
 ## Finding
 

@@ -2,7 +2,7 @@
 
 | Priority | Status | Area | Owner | Opened | Updated |
 |---|---|---|---|---|---|
-| P0 | Done (uncommitted) | content | Content agent; Sahil (24-hour promise, football wording) | 2026-10-26 | 2026-11-23 |
+| P0 | Done (released 2026-11-24) | content | Content agent; Sahil (24-hour promise, football wording) | 2026-10-26 | 2026-11-23 |
 
 ## Finding
 

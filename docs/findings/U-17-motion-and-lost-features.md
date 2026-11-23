@@ -2,7 +2,7 @@
 
 | Priority | Status | Area | Owner | Opened | Updated |
 |---|---|---|---|---|---|
-| P1 | Done 2026-11-24 (uncommitted): motion shipped after three review rounds (verdict: ship); Paper details fold still open | UI, motion | UI agent | 2026-11-23 | 2026-11-24 |
+| P1 | Done 2026-11-24 (released 2026-11-24): motion shipped after three review rounds (verdict: ship); Paper details fold still open | UI, motion | UI agent | 2026-11-23 | 2026-11-24 |
 
 ## Finding
 

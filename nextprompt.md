@@ -189,8 +189,10 @@ Design decisions live in `DESIGN.md` (root) and `docs/design/`. Invoke the `impe
 5. **Performance budget:** no new heavy dependency without a measured reason; below-the-fold and 3D/animation code is lazy-loaded;
    images are sized and optimised; report First Load JS before and after.
 6. **Motion is information, not decoration.** Respect reduced motion; no motion that delays reading.
-7. **Feature flags over deletion.** Hiding a feature (the 3D avatar) is a flag with the code kept, recorded in a finding with its restore
-   condition.
+7. **Feature flags over deletion, and hidden means not imported.** Hiding a feature (the 3D avatar) keeps its code behind a flag, with
+   the restore steps in a finding, and removes its import from the page so it costs visitors nothing (trap 16).
+8. **Footnote what makes the case.** Every figure has a ledger row; only `KEY_FIGURES` in `src/data/claims.ts` carry a footnote, and a
+   figure is shown once where it is the proof (DESIGN.md, Do's and Don'ts).
 
 ---
 
@@ -309,6 +311,25 @@ Roles (`AGENTS.md` routes you; each has a skill in `.cursor/skills/`):
 13. **The hidden attribute that did not hide.** `hidden` plus a `block` utility class rendered every footnote open, and the checks all passed. *Defence:* look at the render (§7.1).
 14. **The stale status doc.** A checklist said "Done" for items that later regressed. *Defence:* status lives in one finding per item,
     updated when work happens; this file holds none.
+15. **The check that sees half.** `content_inventory.mjs` proved every *data* string still rendered, but copy hard-coded in the old
+    components (research interests, footer profile links, "More projects on GitHub") disappeared unseen, and its baseline was taken
+    mid-redesign. *Defence:* before removing a component, compare its rendered text with the live commit (`git show <live>:path`); the
+    72-feature audit in U-17 is the model.
+16. **The hidden feature that still ships.** The avatar was off behind a flag, yet its `dynamic()` import shipped 668 kB of three.js and
+    fetched 1.3 MB of models on every visit. *Defence:* hidden means not imported; read First Load JS per route after hiding anything.
+17. **The grey midpoint.** An eased color change on the header passed through illegible grey whenever the mobile menu opened, and only a
+    frame-by-frame capture showed it. *Defence:* capture motion in frames (normal and reduced) and have a fresh reviewer judge it (U-17).
+18. **The local speed number.** A local static server sends files uncompressed, so mobile LCP read about 6 s locally and 3.0 s live.
+    *Defence:* trust local runs for blocking time and bundle size only; measure load speed on the live site after a deploy.
+19. **The footnote that dilutes.** Footnoting every small count (a course score, a dataset size) made 20 of 25 notes self-reported and
+    buried the figures that matter. *Defence:* every figure keeps a ledger row; only `KEY_FIGURES` carry a footnote.
+20. **The edit that silently missed.** A one-line replace missed text wrapped across two JSX lines; an apostrophe ended a single-quoted
+    TypeScript string; a hook-blocked command ran none of its steps. *Defence:* assert every scripted replacement, use typographic
+    apostrophes (’) in data strings, and re-check the file after any blocked command.
+21. **The guard that reads your verification.** A commit command that also grepped for AI-tool names (to prove they were absent) was
+    refused by the trailer guard. *Defence:* commit in one command, verify messages in another.
+22. **The second deploy.** GitHub Pages also builds from the branch on every push, racing the Next.js deploy. *Defence:* H-04; after a
+    release, confirm the Next.js deploy finished last and verify the live pages.
 
 ---
 

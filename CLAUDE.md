@@ -16,6 +16,8 @@ Next.js 14 (App Router, static export) portfolio for Sahil Patel, deployed to Gi
 - `python3 tools/checks/check_claims.py` — banned claims and ledger coverage. `python3 tools/checks/check_public_safe.py` — secrets and private names, before every commit.
 - `python3 -m unittest discover -s tools/agent-guard/tests` — guard tests. `python3 tools/agent-guard/build_card.py` — rebuild the agent card after editing a card block in `nextprompt.md`.
 - `node tools/checks/content_inventory.mjs` (after a build) — no rendered detail may disappear; reviewed removals go in `tools/checks/content_retired.json`.
+- `python3 tools/checks/check_links.py` (after a build, before a release) — every outbound link loads. Measure speed (Lighthouse) on the live site after a deploy, not on a local server.
+- **Footnotes:** only `KEY_FIGURES` in `src/data/claims.ts` are footnoted; every figure still needs a ledger row. Hidden features are not imported (see `nextprompt.md` §12, traps 15–22).
 - `npm run dev` or any server — only after checking the port and the owner's open terminals, and with a yes.
 
 ## Rules that matter most

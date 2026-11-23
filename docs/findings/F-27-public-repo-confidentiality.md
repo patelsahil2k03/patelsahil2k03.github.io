@@ -2,7 +2,7 @@
 
 | Priority | Status | Area | Owner | Opened | Updated |
 |---|---|---|---|---|---|
-| P0 | Done (uncommitted) | security | Release agent | 2026-10-26 | 2026-10-26 |
+| P0 | Done (released 2026-11-24) | security | Release agent | 2026-10-26 | 2026-10-26 |
 
 ## Finding
 

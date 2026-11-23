@@ -2,7 +2,7 @@
 
 | Priority | Status | Area | Owner | Opened | Updated |
 |---|---|---|---|---|---|
-| P3 | Done 2026-11-24 (uncommitted): direct certificate URLs; link check in the release gate | content | Content agent | 2026-10-26 | 2026-11-24 |
+| P3 | Done 2026-11-24 (released 2026-11-24): direct certificate URLs; link check in the release gate | content | Content agent | 2026-10-26 | 2026-11-24 |
 
 ## Finding
 

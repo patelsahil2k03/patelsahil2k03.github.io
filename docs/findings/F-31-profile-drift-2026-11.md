@@ -2,7 +2,7 @@
 
 | Priority | Status | Area | Owner | Opened | Updated |
 |---|---|---|---|---|---|
-| P1 | Done on the site (uncommitted); two details need the owner (A9) | content | Content agent; Sahil | 2026-11-23 | 2026-11-23 |
+| P1 | Done on the site (released 2026-11-24); two details need the owner (A9) | content | Content agent; Sahil | 2026-11-23 | 2026-11-23 |
 
 ## Finding
 

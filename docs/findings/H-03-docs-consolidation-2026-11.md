@@ -2,7 +2,7 @@
 
 | Priority | Status | Area | Owner | Opened | Updated |
 |---|---|---|---|---|---|
-| P2 | Done (uncommitted) | process | Release agent (commit) | 2026-11-23 | 2026-11-23 |
+| P2 | Done (released 2026-11-24) | process | Release agent (commit) | 2026-11-23 | 2026-11-23 |
 
 ## Finding
 

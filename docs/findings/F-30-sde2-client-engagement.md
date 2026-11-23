@@ -2,7 +2,7 @@
 
 | Priority | Status | Area | Owner | Opened | Updated |
 |---|---|---|---|---|---|
-| P0 | Done on the site (uncommitted); LaTeX, Word and profile README still to align | content | Content agent; Sahil (C1: name the client or not) | 2026-11-23 | 2026-11-23 |
+| P0 | Done on the site (released 2026-11-24); LaTeX, Word and profile README still to align | content | Content agent; Sahil (C1: name the client or not) | 2026-11-23 | 2026-11-23 |
 
 ## Finding
 

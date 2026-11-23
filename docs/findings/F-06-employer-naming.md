@@ -2,7 +2,7 @@
 
 | Priority | Status | Area | Owner | Opened | Updated |
 |---|---|---|---|---|---|
-| P1 | Done (uncommitted) | content | Sahil | 2026-10-26 | 2026-11-23 |
+| P1 | Done (released 2026-11-24) | content | Sahil | 2026-10-26 | 2026-11-23 |
 
 ## Finding
 

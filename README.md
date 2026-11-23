@@ -15,6 +15,8 @@ npm run build   # static export into out/
 npm run lint && npx tsc --noEmit
 python3 tools/checks/check_claims.py      # figures are in the ledger; removed claims stay removed
 python3 tools/checks/check_public_safe.py # no secrets or private names in publishable files
+node tools/checks/content_inventory.mjs    # after a build: no rendered detail lost without a reason
+python3 tools/checks/check_links.py       # after a build, before a release: every outbound link loads
 ```
 
 Branches, release and analytics: [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md). Daily work is on `dev`; a push to `main` deploys.
