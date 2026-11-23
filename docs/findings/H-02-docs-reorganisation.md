@@ -2,7 +2,7 @@
 
 | Priority | Status | Area | Owner | Opened | Updated |
 |---|---|---|---|---|---|
-| P3 | Done (uncommitted) | process | Content agent | 2026-10-26 | 2026-11-23 |
+| P3 | Done (released 2026-11-24) | process | Content agent | 2026-10-26 | 2026-11-23 |
 
 ## Finding
 

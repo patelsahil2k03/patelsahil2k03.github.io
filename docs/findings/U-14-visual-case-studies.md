@@ -2,7 +2,7 @@
 
 | Priority | Status | Area | Owner | Opened | Updated |
 |---|---|---|---|---|---|
-| P1 | Done 2026-11-24 (uncommitted): every case study has a system figure; owner screenshots (B1) would add to them | ui | UI agent; Sahil (B1 screenshots) | 2026-11-23 | 2026-11-24 |
+| P1 | Done 2026-11-24 (released 2026-11-24): every case study has a system figure; owner screenshots (B1) would add to them | ui | UI agent; Sahil (B1 screenshots) | 2026-11-23 | 2026-11-24 |
 
 ## Finding
 

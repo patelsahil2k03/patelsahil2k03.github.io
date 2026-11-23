@@ -2,7 +2,7 @@
 
 | Priority | Status | Area | Owner | Opened | Updated |
 |---|---|---|---|---|---|
-| P3 | Done (uncommitted) | process | Sahil (commit) | 2026-10-26 | 2026-10-26 |
+| P3 | Done (released 2026-11-24) | process | Sahil (commit) | 2026-10-26 | 2026-10-26 |
 
 ## Finding
 

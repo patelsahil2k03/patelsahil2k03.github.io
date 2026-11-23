@@ -2,7 +2,7 @@
 
 | Priority | Status | Area | Owner | Opened | Updated |
 |---|---|---|---|---|---|
-| P1 | Done 2026-11-24 (uncommitted): both P1 decisions applied with the owner's yes; all checks clean | UI, code, content | Agent; Sahil for the gated items | 2026-11-23 | 2026-11-24 |
+| P1 | Done and released 2026-11-24 (main 7c0dce9); live checks pass | UI, code, content | Agent; Sahil for the gated items | 2026-11-23 | 2026-11-24 |
 
 ## Finding
 

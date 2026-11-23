@@ -2,7 +2,7 @@
 
 | Priority | Status | Area | Owner | Opened | Updated |
 |---|---|---|---|---|---|
-| P1 | Done (uncommitted); finish review not run | ui | Sahil (choose); UI agent (build) | 2026-11-23 | 2026-11-23 |
+| P1 | Done (released 2026-11-24); finish review not run | ui | Sahil (choose); UI agent (build) | 2026-11-23 | 2026-11-23 |
 
 ## Finding
 
@@ -31,7 +31,7 @@ Run Impeccable's independent finish review (critique and audit) and Lighthouse (
 
 ## Before and after (2026-11-23)
 
-Before: the live site. After: the local build of the redesign (uncommitted). Captures and metrics in `docs/private/ui-audit/before-2026-11-23/` and `after-2026-11-23/` (`tools/ui/capture.py`, `tools/ui/sections.py`).
+Before: the live site. After: the redesign, released 2026-11-24 (`7c0dce9`). Captures and metrics in `docs/private/ui-audit/before-2026-11-23/` and `after-2026-11-23/` (`tools/ui/capture.py`, `tools/ui/sections.py`).
 
 | Measure | Before | After |
 |---|---|---|
